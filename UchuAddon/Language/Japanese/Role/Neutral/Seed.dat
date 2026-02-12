@@ -7,11 +7,11 @@
 
 # Document
 
-"role.seedU.doc" : "共生相手と共に勝利するニュートラルです。"
+"role.seedU.doc" : "共生相手と共に勝利する第三陣営です。"
 
 # Options
 
-"options.role.seedU.detail" : "共生を使った相手が勝利すると追加勝利するニュートラルです。"
+"options.role.seedU.detail" : "共生を使った相手が勝利すると追加勝利する第三陣営です。"
 "options.role.seedU.seedCooldown" : "共生クールダウン"
 "options.role.seedU.numOfSeed" : "共生使用可能回数"
 "options.role.seedU.dieBlockWins" : "死亡時勝利ブロック"

@@ -7,7 +7,7 @@
 
 # Document
 
-"role.loversbreakerU.doc" : "ラバーズを爆破するニュートラルです。"
+"role.loversbreakerU.doc" : "ラバーズを爆破する第三陣営です。"
 "role.loversbreakerU.ability.title" : "固有能力 "恋の断罪""
 "role.loversbreakerU.ability.main" : "ラバーズを爆破します。爆破エフェクトが発生し、自身にのみSEが再生されます。"
 "role.loversbreakerU.ability.exp" : "<title>爆破</title>ラバーズを爆破します。"

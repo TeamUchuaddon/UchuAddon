@@ -7,7 +7,7 @@
 
 # Document
 
-"role.aliceU.doc" : "キルされると勝利するニュートラルです。"
+"role.aliceU.doc" : "キルされると勝利する第三陣営です。"
 "role.aliceU.ability.title" : "固有能力 "チェシャの導き手""
 "role.aliceU.ability.main" : "%EXTRA%"
 "role.aliceU.ability.main.extraWin" : "アリスはキルされることで、ゲーム終了時に追加勝利することが出来ます。"
@@ -19,7 +19,7 @@
 
 # Options
 
-"options.role.aliceU.detail" : "アリスはキルされると勝利するニュートラルです。"
+"options.role.aliceU.detail" : "アリスはキルされると勝利する第三陣営です。"
 "options.role.aliceU.numOfWin" : "勝利までのキル数"
 "options.role.aliceU.canFixLight" : "停電を修理可能"
 "options.role.aliceU.canFixComms" : "通信障害を修理可能"

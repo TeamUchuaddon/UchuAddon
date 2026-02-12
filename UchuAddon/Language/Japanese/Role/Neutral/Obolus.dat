@@ -13,7 +13,7 @@
 
 # Options
 
-"options.role.obolusU.detail" : "オボルスはインポスターをキルすると勝利するニュートラルです。<br>キルは1ターンに1度しか行うことが出来ません"
+"options.role.obolusU.detail" : "オボルスはインポスターをキルすると勝利する第三陣営です。<br>キルは1ターンに1度しか行うことが出来ません"
 "options.role.obolusU.killCooldown" : "キルクールダウン"
 "options.role.obolusU.killShieldTurn" : "キル封印ターン数"
 "options.role.obolusU.killShieldTurn.detail" : "<b>設定ターン</b>が経過するまで、キルボタンをロックします"

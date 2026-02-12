@@ -11,7 +11,7 @@
 
 # Document
 
-"role.tunaU.doc" : "常に動かないと死んでしまうニュートラルです。"
+"role.tunaU.doc" : "常に動かないと死んでしまう第三陣営です。"
 "role.tunaU.ability.title" : "固有能力 "回遊""
 "role.tunaU.ability.main" : "マグロは自殺タイマーが0になると死亡してしまいます。<br>自殺タイマーは、自身が停止しているときに進行します。"
 "role.tunaU.ability.gauge" : "<b>マグロゲージ</b><br>近くに他のプレイヤーがいることで、ゲージが溜まります。<br>自身が止まっている際中は、ゲージの上昇倍率が上がります。<br>ゲージをMAXになると勝利します。"
