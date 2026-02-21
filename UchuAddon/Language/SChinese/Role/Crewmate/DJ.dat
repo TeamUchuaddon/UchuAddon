@@ -1,0 +1,29 @@
+# Assignable
+
+"role.djU.name" : "打碟手"
+"role.djU.short" : "碟"
+"role.djU.blurb" : "燃起来吧！缤纷庆典"
+
+# Document
+
+"role.djU.doc" : "活跃派对氛围的船员角色。"
+
+# Options
+
+"options.role.djU.detail" : "打碟手是可以让周围玩家视野变亮的船员职业。"
+"options.role.djU.djSkillCooldown" : "打碟冷却"
+"options.role.djU.numOfFlash" : "打碟次数"
+"options.role.djU.numOfFlash.detail" : "设置技能使用次数。"
+"options.role.djU.djSkillRange" : "打碟范围"
+
+# Game
+
+
+# UI
+
+"button.label.scratch" : "打碟"
+
+# Stats
+
+
+# Titles

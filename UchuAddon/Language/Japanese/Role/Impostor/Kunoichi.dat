@@ -1,0 +1,51 @@
+# Assignable
+
+"role.kunoichiU.name" : "クノイチ"
+"role.kunoichiU.short" : "クノ"
+"role.kunoichiU.blurb" : "花は散り際こそ美しく"
+
+# Document
+
+"role.kunoichiU.doc" : "クナイを投げてキルするインポスターです。"
+"role.kunoichiU.ability.title" : "固有能力 "桜花潜影""
+"role.kunoichiU.ability.main" : "クナイを投げてプレイヤーをキルします。"
+"role.kunoichiU.ability.Kunai" : "<title>装備</title>クナイを装備/収納します。"
+"role.kunoichiU.ability.kill" : "<title>クナイ</title>装備したクナイを投げます。<br>クナイがプレイヤーに一定回数ヒットすることでキルできます。"
+"role.kunoichiU.ability.invisibily" : "<title>透明化</title>一定時間止まることで透明化します。<br>ボタンを押すか動くことで透明化が解除されます。"
+"role.kunoichiU.tips" : "・クナイは30m飛んだ時点で消滅します。"
+
+# Options
+
+"options.role.kunoichiU.detail" : "クノイチはクナイを投げてキルし、透明化することのできるインポスターです。"
+"options.role.kunoichiU.KunaiCooldown" : "クナイクールダウン"
+"options.role.kunoichiU.KunaiSize" : "クナイの当たり判定"
+"options.role.kunoichiU.KunaiSpeed" : "クナイの投擲スピード"
+"options.role.kunoichiU.numofhit" : "キルに必要なヒット数"
+"options.role.kunoichiU.canKillImpostor" : "フレンドリーファイア"
+"options.role.kunoichiU.UseInvisibleButton" : "透明化にボタンを使用"
+"options.role.kunoichiU.UseInvisibleButton.detail" : "オフにすると透明化が自動的に行われます。"
+"options.role.kunoichiU.InvisibleTime" : "透明化所要時間"
+"options.role.kunoichi.group.kunai" : "クナイ設定"
+"options.role.kunoichi.group.invisibily" : "透明化設定"
+"options.role.kunoichiU.KunaiIninvisibily" : "透明化中にクナイを投げられる"
+"options.role.kunoichiU.KunaiDisappearOnWall" : "クナイの壁衝突"
+"options.role.kunoichiU.CanIninvisibily" : "透明化能力"
+"options.role.kunoichiU.ResetHitCountOnMeeting" : "会議ごとにヒット数をリセット"
+
+# Game
+
+
+# UI
+
+"button.label.KunaiThrow" : "クナイ"
+"button.label.KunoichiInvisibily" : "透明化"
+"button.label.Kunoichirelease" : "解除"
+"ui.action.kunoichiU.equip" : "クナイを装備/収納します。"
+"ui.action.kunoichiU.kill" : "クナイを投げます。"
+
+
+
+# Stats
+
+
+# Titles

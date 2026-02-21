@@ -47,6 +47,7 @@ public class TunaModiU : DefinedAllocatableModifierTemplate, HasCitation, Define
 {
     private TunaModiU() : base("tunaModiU", "TNA", new(171, 245, 255), [TunaAction,UseallyStopTime,TotalStopTime,MeetingTotalTimeReset,MeetingStopTime])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Tuna.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Tuna.png")!.AsImage(100f)!;
@@ -114,8 +115,8 @@ public class TunaModiU : DefinedAllocatableModifierTemplate, HasCitation, Define
         [Local]
         void PlayerRevive(PlayerReviveEvent ev)
         {
-            float TunaTimerUse = UseallyStopTime;
-            float TunaTimerTotal = TotalStopTime;
+            TunaTimerUse = UseallyStopTime;
+            TunaTimerTotal = TotalStopTime;
         }
         [Local]
         void GameUpdate(GameUpdateEvent ev)

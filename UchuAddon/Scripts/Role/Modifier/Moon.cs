@@ -51,6 +51,8 @@ public class MoonU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
 {
     private MoonU() : base("moonU", "STR", new(255, 255, 20))
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Moon.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     Citation? HasCitation.Citation => Hori.Core.Citations.TownOfHostK;
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Moon.png")!.AsImage(100f)!;

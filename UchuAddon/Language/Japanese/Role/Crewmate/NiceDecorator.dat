@@ -1,20 +1,19 @@
 # Assignable
 
-"role.nicedecoratorU.name" : "ナイスデコレーター"
-"role.nicedecoratorU.short" : "ナデ"
-"role.nicedecoratorU.blurb" : "彩りを宿す手"
+"role.niceDecoratorU.name" : "ナイスデコレーター"
+"role.niceDecoratorU.short" : "デコ"
+"role.niceDecoratorU.blurb" : "彩りを宿す手"
 
 # Document
 
-"role.nicedecoratorU.doc" : "他の人の役職を変えるクルーメイトです。"
-"role.nicedecoratorU.ability.title" : "固有能力 "デコレーション""
-"role.nicedecoratorU.ability.main" : "プレイヤーの役職をフィルターの中からランダムに変更することが出来ます。"
-"role.nicedecoratorU.ability.titleity.decoration" : "<title>装飾</title>プレイヤーの役職を変更します。"
-"role.nicedecoratorU.tips" : "フィルターを設定していないと役職を配ることができません。"
+"role.niceDecoratorU.doc" : "他の人の役職を変えるクルーメイトです。"
+"role.niceDecoratorU.ability.title" : "固有能力 "デコレーション""
+"role.niceDecoratorU.ability.main" : "プレイヤーの役職をフィルターの中からランダムに変更することが出来ます。<br>第三陣営やマッドメイトに対してデコレーションを使用すると、デコレーションの使用回数を無駄にしてしまいます。<br>フィルターで排出されると選んだ役職のみ排出され、クルーメイトがインポスターになること等はありません。"
+"role.niceDecoratorU.tips" : "フィルターを設定していないと役職を配ることができません。"
 
 # Options
 
-"options.role.nicedecoratorU.detail" : "ナイスデコレーターは他のプレイヤーの役職を変えることが出来ます。"
+"options.role.niceDecoratorU.detail" : "ナイスデコレーターは他のプレイヤーの役職を変えることが出来ます。"
 
 # Game
 

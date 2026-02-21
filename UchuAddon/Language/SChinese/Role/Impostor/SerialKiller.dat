@@ -1,0 +1,28 @@
+# Assignable
+
+"role.SerialKillerU.name" : "嗜血杀手"
+"role.SerialKillerU.short" : "杀"
+"role.SerialKillerU.blurb" : "我渴望着你们的鲜血"
+
+# Document
+
+"role.SerialKillerU.doc" : "击杀冷却极短，但在指定时间内没有击杀玩家则会自杀。"
+
+# Options
+
+"options.role.SerialKillerU.detail" : "嗜血杀手击杀冷却极短，但<br>若一定时间不击杀就会自杀。"
+"options.role.serialkillerU.SerikillCooldown" : "击杀冷却时间"
+"options.role.serialkillerU.SuicideCooldown" : "自杀倒计时秒数"
+"options.role.serialkillerU.SeriSuicidebutton" : "启用自杀按钮"
+"options.role.serialkillerU.SeriSuicidebutton.detail" : "按下按钮即可主动自杀。"
+
+# Game
+
+# UI
+
+"kill" : "击杀"
+"button.label.serialKillerU.suicide" : "距离自杀"
+
+# Stats
+
+# Titles

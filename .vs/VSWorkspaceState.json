@@ -2,10 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\UchuAddon",
-    "\\UchuAddon\\Scripts",
+    "\\UchuAddon\\Language",
+    "\\UchuAddon\\Language\\Japanese",
+    "\\UchuAddon\\Language\\Japanese\\Role",
     "\\UchuAddon\\Scripts\\Role",
-    "\\UchuAddon\\Scripts\\Role\\Crewmate"
+    "\\UchuAddon\\Scripts\\Role\\Ghost",
+    "\\UchuAddon\\Scripts\\Role\\Modifier"
   ],
-  "SelectedNode": "\\UchuAddon\\Scripts\\Core",
+  "SelectedNode": "\\UchuAddon\\Language\\Japanese",
   "PreviewInSolutionExplorer": false
 }

@@ -12,6 +12,7 @@
 
 "options.role.witchU.detail" : "女巫是能够对其他玩家施加诅咒的内鬼。被施加诅咒的玩家，若在会议中未放逐或指认女巫，将会死亡。"
 "options.role.witchU.spellCooldown" : "诅咒冷却时间"
+"options.role.witchU.spellDuration" : "法术施法时间"
 "options.role.witchU.numOfOneTurnSpell" : "诅咒一回合最大使用技能"
 "option.role.witchU.witchNormalKill" : "可以使用普通击杀"
 

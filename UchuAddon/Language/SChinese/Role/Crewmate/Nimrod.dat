@@ -1,0 +1,28 @@
+# Assignable
+
+"role.nimrodU.name" : "猎人"
+"role.nimrodU.short" : "猎"
+"role.nimrodU.blurb" : "决意的一箭"
+
+# Document
+
+"role.nimrodU.doc" : "被放逐时，猎人可选指定玩家一同出局。"
+
+# Options
+
+"options.role.nimrodU.detail" : "猎人是可以把会议中指定的玩家一起放逐的船员职业。<br>如果使用了技能但未被驱逐，也会消耗技能。"
+"options.role.nimrodU.numOfInvolve" : "最多连带尝试次数"
+"options.role.nimrodU.maxLeftTimer" : "可发动连带的最长剩余会议时间"
+
+# Game
+
+
+# UI
+
+"role.nimrodU.hudText" : "剩余连带尝试次数"
+
+# Stats
+
+"stats.nimrodU.involve" : "连带成功次数"
+
+# Titles

@@ -1,0 +1,30 @@
+# Assignable
+
+"role.proxyU.name" : "プロキシ"
+"role.proxyU.short" : "プロキ"
+"role.proxyU.blurb" : "境界を跨ぐ結節点"
+
+# Document
+
+"role.proxyU.doc" : "モニターと連携するインポスターです。"
+"role.proxyU.ability.title" : "固有能力 "巡れ、電脳連携""
+"role.proxyU.ability.main" : "プロキシはモニターとのコンビネーションです。上手く連携しましょう"
+"role.proxyU.ability.request" : "<title>申請</title>モニターと役職をチェンジします。"
+
+# Options
+
+"options.role.proxyU.detail" : "プロキシはモニターと連携するインポスターです。"
+"options.role.proxyU.requestCooldown" : "申請クールダウン"
+
+# Game
+
+
+# UI
+
+"button.label.Request" : "申請"
+"button.label.approval" : "承認"
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,40 @@
+# Assignable
+
+"role.triggerU.name" : "トリガー"
+"role.triggerU.short" : "トリ"
+"role.triggerU.blurb" : "銀の銃弾"
+
+# Document
+
+"role.triggerU.doc" : "ベントを解析・移設することが出来ます。"
+"role.triggerU.ability.title" : "固有能力 "メカニカル・グレース""
+"role.triggerU.ability.main" : "ベントを解析・移設することが出来ます。"
+"role.triggerU.ability.analysis" : "<title>解析</title>ベントを解析します。解析したベントを誰かが使うと<br>会議で報告を受け取ります。"
+"role.trigeerU.ability.relocation" : "<title>移設</title>ベントを掴み、移設します。"
+
+# Options
+
+"options.role.triggerU.detail" : "トリガーはベントを解析・移設するクルーメイトです。"
+"options.role.triggerU.analysisCooldown" : "解析クールダウン"
+"options.role.triggerU.numOfAnalysis" : "解析使用可能回数"
+"options.role.triggerU.playerColor" : "明暗の表示"
+"options.role.triggerU.playerColor.detail" : "解析の結果に明暗結果を追加します。"
+"options.role.triggerU.relocationCooldown" : "移設クールダウン"
+"options.role.triggerU.relocationDuration" : "移設持続時間"
+"options.role.triggerU.message.header" : "解析報告"
+"options.role.triggerU.message" : "ベントの使用を検知しました"
+"options.role.triggerU.message.inner.lightColor" : "<b>明暗結果：明</b>"
+"options.role.triggerU.message.inner.darkColor" : "<b>明暗結果：暗</b>"
+
+# Game
+
+
+# UI
+
+"button.label.analysis" : "解析"
+"button.label.relocation" : "移設"
+
+# Stats
+
+
+# Titles

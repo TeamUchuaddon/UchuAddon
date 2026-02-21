@@ -43,6 +43,8 @@ public class ScaleU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
     private ScaleU() : base("scaleU", "SCL", new(115, 107, 107), [ScaleAction,
      new GroupConfiguration("options.role.scaleU.group.size",[SizeFixed,SizeMax,SizeMin,SizeMeetingRandom,NumOfSelect,SizeSelect1,SizeSelect2,SizeSelect3,SizeSelect4,SizeSelect5,SizeMeetingSelect],GroupConfigurationColor.ToDarkenColor(Color.gray)),])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Scale.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
     static private ValueConfiguration<int> ScaleAction = NebulaAPI.Configurations.Configuration("options.role.scaleU.scaleAction", ["options.role.scaleU.scaleAction.fixed", "options.role.scaleU.scaleAction.random", "options.role.scaleU.scaleAction.select"], 0);

@@ -1,0 +1,30 @@
+# Assignable
+
+"role.operatorU.name" : "操作员"
+"role.operatorU.short" : "操"
+"role.operatorU.blurb" : "紧急调度行动"
+
+# Document
+
+"role.operatorU.doc" : "这是一个可以增加会议时间的船员职业。"
+
+# Options
+
+"options.role.operatorU.detail" : "操作员可发起延长会议时长申请，从而增加会议时间。"
+"options.role.operatorU.numOfOperate" : "调度技能可用次数"
+"options.role.operatorU.operateAddTime" : "会议延长时长"
+"options.role.operatorU.skipBan" : "调度期间禁止跳过投票"
+
+# Game
+
+
+# UI
+
+"button.label.operatorU.operate" : "紧急调度"
+"role.operatorU.hudText" : "剩余调度次数"
+
+# Stats
+
+"stats.operatorU.operate" : "调度发动次数"
+
+# Titles

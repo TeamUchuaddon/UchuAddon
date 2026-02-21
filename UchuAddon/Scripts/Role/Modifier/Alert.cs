@@ -51,6 +51,8 @@ public class AlertU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
 {
     private AlertU() : base("alertU", "ALT", new(67, 232, 108))
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Alert.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Alert.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;

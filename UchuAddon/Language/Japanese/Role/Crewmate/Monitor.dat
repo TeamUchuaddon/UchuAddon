@@ -1,0 +1,28 @@
+# Assignable
+
+"role.monitorU.name" : "モニター"
+"role.monitorU.short" : "モニ"
+"role.monitorU.blurb" : "万象を瞰る電子妖精"
+
+# Document
+
+"role.monitorU.doc" : "プロキシと連携するマッドメイトです。"
+"role.monitorU.ability.title" : "固有能力 "CODE FAIRY""
+"role.monitorU.ability.main" : "モニターはプロキシをサポートするマッドメイトです。"
+"role.monitorU.ability.request" : "<title>申請</title>プロキシに役職チェンジをリクエストします。"
+"role.monitorU.ability.approval" : "<title>承認</title>リクエストされたプロキシがこのボタンを押すと<br>役職がチェンジされます。"
+
+# Options
+
+"options.role.monitorU.detail" : "プロキシはモニターと連携するマッドメイトです。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

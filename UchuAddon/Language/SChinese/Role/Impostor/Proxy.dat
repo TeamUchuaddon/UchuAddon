@@ -1,0 +1,30 @@
+# Assignable
+
+"role.proxyU.name" : "控制者"
+"role.proxyU.short" : "控"
+"role.proxyU.blurb" : "跨越边界的节点"
+
+# Document
+
+"role.proxyU.doc" : "与监控者联动的伪装者。"
+"role.proxyU.ability.title" : "固有能力【电子联动】"
+"role.proxyU.ability.main" : "控制者与监控者为组合，好好配合吧。"
+"role.proxyU.ability.request" : "<title>申请</text>与监控者交换身份。"
+
+# Options
+
+"options.role.proxyU.detail" : "控制者是与监控者联动的伪装者。"
+"options.role.proxyU.requestCooldown" : "申请冷却时间"
+
+# Game
+
+
+# UI
+
+"button.label.Request" : "申请"
+"button.label.approval" : "批准"
+
+# Stats
+
+
+# Titles

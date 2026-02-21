@@ -1,5 +1,9 @@
 # Perk
 
+"perk.masterKeyU.name" : "マスターキー"
+"perk.masterKeyU.detail" : "ドアを即座に開錠します。<br>このパークには%CD%秒のクールダウンがあります。"
+"perk.masterKeyU.cooldown" : "クールダウン"
+
 "perk.repairU.name" : "リペア"
 "perk.repairU.detail" : "サボタージュを即座に修理します。"
 

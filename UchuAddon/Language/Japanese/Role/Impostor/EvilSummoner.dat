@@ -1,0 +1,26 @@
+# Assignable
+
+"role.evilSummonerU.name" : "イビルサモナー"
+"role.evilSummonerU.short" : "サモ"
+"role.evilSummonerU.blurb" : "集え、我が従者たちよ"
+
+# Document
+
+"role.evilSummonerU.doc" : "契約したプレイヤーを自身の位置に召喚します。"
+"role.evilSummonerU.ability.title" : "固有能力 "召喚魔術""
+"role.evilSummonerU.ability.main" : ""
+
+# Options
+
+"options.role.evilSummonerU.detail" : "サモナーはプレイヤーと契約し、自身の位置に召喚できるクルーメイトです。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

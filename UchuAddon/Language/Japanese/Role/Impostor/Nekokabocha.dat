@@ -1,0 +1,26 @@
+# Assignable
+
+"role.nekokabochaU.name" : "ネコカボチャ"
+"role.nekokabochaU.short" : "ネコ"
+"role.nekokabochaU.blurb" : "命掴む冥界の尻尾"
+
+# Document
+
+"role.nekokabochaU.doc" : "プレイヤーを道連れにするインポスターです。"
+"role.nekokabochaU.tips" : "・追放の巻き込みによってインポスターが道連れにされることはありません。"
+
+# Options
+
+"options.role.nekokabochaU.detail" : "死亡時や追放時にプレイヤーを道連れにするインポスターです。"
+"options.role.nekokabochaU.exileembroil" : "追放の巻き込み"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

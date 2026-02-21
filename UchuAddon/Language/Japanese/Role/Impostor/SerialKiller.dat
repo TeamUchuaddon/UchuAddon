@@ -1,0 +1,28 @@
+# Assignable
+
+"role.SerialKillerU.name" : "シリアルキラー"
+"role.SerialKillerU.short" : "シリ"
+"role.SerialKillerU.blurb" : "連続殺人鬼"
+
+# Document
+
+"role.SerialKillerU.doc" : "キルクールダウンが早い変わりに時間で自殺するインポスターです。"
+
+# Options
+
+"options.role.SerialKillerU.detail" : "シリアルキラーはキルクールダウンが早い代わりに、<br>一定時間キルをしないと自殺してしまうインポスターです。"
+"options.role.serialkillerU.SerikillCooldown" : "キルクールダウン"
+"options.role.serialkillerU.SuicideCooldown" : "自殺までの秒数"
+"options.role.serialkillerU.SeriSuicidebutton" : "自殺ボタンを有効にする"
+"options.role.serialkillerU.SeriSuicidebutton.detail" : "ボタンを押すことで自殺できるようになります。"
+
+# Game
+
+# UI
+
+"kill" : "キル"
+"button.label.serialKillerU.suicide" : "自殺まで"
+
+# Stats
+
+# Titles

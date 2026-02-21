@@ -1,0 +1,35 @@
+# Assignable
+
+"role.scaleU.name" : "斯凯尔"
+"role.scaleU.generalBlurb" : "躯体异变现象"
+
+# Document
+
+"role.scaleU.doc" : "身体大小会发生变化"
+
+# Options
+
+"options.role.scaleU.detail" : "斯凯尔是一名身体大小可变的变体角色"
+"options.role.scaleU.group.size" : "体型设置"
+"options.role.scaleU.scaleAction" : "体型设定方式"
+"options.role.scaleU.scaleAction.fixed" : "固定体型"
+"options.role.scaleU.scaleAction.random" : "随机体型"
+"options.role.scaleU.scaleAction.select" : "自选体型"
+"options.role.scaleU.sizeFixed" : "固定体型参数"
+"options.role.scaleU.sizeMax" : "最大体型参数"
+"options.role.scaleU.sizeMin" : "最小体型参数"
+"options.role.scaleU.sizeMeetingRandom" : "会议结束后重新随机体型"
+"options.role.scaleU.numOfSelect" : "体型可选方案数"
+"options.role.scaleU.sizeSelect" : "体型可选参数"
+"options.role.scaleU.sizeMeetingSelect" : "会议结束后重新选择体型"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

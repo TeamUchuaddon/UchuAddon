@@ -1,0 +1,28 @@
+# Assignable
+
+"role.monitorU.name" : "监控者"
+"role.monitorU.short" : "监"
+"role.monitorU.blurb" : "窥视万象的电子妖物"
+
+# Document
+
+"role.monitorU.doc" : "与控制者联动的叛徒。"
+"role.monitorU.ability.title" : "固有能力【CODE FAIRY】"
+"role.monitorU.ability.main" : "监控者是支援控制者的叛徒。"
+"role.monitorU.ability.request" : "<title>申请</title>向控制者请求交换身份。"
+"role.monitorU.ability.approval" : "<title>批准</text>收到申请的控制者按下此按钮后，<br>身份将会互换。"
+
+# Options
+
+"options.role.monitorU.detail" : "监控者是与控制者联动的叛徒。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

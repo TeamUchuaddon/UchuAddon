@@ -1,0 +1,22 @@
+﻿# Assignable
+
+"role.HighLowU.name" : "ハイロー"
+"role.HighLowU.generalBlurb" : "会議は私の気まぐれで"
+
+# Document
+
+"role.HighLowU.doc" : "投票するときに運がいいと票数が増えます<br>運が悪いと減ります。"
+
+# Options
+
+"options.role.HighLowU.detail" : "票数が運で変わります。"
+"options.role.HighLowU.Vote" : "失敗したときの票数"
+"options.role.HighLowU.random" : "成功する確率"
+"options.role.HighLowU.YesVote" : "成功したときの票数"
+# Game
+
+# UI
+
+# Stats
+
+# Titles

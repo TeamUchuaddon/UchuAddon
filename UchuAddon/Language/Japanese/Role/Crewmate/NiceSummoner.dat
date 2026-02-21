@@ -1,0 +1,26 @@
+# Assignable
+
+"role.SummonerU.name" : "サモナー"
+"role.SummonerU.short" : "サモ"
+"role.SummonerU.blurb" : "ここが、僕らの盤上"
+
+# Document
+
+"role.SummonerU.doc" : "契約したプレイヤーを自身の位置に召喚します。"
+"role.SummonerU.ability.title" : "固有能力 "召喚魔術""
+"role.SummonerU.ability.main" : ""
+
+# Options
+
+"options.role.SummonerU.detail" : "サモナーはプレイヤーと契約し、自身の位置に召喚できるクルーメイトです。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

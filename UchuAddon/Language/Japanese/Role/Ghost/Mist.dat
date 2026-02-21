@@ -1,0 +1,31 @@
+# Assignable
+
+"role.mistU.name" : "ミスト"
+"role.mistU.blurb" : "影の帳"
+"role.mistU.short" : "ミス"
+
+# Document
+
+"role.mistU.doc" : "視界を狭める影を作り出せます。"
+
+# Options
+
+"options.role.mistU.detail" : "ミストはその場に視界を狭める影を生み出せます。"
+"options.role.mistU.nightCooldown" : "夜霧クールダウン"
+"options.role.mistU.nightDuration" : "夜霧持続時間"
+"options.role.mistU.numOfNight" : "夜霧使用可能数"
+"options.role.mistU.nightSize" : "夜霧サイズ"
+"options.role.mistU.inNightLightSize" : "夜霧の領域内での視界"
+
+# Game
+
+
+# UI
+
+"button.label.mistU.night" : "夜霧"
+
+# Stats
+
+"stats.mistU.night" : "夜霧の発動回数"
+
+# Titles

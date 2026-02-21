@@ -86,6 +86,7 @@ public class SpectrePossessionU : DefinedAllocatableModifierTemplate, DefinedAll
         new GroupConfiguration("options.role.spectrePossessionU.group.fanaticism", [Fanaticism,FanaticismLimit,NumOfTaskFanaticism,NumOfKillFanaticism], new UnityEngine.Color(0.7255f, 0.5961f, 0.7725f)),],  
         allocateToNeutral: false)
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/SpectrePossession.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
