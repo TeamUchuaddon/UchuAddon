@@ -95,7 +95,7 @@ public class PatchManager
 
         logo.gameObject.AddComponent<BoxCollider2D>().size = new Vector2(7f, 3.5f);
 
-        GameOperatorManager.Instance!.Subscribe<GameStartEvent>(_ => GameObject.Destroy(addonLogoHolder), Virial.NebulaAPI.CurrentGame!);
+        GameOperatorManager.Instance!.Subscribe<LobbyDestroyEvent>(_ => GameObject.Destroy(addonLogoHolder), Virial.NebulaAPI.CurrentGame!);
     }
 
 
