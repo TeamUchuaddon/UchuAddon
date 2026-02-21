@@ -27,9 +27,6 @@
 - **Extreme Roles**（制作：Yukieiji）  
   一部アイデア・ロゴを使用
 
-- **Town of Host**（代表：tukasa0001）  
-  一部役職アイデア・ロゴを使用
-
 - **Town of Host Y**（制作：Yumenopai）  
   一部役職アイデア・ロゴを使用
 
@@ -39,15 +36,8 @@
 - **Town of Us**（制作：slushiegoose）  
   一部役職アイデア・ロゴを使用
 
-- **Town of Us-R**（制作：eDonnes124）  
-  一部役職アイデア・ロゴを使用
-
 - **The Other Roles**（代表：Eisbison）  
   一部役職アイデア・ロゴを使用
-
-- **The Other Roles-GM-Haoming**（制作：Hageming）  
-  一部役職アイデア・ロゴを使用
-
 ---
 
 ## Wiki（仕様・役職一覧）

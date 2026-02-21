@@ -1,7 +1,11 @@
 ﻿# Assignable
 
 "role.StarU.name" : "スター"
+<<<<<<< HEAD
 "role.StarU.generalBlurb" : "希望の一等星"
+=======
+"role.StarU.generalblurb" : "希望の一等星"
+>>>>>>> 8b229f6e8709cd93ec7c65c9342ea1f0ce18a60e
 
 # Document
 
@@ -10,9 +14,14 @@
 # Options
 
 "options.role.StarU.detail" : "常に名前が輝き続けます。"
+<<<<<<< HEAD
 "options.StarU.RainbowStar" : "にじいろスター化"
 "options.StarU.RainbowStar.detail" : "名前が虹色に光り輝くようになります"
 "options.role.StarU.RainbowStarOption" : "にじいろスターでのFPS数"
+=======
+"options.role.StarU.RainbowStarOption" : "にじいろスターでの速度"
+"options.StarU.RainbowStar" : "にじいろスター"
+>>>>>>> 8b229f6e8709cd93ec7c65c9342ea1f0ce18a60e
 
 # Game
 
