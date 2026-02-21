@@ -28,9 +28,9 @@ using static Nebula.Modules.ScriptComponents.NebulaSyncStandardObject;
 namespace Hori.Scripts.Role.Crewmate;
 
 [NebulaRPCHolder]
-public class ObserverU : DefinedSingleAbilityRoleTemplate<ObserverU.Ability>, DefinedRole
+public class EvilObserverU : DefinedSingleAbilityRoleTemplate<EvilObserverU.Ability>, DefinedRole
 {
-    private ObserverU() : base("observerU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [MaxCameraCountOption, PlaceCoolDownOption, CanSeeCameraOtherPlayerOption])
+    private EvilObserverU() : base("evilObserverU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [MaxCameraCountOption, PlaceCoolDownOption, CanSeeCameraOtherPlayerOption])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Observer.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon, ConfigurationTags.TagFunny);
@@ -44,11 +44,11 @@ public class ObserverU : DefinedSingleAbilityRoleTemplate<ObserverU.Ability>, De
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Observer.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
-    static public ObserverU MyRole = new ObserverU();
+    static public EvilObserverU MyRole = new EvilObserverU();
     [NebulaPreprocess(PreprocessPhase.PostRoles)]
     public class Camera : NebulaSyncStandardObject
     {
-        public static MultiImage cameraSprite = NebulaAPI.AddonAsset.GetResource("ObserverCameraObject.png")!.AsMultiImage(4, 1, 150f);
+        public static MultiImage cameraSprite = NebulaAPI.AddonAsset.GetResource("ObserverCameraObject.png")!.AsMultiImage(4, 1, 150f)!;
         public static string MyGlobalTag = "CameraGloabl";
         public static string MyLocalTag = "CameraLocal";
 
@@ -81,15 +81,16 @@ public class ObserverU : DefinedSingleAbilityRoleTemplate<ObserverU.Ability>, De
         }
 
     }
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
 
-        static private Image placeButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverPlaceButton.png")!.AsImage(115f);
-        static private Image monitorButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverMonitorButton.png")!.AsImage(115f);
+        static private Image placeButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverPlaceButton.png")!.AsImage(115f)!;
+        static private Image monitorButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverMonitorButton.png")!.AsImage(115f)!;
 
 
-        static private Image nextButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraNextButton.png")!.AsImage(115f);
-        static private Image selfButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraSelfButton.png")!.AsImage(115f);
+        static private Image nextButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraNextButton.png")!.AsImage(115f)!;
+        static private Image selfButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraSelfButton.png")!.AsImage(115f)!;
 
         public Camera[] MyGlobalCamera = new Camera[MaxCameraCountOption];
         public Camera[] MyLocalCamera = new Camera[MaxCameraCountOption];

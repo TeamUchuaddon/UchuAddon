@@ -3,12 +3,11 @@
     "",
     "\\UchuAddon",
     "\\UchuAddon\\Language",
-    "\\UchuAddon\\Language\\Japanese",
     "\\UchuAddon\\Language\\Japanese\\Role",
+    "\\UchuAddon\\Scripts",
     "\\UchuAddon\\Scripts\\Role",
-    "\\UchuAddon\\Scripts\\Role\\Ghost",
-    "\\UchuAddon\\Scripts\\Role\\Modifier"
+    "\\UchuAddon\\Scripts\\Role\\Crewmate"
   ],
-  "SelectedNode": "\\UchuAddon\\Language\\Japanese",
+  "SelectedNode": "\\UchuAddon",
   "PreviewInSolutionExplorer": false
 }

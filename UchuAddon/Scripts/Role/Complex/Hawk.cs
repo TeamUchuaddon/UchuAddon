@@ -13,7 +13,7 @@ namespace Hori.Scripts.Role.Complex;
 
 public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRole, HasCitation
 {
-    public HawkU() : base("hawkU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam,[HawkeyeCoolDownOption, HawkeyeDurationOption, HawkeyeRatioOption, HawkeyeStop])
+    public HawkU() : base("evilHawkU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam,[HawkeyeCoolDownOption, HawkeyeDurationOption, HawkeyeRatioOption, HawkeyeStop])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Hawk.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -32,6 +32,7 @@ public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRol
 
     static public HawkU MyRole = new();
     static private readonly GameStatsEntry StatsHawkeye = NebulaAPI.CreateStatsEntry("stats.hawkU.hawkeyeSKill", GameStatsCategory.Roles, MyRole);
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         static private readonly Virial.Media.Image HawkImage = NebulaAPI.AddonAsset.GetResource("HawkButton.png")!.AsImage(115f)!;
@@ -73,7 +74,7 @@ public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRol
 
 public class NiceHawkU : DefinedSingleAbilityRoleTemplate<NiceHawkU.Ability>, DefinedRole, HasCitation
 {
-    public NiceHawkU() : base("NicehawkU", new(255, 255, 112), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [HawkeyeCoolDownOption, HawkeyeDurationOption, HawkeyeRatioOption, HawkeyeStop])
+    public NiceHawkU() : base("niceHawkU", new(255, 255, 112), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [HawkeyeCoolDownOption, HawkeyeDurationOption, HawkeyeRatioOption, HawkeyeStop])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/HawkNice.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
