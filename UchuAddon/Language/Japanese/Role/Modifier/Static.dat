@@ -1,0 +1,24 @@
+# Assignable
+
+"role.staticU.name" : "スタティック"
+"role.staticU.generalBlurb" : "異常妨害電波"
+
+# Document
+
+"role.staticU.doc" : "アドミン・バイタルの情報が正しく表示されません。"
+
+# Options
+
+"options.role.staticU.detail" : "スタティックは、アドミン・バイタルの情報が正しく表示されません。"
+"options.role.staticU.canSeeAll" : "自覚可能"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,62 @@
+# Assignable
+
+"role.epidemicU.name" : "エピデミック"
+"role.epidemicU.short" : "エピ"
+"role.epidemicU.blurb" : "悪意は伝染する"
+
+# Document
+
+"role.epidemicU.doc" : "未知のウイルスを感染させる第三陣営です。"
+"role.epidemicU.winCond" : "生存者全員にウイルスを感染させる。"
+"role.epidemicU.ability.title" : "固有能力 "見えない恐怖""
+"role.epidemicU.ability.main" : ""
+"role.epidemicU.ability.infection" : "<title>感染</title>プレイヤーを感染させます。初期状態では1回しか使えません、"
+"role.epidemicU.ability.break" : "<title>破壊</title>対象の除染箱を一時的に使用不可な状態にさせます。"
+"role.epidemicU.ability.box" : "<title>除染箱</title>除染箱を使用すると使用したプレイヤーの感染率が減少します。<br>感染率が100%の場合は減少しません。<br>除染箱は<var>%NUMBOX%つ</var>生成されます。"
+"role.epidemicU.ability.boxBreak" : "<title>壊された除染箱</title>破壊能力によって壊された除染箱です。<br>この状態の除染箱はタスクを行うことが出来ず<br><var>%PHASE%ターン</var>後に再補給されます。"
+"role.epidemicU.tips" : "感染率は常に左のバーで確認できます。<br>最初の感染者が誰も感染出来ずに死亡した場合<br>感染の使用回数が<b>一度のみ復活</b>します。<br><br>・除染箱の出現位置<br>　-Skeld: セキュリティルーム カフェティア上 通信室<br>　-MIRA HQ: 研究室 バルコニー右 オフィス<br>　-Polus: エレキ 右リアクター オフィス左下外<br>　-Airship: 昇降機右 武器庫 診察室<br>　-Fungle: 温室 キッチン 鉱山"
+
+# Options
+
+"options.role.epidemicU.detail" : "生存者全員をウイルスに感染させれば勝利します。"
+
+"options.role.epidemicU.infectionCooldown" : "感染クールダウン"
+"options.role.epidemicU.infectionDuration" : "感染所要時間"
+"options.role.epidemicU.infectionMaxTime" : "感染完了までの時間"
+"options.role.epidemicU.infectionRange" : "ウイルス伝染範囲"
+
+"options.role.epidemicU.group.break" : "破壊設定"
+"options.role.epidemicU.breakCooldown" : "破壊クールダウン"
+"options.role.epidemicU.breakDuration" : "破壊所要時間"
+"options.role.epidemicU.numOfBreak" : "破壊使用可能数"
+"options.role.epidemicU.numOfBreakPhase" : "除染箱再補給までのターン"
+"options.role.epidemicU.numOfBreakPhase.detail" : "除染箱が何ターンの間壊れるか設定します。"
+
+"options.role.epidemicU.group.boxTask" : "除染箱の設定"
+"options.role.epidemicU.numOfBox" : "除染箱出現数"
+"options.role.epidemicU.numOfMaxBoxUse" : "1プレイヤーごとの除染箱使用可能数"
+"options.role.epidemicU.cleanUpDuration" : "除染所要時間"
+"options.role.epidemicU.numOfResetInfection" : "減少する感染率"
+"options.role.epidemicU.numOfPenalty" : "除染ペナルティ倍率"
+"options.role.epidemicU.numOfPenalty.detail" : "設定した値分、徐々に効果が薄くなっていきます。"
+
+# Game
+
+"role.epidemicU.minigame.cleanUp" : "除染中"
+
+# UI
+
+"button.label.epidemicU.infection" : "感染"
+"button.label.epidemicU.break" : "破壊"
+
+# Stats
+
+"state.epidemicU.dead" : "<color=#525252>死亡済み</color>"
+"state.epidemicU.complete" : "<color=#e9f78b>感染済み</color>"
+
+# Team
+
+"teams.epidemicU" : "エピデミック"
+"end.epidemicU" : "エピデミック%EXTRA%勝利"
+"document.tip.winCond.epidemicU.title" : "特殊勝利"
+"document.tip.winCond.epidemicU" : "生存者全員にウイルスを感染させると勝利します。"

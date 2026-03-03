@@ -62,18 +62,25 @@ public class MoonU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
     public class Instance : RuntimeAssignableTemplate, RuntimeModifier
     {
         DefinedModifier RuntimeModifier.Modifier => MyRole;
-        public bool IgnoreBlackout { get; private set; } = true;
+
         string? RuntimeModifier.DisplayIntroBlurb => Language.Translate("role.moonU.blurb");
+        IgnoreBlackoutVisionAbility? ignoreBlackoutAbility;
+        IEnumerable<IPlayerAbility?> RuntimeAssignable.MyAbilities => [ignoreBlackoutAbility];
 
         public Instance(GamePlayer player) : base(player)
         {
-
+            if (AmOwner)
+                ignoreBlackoutAbility = new IgnoreBlackoutVisionAbility(MyPlayer);
         }
 
         void RuntimeAssignable.OnActivated()
         {
-
+            if (AmOwner)
+            { 
+                
+            }
         }
+
         void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
         {
             if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();

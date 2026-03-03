@@ -1,0 +1,30 @@
+# Assignable
+
+"role.buzzerU.name" : "ブザー"
+"role.buzzerU.blurb" : "幽霊密告"
+"role.buzzerU.short" : "ブザ"
+
+# Document
+
+"role.buzzerU.doc" : "生きているインポスターに通知を送ります。"
+"role.buzzerU.ability.title" : "固有能力 "狼サイレン""
+"role.buzzerU.ability.main" : ""
+"role.buzzerU.ability.buzzer" : "<title>ブザー</title>インポスターのみに見える通知をその場に出します。"
+
+# Options
+
+"options.role.buzzerU.detail" : "ブザーは生存してるインポスターに通知を送ります。"
+"options.role.buzzerU.buzzerCooldown" : "ブザークールダウン"
+"options.role.buzzer.numOfBuzzer" : "ブザー使用可能数"
+
+# Game
+
+
+# UI
+
+"button.label.buzzerU.buzzer" : "ブザー"
+
+# Stats
+
+
+# Titles

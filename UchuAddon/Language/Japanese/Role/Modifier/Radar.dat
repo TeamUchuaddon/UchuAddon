@@ -1,0 +1,23 @@
+# Assignable
+
+"role.radarU.name" : "レーダー"
+"role.radarU.generalBlurb" : "探知トランデューサ起動"
+
+# Document
+
+"role.radarU.doc" : "一番近くのプレイヤーを矢印で追跡します。"
+
+# Options
+
+"options.role.radarU.detail" : "レーダーは一番近くのプレイヤーを追跡します。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,37 @@
+# Assignable
+
+"role.miracleU.name" : "ミラクル"
+"role.miracleU.blurb" : "天文確率のキセキ"
+"role.miracleU.short" : "ミラ"
+
+# Document
+
+"role.miracleU.doc" : "生きているプレイヤーと自身の役職を交換します。"
+"role.miracleU.ability.title" : "固有能力 "ミラクルスワップ""
+"role.miracleU.ability.main" : ""
+"role.miracleU.ability.swap" : "<title>スワップ</title>対象のプレイヤーと、次の会議後<br>役職を交換します。<br><var>%ACTION%</var>"
+"role.miracleU.ability.main.myTeam" : "自身と同陣営のプレイヤーとしかチェンジできません。"
+"role.miracleU.ability.main.otherNeutral" : "第三陣営以外のプレイヤーとしかチェンジできません。"
+"role.miracleU.ability.main.all" : "全生存プレイヤーとチェンジ可能です。"
+
+# Options
+
+"options.role.miracleU.detail" : "ミラクルは生きてるプレイヤーと役職をチェンジできます。"
+"options.role.miracleU.swapCooldown" : "スワップクールダウン"
+"options.role.miracleU.numOfSwap" : "スワップ使用可能数"
+"options.role.miracleU.miracleAction" : "交換可能プレイヤー"
+"options.role.miracleU.miracleAction.myTeam" : "同陣営のみ"
+"options.role.miracleU.miracleAction.otherNeutral" : "第三陣営以外"
+"options.role.miracleU.miracleAction.all" : "全プレイヤー"
+
+# Game
+
+
+# UI
+
+"button.label.miracleU.swap" : "スワップ"
+
+# Stats
+
+
+# Titles
