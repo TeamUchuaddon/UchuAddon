@@ -36,10 +36,7 @@ public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Abil
     public SerialKillerU() : base("SerialKillerU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [SuicideCooldownOption, SerikillCooldownOption, CanUseSuicideButtonOption])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
-<<<<<<< HEAD
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/SerialKiller.png")!.AsImage(115f);
-=======
->>>>>>> 8b229f6e8709cd93ec7c65c9342ea1f0ce18a60e
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
@@ -88,11 +85,7 @@ public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Abil
                 suicideDisplay.Visibility = (button) => !MyPlayer.IsDead && isTimerActive;
                 suicideTimerImpl = new TimerImpl(SuicideCooldownOption).Register(this);
                 suicideDisplay.EffectTimer = suicideTimerImpl;
-<<<<<<< HEAD
                 suicideDisplay.SetLabel("serialKillerU.suicide");
-=======
-                suicideDisplay.SetLabel(Mathn.CeilToInt(SuicideTime).ToString());
->>>>>>> 8b229f6e8709cd93ec7c65c9342ea1f0ce18a60e
             }
             }
             void OnMeetingStart(MeetingStartEvent ev)

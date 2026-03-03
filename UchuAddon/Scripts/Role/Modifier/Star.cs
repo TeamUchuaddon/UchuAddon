@@ -36,22 +36,16 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
 {
     private StarU() : base("StarU", "STA", new(255, 255, 50), [RainbowStar, RainbowStarOption])
     {
-<<<<<<< HEAD
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Star.png")!.AsImage(115f);
-=======
-        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Uchu__20260206140613.png")!.AsImage(115f);
->>>>>>> 8b229f6e8709cd93ec7c65c9342ea1f0ce18a60e
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     static private BoolConfiguration RainbowStar = NebulaAPI.Configurations.Configuration("options.StarU.RainbowStar", false);
     static private IntegerConfiguration RainbowStarOption = NebulaAPI.Configurations.Configuration("options.role.StarU.RainbowStarOption", (5, 15), 8, () => RainbowStar);
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Star.png")!.AsImage(100f)!;
-<<<<<<< HEAD
+
     Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
-=======
-    Citation? HasCitation.Citation => Hori.Core.Citations.SuperNewRoles;
->>>>>>> 8b229f6e8709cd93ec7c65c9342ea1f0ce18a60e
+
     Image? DefinedAssignable.IconImage => IconImage;
     static public StarU MyRole = new StarU();
 

@@ -3,13 +3,11 @@
     "",
     "\\UchuAddon",
     "\\UchuAddon\\Language",
-    "\\UchuAddon\\Language\\Japanese",
-    "\\UchuAddon\\Language\\Japanese\\Role",
     "\\UchuAddon\\Language\\Japanese\\Role\\Ghost",
-    "\\UchuAddon\\Resources\\RoleIcon",
     "\\UchuAddon\\Scripts",
-    "\\UchuAddon\\Scripts\\Role"
+    "\\UchuAddon\\Scripts\\Role",
+    "\\UchuAddon\\Scripts\\Role\\Impostor"
   ],
-  "SelectedNode": "\\UchuAddon\\Language\\Japanese\\Role\\Ghost\\Mist.dat",
+  "SelectedNode": "\\UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs",
   "PreviewInSolutionExplorer": false
 }
