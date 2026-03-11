@@ -11,7 +11,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Hori.Scripts.Role.Modifier;
 
-public class ResonanceU : DefinedAllocatableModifierTemplate, DefinedModifier
+public class ResonanceU : DefinedAllocatableModifierTemplate, DefinedModifier, DefinedAllocatableModifier
 {
     private ResonanceU() : base("resonanceU", "RSO", NebulaTeams.ImpostorTeam.Color, [], allocateToCrewmate: false, allocateToNeutral: false)
     {

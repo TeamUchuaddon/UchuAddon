@@ -3,11 +3,10 @@
     "",
     "\\UchuAddon",
     "\\UchuAddon\\Language",
-    "\\UchuAddon\\Language\\Japanese\\Role\\Ghost",
     "\\UchuAddon\\Scripts",
     "\\UchuAddon\\Scripts\\Role",
-    "\\UchuAddon\\Scripts\\Role\\Impostor"
+    "\\UchuAddon\\Scripts\\Role\\Modifier"
   ],
-  "SelectedNode": "\\UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs",
+  "SelectedNode": "\\UchuAddon",
   "PreviewInSolutionExplorer": false
 }

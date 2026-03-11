@@ -111,14 +111,17 @@ public class HunchU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
         bool isNearBodyLastFrame = false;
         void RuntimeAssignable.OnActivated()
         {
-            if (AmOwner && DetectedOption)
+            if (AmOwner)
             {
-              　new DetectedFlashAbility() { FlashColor = MyRole.UnityColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
+                if (DetectedOption)
+                {
+                    new DetectedFlashAbility() { FlashColor = MyRole.UnityColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
 
-            }
-            else
-            {
-                new FlashAbility() { FlashColor = MyRole.UnityColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
+                }
+                else
+                {
+                    new FlashAbility() { FlashColor = MyRole.UnityColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
+                }
             }
         }
 

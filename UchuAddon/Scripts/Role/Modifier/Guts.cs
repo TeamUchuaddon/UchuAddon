@@ -37,7 +37,7 @@ using Image = Virial.Media.Image;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
-public class GutsU : DefinedAllocatableModifierTemplate, DefinedModifier, HasCitation
+public class GutsU : DefinedAllocatableModifierTemplate, DefinedAllocatableModifier, HasCitation
 {
     private GutsU() : base("gutsU", "GUT", new(255, 165, 0), [])
     {

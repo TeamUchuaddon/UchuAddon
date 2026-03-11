@@ -8,7 +8,7 @@ using Image = Virial.Media.Image;
 
 namespace Hori.Scripts.Role.Modifier;
 
-public class MiasmaU : DefinedAllocatableModifierTemplate, DefinedModifier
+public class MiasmaU : DefinedAllocatableModifierTemplate, DefinedModifier, DefinedAllocatableModifier
 {
     private MiasmaU() : base("miasmaU", "MSA", new(135, 135, 135), [KillerLight])
     {

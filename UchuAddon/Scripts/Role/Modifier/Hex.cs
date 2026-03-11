@@ -1,6 +1,5 @@
 ﻿using Hori.Core;
 using Hori.Scripts.Role.Neutral;
-using Hori.Scripts.Role.Sample;
 using Nebula.Modules;
 using Nebula.Modules.Cosmetics;
 using Nebula.Roles;
@@ -11,7 +10,10 @@ using System.Linq;
 using Virial.Attributes;
 using Virial.Events.Player;
 using Image = Virial.Media.Image;
-public class HexU : DefinedAllocatableModifierTemplate, DefinedModifier, HasCitation
+
+namespace Hori.Scripts.Role.Modifier;
+
+public class HexU : DefinedAllocatableModifierTemplate, DefinedAllocatableModifier, HasCitation
 {
     private HexU() : base("hexU", "HEX", new(236, 0, 140), [])
     {

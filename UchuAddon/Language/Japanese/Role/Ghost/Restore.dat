@@ -1,0 +1,26 @@
+# Assignable
+
+"role.restoreU.name" : "レストア"
+"role.restoreU.blurb" : "あの世の整備士"
+"role.miracleU.short" : "レス"
+
+# Document
+
+"role.restoreU.doc" : "タスクを消費しサボタージュを直します。"
+
+# Options
+
+"options.role.restoreU.detail" : "レストアはタスクを消費してサボタージュを直せます。"
+"options.role.restoreU.numOfRewind" : "消費タスク数"
+
+# Game
+
+
+# UI
+
+"button.label.fix" : "修理"
+
+# Stats
+
+
+# Titles

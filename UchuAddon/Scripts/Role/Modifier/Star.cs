@@ -43,9 +43,7 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
     static private IntegerConfiguration RainbowStarOption = NebulaAPI.Configurations.Configuration("options.role.StarU.RainbowStarOption", (5, 15), 8, () => RainbowStar);
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Star.png")!.AsImage(100f)!;
-
     Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
-
     Image? DefinedAssignable.IconImage => IconImage;
     static public StarU MyRole = new StarU();
 
