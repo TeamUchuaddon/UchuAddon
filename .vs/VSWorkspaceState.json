@@ -5,8 +5,9 @@
     "\\UchuAddon\\Language",
     "\\UchuAddon\\Scripts",
     "\\UchuAddon\\Scripts\\Role",
-    "\\UchuAddon\\Scripts\\Role\\Crewmate"
+    "\\UchuAddon\\Scripts\\Role\\Crewmate",
+    "\\UchuAddon\\Scripts\\Role\\Neutral"
   ],
-  "SelectedNode": "\\UchuAddon\\Scripts\\Role\\Crewmate\\Admiral.cs",
+  "SelectedNode": "\\UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs",
   "PreviewInSolutionExplorer": false
 }

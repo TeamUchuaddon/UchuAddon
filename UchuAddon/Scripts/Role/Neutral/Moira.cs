@@ -65,13 +65,10 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 
     static public MoiraU MyRole = new MoiraU();
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
-<<<<<<< HEAD
 
     static internal Virial.Media.Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Moira.png")!.AsImage(100f)!;
     Virial.Media.Image? DefinedAssignable.IconImage => IconImage;
 
-=======
->>>>>>> 67d3b95376faa0c005a6bdbe6d4053aadd1235c2
     public class Instance : RuntimeAssignableTemplate, RuntimeRole, RuntimeAssignable, ILifespan, IBindPlayer, IGameOperator, IReleasable
     {
         bool usedAbility = false;
