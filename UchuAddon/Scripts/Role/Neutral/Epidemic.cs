@@ -101,8 +101,8 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
     {
         public override DefinedRole Role => MyRole;
         static private readonly Dictionary<GamePlayer, float> infection = new();
-        public static List<GamePlayer>? InfectionCompletes = new List<GamePlayer>(); // 感染済みプレイヤー
-        private List<GamePlayer> IsInfection = new(); //感染進行中のプレイヤー
+        public static HashSet<GamePlayer>? InfectionCompletes = new HashSet<GamePlayer>(); // 感染済みプレイヤー
+        private HashSet<GamePlayer> IsInfection = new(); //感染進行中のプレイヤー
         public static List<GamePlayer>? FirstInfection = new List<GamePlayer>();
         float ratePerSecond = 100f / InfectionMaxTime;
         int leftInfection = 1;
@@ -110,6 +110,9 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
         bool Toggle = false;
         static private Dictionary<GamePlayer, int> useCounts = new();
         ModAbilityButton infectionButton = null!;
+        float distance;
+        float current;
+
         void InfectionReset()//感染度の初期化
         {
 
@@ -167,7 +170,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                 {
                     if (source.IsDead) continue;
 
-                    float distance = Vector2.Distance(source.Position, target.Position);
+                    distance = Vector2.Distance(source.Position, target.Position);
 
                     if (distance <= InfectionRange)
                     {
@@ -191,7 +194,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             {
                 if (player == MyPlayer) continue;
 
-                float current = infection.TryGetValue(player, out var v) ? v : 0f;
+                current = infection.TryGetValue(player, out var v) ? v : 0f;
 
                 current += ratePerSecond * ev.DeltaTime;
                 current = Mathf.Clamp(current, 0f, 100f);

@@ -58,10 +58,12 @@ public class UchuGameEnd
     public static GameEnd CaptainWin = NebulaAPI.Preprocessor!.CreateEnd("captainU", new Virial.Color(65, 73, 158), 32);
     public static GameEnd PandoraWin = NebulaAPI.Preprocessor!.CreateEnd("pandoraU", new Virial.Color(133, 9, 9), 32); 
     public static GameEnd EpidemicWin = NebulaAPI.Preprocessor!.CreateEnd("epidemicU", new Virial.Color(68, 255, 0), 33);
+    public static GameEnd MoiraWin = NebulaAPI.Preprocessor!.CreateEnd("moiraU", new Virial.Color(194, 125, 207), 32);
 
     public static ExtraWin AliceExtra = NebulaAPI.Preprocessor!.CreateExtraWin("aliceU", new Virial.Color(255, 255, 15));
     public static ExtraWin ObolusExtra = NebulaAPI.Preprocessor!.CreateExtraWin("obolusU", new Virial.Color(189, 135, 26));
     public static ExtraWin EnchanterExtra = NebulaAPI.Preprocessor!.CreateExtraWin("enchanterU", EnchanterU.MyTeam.Color);
+    public static ExtraWin MoiraExtra = NebulaAPI.Preprocessor!.CreateExtraWin("moiraU", new Virial.Color(194, 125, 207));
 
     static void Preprocess(NebulaPreprocessor preprocessor)
     {
@@ -73,6 +75,7 @@ public class UchuGameEnd
         RegisterWinCondTip(ObolusWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.ObolusU.MyRole as ISpawnable).IsSpawnable && !Scripts.Role.Neutral.ObolusU.ExtraWin, "obolusU");
         RegisterWinCondTip(AnchorUTeamWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.AnchorU.MyRole as ISpawnable).IsSpawnable, "anchorU");
         RegisterWinCondTip(EpidemicWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.EpidemicU.MyRole as ISpawnable).IsSpawnable, "epidemicU");
+        RegisterWinCondTip(MoiraWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.MoiraU.MyRole as ISpawnable).IsSpawnable && Scripts.Role.Neutral.MoiraU.WinConditionOption.GetValue() == 0, "moiraU");
     }
     private static void RegisterWinCondTip(GameEnd gameEnd, Func<bool> predicate, string name, Func<string, string>? decorator = null)
     {

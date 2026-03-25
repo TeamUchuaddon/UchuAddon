@@ -1,0 +1,45 @@
+﻿# Assignable
+
+"role.moiraU.name" : "モイラ"
+"role.moiraU.short" : "モ"
+"role.moiraU.blurb" : "万象の織り手"
+"teams.moiraU" : "モイラ"
+
+# Document
+
+"role.moiraU.doc" : "モイラはプレイヤーの役職を交換することができます。交換は全員視点で通知されます。<br>また、全員の役職を把握することができます。"
+"role.moiraU.ability.title" : "固有能力 "運命操作""
+"role.moiraU.ability.main" : "設定回数役職を交換後、%WIN%勝利します。"
+"role.moiraU.ability.main.normalWin" : "即座に<var>単独</var>"
+"role.moiraU.ability.main.extraWin" : "試合終了時まで生存していると<var>共存</var>"
+"role.moiraU.ability.revelation" : "<title>啓示</title>ターゲットを交換対象に追加します。"
+"role.moiraU.ability.exchange" : "<title>操作</title>選択した二人の役職を入れ替えます。"
+"document.tip.winCond.moiraU.title" : "特殊勝利"
+"document.tip.winCond.moiraU" : "設定数役職を交換すると勝利します。"
+
+
+# Options
+
+"options.role.moiraU.detail" : "モイラはプレイヤーの役職を交換する第三陣営です。"
+"options.role.moiraU.needRevelation" : "交換に啓示が必要"
+"options.role.moiraU.revelationCooldown" : "啓示クールダウン"
+"options.role.moiraU.numOfSwappingWin" : "勝利に必要な交換回数"
+"options.role.moiraU.winCondition" : "勝利条件"
+"options.role.moiraU.winCondition.solo" : "単独勝利"
+"options.role.moiraU.winCondition.extra" : "共存勝利"
+"options.role.moiraU.needAlive" : "勝利に生存が必要"
+
+# Game
+
+"role.moiraU.leftWin" : "残りの交換回数"
+
+# UI
+
+"button.label.revelation" : "啓示"
+
+# Stats
+
+"end.moiraU" : "モイラ%EXTRA%勝利"
+"end.extra.moiraU" : " <color=#FFFFFF>+</color> モイラ"
+
+# Titles

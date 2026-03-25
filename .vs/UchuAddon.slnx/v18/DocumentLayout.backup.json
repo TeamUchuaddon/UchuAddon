@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,14 +31,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SerialKiller.cs",
-              "DocumentMoniker": "C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs",
-              "RelativeDocumentMoniker": "UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs",
-              "ToolTip": "C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs",
-              "RelativeToolTip": "UchuAddon\\Scripts\\Role\\Impostor\\SerialKiller.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAAAFYAAAA+AAAAAAAAAA==",
+              "Title": "Moira.cs",
+              "DocumentMoniker": "C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs",
+              "RelativeDocumentMoniker": "UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs",
+              "ToolTip": "C:\\Users\\ashih\\Documents\\GitHub\\UchuAddon\\UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs",
+              "RelativeToolTip": "UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-03T13:11:29.66Z",
+              "WhenOpened": "2026-03-25T07:28:49.715Z",
               "EditorCaption": ""
             }
           ]
