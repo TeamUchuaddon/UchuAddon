@@ -28,6 +28,8 @@
 "options.role.moiraU.winCondition.solo" : "単独勝利"
 "options.role.moiraU.winCondition.extra" : "共存勝利"
 "options.role.moiraU.needAlive" : "勝利に生存が必要"
+"options.role.moiraU.canSeeVote" : "投票先を視認可能"
+
 
 # Game
 

@@ -33,7 +33,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 {
     static readonly public RoleTeam MyTeam = NebulaAPI.Preprocessor!.CreateTeam("teams.moiraU", new(194, 125, 207), TeamRevealType.OnlyMe);
 
-    private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption])
+    private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption, CanSeeVoteOption])
     {
     }
 
@@ -42,6 +42,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
     static private IntegerConfiguration NumOfSwappingWinOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.numOfSwappingWin", (1, 10, 1), 5);
     static public ValueConfiguration<int> WinConditionOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.winCondition", ["options.role.moiraU.winCondition.solo", "options.role.moiraU.winCondition.extra"], 0);
     static private BoolConfiguration NeedAliveOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.needAlive", true, () => WinConditionOption.GetValue() == 1);
+    static internal BoolConfiguration CanSeeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeVote", false);
 
 
 

@@ -226,7 +226,7 @@ public static class AnonymousVoteBypass
     {
         if (__result && NebulaAPI.CurrentGame != null && GamePlayer.LocalPlayer != null)
         {
-            if (GamePlayer.LocalPlayer.Role.Role == Hori.Scripts.Role.Crewmate.AdmiralU.MyRole)
+            if ((GamePlayer.LocalPlayer.Role.Role == Hori.Scripts.Role.Crewmate.AdmiralU.MyRole) || (GamePlayer.LocalPlayer.Role.Role == MoiraU.MyRole && MoiraU.CanSeeVoteOption))
             {
                 __result = false;
             }
