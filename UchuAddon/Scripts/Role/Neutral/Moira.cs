@@ -2,6 +2,7 @@
 using Hori.Core;
 using Nebula;
 using Nebula.Behavior;
+using Nebula.Configuration;
 using Nebula.Documents;
 using Nebula.Extensions;
 using Nebula.Game;
@@ -25,16 +26,19 @@ using Virial.Events.Game;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
+using Image = Virial.Media.Image;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
-public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
+public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, HasCitation
 {
     static readonly public RoleTeam MyTeam = NebulaAPI.Preprocessor!.CreateTeam("teams.moiraU", new(194, 125, 207), TeamRevealType.OnlyMe);
 
     private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption, CanSeeVoteOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Moira.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
     static private BoolConfiguration NeedRevelationOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.needRevelation", true);
@@ -44,6 +48,10 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
     static private BoolConfiguration NeedAliveOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.needAlive", true, () => WinConditionOption.GetValue() == 1);
     static internal BoolConfiguration CanSeeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeVote", false);
 
+    Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.SuperNewRoles; } }
+
+    static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Moira.png")!.AsImage(100f)!;
+    Image? DefinedAssignable.IconImage => IconImage;
 
 
     bool IAssignableDocument.HasAbility => true;
@@ -66,10 +74,6 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 
     static public MoiraU MyRole = new MoiraU();
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
-
-    static internal Virial.Media.Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Moira.png")!.AsImage(100f)!;
-    Virial.Media.Image? DefinedAssignable.IconImage => IconImage;
-
     public class Instance : RuntimeAssignableTemplate, RuntimeRole, RuntimeAssignable, ILifespan, IBindPlayer, IGameOperator, IReleasable
     {
         bool usedAbility = false;
@@ -104,6 +108,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                     revelationed.Add(player);
                     button.StartCoolDown();
                 });
+
 
             }
         }
