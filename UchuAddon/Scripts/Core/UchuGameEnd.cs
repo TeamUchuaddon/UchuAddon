@@ -60,6 +60,8 @@ public class UchuGameEnd
     public static GameEnd EpidemicWin = NebulaAPI.Preprocessor!.CreateEnd("epidemicU", new Virial.Color(68, 255, 0), 33);
     public static GameEnd MoiraWin = NebulaAPI.Preprocessor!.CreateEnd("moiraU", new Virial.Color(194, 125, 207), 32);
 
+    public static GameEnd BettorWin = NebulaAPI.Preprocessor!.CreateEnd("bettorU", new Virial.Color(247, 157, 72), 32);
+
     public static ExtraWin AliceExtra = NebulaAPI.Preprocessor!.CreateExtraWin("aliceU", new Virial.Color(255, 255, 15));
     public static ExtraWin ObolusExtra = NebulaAPI.Preprocessor!.CreateExtraWin("obolusU", new Virial.Color(189, 135, 26));
     public static ExtraWin EnchanterExtra = NebulaAPI.Preprocessor!.CreateExtraWin("enchanterU", EnchanterU.MyTeam.Color);
@@ -76,7 +78,8 @@ public class UchuGameEnd
         RegisterWinCondTip(AnchorUTeamWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.AnchorU.MyRole as ISpawnable).IsSpawnable, "anchorU");
         RegisterWinCondTip(EpidemicWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.EpidemicU.MyRole as ISpawnable).IsSpawnable, "epidemicU");
         RegisterWinCondTip(MoiraWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.MoiraU.MyRole as ISpawnable).IsSpawnable && Scripts.Role.Neutral.MoiraU.WinConditionOption.GetValue() == 0, "moiraU");
-    }
+        RegisterWinCondTip(BettorWin, () => GeneralConfigurations.NeutralSpawnable && (Scripts.Role.Neutral.BettorU.MyRole as ISpawnable).IsSpawnable, "bettorU");    
+	}
     private static void RegisterWinCondTip(GameEnd gameEnd, Func<bool> predicate, string name, Func<string, string>? decorator = null)
     {
         NebulaAPI.RegisterTip(new WinConditionTip(gameEnd, predicate, () => Language.Translate("document.tip.winCond." + name + ".title"), () =>
