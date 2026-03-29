@@ -2,13 +2,13 @@
 
 "role.bettorU.name" : "ベッター"
 "role.bettorU.short" : "べ"
-"role.bettorU.blurb" : "運命に賭ける者"
+"role.bettorU.blurb" : "Logic Over Luck."
 "teams.bettorU" : "ベッター"
 
 # Document
 
 "role.bettorU.doc" : "全員の役職を言い当てると勝利する第三陣営です。"
-"role.bettorU.ability.title" : "固有能力 "予測""
+"role.bettorU.ability.title" : "固有能力 "ロジカル・コール""
 "role.bettorU.ability.main" : "プレイヤーの役職を予想し、タスクターンに書き込むことで結果を確認できます。"
 "role.bettorU.ability.guess" : "<title>推測</title>プレイヤーの役職を推測できます。"
 "role.bettorU.ability.analyze" : "<title>分析</title>選択したプレイヤーの陣営を確認できます。"
