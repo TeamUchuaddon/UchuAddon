@@ -266,6 +266,7 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
             if (disableGuessTurn > 0) disableGuessTurn--;
         }
 
+		[Local]
         void GetPlayerRole(PlayerCheckRoleInfoVisibilityLocalEvent ev)
         {
             if (state[ev.Player] == State.HIT) ev.CanSeeRole = true;
