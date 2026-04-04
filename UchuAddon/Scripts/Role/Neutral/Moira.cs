@@ -35,7 +35,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
 {
     static readonly public RoleTeam MyTeam = NebulaAPI.Preprocessor!.CreateTeam("teams.moiraU", new(194, 125, 207), TeamRevealType.OnlyMe);
 
-    private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption, CanSeeVoteOption])
+    private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption, CanSeeVoteOption, CanSeeRoleOption])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Moira.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -47,6 +47,8 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
     static public ValueConfiguration<int> WinConditionOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.winCondition", ["options.role.moiraU.winCondition.solo", "options.role.moiraU.winCondition.extra"], 0);
     static private BoolConfiguration NeedAliveOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.needAlive", true, () => WinConditionOption.GetValue() == 1);
     static internal BoolConfiguration CanSeeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeVote", false);
+	static internal BoolConfiguration CanSeeRoleOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeRole", true);
+
 
     Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.SuperNewRoles; } }
 
@@ -123,7 +125,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
         [Local]
         void RoleInfoVisibilityLocalEvent(PlayerCheckRoleInfoVisibilityLocalEvent ev)
         {
-            ev.CanSeeAll = true;
+			if (CanSeeRoleOption) ev.CanSeeAll = true;
         }
 
         [Local]
