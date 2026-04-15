@@ -39,11 +39,12 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Uchu__20260206140613.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
+
     static private BoolConfiguration RainbowStar = NebulaAPI.Configurations.Configuration("options.StarU.RainbowStar", false);
     static private IntegerConfiguration RainbowStarOption = NebulaAPI.Configurations.Configuration("options.role.StarU.RainbowStarOption", (5, 15), 8, () => RainbowStar);
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Star.png")!.AsImage(100f)!;
-    Citation? HasCitation.Citation => Hori.Core.Citations.SuperNewRoles;
+    Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
     Image? DefinedAssignable.IconImage => IconImage;
     static public StarU MyRole = new StarU();
 
@@ -51,6 +52,7 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
 
     public class Instance : RuntimeAssignableTemplate, RuntimeModifier
     {
+        private bool IsGameEnding = false;
         DefinedModifier RuntimeModifier.Modifier => MyRole;
 
         public Instance(GamePlayer player) : base(player)
@@ -66,23 +68,24 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
         }
 
         float colorTimer = 0f;
+
         void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
         {
+            if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
+        }
+        [OnlyMyPlayer]
+        void DecorateName(PlayerDecorateNameEvent ev)
+        {
             colorTimer += Time.deltaTime;
-            string originalName = this.MyPlayer?.PlayerName ?? name;
-
             if (RainbowStar)
             {
                 float hue = (Time.time * (RainbowStarOption / 10f)) % 1f;
                 UnityEngine.Color rainbowColor = UnityEngine.Color.HSVToRGB(hue, 1f, 1f);
-                string currentColorHex = UnityEngine.ColorUtility.ToHtmlStringRGB(rainbowColor);
-                name = $"<color=#{currentColorHex}>{originalName}</color>";
-                if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
+                ev.Color = new Virial.Color(rainbowColor.r, rainbowColor.g, rainbowColor.b, rainbowColor.a);
             }
             else
             {
-                name = $"<color=#FFFF00>{originalName}</color>";
-                if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
+                ev.Color = new Virial.Color(1f, 1f, 0f, 1f);
             }
         }
     }

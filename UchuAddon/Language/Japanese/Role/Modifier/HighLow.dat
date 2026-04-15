@@ -10,9 +10,9 @@
 # Options
 
 "options.role.HighLowU.detail" : "票数が運で変わります。"
-"options.role.HighLowU.Vote" : "失敗票数"
+"options.role.HighLowU.Vote" : "失敗時票数"
 "options.role.HighLowU.random" : "成功確率"
-"options.role.HighLowU.YesVote" : "成功票数"
+"options.role.HighLowU.YesVote" : "成功時票数"
 # Game
 
 # UI
