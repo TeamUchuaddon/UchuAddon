@@ -165,3 +165,17 @@ public class AddonConfigurationTags
     static private GUIWidget GetTagTextWidget(string translationKey) => new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaGUIWidgetEngine.API.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new TranslateTextComponent("configuration.tag." + translationKey));
     static public ConfigurationTag TagUchuAddon { get; private set; } = new(AddonTagSprite, GetTagTextWidget("UchuAddonTag"));
 }
+
+[NebulaPreprocess(PreprocessPhase.BuildNoSModule)]
+public class UchuTranslatable
+{
+    public static TranslatableTag ChickenVentDead = new("state.chickenDeadVent"); //転倒死  ベント
+    public static TranslatableTag ChickenFallDead = new("state.chickenDeadFall"); //転落死　梯子・ジップライン
+    public static TranslatableTag ChickenDropDead = new("state.chickenDeadDrop"); //落下死　昇降機
+    public static TranslatableTag ChickenDoorDead = new("state.chickenDeadDoor"); //挟圧死　ドア
+    public static TranslatableTag ChickenMessDead = new("state.chickenDeadWuss"); //錯乱死　停電
+    public static TranslatableTag ChickenWussDead = new("state.chickenDeadMess"); //恐怖死　投票
+    public static TranslatableTag EclipseBomb = new("state.eclipseBomb"); //エクリプス　爆撃
+    public static TranslatableTag RocketLaunch = new("state.rocketLaunch"); //ロケット 発射
+    public static TranslatableTag WitchSpell = new("state.witchSpell"); //ウィッチ 魔術
+}

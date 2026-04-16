@@ -1,0 +1,21 @@
+# Document
+
+"role.summonerU.ability.contract" : "<title>契約</title>対象と契約します。<br>左下のUIを押すと、契約解除することができます。""
+"role.summonerU.ability.summon" : "<title>召喚</title>契約したプレイヤーを召喚します。"
+
+# Options
+
+"options.role.summonerU.contractCooldown" : "契約クールダウン"
+"options.role.summonerU.contractDuration" : "契約所要時間"
+"options.role.summonerU.numOfMaxTarget" : "最大同時契約数"
+"options.role.summonerU.summonCooldown" : "召喚クールダウン"
+
+# Game
+
+
+# UI
+
+"button.label.summonerU.contract" : "契約"
+"button.label.summonerU.summon" : "召喚"
+
+# Status

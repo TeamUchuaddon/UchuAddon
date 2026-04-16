@@ -1,0 +1,40 @@
+# Assignable
+
+"role.triggerU.name" : "改造师"
+"role.triggerU.short" : "改"
+"role.triggerU.blurb" : "改造飞船上的管道"
+
+# Document
+
+"role.triggerU.doc" : "可以解析、移设通风管道。"
+"role.triggerU.ability.title" : "固有能力【机械恩典】"
+"role.triggerU.ability.main" : "可以解析移动通风管道。"
+"role.triggerU.ability.analysis" : "<title>解析</title>解析通风管道。若有人使用被解析的管道，<br>会议中会收到报告。"
+"role.trigeerU.ability.relocation" : "<title>移设</title>抓起并移动通风管道。"
+
+# Options
+
+"options.role.triggerU.detail" : "改造师是可以解析移设管道的船员。"
+"options.role.triggerU.analysisCooldown" : "解析冷却时间"
+"options.role.triggerU.numOfAnalysis" : "解析可用次数"
+"options.role.triggerU.playerColor" : "显示深浅色"
+"options.role.triggerU.playerColor.detail" : "在解析结果中显示玩家颜色深浅。"
+"options.role.triggerU.relocationCooldown" : "移设冷却时间"
+"options.role.triggerU.relocationDuration" : "移设持续时间"
+"options.role.triggerU.message.header" : "解析报告"
+"options.role.triggerU.message" : "检测到通风管道被使用"
+"options.role.triggerU.message.inner.lightColor" : "<b>深浅结果：浅色</b>"
+"options.role.triggerU.message.inner.darkColor" : "<b>深浅结果：深色</b>"
+
+# Game
+
+
+# UI
+
+"button.label.analysis" : "解析"
+"button.label.relocation" : "移设"
+
+# Stats
+
+
+# Titles

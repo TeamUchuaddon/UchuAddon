@@ -1,0 +1,26 @@
+# Assignable
+
+"role.sentinelU.name" : "哨兵"
+"role.sentinelU.short" : "哨"
+"role.sentinelU.blurb" : "反制装置"
+
+# Document
+
+"role.sentinelU.doc" : "当玩家靠近信息设备时，会实时收到报告。"
+
+# Options
+
+"options.role.sentinelU.detail" : "哨兵可以获知玩家是否在信息设备附近。"
+"options.role.sentinelU.impostorNoDevice" : "不检测内鬼"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+

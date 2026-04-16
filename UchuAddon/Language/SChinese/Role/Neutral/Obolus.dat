@@ -1,0 +1,41 @@
+# Assignable
+
+"role.obolusU.name" : "奥伯卢斯"
+"role.obolusU.short" : "奥伯"
+"role.obolusU.blurb" : "终末一击"
+"teams.obolusU" : "奥伯卢斯阵营"
+
+# Document
+
+"role.obolusU.doc" : "击杀伪装者即可获胜<br>但每回合仅能发动一次击杀"
+"document.tip.winCond.obolusU.title" : "特殊胜利条件"
+"document.tip.winCond.obolusU" : "击杀伪装者即可获胜"
+
+# Options
+
+"options.role.obolusU.detail" : "奥伯卢斯是击杀伪装者即可获胜的中立阵营角色<br>每回合仅能发动一次击杀"
+"options.role.obolusU.killCooldown" : "击杀冷却时间"
+"options.role.obolusU.killShieldTurn" : "击杀封印回合数"
+"options.role.obolusU.killShieldTurn.detail" : "<b>设定回合数</b>结束前，击杀按钮将处于锁定状态"
+"options.role.obolusU.canKillHidingPlayer" : "可击杀隐蔽状态的玩家"
+"options.role.obolusU.impostorVision" : "内鬼同款视野"
+"options.role.obolusU.blackOutVision" : "不受电力故障视野限制"
+"options.role.obolusU.extraWin" : "额外胜利判定"
+"options.role.obolusU.extraWin.detail" : "满足胜利条件后，将自动获得额外胜利判定"
+"options.role.obolusU.group.win" : "胜利条件扩展设置"
+"options.role.obolusU.jackalOptions" : "击杀<color=#08bef5>豺狼</color>亦可达成胜利条件"
+"options.role.obolusU.tyrantOptions" : "击杀<color=#b98900>暴君</color>亦可达成胜利条件"
+"options.role.obolusU.obolusOptions" : "击杀<color=#bd871a>奥伯卢斯</color>亦可达成胜利条件"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"end.obolusU" : "奥伯卢斯 勝利"
+"end.extra.aliceU" : "<color=#FFFFFF>+</color> 奥伯卢斯"
+
+# Titles

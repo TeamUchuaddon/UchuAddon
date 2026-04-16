@@ -33,3 +33,19 @@
 
 
 # Titles
+
+"achievement.scaleU.common1.title" : "ワオ！ジャンボ！！！"
+"achievement.scaleU.common1.goal" : "大きくなる。"
+"achievement.scaleU.common1.cond" : ""
+
+"achievement.scaleU.common2.title" : "小惑星"
+"achievement.scaleU.common2.goal" : "小さくなる。"
+"achievement.scaleU.common2.cond" : ""
+
+"achievement.scaleU.another1.title" : "ふみつぶし"
+"achievement.scaleU.another1.goal" : "体が小さい時に死亡する。"
+"achievement.scaleU.another1.cond" : ""
+
+"achievement.scaleU.challenge1.title" : "超変異体"
+"achievement.scaleU.challenge1.goal" : "1ゲーム中に7回以上、大きさが変わる。"
+"achievement.scaleU.challenge1.cond" : ""

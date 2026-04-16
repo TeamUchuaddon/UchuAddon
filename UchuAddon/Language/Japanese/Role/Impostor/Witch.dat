@@ -12,6 +12,7 @@
 
 "options.role.witchU.detail" : "ウィッチは他プレイヤーに魔法をかけるインポスターです。<br>魔法がつけられたプレイヤーは、会議でウィッチを追放・推察しないと死亡してしまいます。"
 "options.role.witchU.spellCooldown" : "魔術クールダウン"
+"options.role.witchU.spellDuration" : "魔術所要時間"
 "options.role.witchU.numOfOneTurnSpell" : "1ターンの最大魔術使用可能数"
 "option.role.witchU.witchNormalKill" : "通常キル使用可能"
 

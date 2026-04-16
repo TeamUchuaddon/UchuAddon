@@ -1,0 +1,24 @@
+# Assignable
+
+"role.evilObserverU.name" : "イビルオブザーバー"
+"role.evilObserverU.short" : "オ"
+"role.evilObserverU.blurb" : "逃れ得ぬ監視網"
+
+# Document
+
+"role.evilObserverU.doc" : "カメラを設置するインポスターです。"
+
+# Options
+
+"options.role.evilObserverU.detail" : "オブザーバーは定点カメラを設置することができるインポスターです<br>会議後に有効化し、好きなタイミングでカメラの近くを監視することができます。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

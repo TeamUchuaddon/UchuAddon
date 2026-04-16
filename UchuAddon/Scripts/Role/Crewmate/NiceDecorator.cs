@@ -1,4 +1,5 @@
-﻿using Nebula.Modules;
+﻿using Hori.Core;
+using Nebula.Modules;
 using Nebula.Roles;
 using Nebula.Utilities;
 using System;
@@ -12,18 +13,20 @@ namespace Hori.Scripts.Role.Crewmate;
 
 public class NiceDecorator : DefinedSingleAbilityRoleTemplate<NiceDecorator.Ability>, DefinedRole, IAssignableDocument
 {
-    public NiceDecorator() : base("nicedecoratorU", new(253f / 255f, 187f / 255f, 22f / 255f), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NumOfDecorationOption, DecorationCoolDownOption, ImpostorFilterOption, CrewmateFilterOption])
+    public NiceDecorator() : base("niceDecoratorU", new(253f / 255f, 187f / 255f, 22f / 255f), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NumOfDecorationOption, DecorationCoolDownOption, ImpostorFilterOption, CrewmateFilterOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/NiceDecorator.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
     static List<DefinedRole> IgiveableRoles = new List<DefinedRole>();
     static List<DefinedRole> CgiveableRoles = new List<DefinedRole>();
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
-    static private IntegerConfiguration NumOfDecorationOption = NebulaAPI.Configurations.Configuration("options.role.evildecoratorU.maxdecorationCount", (1, 10), 5);
-    static private FloatConfiguration DecorationCoolDownOption = NebulaAPI.Configurations.Configuration("options.role.evildecoratorU.decorationCoolDown", (20f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
-    static internal IConfiguration ImpostorFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.evildecoratorU.ImpostorgiveFilter", _ => OpenImpostorFilterEditor()));
-    static internal IConfiguration CrewmateFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.evildecoratorU.CrewmategiveFilter", _ => OpenCrewmateFilterEditor()));
+    static private IntegerConfiguration NumOfDecorationOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.maxdecorationCount", (1, 10), 5);
+    static private FloatConfiguration DecorationCoolDownOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.decorationCoolDown", (20f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
+    static internal IConfiguration ImpostorFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.decoratorU.ImpostorgiveFilter", _ => OpenImpostorFilterEditor()));
+    static internal IConfiguration CrewmateFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.decoratorU.CrewmategiveFilter", _ => OpenCrewmateFilterEditor()));
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Decorator.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
@@ -71,7 +74,7 @@ public class NiceDecorator : DefinedSingleAbilityRoleTemplate<NiceDecorator.Abil
     bool IAssignableDocument.HasAbility => true;
     IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
     {
-        yield return new(DecorationImage, "role.nicedecoratorU.ability.decoration");
+        yield return new(DecorationImage, "role.decoratorU.ability.decoration");
     }
     static private readonly Virial.Media.Image DecorationImage = NebulaAPI.AddonAsset.GetResource("DecorationButtonNice.png")!.AsImage(115f)!;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility

@@ -1,0 +1,56 @@
+# Assignable
+
+"role.chickenU.name" : "胆小鬼"
+"role.chickenU.short" : "胆"
+"role.chickenU.blurb" : "怯懦的人"
+
+"role.chickenModifierU.name" : "胆小鬼"
+"role.chickenModifierU.short" : "胆"
+"role.chickenModifierU.generalBlurb" : "怯懦者"
+
+# Document
+
+"role.chickenU.doc" : "胆小鬼是一个弱小无能的船员。"
+"role.chickenU.ability.title" : "固有能力【虚弱】"
+"role.chickenU.ability.main" : "胆小鬼非常脆弱很容易死亡，通过活到最后和船员一起获胜。"
+"role.chicken.ability.Door" : "<title>被门夹死</title>被门夹手指而死"
+"role.chicken.ability.Vent" : "<title>绊倒而死</title>被通风管道绊倒而死"
+"role.chicken.ability.Mess" : "<title>错乱而死</title>电力破坏持续后因错乱而死"
+"role.chicken.ability.Drop" : "<title>坠落而死</title>从升降梯落下而死。"
+"role.chicken.ability.Fall" : "<title>跌落而死</title>从梯子、滑索上跌落而死。"
+"role.chicken.ability.Wuss" : "<title>惊吓而死</title>如果获得<var>一定票数</var>，会以为被盯上而死。"
+
+"role.chickenModifierU.doc" : "胆小鬼是一个弱小无能的船员。"
+
+# Options
+
+"options.role.chickenU.detail" : "胆小鬼是一个弱小无能的船员。"
+"options.role.chickenU.deadPercentVent" : "通风管道绊倒而死概率"
+"options.role.chickenU.deadPercentLadder" : "楼梯跌落而死概率"
+"options.role.chickenU.deadPercentZipLine" : "滑索跌落而死概率"
+"options.role.chickenU.deadPercentPlatform" : "升降梯摔落而死概率"
+"options.role.chickenU.deadPercentDoor" : "被门压迫而死概率"
+"options.role.chickenU.deadElectricSecond" : "因为电力破坏而错乱的时间"
+"options.role.chickenU.deadElectricSecond.detai" : "设定电力破坏持续多久会死亡的时间。"
+"options.role.admiralU.deadNumOfVote" : "因为票数而惊吓死的票数"
+"options.role.chickenU.ventRange" : "绊倒而死的范围"
+"options.role.chickenU.ventRange.detail" : "设定会因为通风管道绊倒的范围。"
+
+"options.role.chickenModifierU.detail" : "胆小鬼是一个弱小无能的附加。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"state.chickenDeadVent" : "绊倒而死"
+"state.chickenDeadFall" : "跌落而死"
+"state.chickenDeadDrop" : "坠落而死"
+"state.chickenDeadDoor" : "被门夹死"
+"state.chickenDeadWuss" : "错乱而死"
+"state.chickenDeadMess" : "惊吓而死"
+
+# Titles

@@ -45,7 +45,7 @@
 
 # Stats
 
-"end.aliceU" : "アリス勝利"
+"end.aliceU" : "アリス%EXTRA%勝利"
 "end.extra.aliceU" : "<color=#FFFFFF>+</color> アリス"
 
 # Titles

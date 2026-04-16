@@ -31,7 +31,7 @@ namespace Hori.Scripts.Role.Crewmate;
 [NebulaRPCHolder]
 public class NiceObserverU : DefinedSingleAbilityRoleTemplate<NiceObserverU.Ability>, DefinedRole
 {
-    private NiceObserverU() : base("niceObserverU", new(255, 191, 0), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [MaxCameraCountOption, PlaceCoolDownOption, CanSeeCameraOtherPlayerOption])
+    private NiceObserverU() : base("niceObserverU", new(0, 103, 144), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [MaxCameraCountOption, PlaceCoolDownOption, CanSeeCameraOtherPlayerOption])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon, ConfigurationTags.TagFunny);
     }
@@ -49,15 +49,15 @@ public class NiceObserverU : DefinedSingleAbilityRoleTemplate<NiceObserverU.Abil
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
 
-        static private Image placeButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverPlaceButtonN.png")!.AsImage(115f);
-        static private Image monitorButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverMonitorButtonN.png")!.AsImage(115f);
+        static private Image placeButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverPlaceButtonN.png")!.AsImage(115f)!;
+        static private Image monitorButtonSprite = NebulaAPI.AddonAsset.GetResource("ObserverMonitorButtonN.png")!.AsImage(115f)!;
 
 
-        static private Image nextButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraNextButton.png")!.AsImage(115f);
-        static private Image selfButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraSelfButton.png")!.AsImage(115f);
+        static private Image nextButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraNextButton.png")!.AsImage(115f)!;
+        static private Image selfButtonSprite = NebulaAPI.AddonAsset.GetResource("CameraSelfButton.png")!.AsImage(115f)!;
 
-        public ObserverU.Camera[] MyGlobalCamera = new ObserverU.Camera[MaxCameraCountOption];
-        public ObserverU.Camera[] MyLocalCamera = new ObserverU.Camera[MaxCameraCountOption];
+        public EvilObserverU.Camera[] MyGlobalCamera = new EvilObserverU.Camera[MaxCameraCountOption];
+        public EvilObserverU.Camera[] MyLocalCamera = new EvilObserverU.Camera[MaxCameraCountOption];
         int nowGlobalCameraCount = 0;
         int nowLocalCameraCount = 0;
         int watchingCameraNumber = -1;
@@ -87,11 +87,11 @@ public class NiceObserverU : DefinedSingleAbilityRoleTemplate<NiceObserverU.Abil
                     {
                         left--;
                         placeButton.UpdateUsesIcon(left.ToString());
-                        MyLocalCamera[nowLocalCameraCount] = (NebulaSyncObject.LocalInstantiate(ObserverU.Camera.MyLocalTag, [
+                        MyLocalCamera[nowLocalCameraCount] = (NebulaSyncObject.LocalInstantiate(EvilObserverU.Camera.MyLocalTag, [
                         PlayerControl.LocalPlayer.transform.localPosition.x,
                         PlayerControl.LocalPlayer.transform.localPosition.y,
                         PlayerControl.LocalPlayer.cosmetics.FlipX ? 1f : -1f
-                        ]).SyncObject as ObserverU.Camera);
+                        ]).SyncObject as EvilObserverU.Camera);
                         nowLocalCameraCount++;
                     });
                     placeButton.StartCoolDown();
@@ -148,17 +148,17 @@ public class NiceObserverU : DefinedSingleAbilityRoleTemplate<NiceObserverU.Abil
                 if (MyLocalCamera[i] != null && MyGlobalCamera[i] == null)
                 {
 
-                    if (CanSeeCameraOtherPlayerOption) MyGlobalCamera[i] = (NebulaSyncObject.RpcInstantiate(ObserverU.Camera.MyGlobalTag, [
+                    if (CanSeeCameraOtherPlayerOption) MyGlobalCamera[i] = (NebulaSyncObject.RpcInstantiate(EvilObserverU.Camera.MyGlobalTag, [
                         MyLocalCamera[i].Position.x,
                         MyLocalCamera[i].Position.y,
                         MyLocalCamera[i].Flipped ? -1f : 1f
-                        ]).SyncObject as ObserverU.Camera);
+                        ]).SyncObject as EvilObserverU.Camera);
 
-                    else MyGlobalCamera[i] = (NebulaSyncObject.LocalInstantiate(ObserverU.Camera.MyGlobalTag, [
+                    else MyGlobalCamera[i] = (NebulaSyncObject.LocalInstantiate(EvilObserverU.Camera.MyGlobalTag, [
                         MyLocalCamera[i].Position.x,
                         MyLocalCamera[i].Position.y,
                         MyLocalCamera[i].Flipped ? 1f : -1f
-                        ]).SyncObject as ObserverU.Camera);
+                        ]).SyncObject as EvilObserverU.Camera);
                     NebulaSyncObject.LocalDestroy(MyLocalCamera[i].ObjectId);
                     nowGlobalCameraCount++;
                 }

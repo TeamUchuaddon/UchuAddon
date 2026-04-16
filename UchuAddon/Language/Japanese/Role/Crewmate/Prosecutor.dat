@@ -24,7 +24,8 @@
 
 "button.label.prosecute" : "プロセキュート"
 "role.prosecutorU.hudText" : "残りプロセキュート回数"
-　
+"role.prosecutorU.message1" : "<color=#3477eb>プロセキュート</color>"
+
 # Stats
 
 

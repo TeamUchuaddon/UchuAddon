@@ -40,6 +40,7 @@ public class ChickenModifierU : DefinedAllocatableModifierTemplate, DefinedAlloc
 {
     private ChickenModifierU() : base("chickenModifierU", "TNA", new(255, 238, 0), [DeadPercentVent, DeadPercentLadder, DeadPercentZipLine, DeadPercentPlatform, DeadPercentDoor, DeadElectricSecond, DeadNumOfVote, VentRange])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Chicken.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -54,6 +55,10 @@ public class ChickenModifierU : DefinedAllocatableModifierTemplate, DefinedAlloc
     static public readonly FloatConfiguration VentRange = NebulaAPI.Configurations.Configuration("options.role.chickenU.ventRange", (0.25f, 5f, 0.25f), 1f, FloatConfigurationDecorator.Ratio);
 
     static public ChickenModifierU MyRole = new ChickenModifierU();
+
+
+    static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Chicken.png")!.AsImage(100f)!;
+    Image? DefinedAssignable.IconImage => IconImage;
 
     RuntimeModifier RuntimeAssignableGenerator<RuntimeModifier>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
     public class Instance : RuntimeAssignableTemplate, RuntimeModifier
@@ -168,6 +173,11 @@ public class ChickenModifierU : DefinedAllocatableModifierTemplate, DefinedAlloc
             {
                 Electric = 0f;
             }
+        }
+
+        void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
+        {
+            if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
         }
     }
 }

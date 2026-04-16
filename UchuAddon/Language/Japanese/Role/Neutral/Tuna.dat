@@ -48,7 +48,7 @@
 # Stats
 
 "state.tuna.dead" : "調理"
-"end.tunaU" : "マグロ勝利"
+"end.tunaU" : "マグロ%EXTRA%勝利"
 "document.tip.winCond.tunaU.title" : "特殊勝利"
 "document.tip.winCond.tunaU" : "<b>マグロゲージ</b>がMAXになると勝利します。"
 

@@ -39,6 +39,8 @@ public class TimerU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
 {
     private TimerU() : base("timerU", "TMR", new(3, 252, 194))
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Timer.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Timer.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;

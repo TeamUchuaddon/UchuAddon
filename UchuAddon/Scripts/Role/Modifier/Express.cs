@@ -57,6 +57,7 @@ public class ExpressU : DefinedAllocatableModifierTemplate, HasCitation, Defined
 {
     private ExpressU() : base("expressU", "EXP", new(121, 126, 208), [ExpressSpeed])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Express.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     Citation? HasCitation.Citation => Hori.Core.Citations.TownOfHostY;

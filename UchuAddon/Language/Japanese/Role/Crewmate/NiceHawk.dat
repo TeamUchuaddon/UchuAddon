@@ -1,16 +1,16 @@
 # Assignable
 
-"role.NicehawkU.name" : "ナイスホーク"
-"role.NicehawkU.short" : "ナホ"
-"role.NicehawkU.blurb" : "正義の俯瞰者"
+"role.niceHawkU.name" : "ナイスホーク"
+"role.niceHawkU.short" : "ホ"
+"role.niceHawkU.blurb" : "正義の俯瞰者"
 
 # Document
 
-"role.NicehawkU.doc" : "視界を広げるクルーメイトです。"
+"role.niceHawkU.doc" : "視界を広げるクルーメイトです。"
 
 # Options
 
-"options.role.NicehawkU.detail" : "ホークは自身の視界を広げることが出来るクルーメイトです。"
+"options.role.niceHawkU.detail" : "ホークは自身の視界を広げることが出来るクルーメイトです。"
 
 # Game
 

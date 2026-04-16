@@ -1,0 +1,34 @@
+# Assignable
+
+"role.enchanterU.name" : "エンチャンター"
+"role.enchanterU.short" : "エン"
+"role.enchanterU.blurb" : "最強のガジェットを求めて"
+"teams.enchanterU" : "エンチャンター"
+
+# Document
+
+"role.enchanterU.doc" : "選んだ相手に対してモディファイアを渡すことができる第三陣営です。"
+"role.enchanterU.ability.title" : "固有能力"ドレスコード - リライト""
+"role.enchanterU.ability.main" : "設定された回数分エンチャントをすると、追加勝利することができます。"
+"role.EnchanterU.ability.enchant" : "<title>エンチャント</title>モディファイアを付与させることができます。<br>エンチャントによって追加されたモディファイアのみ変化し続けます。"
+"role.enchanterU.tips" : "この役職を使用する際は、フィルターの設定をしてからプレイしてください。"
+
+# Options
+
+"options.role.enchanterU.detail" : "エンチャンターは他のプレイヤーにモディファイアを配ることが出来る第三陣営です。<br>一定回数エンチャントをすると追加勝利することが出来ます。"
+"options.role.enchanterU.enchantCount" : "勝利に必要なエンチャント回数"
+"options.role.enchanterU.enchantCoolDown" : "エンチャントクールダウン"
+"options.role.enchanterU.giveableFilter" : "エンチャントフィルター"
+
+# Game
+
+
+# UI
+
+"button.label.EnchanterU.enchant" : "エンチャント"
+
+# Stats
+
+"end.extra.enchanterU" : "<color=#FFFFFF>+</color> エンチャンター"
+
+# Titles

@@ -1,0 +1,19 @@
+# Document
+
+"role.decoratorU.ability.decoration" : "<title>装飾</title>プレイヤーの役職を変更します。"
+
+# Options
+
+"options.role.decoratorU.maxdecorationCount" : "デコレーション使用回数"
+"options.role.decoratorU.decorationCoolDown" : "デコレーションクールダウン"
+"options.role.decoratorU.ImpostorgiveFilter" : "インポスター排出可能フィルター"
+"options.role.decoratorU.CrewmategiveFilter" : "クルーメイト排出可能フィルター"
+
+# Game
+
+
+# UI
+
+"button.label.decoration" : "装飾"
+
+# Status

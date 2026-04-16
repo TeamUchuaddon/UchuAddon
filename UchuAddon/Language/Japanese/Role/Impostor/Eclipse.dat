@@ -10,7 +10,7 @@
 "role.eclipseU.ability.title" : "固有能力 "宇宙からの厄災"
 "role.eclipseU.ability.main" : "エクリプスは隕石を降らすことが出来るインポスターです。"
 "role.eclipseU.ability.mark" : "<title>マーク</title>隕石の着弾地点をマークをします"
-"role.eclipseU.ability.blast" : "<title>マークをした場所に、隕石を降らせます。<br>マーク地点がないと使用できません。"
+"role.eclipseU.ability.blast" : "<title>メテオ</title>マークをした場所に、隕石を降らせます。<br>マーク地点がないと使用できません。"
 
 # Options
 

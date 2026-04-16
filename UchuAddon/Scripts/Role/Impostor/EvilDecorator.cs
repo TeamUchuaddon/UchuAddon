@@ -16,8 +16,9 @@ namespace Hori.Scripts.Role.Impostor;
 
 public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ability>, DefinedRole,IAssignableDocument
 {
-    public EvilDecoratorU() : base("evildecoratorU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [NumOfDecorationOption, DecorationCoolDownOption, ImpostorFilterOption, CrewmateFilterOption])
+    public EvilDecoratorU() : base("evilDecoratorU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [NumOfDecorationOption, DecorationCoolDownOption, ImpostorFilterOption, CrewmateFilterOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/EvilDecorator.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -26,10 +27,10 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
     static List<DefinedRole> CgiveableRoles = new List<DefinedRole>();
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
-    static private IntegerConfiguration NumOfDecorationOption = NebulaAPI.Configurations.Configuration("options.role.evildecoratorU.maxdecorationCount", (1, 10), 5);
-    static private FloatConfiguration DecorationCoolDownOption = NebulaAPI.Configurations.Configuration("options.role.evildecoratorU.decorationCoolDown", (20f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
-    static internal IConfiguration ImpostorFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.evildecoratorU.ImpostorgiveFilter", _ => OpenImpostorFilterEditor()));
-    static internal IConfiguration CrewmateFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.evildecoratorU.CrewmategiveFilter", _ => OpenCrewmateFilterEditor()));
+    static private IntegerConfiguration NumOfDecorationOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.maxdecorationCount", (1, 10), 5);
+    static private FloatConfiguration DecorationCoolDownOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.decorationCoolDown", (20f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
+    static internal IConfiguration ImpostorFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.decoratorU.ImpostorgiveFilter", _ => OpenImpostorFilterEditor()));
+    static internal IConfiguration CrewmateFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.decoratorU.CrewmategiveFilter", _ => OpenCrewmateFilterEditor()));
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Decorator.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
@@ -78,7 +79,7 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
     bool IAssignableDocument.HasAbility => true;
     IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
     {
-        yield return new(DecorationImage, "role.evildecoratorU.ability.decoration");
+        yield return new(DecorationImage, "role.decoratorU.ability.decoration");
     }
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {

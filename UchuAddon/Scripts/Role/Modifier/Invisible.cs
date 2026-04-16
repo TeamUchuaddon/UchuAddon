@@ -67,7 +67,7 @@ public class InvisibleU : DefinedAllocatableModifierTemplate, DefinedAllocatable
 
         void RuntimeAssignable.OnActivated()
         {
-            MyPlayer.GainAttribute(PlayerAttributes.InvisibleElseImpostor, 0.1f, false, 1, "InvisibleU.invisible");
+            MyPlayer.GainAttribute(PlayerAttributes.InvisibleElseImpostor, 999999999999999f, true, 1, "InvisibleU.invisible");
         }
         void IGameOperator.OnReleased()
         {

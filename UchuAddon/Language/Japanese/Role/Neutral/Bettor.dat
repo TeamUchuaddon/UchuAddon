@@ -1,0 +1,49 @@
+﻿# Assignable
+
+"role.bettorU.name" : "ベッター"
+"role.bettorU.short" : "べ"
+"role.bettorU.blurb" : "Logic Over Luck."
+"teams.bettorU" : "ベッター"
+
+# Document
+
+"role.bettorU.doc" : "全員の役職を言い当てると勝利する第三陣営です。"
+"role.bettorU.ability.title" : "固有能力 "ロジカル・コール""
+"role.bettorU.ability.main" : "プレイヤーの役職を予想し、タスクターンに書き込むことで結果を確認できます。"
+"role.bettorU.ability.guess" : "<title>推測</title>プレイヤーの役職を推測できます。"
+"role.bettorU.ability.analyze" : "<title>分析</title>選択したプレイヤーの陣営を確認できます。"
+"role.bettorU.ability.identify" : "<title>特定</title>選択したプレイヤーの役職を知ることができます。"
+"document.tip.winCond.bettorU.title" : "特殊勝利"
+"document.tip.winCond.bettorU" : "全員の役職を言い当てると勝利します。"
+
+
+# Options
+
+"options.role.bettorU.detail" : "ベッターは全プレイヤーの役職を言い当てると勝利する第三陣営です。"
+"options.role.bettorU.analyzeCooldownOption" : "分析クールダウン"
+"options.role.bettorU.numOfAnalyzeOption" : "分析の使用回数"
+"options.role.bettorU.allowIdentifyonDeadPlayersOption" : "特定を死亡したプレイヤーに使用可能"
+"options.role.bettorU.getIdentifyPercentageOption" : "特定が使用可能になるヒット数割合"
+"options.role.bettorU.disableGuessTurn" : "ゲーム開始後「推測」が使用できないターン数"
+
+# Game
+
+"role.bettorU.analyze.title" : "分析結果"
+
+"role.bettorU.information.title" : "現在判明している情報"
+"role.bettorU.information.blow" : "存在する役職"
+"role.bettorU.information.miss": "存在しない役職"
+"role.bettorU.information.none" : "なし"
+"role.bettorU.identifyHelp" : ""特定"使用可能まで"
+"role.bettorU.normalHelp" :  "現在のヒット割合"
+
+# UI
+
+"button.label.guess" : "推測"
+"button.label.analyze" : "分析"
+
+# Stats
+
+"end.bettorU" : "ベッター%EXTRA%勝利"
+
+# Titles

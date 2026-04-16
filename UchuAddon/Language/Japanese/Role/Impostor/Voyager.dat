@@ -9,7 +9,7 @@
 "role.voyagerU.doc" : "次元を越えるインポスターです。"
 "role.voyagerU.ability.title" : "固有能力 "パラレルダイブ""
 "role.voyagerU.ability.main" : "次元に潜伏することが出来ます。一定時間内に離脱しないと死亡してしまいます。"
-"role.voyagerU.ability.dive" : "<title>潜伏</title>新たな次元へ移動します。<br>潜伏中は他プレイヤーの見た目がシャッフルされます。<br>潜伏中は透明化し、速度が上昇します。"
+"role.voyagerU.ability.dive" : "<title>潜伏</title>新たな次元へ移動します。<br>潜伏中は他プレイヤーの見た目がシャッフルされ、<br>透明化・速度上昇が付与されます。"
 "role.voyagerU.ability.away" : "<title>離脱</title>次元から離脱します。"
 # Options
 

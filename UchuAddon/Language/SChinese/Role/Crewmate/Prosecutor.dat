@@ -1,0 +1,31 @@
+# Assignable
+
+"role.prosecutorU.name" : "检察官"
+"role.prosecutorU.short" : "检"
+"role.prosecutorU.blurb" : "审判你的罪行"
+
+# Document
+
+"role.prosecutorU.doc" : "可强制放逐指定玩家"
+"role.prosecutorU.ability.title" : "固有能力『有罪判决』"
+"role.prosecutorU.ability.main" : "可强制放逐玩家"
+"role.prosecutorU.ability.prosecute" : "<title>裁决</title>使用后，将强制放逐被投票的玩家"　
+
+# Options
+
+"options.role.prosecutorU.detail" : "检察官是一名可强制放逐其他玩家的船员阵营角色"
+"options.role.prosecutorU.numOfProsecute" : "裁决可用次数"
+"options.role.prosecutorU.prosecuteCrewmateCheck" : "若目标为船员阵营则直接淘汰"
+
+# Game
+
+
+# UI
+
+"button.label.prosecute" : "裁决"
+"role.prosecutorU.hudText" : "剩余裁决次数"
+　
+# Stats
+
+
+# Titles

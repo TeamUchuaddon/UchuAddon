@@ -1,0 +1,24 @@
+# Assignable
+
+"role.HighLowU.name" : "运气儿"
+"role.HighLowU.generalBlurb" : "会议全凭我一时兴起"
+
+# Document
+
+"role.HighLowU.doc" : "投票时运气好票数会增加，<br>运气差票数会减少。"
+
+# Options
+
+"options.role.HighLowU.detail" : "票数由运气决定。"
+"options.role.HighLowU.Vote" : "失败时票数"
+"options.role.HighLowU.random" : "成功概率"
+"options.role.HighLowU.YesVote" : "成功时票数"
+# Game
+
+# UI
+
+
+# Stats
+
+
+# Titles

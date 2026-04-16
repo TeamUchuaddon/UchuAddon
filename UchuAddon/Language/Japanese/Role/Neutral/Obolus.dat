@@ -35,7 +35,7 @@
 
 # Stats
 
-"end.obolusU" : "オボルス勝利"
+"end.obolusU" : "オボルス%EXTRA%勝利"
 "end.extra.aliceU" : "<color=#FFFFFF>+</color> オボルス"
 
 # Titles

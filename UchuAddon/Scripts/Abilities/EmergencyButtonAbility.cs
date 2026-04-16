@@ -45,6 +45,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Hori.Scripts.Abilities;
 
+// var ability = new EmergencyButtonAbility().Register(this); をAmOwnerの中に置けば使える
 public class EmergencyButtonAbility : FlexibleLifespan, IGameOperator
 {
     static private readonly Virial.Media.Image EmergencyImage = NebulaAPI.AddonAsset.GetResource("EmergencyButton.png")!.AsImage(115f)!;
@@ -52,7 +53,7 @@ public class EmergencyButtonAbility : FlexibleLifespan, IGameOperator
     public EmergencyButtonAbility()
     {
         GamePlayer? my = GamePlayer.LocalPlayer;
-        var emergencyButton = NebulaAPI.Modules.AbilityButton(this, my!, false, true, Virial.Compat.VirtualKeyInput.SidekickAction, null, 15f, "emergency.ability", EmergencyImage, null);
+        var emergencyButton = NebulaAPI.Modules.AbilityButton(this, my!, false, true, Virial.Compat.VirtualKeyInput.None, null, 15f, "emergency.ability", EmergencyImage, null);
         emergencyButton.OnClick = (button) =>
         {
             if (!my!.CanMove) return;

@@ -1,0 +1,25 @@
+# Assignable
+
+"role.drunkU.name" : "醉鬼"
+"role.drunkU.generalBlurb" : "昨天喝多了……"
+"role.drunkU.blurb" : "昨天喝多了……"
+
+# Document
+
+"role.drunkU.doc" : "移动方向始终会出现错乱。"
+
+# Options
+
+"options.role.drunkU.detail" : "移动方向永远错乱的附加职业。"
+"options.role.drunkU.meetingDrunkShuffle" : "会议后重新打乱移动方向"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

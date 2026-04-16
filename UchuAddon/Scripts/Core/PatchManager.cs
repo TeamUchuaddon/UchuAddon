@@ -95,7 +95,7 @@ public class PatchManager
 
         logo.gameObject.AddComponent<BoxCollider2D>().size = new Vector2(7f, 3.5f);
 
-        GameOperatorManager.Instance!.Subscribe<GameStartEvent>(_ => GameObject.Destroy(addonLogoHolder), Virial.NebulaAPI.CurrentGame!);
+        GameOperatorManager.Instance!.Subscribe<LobbyDestroyEvent>(_ => GameObject.Destroy(addonLogoHolder), Virial.NebulaAPI.CurrentGame!);
     }
 
 
@@ -193,7 +193,7 @@ public static class AddonScreen
         var window = MetaScreen.GenerateWindow(new Vector2(7.5f, 4.6f), parent, new Vector3(0f, 0f, -200f), true, false, true, BackgroundSetting.Modern);
         window.SetWidget(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Center,
             NebulaAPI.GUI.Image(GUIAlignment.Center, NebulaAPI.AddonAsset.GetResource("TitleLogo.png")!.AsImage(100f)!, new(1.5f, 1.5f)),
-            NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>UchuAddon ver-β1.2.7</size>"),
+            NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>UchuAddon ver-β1.3.3</size>"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "\n<size=110%>このアドオンはNebula on the Shipを基に製作されています。</size>"),
             NebulaAPI.GUI.VerticalMargin(0.15f),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentTitle, "Credit"),
@@ -226,7 +226,7 @@ public static class AnonymousVoteBypass
     {
         if (__result && NebulaAPI.CurrentGame != null && GamePlayer.LocalPlayer != null)
         {
-            if (GamePlayer.LocalPlayer.Role.Role == Hori.Scripts.Role.Crewmate.AdmiralU.MyRole)
+            if ((GamePlayer.LocalPlayer.Role.Role == Hori.Scripts.Role.Crewmate.AdmiralU.MyRole) || (GamePlayer.LocalPlayer.Role.Role == MoiraU.MyRole && MoiraU.CanSeeVoteOption))
             {
                 __result = false;
             }

@@ -1,0 +1,38 @@
+# Assignable
+
+"role.shamanU.name" : "シャーマン"
+"role.shamanU.short" : "シャ"
+"role.shamanU.blurb" : "追憶憑依"
+
+# Document
+
+"role.shamanU.doc" : "生存してる非クルーメイト数を調べることが出来ます。"
+"role.shamanU.ability.title" : "固有能力 "英霊の記憶""
+"role.shamanU.ability.main" : "降霊術を使い、生存している非クルーメイト数を聞き出します。"
+"role.shamanU.ability.necromancy" : "<title>降霊術</title>生存している非クルーメイト数を調べます。<br>能力は指定の部屋でしか使用することが出来ず<br>降霊中に動くと即座にキャンセルされます。<br>結果は会議で届きます。"
+"role.shamanU.ability.necromancyBoost" : "<title>強化降霊術</title><var>%NUMBOOST%</var>個のタスクを終えると、降霊術が強化されます。<br>強化された降霊術では、<br>どの非クルーメイトが生存しているかまで分かります。"
+"role.shamanU.tips" : "指定の部屋には矢印が表示されます。<br>降霊術が完了すると部屋が再抽選されます。<br>表示される結果は降霊術を使った時点での結果です。"
+
+# Options
+
+"options.role.shamanU.detail" : "シャーマンは生存してる人外数を調べるクルーメイトです。"
+"options.role.shamanU.necromancyCooldown" : "降霊術クールダウン"
+"options.role.shamanU.necromancyDuration" : "降霊術所要時間"
+"options.role.shamanU.numOfnecromancy" : "降霊術使用可能数"
+"options.role.shamanU.taskCompletesRoomReroll" : "タスク完了時に部屋を再抽選"
+"options.role.shamanU.skillBoost" : "降霊術の強化"
+"options.role.shamanU.numOfBoostTask" : "強化されるタスク数"
+
+# Game
+
+"options.role.shamanU.message.header" : "降霊術結果"
+"role.shamanU.result" : "生存してる非クルーメイト数"
+# UI
+
+"button.label.shamanU.necromancy" : "降霊術"
+
+
+# Stats
+
+
+# Titles
