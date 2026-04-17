@@ -1,0 +1,43 @@
+﻿# Assignable
+
+"role.citrusU.name" : "シトラス"
+"role.citrusU.short" : "シト"
+"role.citrusU.blurb" : "みかんせん"
+"teams.citrusU" : "シトラス"
+
+"role.citrusStateU.name" : "柑橘状態"
+"role.citrusStateU.generalBlurb" : "柑染済"
+
+# Document
+
+"role.citrusU.doc" : "シトラスはプレイヤーを感染させることができます。<br>感染させられたプレイヤーは判別できなくなります。"
+"role.citrusU.ability.title" : "固有能力 "柑染""
+"role.citrusU.ability.main" : "自分以外の全生存者を感染させると、勝利します。"
+"role.citrusU.ability.infection" : "<title>感染</title>ターゲットを感染させます。"
+"role.citrusU.ability.selfInfection" : "<title>自己感染</title>自分を感染させます。"
+"document.tip.winCond.citrusU.title" : "特殊勝利"
+"document.tip.winCond.citrusU" : "自分以外の生存者全員が柑橘状態になると勝利します。"
+
+"role.citrusStateU.doc" : "シトラスによって感染させられたプレイヤーです。<br>自身が死亡する、もしくは感染させたシトラスが死亡すると解除されます。"
+
+# Options
+
+"options.role.citrusU.detail" : "シトラスはプレイヤーを柑橘状態にする第三陣営です。"
+"options.role.citrusU.infectionCooldown" : "感染クールダウン"
+"options.role.citrusU.canUseVent" : "ベントを使用可能"
+"options.role.citrusU.canUseStamp" : "感染させられたプレイヤーがスタンプ・エモートを使用可能"
+
+
+
+# Game
+
+# UI
+
+"button.label.infection" : "感染"
+"button.label.selfInfection" : "自己感染"
+
+# Stats
+
+"end.citrusU" : "シトラス%EXTRA%勝利"
+
+# Titles

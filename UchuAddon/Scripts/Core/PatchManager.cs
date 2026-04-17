@@ -77,6 +77,12 @@ public class PatchManager
             postfix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(SetUpPatch)))
         );
 
+        harmony.Patch(
+            typeof(MeetingHud).GetMethod(nameof(MeetingHud.Awake)),
+            prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(StartMeeting)))
+        );
+
+
     }
 
     public static void LobbyStart(LobbyBehaviour __instance)
@@ -181,6 +187,10 @@ public class PatchManager
         __instance.transform.FindChild("ModLabel").GetComponent<SpriteRenderer>().sprite = UchuAddonLabel;
     }
 
+    public static void StartMeeting()
+    {
+        GameOperatorManager.Instance?.Run(new MeetingEvent());
+    }
 
 
 
@@ -219,6 +229,14 @@ public static class AddonScreen
         return window;
     }
 }
+
+public class MeetingEvent : Virial.Events.Event
+{
+    internal MeetingEvent()
+    {
+    }
+}
+
 
 public static class AnonymousVoteBypass
 {

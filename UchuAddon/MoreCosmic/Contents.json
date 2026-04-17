@@ -3,34 +3,6 @@
         {
             "Author": "catudon",
             "Package": "Catudon Costume",
-		    "Name" : "Anonymous_LINKLOST",
-		    "Bounce": "false",
-		    "Adaptive": "false",
-          "HideHands": "true",
-          "Hidden" :  "true",
-            "FPS": "30",
-            "Main": {
-                "Address": "LinkLostU.png",
-                "Hash": "15237ba3f01f0426f8108c80d5028bbc",               
-                "MaskAddress":"AllCover-60.png",
-                "MaskHash":"7b7c6aef9545c6139ed110e211d3c081",   
-                "X":5,
-                "Y":12,
-                "Length": "60"
-            },
-            "Flip": {
-                "Address": "LinkLostU_Flip.png",
-                "Hash": "71c93b31ba2f3599a87c774ab82ddfbc",               
-                "MaskAddress":"AllCover-60.png",
-                "MaskHash":"7b7c6aef9545c6139ed110e211d3c081",   
-                "X":5,
-                "Y":12,
-                "Length": "60"
-            }          
-        },
-        {
-            "Author": "catudon",
-            "Package": "Catudon Costume",
 		    "Name" : "Citrus_Orange",
 		    "Bounce": "false",
 		    "Adaptive": "true",
@@ -181,85 +153,8 @@
                 "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
                 "Length": "9"                    
             }
-        },
-        {
-            "Author": "catudon",
-            "Package": "Catudon Costume",
-		    "Name" : "Citrus_Hjk",
-		    "Bounce": "false",
-		    "Adaptive": "false",
-            "IsSkinny": "true",
-            "IsHidden" : "true",
-            "FPS": "8",
-            "Main": {
-                "Address": "HjkU.png",
-                "Hash": "1c05edd48ca8005a8cf95bf0b9c75eb5",
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
-                "Length": "1"
-            },
-            "Move": {
-                "Address": "HjkU_Move.png",
-                "Hash": "ea15983cdfed13f6113ba487f8531ffb",
-                "MaskAddress": "AllCover-9.png",
-                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
-                "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                  
-                "Length": "9"
-            },            
-            "Climb": {
-                "Address": "HjkU_Climb.png",
-                "Hash": "365bdaf2264404b1712e38d2497b20eb",
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
-                "Length": "1"                       
-            },
-            "Exile": {
-                "Address": "HjkU_Exiled.png",
-                "Hash": "e868890e491f102db0287b13b9f39733",
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
-                "Length": "1"     
-		    },                   
-            "SeekerAlternative" : {
-                "Author" : "catudon",
-		        "Name" : "Citrus_Hjk(Se)"
-            }
-        },
-        {
-            "Author": "catudon",
-            "Package": "Catudon Costume",
-		    "Name" : "Citrus_Hjk(Se)",
-		    "Bounce": "false",
-		    "Adaptive": "false",
-            "IsSkinny": "true",
-            "IsHidden" : "true",
-            "FPS": "8",
-            "Main": {
-                "Address": "HjkU(Se).png",
-                "Hash": "b12f66ed77b0e8e9794f71c756cdb2a3",
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
-                "Length": "1"     
-            },
-            "Move": {
-                "Address": "HjkU(Se)_Move.png",
-                "Hash": "2b8f9ccc7557d5514ec208777c9a3464",
-                "MaskAddress": "AllCover-9.png",
-                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",              
-                "Length": "9"
-            },            
-            "Climb": {
-                "Address": "HjkU(Se)_Climb.png",
-                "Hash": "ef0a2197f09da71265da06b4bca385ca",
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
-                "Length": "1"                     
-            }
         }
     ],
-"visors": [
-
-    ],    
 "nameplates": [
         {
                 "Author": "catudon",
@@ -271,7 +166,7 @@
                 }
         }
     ],    
-"packages": [
+    "packages": [
             {
                 "Package": "Catudon Costume",
                 "Format": "Catudon Costume",
