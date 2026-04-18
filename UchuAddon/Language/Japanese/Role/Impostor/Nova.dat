@@ -1,0 +1,32 @@
+# Assignable
+
+"role.novaU.name" : "ノヴァ"
+"role.novaU.short" : "ノ"
+"role.novaU.blurb" : "星の産声"
+
+# Document
+
+"role.novaU.doc" : "一直線上にビームを放つインポスターです。"
+
+# Options
+
+"options.role.novaU.detail" : "ノヴァは一直線上にビームを放ち、命中したプレイヤーをキルできるインポスターです。"
+"options.role.novaU.firingMode" : "発射モード"
+"options.role.novaU.firingMode.free" : "自由"
+"options.role.novaU.firingMode.twoDirections" : "左右"
+"options.role.novaU.firingMode.fourDirections" : "上下左右"
+"options.role.novaU.equipCooldown" : "発射クールダウン"
+"options.role.novaU.beamSize" : "ビームのサイズ"
+"options.role.novaU.chargeDuration" : "チャージ時間"
+
+# Game
+
+
+# UI
+
+"button.label.fire" : "発射"
+
+# Stats
+
+
+# Titles

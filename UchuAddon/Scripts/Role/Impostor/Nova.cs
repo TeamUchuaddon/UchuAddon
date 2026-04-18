@@ -24,7 +24,7 @@ namespace Hori.Scripts.Role.Impostor;
 
 public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRole
 {
-    public NovaU() : base("novaU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [firingMode, BeamSizeOption, ChargeDurationOption])
+    public NovaU() : base("novaU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [firingMode, EquipCooldownOption, BeamSizeOption, ChargeDurationOption])
     {
     }
 
@@ -36,6 +36,10 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
     public static AssetBundle assetBundle = AssetBundle.LoadFromMemory(NebulaAPI.AddonAsset.GetResource("novaasset.bundle")!.AsStream()!.ReadBytes());
+
+    static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Nova.png")!.AsImage(100f)!;
+    Image? DefinedAssignable.IconImage => IconImage;
+
 
     static public NovaU MyRole = new();
 
@@ -80,6 +84,9 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
         VFXController? controller = null;
         bool launching = false;
 
+        static readonly Image EquipButtonImage = NebulaAPI.AddonAsset.GetResource("NovaEquipButton.png")!.AsImage(115f)!;
+        static readonly Image FireButtonImage = NebulaAPI.AddonAsset.GetResource("NovaFireButton.png")!.AsImage(115f)!;
+
         ModAbilityButton? equipButton = null;
 
 
@@ -89,17 +96,17 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
         {
             if (AmOwner)
             {
-                equipButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, VirtualKeyInput.FixedAbility, 10, "equip", null).SetAsUsurpableButton(this);
+                equipButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, VirtualKeyInput.FixedAbility, EquipCooldownOption, "equip", EquipButtonImage).SetAsUsurpableButton(this);
                 equipButton.Availability = button => !MyBarrel?.IsLocked ?? true;
                 equipButton.OnClick = button =>
                 {
                     RpcEquip.Invoke((MyPlayer, MyBarrel == null));
                 };
 
-                var launchButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, true, false, VirtualKeyInput.Kill, null, 0, "launch", null).SetAsMouseClickButton().SetAsUsurpableButton(this);
-                launchButton.Availability = button => MyBarrel != null && !MyBarrel.IsLocked;
-                launchButton.Visibility = button => MyBarrel != null;
-                launchButton.OnClick = button =>
+                var fireButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, true, false, VirtualKeyInput.Kill, null, 0, "fire", FireButtonImage).SetAsMouseClickButton().SetAsUsurpableButton(this);
+                fireButton.Availability = button => MyBarrel != null && !MyBarrel.IsLocked;
+                fireButton.Visibility = button => MyBarrel != null;
+                fireButton.OnClick = button =>
                 {
 
                     launching = true;
@@ -190,12 +197,14 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
 
         void Equip()
         {
+            equipButton?.SetLabel("unequip");
             MyBarrel = new NovaBarrel(MyPlayer).Register(this);
             if (MyPlayer.AmOwner) MyPlayer.GainSpeedAttribute(0f, 1000000f, false, 100, "NovaU:equip");
         }
 
         void UnEquip()
         {
+            equipButton?.SetLabel("equip");
             MyBarrel?.Release();
             MyBarrel = null;
             if (MyPlayer.AmOwner) MyPlayer.RemoveAttributeByTag("NovaU:equip");
