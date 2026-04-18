@@ -106,7 +106,7 @@
                 "Address": "LemonU_Move.png",
                 "Hash": "b00a4efe0245ad8bc84b6f2d4460ea48",
                 "MaskAddress": "AllCover-9.png",
-                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "MaskHash": "e35bc8fb86fb7d7ffe34a58f5176af2a",  
                 "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                  
                 "Length": "9"
             },            
@@ -140,7 +140,7 @@
             },
             "Move": {
                 "Address": "LemonU(Se)_Move.png",
-                "Hash": "a483a8229091de08f8f5c6392f57a7a4",
+                "Hash": "ce75dbd5746efb4e30565e73e9708fbc",
                 "MaskAddress": "AllCover-9.png",
                 "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
                 "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                  
