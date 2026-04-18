@@ -97,14 +97,14 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
             if (AmOwner)
             {
                 equipButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, VirtualKeyInput.FixedAbility, EquipCooldownOption, "equip", EquipButtonImage).SetAsUsurpableButton(this);
-                equipButton.Availability = button => !MyBarrel?.IsLocked ?? true;
+                equipButton.Availability = button => !MyBarrel?.IsLocked ?? true && MyPlayer.CanMove;
                 equipButton.OnClick = button =>
                 {
                     RpcEquip.Invoke((MyPlayer, MyBarrel == null));
                 };
 
                 var fireButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, true, false, VirtualKeyInput.Kill, null, 0, "fire", FireButtonImage).SetAsMouseClickButton().SetAsUsurpableButton(this);
-                fireButton.Availability = button => MyBarrel != null && !MyBarrel.IsLocked;
+                fireButton.Availability = button => MyBarrel != null && !MyBarrel.IsLocked && MyPlayer.CanMove;
                 fireButton.Visibility = button => MyBarrel != null;
                 fireButton.OnClick = button =>
                 {
