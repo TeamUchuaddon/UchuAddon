@@ -128,10 +128,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
 
         void OnMeetingStart(MeetingPreStartEvent ev)
         {
-            if (MyBarrel != null)
-            {
-                UnEquip();
-            }
+			UnEquip();
             foreach(var controller in GameObject.FindObjectsOfType<VFXController>())
             {
                 GameObject.Destroy(controller.gameObject);
@@ -479,7 +476,7 @@ public class VFXController : MonoBehaviour
     {
         var audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.loop = true;
-        audioSource.volume = 0.5f;
+        audioSource.volume = 0.25f;
         audioSource.clip = APICompat.GetSound("Nova_Charge");
         audioSource.Play();
 
