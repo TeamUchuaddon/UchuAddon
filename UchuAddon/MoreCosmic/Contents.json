@@ -14,8 +14,8 @@
                 "Hash": "4db15555dc52ddb37ecc774341c91287",
                 "ExAddress": "OrangeU_Ex.png",
                 "ExHash": "c6bf371b4e9662c7074f7a65586b354c",                
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",         
+                "MaskAddress":"AllCover_Id.png",
+                "MaskHash":"18a5137e221e76364a5df84c08b2b823",         
                 "ExIsFront":"true",              
                 "Length": "1"
             },
@@ -36,7 +36,7 @@
                 "ExAddress": "OrangeU_ExClimb.png",
                 "ExHash": "06a3dbd9458198fef1d47498125a5b55", 
                 "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",     
+                "MaskHash":"ae728f93e9f93d3ff2c729e455e65470",     
                 "ExIsFront":"true",                           
                 "Length": "1"                       
             },
@@ -98,8 +98,8 @@
             "Main": {
                 "Address": "LemonU.png",
                 "Hash": "e888e5b3a8c0f29e367b7698f862a6bd",
-                "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
+                "MaskAddress":"AllCover_Id.png",
+                "MaskHash":"18a5137e221e76364a5df84c08b2b823",                
                 "Length": "1"
             },
             "Move": {
@@ -114,7 +114,7 @@
                 "Address": "LemonU_Climb.png",
                 "Hash": "c07aaf375fee490ccdf16a068bc1302d",
                 "MaskAddress":"AllCover.png",
-                "MaskHash":"b1dac022f3c4cd2385bc90003cf51fe7",                
+                "MaskHash":"ae728f93e9f93d3ff2c729e455e65470",                
                 "Length": "1"                       
             },
             "SeekerAlternative" : {
