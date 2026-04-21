@@ -47,7 +47,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
     static public ValueConfiguration<int> WinConditionOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.winCondition", ["options.role.moiraU.winCondition.solo", "options.role.moiraU.winCondition.extra"], 0);
     static private BoolConfiguration NeedAliveOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.needAlive", true, () => WinConditionOption.GetValue() == 1);
     static internal BoolConfiguration CanSeeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeVote", false);
-	static internal BoolConfiguration CanSeeRoleOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeRole", true);
+    static internal BoolConfiguration CanSeeRoleOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeRole", true);
 
 
     Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.SuperNewRoles; } }
@@ -125,7 +125,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
         [Local]
         void RoleInfoVisibilityLocalEvent(PlayerCheckRoleInfoVisibilityLocalEvent ev)
         {
-			if (CanSeeRoleOption) ev.CanSeeAll = true;
+            if (CanSeeRoleOption) ev.CanSeeAll = true;
         }
 
         [Local]
@@ -141,18 +141,29 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
                            if (changeTarget1 == null)
                            {
                                changeTarget1 = p.MyPlayer;
+                               p.SetSelect(true);
                            }
                            if (changeTarget1 != null && changeTarget2 == null && p.MyPlayer != changeTarget1)
                            {
                                changeTarget2 = p.MyPlayer;
+                               p.SetSelect(true);
                                usedAbility = true;
+
+                               RpcSetTarget.Invoke((changeTarget1, changeTarget2, MyPlayer));
+
                            }
                        }
                    },
-                   p => !usedAbility && !p.MyPlayer.IsDead && !MeetingHudExtension.ExileEvenIfTie && !MyPlayer.IsDead && !p.MyPlayer.AmOwner && changeTarget1 != p.MyPlayer && changeTarget2 != p.MyPlayer && !canWin && (NeedRevelationOption ? revelationed.Contains(p.MyPlayer) : true))
+                   p => (!usedAbility || changeTarget1 == p.MyPlayer || changeTarget2 == p.MyPlayer) && !p.MyPlayer.IsDead && !MeetingHudExtension.ExileEvenIfTie && !MyPlayer.IsDead && !p.MyPlayer.AmOwner && !canWin && (NeedRevelationOption ? revelationed.Contains(p.MyPlayer) : true))
                    );
             }
         }
+
+        static RemoteProcess<(GamePlayer target1, GamePlayer target2, GamePlayer myPlayer)> RpcSetTarget = new("moiraSetTarget", (message, _) =>
+        {
+            (message.myPlayer.Role as Instance)!.changeTarget1 = message.target1;
+            (message.myPlayer.Role as Instance)!.changeTarget2 = message.target2;
+        });
 
 
         [Local]
@@ -177,6 +188,21 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
                 NebulaGameManager.Instance?.RpcInvokeSpecialWin(UchuGameEnd.MoiraWin, 1 << MyPlayer.PlayerId);
             }
 
+        }
+
+        
+        void ChangeVote(PlayerFixVoteHostEvent ev)
+        {
+            if (ev.VoteTo == changeTarget1)
+            {
+                ev.VoteTo = changeTarget2;
+                return;
+            }
+            else if (ev.VoteTo == changeTarget2)
+            {
+                ev.VoteTo = changeTarget1;
+                return;
+            }
         }
 
         void OnMeetingPreEnd(MeetingPreEndEvent ev)
