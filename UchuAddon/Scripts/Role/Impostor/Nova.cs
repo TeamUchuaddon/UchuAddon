@@ -477,7 +477,7 @@ public class VFXController : MonoBehaviour
     {
         var audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.loop = true;
-        audioSource.volume = 0.25f;
+        audioSource.volume = 0.35f;
         audioSource.clip = APICompat.GetSound("Nova_Charge");
         audioSource.Play();
 
