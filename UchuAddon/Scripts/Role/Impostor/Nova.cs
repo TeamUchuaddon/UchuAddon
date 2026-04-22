@@ -13,7 +13,10 @@ using Nebula.Utilities;
 using System.Collections;
 using System.Linq;
 using UnityEngine.UIElements;
+using Virial.Attributes;
 using Virial.Configuration;
+using Virial.Events.Player;
+using Virial.Helpers;
 using Virial.Media;
 using Color = UnityEngine.Color;
 using Image = Virial.Media.Image;
@@ -28,7 +31,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
     {
     }
 
-    static readonly ValueConfiguration<int> firingMode = NebulaAPI.Configurations.Configuration("options.role.novaU.firingMode", ["options.role.novaU.firingMode.free","options.role.novaU.firingMode.twoDirections", "options.role.novaU.firingMode.fourDirections"], 0);
+    static readonly ValueConfiguration<int> firingMode = NebulaAPI.Configurations.Configuration("options.role.novaU.firingMode", ["options.role.novaU.firingMode.free", "options.role.novaU.firingMode.twoDirections", "options.role.novaU.firingMode.fourDirections"], 0);
     internal static readonly FloatConfiguration EquipCooldownOption = NebulaAPI.Configurations.Configuration("options.role.novaU.equipCooldown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
     internal static readonly FloatConfiguration BeamSizeOption = NebulaAPI.Configurations.Configuration("options.role.novaU.beamSize", (0.25f, 5f, 0.25f), 1f, FloatConfigurationDecorator.Ratio);
     static readonly FloatConfiguration ChargeDurationOption = NebulaAPI.Configurations.Configuration("options.role.novaU.chargeDuration", (0.5f, 10f, 0.5f), 3f, FloatConfigurationDecorator.Second);
@@ -122,18 +125,33 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
 
             }
 
-
-
         }
 
         void OnMeetingStart(MeetingPreStartEvent ev)
         {
-			UnEquip();
-            foreach(var controller in GameObject.FindObjectsOfType<VFXController>())
+            CancelFire();
+        }
+
+
+        [OnlyMyPlayer]
+        void OnDieOrDisconnect(PlayerDieOrDisconnectEvent ev)
+        {
+            CancelFire();
+        }
+
+        void CancelFire()
+        {
+            UnEquip();
+            MyPlayer.RemoveAttributeByTag("NovaU:launch");
+            foreach (var controller in GameObject.FindObjectsOfType<VFXController>())
             {
                 GameObject.Destroy(controller.gameObject);
             }
+
         }
+
+        void EnterVent(PlayerVentEnterEvent ev) => CancelFire();
+
         IEnumerator CoFire()
         {
             if (controller == null || MyBarrel == null) yield break;
@@ -265,8 +283,8 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
                     break;
             }
             ability.controller.rotation = rotation * 180f / MathF.PI;
-            beamObject.transform.localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * 1.75f).AsVector3(-4.9f);
-			beamObject.transform.Find("----Beam----/Beam Entry").localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * ((1f / 8f) * NovaU.BeamSizeOption - (1f / 8f))).AsVector3(0);
+            beamObject.transform.localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * 1.85f).AsVector3(-4.9f);
+            beamObject.transform.Find("----Beam----/Beam Entry").localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * ((1f / 8f) * NovaU.BeamSizeOption - (1f / 8f))).AsVector3(0);
 
             ability.MyBarrel!.Lock(message.mouseAngle);
             ability.MyBarrel!.OnFire(message.mouseAngle);
@@ -372,15 +390,9 @@ public class VFXController : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
         delay = 1.16666666f * chargingDuration;
         SetLifeTimeAndDuration();
+        SetColor(Color1, Color2);
         setRotation();
         UpdateBeamSize();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        SetColor(Color1, Color2);
     }
 
 
@@ -390,8 +402,8 @@ public class VFXController : MonoBehaviour
         {
             ps.transform.localScale *= 1.5f;
         }
-        beamParticleSystem.transform.localScale *= NovaU.BeamSizeOption * 6;
-        beamEntryParticleSystem.transform.localScale *= NovaU.BeamSizeOption * 6;
+        beamParticleSystem.transform.localScale *= 6 * NovaU.BeamSizeOption;
+        beamEntryParticleSystem.transform.localScale *= 6 * NovaU.BeamSizeOption;
     }
 
     public void SetLifeTimeAndDuration()
@@ -510,7 +522,7 @@ public class VFXController : MonoBehaviour
         foreach (var p in particleSystems)
         {
             var transform = p.transform;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, rotation);
+            transform.eulerAngles = new Vector3(0, 0, rotation);
         }
     }
 
