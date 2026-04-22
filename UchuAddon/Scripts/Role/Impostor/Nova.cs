@@ -266,6 +266,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
             }
             ability.controller.rotation = rotation * 180f / MathF.PI;
             beamObject.transform.localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * 1.75f).AsVector3(-4.9f);
+			beamObject.transform.Find("----Beam----/Beam Entry").localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * ((1f / 8f) * NovaU.BeamSizeOption - (1f / 8f))).AsVector3(0);
 
             ability.MyBarrel!.Lock(message.mouseAngle);
             ability.MyBarrel!.OnFire(message.mouseAngle);
