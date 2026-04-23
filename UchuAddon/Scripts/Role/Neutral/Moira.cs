@@ -35,7 +35,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
 {
     static readonly public RoleTeam MyTeam = NebulaAPI.Preprocessor!.CreateTeam("teams.moiraU", new(194, 125, 207), TeamRevealType.OnlyMe);
 
-    private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption, CanSeeVoteOption, CanSeeRoleOption])
+    private MoiraU() : base("moiraU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [NeedRevelationOption, RevelationCooldownOption, NumOfSwappingWinOption, WinConditionOption, NeedAliveOption, CanSeeVoteOption, CanSeeRoleOption, CanPushButtonOption])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Moira.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -48,6 +48,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
     static private BoolConfiguration NeedAliveOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.needAlive", true, () => WinConditionOption.GetValue() == 1);
     static internal BoolConfiguration CanSeeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeVote", false);
     static internal BoolConfiguration CanSeeRoleOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeRole", true);
+    static private BoolConfiguration CanPushButtonOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canPushButton", true);
 
 
     Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.SuperNewRoles; } }
@@ -203,6 +204,11 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
                 ev.VoteTo = changeTarget1;
                 return;
             }
+        }
+
+        void BlockCallEmergencyMeeting(CheckCanPushEmergencyButtonEvent ev)
+        {
+            if (!CanPushButtonOption) ev.DenyButton("role.moiraU.denyReason");
         }
 
         void OnMeetingPreEnd(MeetingPreEndEvent ev)
