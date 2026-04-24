@@ -49,6 +49,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
     static internal BoolConfiguration CanSeeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeVote", false);
     static internal BoolConfiguration CanSeeRoleOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canSeeRole", true);
     static private BoolConfiguration CanPushButtonOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.canPushButton", true);
+    static private BoolConfiguration ChangeVoteOption = NebulaAPI.Configurations.Configuration("options.role.moiraU.changeVoteButton", true);
 
 
     Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.SuperNewRoles; } }
@@ -194,6 +195,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
         
         void ChangeVote(PlayerFixVoteHostEvent ev)
         {
+            if (!ChangeVoteOption) return;
             if (ev.VoteTo == changeTarget1)
             {
                 ev.VoteTo = changeTarget2;
@@ -211,6 +213,8 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
             if (!CanPushButtonOption) ev.DenyButton("role.moiraU.denyReason");
         }
 
+
+        [Local]
         void OnMeetingPreEnd(MeetingPreEndEvent ev)
         {
             ev.PushCoroutine(SwapPlayerCompletely(changeTarget1, changeTarget2));
