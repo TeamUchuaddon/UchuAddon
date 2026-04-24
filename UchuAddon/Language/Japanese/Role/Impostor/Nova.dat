@@ -18,6 +18,7 @@
 "options.role.novaU.equipCooldown" : "発射クールダウン"
 "options.role.novaU.beamSize" : "ビームのサイズ"
 "options.role.novaU.chargeDuration" : "チャージ時間"
+"options.role.novaU.resetKillCooldown" : "発射後にキルクールダウンをリセット"
 
 # Game
 
