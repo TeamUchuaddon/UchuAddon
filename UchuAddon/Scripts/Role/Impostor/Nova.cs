@@ -36,6 +36,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
     internal static readonly FloatConfiguration BeamSizeOption = NebulaAPI.Configurations.Configuration("options.role.novaU.beamSize", (0.25f, 5f, 0.25f), 1f, FloatConfigurationDecorator.Ratio);
     static readonly FloatConfiguration ChargeDurationOption = NebulaAPI.Configurations.Configuration("options.role.novaU.chargeDuration", (0.5f, 10f, 0.5f), 3f, FloatConfigurationDecorator.Second);
     static readonly FloatConfiguration BeamDurationOption = NebulaAPI.Configurations.Configuration("options.role.novaU.beamDuration", (0.5f, 10f, 0.25f), 5f, FloatConfigurationDecorator.Second);
+    static readonly BoolConfiguration ResetKillCooldownOption = NebulaAPI.Configurations.Configuration("options.role.novaU.resetKillCooldown", true);
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
     public static AssetBundle assetBundle = AssetBundle.LoadFromMemory(NebulaAPI.AddonAsset.GetResource("novaasset.bundle")!.AsStream()!.ReadBytes());
@@ -90,11 +91,11 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
         static readonly Image EquipButtonImage = NebulaAPI.AddonAsset.GetResource("NovaEquipButton.png")!.AsImage(115f)!;
         static readonly Image FireButtonImage = NebulaAPI.AddonAsset.GetResource("NovaFireButton.png")!.AsImage(115f)!;
 
-        ModAbilityButton? equipButton = null;
+        ModAbilityButton? equipButton = null, killButton = null;
 
 
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
-        bool IPlayerAbility.HideKillButton => MyBarrel != null || launching;
+        bool IPlayerAbility.HideKillButton => true;
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
         {
             if (AmOwner)
@@ -122,6 +123,12 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
 
                 };
 
+                killButton = NebulaAPI.Modules.KillButton(this, MyPlayer, true, VirtualKeyInput.Kill, AmongUsLLImpl.Instance.VanillaKillCooldown, "kill", ModAbilityButton.LabelType.Impostor, null, (player, button) =>
+                {
+                    MyPlayer.MurderPlayer(player, PlayerState.Dead, EventDetail.Kill, KillParameter.NormalKill);
+                    button.StartCoolDown();
+                });
+                killButton.Visibility = _ => MyBarrel == null && !launching && !MyPlayer.IsDead;
 
             }
 
@@ -142,6 +149,8 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
         void CancelFire()
         {
             UnEquip();
+            equipButton!.StartCoolDown();
+            if (ResetKillCooldownOption) killButton!.StartCoolDown();
             MyPlayer.RemoveAttributeByTag("NovaU:launch");
             foreach (var controller in GameObject.FindObjectsOfType<VFXController>())
             {
@@ -192,6 +201,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
 
             UnEquip();
             equipButton!.StartCoolDown();
+            if (ResetKillCooldownOption) killButton!.StartCoolDown();
             launching = false;
             GameObject.Destroy(controller.gameObject);
         }
@@ -219,6 +229,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
 
         void UnEquip()
         {
+            launching = false;
             equipButton?.SetLabel("equip");
             MyBarrel?.Release();
             MyBarrel = null;
