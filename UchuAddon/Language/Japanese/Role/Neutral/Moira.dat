@@ -31,6 +31,7 @@
 "options.role.moiraU.canSeeVote" : "投票先を視認可能"
 "options.role.moiraU.canSeeRole" : "他人の役職を視認可能"
 "options.role.moiraU.canPushButton" : "緊急会議ボタンを使用可能"
+"options.role.moiraU.changeVoteButton" : "投票数も交換する"
 
 
 # Game
