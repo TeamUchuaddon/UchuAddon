@@ -1,11 +1,4 @@
 [
 	{
-		"id" : "200000",
-		"title" : "タイトル",
-		"subTitle" : "サブタイトル",
-		"shortTitle" : "ショートタイトル",
-		"detail" : "本文<br>改行可",
-		"date" : "2026-01-01T09:00:00Z",
-		"debug" : false
 	}
 ]
