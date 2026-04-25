@@ -9,7 +9,7 @@
 
 # Options
 
-"options.role.hunchU.detail" : "他プレイヤーが死亡した際、画面が光ります。<br>設定で、死亡を感知できる範囲を変更することが出来ます。"
+"options.role.hunchU.detail" : "他プレイヤーが死亡した際、画面が光ります。<br>設定で、死亡を感知できる範囲を変更することができます。"
 "options.role.hunchU.detected" : "感知する範囲を制限"
 "options.role.hunchU.detectedRange" : "死亡感知範囲"
 

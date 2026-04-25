@@ -10,7 +10,7 @@
 
 # Options
 
-"options.role.bakeryU.detail" : "ベーカリーはパンを焼くクルーメイトです。<br>この役職が生存していると、会議終了時に<br>パンを焼いた通知が表示されます"
+"options.role.bakeryU.detail" : "ベーカリーはパンを焼くクルーメイトです。<br>この役職が生存していると、会議終了時に<br>パンを焼いた通知が表示されます。"
 "options.role.bakeryU.passBreadCooldown" : "渡すクールダウン"
 "options.role.bakeryU.breadPerMeeting" : "会議ごとのパン増加数"
 
@@ -21,7 +21,7 @@
 
 "role.bakeryU.message3" : "<color=#e6b422>今夜はパン祭りの予感がする…！</color>"
 "role.bakeryU.message2" : "<color=#696969>焦げた生地の匂いが漂う...</color>"
-"role.bakeryU.message1" : "<color=#87ffbb>焼かれた生地の匂いが漂う</color>"
+"role.bakeryU.message1" : "<color=#87ffbb>焼かれた生地の匂いが漂う。</color>"
 "button.label.bakeryU.passBread" : "渡す"
 
 # Stats

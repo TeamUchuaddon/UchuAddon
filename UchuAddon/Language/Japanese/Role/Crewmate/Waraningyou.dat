@@ -10,7 +10,7 @@
 
 # Options
 
-"options.role.waraningyouU.detail" : "わら人形は自身への投票をチャージし、<br><b>呪う</b>ボタンでチャージした票を使えるクルーメイトです。<br>自投票はチャージすることが出来ません"
+"options.role.waraningyouU.detail" : "わら人形は自身への投票をチャージし、<br><b>呪う</b>ボタンでチャージした票を使えるクルーメイトです。<br>自投票はチャージできません。"
 "options.role.waraningyouU.allowSkip" : "呪う使用時スキップ投票可能"
 "options.role.waraningyouU.defaultVote" : "票数の初期値"
 

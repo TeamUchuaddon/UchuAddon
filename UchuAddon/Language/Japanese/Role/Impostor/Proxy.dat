@@ -8,7 +8,7 @@
 
 "role.proxyU.doc" : "モニターと連携するインポスターです。"
 "role.proxyU.ability.title" : "固有能力 "巡れ、電脳連携""
-"role.proxyU.ability.main" : "プロキシはモニターとのコンビネーションです。上手く連携しましょう"
+"role.proxyU.ability.main" : "プロキシはモニターとのコンビネーションです。上手く連携しましょう。"
 "role.proxyU.ability.request" : "<title>申請</title>モニターと役職をチェンジします。"
 
 # Options

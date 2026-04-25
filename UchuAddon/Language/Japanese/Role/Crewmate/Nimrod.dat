@@ -10,7 +10,7 @@
 
 # Options
 
-"options.role.nimrodU.detail" : "ニムロッドは会議中に指定したプレイヤーを道連れ追放することが出来るクルーメイトです。<br>能力を使用しても追放されなかった場合、使用回数が減少します。"
+"options.role.nimrodU.detail" : "ニムロッドは、会議中に指定したプレイヤーを道連れにできるクルーメイトです。<br>能力を使用すると、追放の結果に関わらず使用回数を消費します。"
 "options.role.nimrodU.numOfInvolve" : "道連れ試行最大回数"
 "options.role.nimrodU.maxLeftTimer" : "道連れ可能な最大残会議時間"
 

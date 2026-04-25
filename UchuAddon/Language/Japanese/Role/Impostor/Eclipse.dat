@@ -9,12 +9,12 @@
 "role.eclipseU.doc" : "隕石を召喚するインポスターです。"
 "role.eclipseU.ability.title" : "固有能力 "宇宙からの厄災"
 "role.eclipseU.ability.main" : "エクリプスは隕石を降らすことが出来るインポスターです。"
-"role.eclipseU.ability.mark" : "<title>マーク</title>隕石の着弾地点をマークをします"
+"role.eclipseU.ability.mark" : "<title>マーク</title>隕石の着弾地点をマークをします。"
 "role.eclipseU.ability.blast" : "<title>メテオ</title>マークをした場所に、隕石を降らせます。<br>マーク地点がないと使用できません。"
 
 # Options
 
-"options.role.eclipseU.detail" : "エクリプスは隕石を降らせてキルをするインポスターです。<br>隕石は、味方に当たっても問答無用でキルしてしまいます"
+"options.role.eclipseU.detail" : "エクリプスは隕石を降らせてキルをするインポスターです。<br>隕石は、味方に当たっても問答無用でキルしてしまいます。"
 "options.role.eclipseU.useOfMeteor" : "メテオ使用可能回数"
 "options.role.eclipseU.meteorMarkCoolDown" : "マーククールダウン"
 "options.role.eclipseU.meteorBlastCoolDown" : "メテオクールダウン"

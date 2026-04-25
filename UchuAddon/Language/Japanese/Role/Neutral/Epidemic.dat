@@ -10,10 +10,10 @@
 "role.epidemicU.winCond" : "生存者全員にウイルスを感染させる。"
 "role.epidemicU.ability.title" : "固有能力 "見えない恐怖""
 "role.epidemicU.ability.main" : ""
-"role.epidemicU.ability.infection" : "<title>感染</title>プレイヤーを感染させます。初期状態では1回しか使えません、"
+"role.epidemicU.ability.infection" : "<title>感染</title>プレイヤーを感染させます。初期状態では1回しか使えません。"
 "role.epidemicU.ability.break" : "<title>破壊</title>対象の除染箱を一時的に使用不可な状態にさせます。"
 "role.epidemicU.ability.box" : "<title>除染箱</title>除染箱を使用すると使用したプレイヤーの感染率が減少します。<br>感染率が100%の場合は減少しません。<br>除染箱は<var>%NUMBOX%つ</var>生成されます。"
-"role.epidemicU.ability.boxBreak" : "<title>壊された除染箱</title>破壊能力によって壊された除染箱です。<br>この状態の除染箱はタスクを行うことが出来ず<br><var>%PHASE%ターン</var>後に再補給されます。"
+"role.epidemicU.ability.boxBreak" : "<title>壊された除染箱</title>破壊能力によって壊された除染箱です。<br>この状態の除染箱はタスクを行うことができず<br><var>%PHASE%ターン</var>後に再補給されます。"
 "role.epidemicU.tips" : "感染率は常に左のバーで確認できます。<br>最初の感染者が誰も感染出来ずに死亡した場合<br>感染の使用回数が<b>一度のみ復活</b>します。<br><br>・除染箱の出現位置<br>　-Skeld: セキュリティルーム カフェティア上 通信室<br>　-MIRA HQ: 研究室 バルコニー右 オフィス<br>　-Polus: エレキ 右リアクター オフィス左下外<br>　-Airship: 昇降機右 武器庫 診察室<br>　-Fungle: 温室 キッチン 鉱山"
 
 # Options

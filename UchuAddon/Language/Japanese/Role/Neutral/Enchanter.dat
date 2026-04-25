@@ -15,7 +15,7 @@
 
 # Options
 
-"options.role.enchanterU.detail" : "エンチャンターは他のプレイヤーにモディファイアを配ることが出来る第三陣営です。<br>一定回数エンチャントをすると追加勝利することが出来ます。"
+"options.role.enchanterU.detail" : "エンチャンターは他のプレイヤーにモディファイアを渡すことができる第三陣営です。<br>一定回数エンチャントをすると追加勝利します。"
 "options.role.enchanterU.enchantCount" : "勝利に必要なエンチャント回数"
 "options.role.enchanterU.enchantCoolDown" : "エンチャントクールダウン"
 "options.role.enchanterU.giveableFilter" : "エンチャントフィルター"

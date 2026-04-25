@@ -10,7 +10,7 @@
 "role.bettorU.doc" : "全員の役職を言い当てると勝利する第三陣営です。"
 "role.bettorU.ability.title" : "固有能力 "ロジカル・コール""
 "role.bettorU.ability.main" : "プレイヤーの役職を予想し、タスクターンに書き込むことで結果を確認できます。"
-"role.bettorU.ability.guess" : "<title>推測</title>プレイヤーの役職を推測できます。<br>HIT → 正解<br>BLOW → 不正解だけどその役職は存在する<br>MISS → 不正解"
+"role.bettorU.ability.guess" : "<title>推測</title>プレイヤーの役職を推測できます。<br>HIT → 正解<br>BLOW → 不正解だが、他にその役職のプレイヤーが存在する<br>MISS → 不正解"
 "role.bettorU.ability.analyze" : "<title>分析</title>選択したプレイヤーの陣営を確認できます。"
 "role.bettorU.ability.identify" : "<title>特定</title>選択したプレイヤーの役職を知ることができます。"
 "document.tip.winCond.bettorU.title" : "特殊勝利"

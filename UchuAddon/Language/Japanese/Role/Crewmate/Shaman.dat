@@ -9,7 +9,7 @@
 "role.shamanU.doc" : "生存してる非クルーメイト数を調べることが出来ます。"
 "role.shamanU.ability.title" : "固有能力 "英霊の記憶""
 "role.shamanU.ability.main" : "降霊術を使い、生存している非クルーメイト数を聞き出します。"
-"role.shamanU.ability.necromancy" : "<title>降霊術</title>生存している非クルーメイト数を調べます。<br>能力は指定の部屋でしか使用することが出来ず<br>降霊中に動くと即座にキャンセルされます。<br>結果は会議で届きます。"
+"role.shamanU.ability.necromancy" : "<title>降霊術</title>生存している非クルーメイト数を調べます。<br>能力は指定の部屋でしか使用することができず、<br>降霊中に動くと即座にキャンセルされます。<br>結果は会議で届きます。"
 "role.shamanU.ability.necromancyBoost" : "<title>強化降霊術</title><var>%NUMBOOST%</var>個のタスクを終えると、降霊術が強化されます。<br>強化された降霊術では、<br>どの非クルーメイトが生存しているかまで分かります。"
 "role.shamanU.tips" : "指定の部屋には矢印が表示されます。<br>降霊術が完了すると部屋が再抽選されます。<br>表示される結果は降霊術を使った時点での結果です。"
 

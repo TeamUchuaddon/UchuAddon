@@ -6,7 +6,7 @@
 
 # Document
 
-"role.prosecutorU.doc" : "プレイヤーを強制追放します"
+"role.prosecutorU.doc" : "プレイヤーを強制追放します。"
 "role.prosecutorU.ability.title" : "固有能力 "有罪判決""
 "role.prosecutorU.ability.main" : "プレイヤーを強制追放することが出来ます。"
 "role.prosecutorU.ability.prosecute" : "<title>プロセキュート</title>使用後、投票したプレイヤーを強制追放します。"
