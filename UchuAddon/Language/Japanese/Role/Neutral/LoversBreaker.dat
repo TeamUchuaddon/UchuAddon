@@ -30,6 +30,10 @@
 
 "button.label.Explosion" : "爆破"
 "role.loversbreakerU.hudText" : "自爆までの失敗数"
+"document.tip.winCond.loversbreakerU.normal.title" : "特殊勝利"
+"document.tip.winCond.loversbreakerU.normal" : "ラバーズを一定回数爆破した時点で単独勝利します。"
+"document.tip.winCond.loversbreakerU.takeover.title" : "乗っ取り勝利"
+"document.tip.winCond.loversbreakerU.takeover" : "一定回数ラバーズを爆破した後生存して生き残ると勝利します。"
 
 # Stats
 
