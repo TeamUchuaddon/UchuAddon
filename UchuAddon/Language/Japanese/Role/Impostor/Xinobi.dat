@@ -8,14 +8,14 @@
 
 "role.xinobiU.doc" : "オブジェクトに変化するインポスターです。"
 "role.xinobiU.ability.title" : "固有能力 "静寂の変化術""
-"role.xinobiU.ability.main" : "シノビは<b>変化の術</b>と<b>ベン遁の術</b>の二つの忍術を使用することが出来ます。<br>また、ベントにクールダウン・持続時間がある代わりに、全てのベントが接続されています。"
+"role.xinobiU.ability.main" : "シノビは<b>変化の術</b>と<b>ベン遁の術</b>の二つの忍術を使用することができます。<br>また、ベントにクールダウン・持続時間がある代わりに、全てのベントが接続されています。"
 "role.xinobiU.ability.possess" : "<title>変化</title>対象のオブジェクトに変化します。"
 "role.xinobiU.ability.vent" : "<title>ベン遁</title>一番近くのベントに遠隔で入ります。"
 "role.xinobiU.tips" : "一番近くのベントには矢印が表示されます。"
 
 # Options
 
-"options.role.xinobiU.detail" : "シノビはオブジェクトに変化することが出来るインポスターです。"
+"options.role.xinobiU.detail" : "シノビはオブジェクトに変化できるインポスターです。"
 "options.role.xinobiU.killCooldown" : "キルクールダウン"
 "options.role.xinobiU.xinobiUVentCooldown" : "ベン遁クールダウン"
 

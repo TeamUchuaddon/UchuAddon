@@ -10,7 +10,7 @@
 
 # Options
 
-"options.role.djU.detail" : "DJは周囲のプレイヤーの視界を光らせるクルーメイトです。"s
+"options.role.djU.detail" : "DJは周囲のプレイヤーの視界を光らせるクルーメイトです。"
 "options.role.djU.djSkillCooldown" : "スクラッチクールダウン"
 "options.role.djU.numOfFlash" : "フラッシュ回数"
 "options.role.djU.numOfFlash.detail" : "スキル使用時のフラッシュ回数を設定します。"

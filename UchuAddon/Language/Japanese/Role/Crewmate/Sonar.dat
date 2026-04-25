@@ -6,7 +6,7 @@
 
 # Document
 
-"role.sonarU.doc" : "キルを検知するアンテナを設置します"
+"role.sonarU.doc" : "キルを検知するアンテナを設置します。"
 "role.sonarU.ability.title" : "固有能力 "アンテナ""
 "role.sonarU.ability.main" : "アンテナを設置することが出来ます。<br>アンテナの周囲でキルが起こった場合、ノイズで全プレイヤーに通知されます。"
 "role.sonarU.ability.place" : "<title>設置</title>アンテナを設置します。設置したアンテナは自分にしか見えません。"

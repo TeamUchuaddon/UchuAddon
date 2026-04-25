@@ -28,7 +28,7 @@
 # UI
 
 "button.label.admiral" : "提督権限"
-"role.admiralU.message1" : "提督権限により追放が無効化されました"
+"role.admiralU.message1" : "提督権限により追放が無効化されました。"
 "role.admiralU.hudText" : "残り使用回数"
 
 # Stats
