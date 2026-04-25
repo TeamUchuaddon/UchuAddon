@@ -5,14 +5,14 @@
 
 # Document
 
-"role.HighLowU.doc" : "投票するときに運がいいと票数が増えます<br>運が悪いと減ります。"
+"role.HighLowU.doc" : "投票時に幸運な場合、設定数票数が増加します。<br>不幸な場合は設定数減少します。"
 
 # Options
 
-"options.role.HighLowU.detail" : "票数が運で変わります。"
-"options.role.HighLowU.Vote" : "失敗したときの票数"
-"options.role.HighLowU.random" : "成功する確率"
-"options.role.HighLowU.YesVote" : "成功したときの票数"
+"options.role.HighLowU.detail" : "票数が運で変化します。"
+"options.role.HighLowU.FailureVote" : "失敗時票数"
+"options.role.HighLowU.random" : "成功確率"
+"options.role.HighLowU.SuccessVote" : "成功時票数"
 # Game
 
 # UI
