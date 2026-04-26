@@ -77,6 +77,12 @@ public class PatchManager
             postfix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(SetUpPatch)))
         );
 
+		harmony.Patch(
+            typeof(StampHelpers).GetMethod(nameof(StampHelpers.TryShowStampRingMenu)),
+            prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(CitrusStampPatch)))
+        );
+
+
         harmony.Patch(
             typeof(MeetingHud).GetMethod(nameof(MeetingHud.Awake)),
             prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(StartMeeting)))
@@ -187,6 +193,14 @@ public class PatchManager
         __instance.transform.FindChild("ModLabel").GetComponent<SpriteRenderer>().sprite = UchuAddonLabel;
     }
 
+	public static bool CitrusStampPatch()
+    {
+        if (GamePlayer.LocalPlayer!.TryGetModifier<CitrusStateU.Instance>(out _) && !CitrusU.CanUseStampOption) return false;
+        else return true;
+
+    }
+
+
     public static void StartMeeting()
     {
         GameOperatorManager.Instance?.Run(new MeetingEvent());
@@ -215,14 +229,7 @@ public static class AddonScreen
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ねこかぼちゃ(nekokabocha), マカロン(macaron), シート(Sheat), りょい(ryoi)\n</size>\n"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Language</b>\n</size>"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>回往(HW)  客串齐(KCQ)  Plana\n</size>"),
-            NebulaAPI.GUI.VerticalMargin(0.15f)//,
-            //new  GUIModernButton(GUIAlignment.Center, AttributeAsset.OptionsButtonMedium, new RawTextComponent("wiki"))
-            //{
-            //    OnClick = clickable =>
-            //    {
-            //        Application.OpenURL("https://hackmd.io/@uchuaddon/home");
-            //    },
-            //}
+            NebulaAPI.GUI.VerticalMargin(0.15f)
             ), 
             new Vector2(0.5f, 1f), out _);
 
