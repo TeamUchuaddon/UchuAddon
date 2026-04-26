@@ -172,6 +172,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
         void PlayerVoted(PlayerVotedLocalEvent ev)
         {
             if (changeTarget1 == null || changeTarget2 == null) return;
+			if (changeTarget1.IsDead || changeTarget2.IsDead) return;
             revelationed.Remove(changeTarget1);
             revelationed.Remove(changeTarget2);
             if (usedAbility && !changeTarget1.IsDead && !changeTarget2.IsDead && usedAbility) RpcShowChangeAnim.Invoke(new(changeTarget1, changeTarget2));
@@ -195,7 +196,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
         
         void ChangeVote(PlayerFixVoteHostEvent ev)
         {
-            if (!ChangeVoteOption) return;
+            if (!ChangeVoteOption || changeTarget1.IsDead || changeTarget2.IsDead) return;
             if (ev.VoteTo == changeTarget1)
             {
                 ev.VoteTo = changeTarget2;
@@ -208,6 +209,8 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
             }
         }
 
+
+		[Local]
         void BlockCallEmergencyMeeting(CheckCanPushEmergencyButtonEvent ev)
         {
             if (!CanPushButtonOption) ev.DenyButton("role.moiraU.denyReason");
@@ -217,7 +220,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
         [Local]
         void OnMeetingPreEnd(MeetingPreEndEvent ev)
         {
-            ev.PushCoroutine(SwapPlayerCompletely(changeTarget1, changeTarget2));
+            if (!changeTarget1.IsDead && !changeTarget2.IsDead) ev.PushCoroutine(SwapPlayerCompletely(changeTarget1, changeTarget2));
         }
 
         [OnlyMyPlayer]
