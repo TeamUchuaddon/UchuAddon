@@ -3,11 +3,14 @@
     "",
     "\\UchuAddon",
     "\\UchuAddon\\Language",
+    "\\UchuAddon\\Language\\Japanese",
+    "\\UchuAddon\\Language\\Japanese\\Role",
+    "\\UchuAddon\\Language\\Japanese\\Role\\Neutral",
     "\\UchuAddon\\Scripts",
     "\\UchuAddon\\Scripts\\Role",
-    "\\UchuAddon\\Scripts\\Role\\Crewmate",
+    "\\UchuAddon\\Scripts\\Role\\Impostor",
     "\\UchuAddon\\Scripts\\Role\\Neutral"
   ],
-  "SelectedNode": "\\UchuAddon\\Scripts\\Role\\Neutral\\Moira.cs",
+  "SelectedNode": "\\UchuAddon\\Language\\Japanese\\Role\\Neutral\\Enchanter.dat",
   "PreviewInSolutionExplorer": false
 }
