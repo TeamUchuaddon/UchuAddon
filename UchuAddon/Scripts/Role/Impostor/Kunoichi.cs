@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AmongUs.InnerNet.GameDataMessages;
 using BepInEx.Unity.IL2CPP.Utils.Collections;
+using Hori.Core;
+using Hori.Scripts.Abilities;
 using Nebula;
 using Nebula.Configuration;
 using Nebula.Extensions;
 using Nebula.Game;
 using Nebula.Game.Statistics;
-using Nebula.Map;
 using Nebula.Modules;
 using Nebula.Modules.ScriptComponents;
 using Nebula.Player;
@@ -17,15 +14,21 @@ using Nebula.Roles;
 using Nebula.Roles.Abilities;
 using Nebula.Roles.Impostor;
 using Nebula.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Virial.Assignable;
 using Virial.Attributes;
-using Virial.Events.Player;
+using Virial.Compat;
+using Virial.Configuration;
 using Virial.Events.Game;
 using Virial.Events.Game.Meeting;
-using static Nebula.Modules.ScriptComponents.NebulaSyncStandardObject;
-using UnityColor = UnityEngine.Color;
+using Virial.Events.Player;
+using Virial.Game;
+using Virial.Media;
+using Color = UnityEngine.Color;
 using Image = Virial.Media.Image;
-using UnityEngine;
-using Hori.Scripts.Abilities;
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -33,11 +36,14 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
 {
     public KunoichiU() : base("kunoichiU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam,
         [
-        new GroupConfiguration("options.role.kunoichi.group.kunai", [KunaiCooldown, KunaiSize, KunaiSpeed, NumOfHit, ResetHitCountOnMeeting, KunaiDisappearOnWall, CanKillImpostorOption], GroupConfigurationColor.ImpostorRed),
+        new GroupConfiguration("options.role.kunoichi.group.kunai", [KunaiCooldown, KunaiSize, KunaiSpeed, NumOfHit, ResetHitCountOnMeeting, remainkunai, KunaiDisappearOnWall, CanKillImpostorOption], GroupConfigurationColor.ImpostorRed),
         new GroupConfiguration("options.role.kunoichi.group.invisibily", [CanInvisibily, UseInvisibleButton, InvTime, CanKunaiInInvisibily], GroupConfigurationColor.ImpostorRed)
         ])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Kunoichi.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
+    AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
     Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
 
     static private FloatConfiguration KunaiCooldown = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.KunaiCooldown", (0f, 60f, 0.25f), 0.5f, FloatConfigurationDecorator.Second);
@@ -47,6 +53,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
     static private BoolConfiguration CanKillImpostorOption = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.canKillImpostor", false);
     static private BoolConfiguration KunaiDisappearOnWall = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.KunaiDisappearOnWall", true);
     static private BoolConfiguration ResetHitCountOnMeeting = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.ResetHitCountOnMeeting", false);
+    static private BoolConfiguration remainkunai = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.remainkunai", true);
     static private BoolConfiguration CanInvisibily = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.CanIninvisibily", true);
     static private BoolConfiguration UseInvisibleButton = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.UseInvisibleButton", true, static () => CanInvisibily);
     static private FloatConfiguration InvTime = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.InvisibleTime", (0f, 10f, 1f), 3f, FloatConfigurationDecorator.Second, static () => CanInvisibily);
@@ -71,6 +78,20 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
     //参考:レイダー
 
     [NebulaPreprocess(PreprocessPhase.PostRoles)]
+    public class KunaiDeadbody : NebulaSyncStandardObject, IGameOperator
+    {
+        public const string MyTag = "KunoichiDeadBody";
+        private static Image DeadbodyKunai = NebulaAPI.AddonAsset.GetResource("DeadbodyKunai.png")!.AsImage(500f)!;
+        float indexT = 0f;
+        int index = 0;
+             public KunaiDeadbody(UnityEngine.Vector2 pos) : base(pos, ZOption.Just, true, DeadbodyKunai.GetSprite())    {
+        }
+
+        static KunaiDeadbody()
+        {
+            RegisterInstantiater(MyTag, (args) => new KunaiDeadbody(new UnityEngine.Vector2(args[0], args[1])));
+        }
+    }
     public class KunoichiKunai : NebulaSyncStandardObject, IGameOperator
     {
         public static readonly string MyTag = "KunoichiKunai";
@@ -219,6 +240,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
         public KunoichiKunai? MyKunai = null;
         private UnityEngine.Vector2 lastPosition;
         private float MoveTime = 0f;
+        private List<NebulaSyncStandardObject> DeadbodyKunai = [];
         private bool isInvisible = false;
 
         bool IPlayerAbility.HideKillButton => !(equipButton?.IsBroken ?? false);
@@ -235,6 +257,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
 
                 equipButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, "kunoichiU.equip",
                     0f, "equip", buttonSprite, _ => (CanKunaiInInvisibily || !isInvisible)).SetAsUsurpableButton(this);
+                equipButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Impostor);
 
                 equipButton.OnClick = (button) =>
                 {
@@ -268,7 +291,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
                 NebulaAPI.CurrentGame?.KillButtonLikeHandler.Register(killButton.GetKillButtonLike());
 
                 invisibleButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.SecondaryAbility,
-                    InvTime, "KunoichiInvisibily", InvisibleButtonSprite, _ => MoveTime >= 3f);
+                    InvTime, "KunoichiInvisibily", InvisibleButtonSprite, _ => MoveTime >= InvTime);
                 invisibleButton.Visibility = (button) => !MyPlayer.IsDead && CanInvisibily && UseInvisibleButton;
                 invisibleButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Impostor);
                 invisibleButton.OnClick = (button) =>
@@ -367,6 +390,21 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
         }
 
         [Local]
+        void OnMurdered(PlayerMurderedEvent ev)
+        {
+            if (ev.Murderer.PlayerId == MyPlayer.PlayerId && ev.Dead.PlayerId != MyPlayer.PlayerId && remainkunai)
+            {
+                var deadPos = ev.Dead.TruePosition;
+                var kunaideadbody = NebulaSyncObject.RpcInstantiate(KunaiDeadbody.MyTag, [
+                    deadPos.x,
+                deadPos.y+0.25f,
+            ]).SyncObject! as NebulaSyncStandardObject;
+                DeadbodyKunai.Add(kunaideadbody!);
+            }
+
+        }
+
+        [Local]
         void OnMeetingStart(MeetingStartEvent ev)
         {
             UnequipKunai();
@@ -379,6 +417,15 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
             {
                 KunoichiKunai.ResetHitCount();
             }
+
+            foreach (var deadbody in DeadbodyKunai)
+            {
+                if (deadbody != null)
+                {
+                    NebulaSyncObject.RpcDestroy(deadbody.ObjectId);
+                }
+            }
+            DeadbodyKunai.Clear();
 
             foreach (var icon in iconHolder.AllIcons.ToArray())
             {
@@ -404,6 +451,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
             if (MyKunai != null) NebulaSyncObject.RpcDestroy(MyKunai.ObjectId);
             MyKunai = null;
         }
+
 
         private static int KunaiIgnoreLayerMask = 1 << LayerExpansion.GetRaiderColliderLayer();
         public static bool OverlapKunaiIgnoreArea(UnityEngine.Vector2 pos) => Physics2D.OverlapPoint(pos, KunaiIgnoreLayerMask);
