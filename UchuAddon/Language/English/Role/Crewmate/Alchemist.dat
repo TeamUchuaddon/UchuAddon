@@ -1,0 +1,29 @@
+# Assignable
+
+"role.alchemistU.name" : "Alchemist"
+"role.alchemistU.short" : "Alc"
+"role.alchemistU.blurb" : "Harmony with Death"
+
+# Document
+
+"role.alchemistU.doc" : "A Crewmate that uses Alchemy on corpses to create Alchemy Bullets."
+
+# Options
+
+"options.role.alchemistU.detail" : "Can exchange corpses through Alchemy for Kill ability during meetings."
+"options.role.AlchemistU.AlchemyCooldown" : "AlchemyCooldown"
+"options.role.AlchemistU.alchemycount" : "Alchemy Bullets Gained Per Use"
+"options.role.AlchemistU.NumOfShotPerMeeting" : "Maximum Bullets Per Meeting"
+
+# Game
+
+
+# UI
+
+"button.label.Alchemy" : "Alchemy"
+"alchemistU.leftalchemy" : "Remaining Alchemy Bullets"
+
+# Stats
+
+
+# Titles

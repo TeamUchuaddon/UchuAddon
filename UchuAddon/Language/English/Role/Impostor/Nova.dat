@@ -1,0 +1,33 @@
+# Assignable
+
+"role.novaU.name" : "Nova"
+"role.novaU.short" : "Nv"
+"role.novaU.blurb" : "First Cry of a Star"
+
+# Document
+
+"role.novaU.doc" : "An Impostor who fires a beam in a straight line."
+
+# Options
+
+"options.role.novaU.detail" : "Nova is an Impostor who fires a beam in a straight line and kills any player it hits."
+"options.role.novaU.firingMode" : "Firing Mode"
+"options.role.novaU.firingMode.free" : "Free"
+"options.role.novaU.firingMode.twoDirections" : "Left/Right"
+"options.role.novaU.firingMode.fourDirections" : "Up/Down/Left/Right"
+"options.role.novaU.equipCooldown" : "Fire Cooldown"
+"options.role.novaU.beamSize" : "Beam Size"
+"options.role.novaU.chargeDuration" : "Charge Time"
+"options.role.novaU.resetKillCooldown" : "Reset Kill Cooldown After Firing"
+
+# Game
+
+
+# UI
+
+"button.label.fire" : "Fire"
+
+# Stats
+
+
+# Titles

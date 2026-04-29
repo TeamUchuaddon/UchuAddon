@@ -1,0 +1,30 @@
+# Assignable
+
+"role.SerialKillerU.name" : "Serial Killer"
+"role.SerialKillerU.short" : "SK"
+"role.SerialKillerU.blurb" : "Repeat Murderer"
+
+# Document
+
+"role.SerialKillerU.doc" : "An Impostor with a fast kill cooldown who suicides if they don't kill within a set time."
+
+# Options
+
+"options.role.SerialKillerU.detail" : "Serial Killer is an Impostor with a faster kill cooldown<br>but who must kill within a set time or suicide."
+"options.role.serialkillerU.SerikillCooldown" : "Serial Kill Cooldown"
+"options.role.serialkillerU.SuicideCooldown" : "Suicide Timer"
+"options.role.serialkillerU.MeetingEndsTimerActive" : "Activate Suicide Timer After First Meeting"
+"options.role.serialkillerU.SuicideCooldown" : "Suicide Timer"
+"options.role.serialkillerU.SerikillCooldown" : "Serial Kill Cooldown"
+"options.role.serialkillerU.MeetingEndsTimerActive" : "Activate Suicide Timer After First Meeting"
+
+# Game
+
+# UI
+
+"kill" : "Kill"
+"button.label.serialkill" : "Suicide"
+
+# Stats
+
+# Titles

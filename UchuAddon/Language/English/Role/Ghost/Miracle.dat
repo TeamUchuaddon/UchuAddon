@@ -1,0 +1,37 @@
+# Assignable
+
+"role.miracleU.name" : "Miracle"
+"role.miracleU.blurb" : "Astronomical Odds"
+"role.miracleU.short" : "Mir"
+
+# Document
+
+"role.miracleU.doc" : "Swaps your role with a living player's role."
+"role.miracleU.ability.title" : "Unique Ability "Miracle Swap""
+"role.miracleU.ability.main" : ""
+"role.miracleU.ability.swap" : "<title>Swap</title>Swap roles with the target player<br>after the next meeting.<br><var>%ACTION%</var>"
+"role.miracleU.ability.main.myTeam" : "You can only swap with players on the same team."
+"role.miracleU.ability.main.otherNeutral" : "You can only swap with players that are not in the Neutral faction."
+"role.miracleU.ability.main.all" : "You can swap with any living player."
+
+# Options
+
+"options.role.miracleU.detail" : "Miracle can swap roles with a living player."
+"options.role.miracleU.swapCooldown" : "Swap Cooldown"
+"options.role.miracleU.numOfSwap" : "Swap Uses"
+"options.role.miracleU.miracleAction" : "Swappable Players"
+"options.role.miracleU.miracleAction.myTeam" : "Same Faction Only"
+"options.role.miracleU.miracleAction.otherNeutral" : "Exclude Neutral"
+"options.role.miracleU.miracleAction.all" : "All Players"
+
+# Game
+
+
+# UI
+
+"button.label.miracleU.swap" : "Swap"
+
+# Stats
+
+
+# Titles

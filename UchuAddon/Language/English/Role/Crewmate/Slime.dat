@@ -1,0 +1,46 @@
+# Assignable
+
+"role.slimeU.name" : "Slime"
+"role.slimeU.short" : "Sl"
+"role.slimeU.blurb" : "Ever-Shifting"
+
+# Document
+
+"role.slimeU.doc" : "A Crewmate who can stretch and shrink their body."
+"role.slimeU.ability.title" : "Unique Ability "Ever-Shifting Flow""
+"role.slimeU.ability.main" : "Can make their body larger or smaller."
+"role.slimeU.ability.jumbo" : "<title>Enlarge</title>The body grows. Vision also expands while enlarged."
+"role.slimeU.ability.mini" : "<title>Shrink</title>The body shrinks. Vision narrows but movement speed increases."
+"role.slimeU.tips" : "While one ability is active, the other ability's cooldown is reset and does not advance during use."
+
+# Options
+
+"options.role.slimeU.detail" : "Slime is a Crewmate who can stretch and shrink their body."
+"options.role.slimeU.JumboCoolDown" : "Enlarge Cooldown"
+"options.role.slimeU.JumboDuration" : "Enlarge Duration"
+"options.role.slimeU.JumboSize" : "Enlarge Size"
+"options.role.slimeU.JumboVision" : "Vision While Enlarged"
+"options.role.slimeU.JumboScreen" : "Screen Size While Enlarged"
+"options.role.slimeU.MiniCoolDown" : "Shrink Cooldown"
+"options.role.slimeU.MiniDuration" : "Shrink Duration"
+"options.role.slimeU.MiniSize" : "Shrink Size"
+"options.role.slimeU.MiniSpeed" : "Movement Speed While Shrunken"
+"options.role.slimeU.MiniScreen" : "Screen Size While Shrunken"
+"options.group.slimejumbo" : "Enlarge Settings"
+"options.group.slimemini" : "Shrink Settings"
+
+# Game
+
+
+# UI
+
+"ui.action.slimeU.jumbo" : "Enlarge your body"
+"ui.action.slimeU.mini" : "Shrink your body"
+"button.label.jumbo" : "Enlarge"
+"button.label.mini" : "Shrink"
+
+# Stats
+
+
+# Titles
+

@@ -1,0 +1,37 @@
+# Assignable
+
+"role.admiralU.name" : "Admiral"
+"role.admiralU.short" : "Adm"
+"role.admiralU.blurb" : "Absolute Authority"
+
+# Document
+
+"role.admiralU.doc" : "A Crewmate that exercises Admiral Authority to prevent Expulsion."
+"role.admiralU.ability.title" : "UniqueAbility "AbsoluteAdmiral Authority""
+"role.admiralU.ability.main" : "Admiral is a Crewmate that prevents Expulsion. Meetings using the ability prevent Expulsion."
+"role.admiralU.ability.skill" : "<title>Admiral Authority</title>Prevents Expulsion. Deaths are prevented in meetings where the ability is activated even if someone is expelled."
+
+# Options
+
+"options.role.admiralU.detail" : "Admiral is a Crewmate that prevents Expulsion. The ability allows preventing Expulsion in meetings."
+"options.role.admiralU.numOfAdmiral" : "Available Uses of Admiral Authority"
+"options.role.admiralU.publicName" : "Reveal Role"
+"options.role.admiralU.publicName.detail" : "When the set number of Tasks are completed, Admiral's name changes color."
+"options.role.admiralU.numOfPublicTask" : "Role Reveal Task Count"
+"options.role.admiralU.voteWatching" : "Anonymous Vote Penetration"
+"options.role.admiralU.notGuess" : "Cannot Guess Admiral"
+"options.role.admiralU.privateNameGuess" : "Can Guess When Role is Private"
+
+# Game
+
+
+# UI
+
+"button.label.admiral" : "Admiral Authority"
+"role.admiralU.message1" : "Expulsion has been nullified by Admiral Authority."
+"role.admiralU.hudText" : "Remaining Use Count"
+
+# Stats
+
+
+# Titles

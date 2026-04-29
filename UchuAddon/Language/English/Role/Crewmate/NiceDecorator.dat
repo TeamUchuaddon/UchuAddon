@@ -1,0 +1,27 @@
+# Assignable
+
+"role.niceDecoratorU.name" : "Nice Decorator"
+"role.niceDecoratorU.short" : "NDc"
+"role.niceDecoratorU.blurb" : "Hand That Brings Color"
+
+# Document
+
+"role.niceDecoratorU.doc" : "A Crewmate who changes other players' roles."
+"role.niceDecoratorU.ability.title" : "Unique Ability "Decoration""
+"role.niceDecoratorU.ability.main" : "Randomly changes a player's role from a chosen filter.<br>Using Decoration on a Neutral or Madmate wastes a use of the ability.<br>Only roles selected in the filter are drawn — a Crewmate cannot become an Impostor, etc."
+"role.niceDecoratorU.tips" : "If no filter is set, no roles can be assigned."
+
+# Options
+
+"options.role.niceDecoratorU.detail" : "Nice Decorator can change other players' roles."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

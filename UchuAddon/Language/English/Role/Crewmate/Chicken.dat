@@ -1,0 +1,56 @@
+# Assignable
+
+"role.chickenU.name" : "Chicken"
+"role.chickenU.short" : "Chk"
+"role.chickenU.blurb" : "You are a coward"
+
+"role.chickenModifierU.name" : "Chicken"
+"role.chickenModifierU.short" : "Chk"
+"role.chickenModifierU.generalBlurb" : "You are a coward"
+
+# Document
+
+"role.chickenU.doc" : "A very cowardly and frail Crewmate."
+"role.chickenU.ability.title" : "Unique Ability "Frail""
+"role.chickenU.ability.main" : "Very frail and dies easily, but if Chicken survives until the end, the Crewmates take the win."
+"role.chicken.ability.Door" : "<title>Crushed to Death</title>Gets fingers crushed in a door and dies."
+"role.chicken.ability.Vent" : "<title>Stumbled to Death</title>Trips while exiting a vent and dies."
+"role.chicken.ability.Mess" : "<title>Confused to Death</title>If a blackout continues for a certain time, Chicken becomes confused and dies."
+"role.chicken.ability.Drop" : "<title>Fell to Death</title>Falls from an elevator and dies."
+"role.chicken.ability.Fall" : "<title>Tumbled to Death</title>Falls from a ladder or zipline and dies."
+"role.chicken.ability.Wuss" : "<title>Scared to Death</title>If <var>a certain number</var> of votes are cast against Chicken, Chicken believes it is being targeted and dies."
+
+"role.chickenModifierU.doc" : "A very cowardly and frail modifier."
+
+# Options
+
+"options.role.chickenU.detail" : "Chicken is a very frail Crewmate."
+"options.role.chickenU.deadPercentVent" : "Vent Death Chance"
+"options.role.chickenU.deadPercentLadder" : "Ladder Death Chance"
+"options.role.chickenU.deadPercentZipLine" : "Zipline Death Chance"
+"options.role.chickenU.deadPercentPlatform" : "Elevator Death Chance"
+"options.role.chickenU.deadPercentDoor" : "Door Death Chance"
+"options.role.chickenU.deadElectricSecond" : "Blackout Time Until Death"
+"options.role.chickenU.deadElectricSecond.detail" : "Set how many seconds of blackout must pass before Chicken dies."
+"options.role.admiralU.deadNumOfVote" : "Votes Until Death"
+"options.role.chickenU.ventRange" : "Vent Stumble Range"
+"options.role.chickenU.ventRange.detail" : "Set the range within which Chicken can die from a vent."
+
+"options.role.chickenModifierU.detail" : "Chicken is a very frail modifier."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"state.chickenDeadVent" : "Stumbled to Death"
+"state.chickenDeadFall" : "Tumbled to Death"
+"state.chickenDeadDrop" : "Fell to Death"
+"state.chickenDeadDoor" : "Crushed to Death"
+"state.chickenDeadWuss" : "Scared to Death"
+"state.chickenDeadMess" : "Confused to Death"
+
+# Titles

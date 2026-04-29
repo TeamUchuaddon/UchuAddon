@@ -1,0 +1,54 @@
+# Assignable
+
+"role.seedU.name" : "Seed"
+"role.seedU.short" : "Sed"
+"role.seedU.blurb" : "Flower of tears"
+"teams.seedU" : "Seed"
+
+# Document
+
+"role.seedU.doc" : "A Neutral that wins together with their symbiotic partner."
+
+# Options
+
+"options.role.seedU.detail" : "A Neutral that gains an extra win when the player they used Symbiosis on wins."
+"options.role.seedU.seedCooldown" : "Symbiosis Cooldown"
+"options.role.seedU.numOfSeed" : "Symbiosis Uses"
+"options.role.seedU.dieBlockWins" : "Block Win on Death"
+"options.role.seed.group.gauge" : "Seed Gauge Settings"
+"options.role.seedU.seedGauge" : "Seed Gauge"
+"options.role.seedU.seedGauge.detail" : "Requires the Seed Gauge to win."
+"options.role.seedU.requiredGaugeToWin" : "Gauge Required to Win"
+"options.role.seedU.surplusGauge" : "Surplus Gauge Amount"
+"options.role.seedU.gaugeReductionRatio" : "Seed Gauge Decay Rate"
+
+# Game
+
+
+# UI
+
+"button.label.seedSkill" : "Symbiosis"
+
+# Stats
+
+"end.extra.seedU" : "<color=#FFFFFF>+</color> Seed"
+
+# Titles
+
+"achievement.seedU.common1.title" : "Seedbed"
+"achievement.seedU.common1.goal" : "Use Symbiosis."
+"achievement.seedU.common1.cond" : ""
+
+"achievement.seedU.another1.title" : "Rondo of Nostalgia"
+"achievement.seedU.another1.goal" : "Lose without any symbiotic partner winning."
+"achievement.seedU.another1.cond" : ""
+
+"achievement.seedU.hard1.title" : "Bloom"
+"achievement.seedU.hard1.goal" : "Use Symbiosis and win."
+"achievement.seedU.hard1.cond" : ""
+
+"achievement.seedU.challenge1.title" : "Rondo of Frost Pollen"
+"achievement.seedU.challenge1.goal": "Use Symbiosis on only one player and win."
+"achievement.seedU.challenge1.cond" : ""
+"achievement.seedU.challenge1.flavor" : "The seasons turn."
+"achievement.seedU.challenge1.splitted.2" : "Rondo"

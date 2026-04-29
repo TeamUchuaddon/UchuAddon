@@ -1,0 +1,35 @@
+# Assignable
+
+"role.voyagerU.name" : "Voyager"
+"role.voyagerU.short" : "Voy"
+"role.voyagerU.blurb" : "Traveler of Time"
+
+# Document
+
+"role.voyagerU.doc" : "An Impostor who crosses dimensions."
+"role.voyagerU.ability.title" : "Unique Ability "Parallel Dive""
+"role.voyagerU.ability.main" : "Can hide inside another dimension. If you don't return within a set time, you die."
+"role.voyagerU.ability.dive" : "<title>Dive</title>Move into a new dimension.<br>While diving, other players' appearances are shuffled,<br>and you gain invisibility and a speed boost."
+"role.voyagerU.ability.away" : "<title>Return</title>Leave the other dimension."
+# Options
+
+"options.role.voyagerU.detail" : "Voyager is an Impostor who crosses between dimensions."
+"options.role.voyagerU.diveCooldown" : "Dive Cooldown"
+"options.role.voyagerU.diveDuration" : "Dive Duration"
+"options.role.voyagerU.speedRatio" : "Dive Speed Multiplier"
+
+# Game
+
+
+# UI
+
+"button.label.pdiver.dive" : "Dive"
+"button.label.pdiver.away" : "Return" 
+"role.voyagerU.paradoxTimerText" : "Until Paradox"
+
+# Stats
+
+"state.paradox" : "Paradox"
+
+# Titles
+

@@ -1,0 +1,41 @@
+# Assignable
+
+"role.eclipseU.name" : "Eclipse"
+"role.eclipseU.short" : "Ecl"
+"role.eclipseU.blurb" : "Calamity Rains from Above"
+
+# Document
+
+"role.eclipseU.doc" : "An Impostor who summons meteors."
+"role.eclipseU.ability.title" : "Unique Ability "Disaster from Space""
+"role.eclipseU.ability.main" : "Eclipse is an Impostor who can rain meteors down."
+"role.eclipseU.ability.mark" : "<title>Mark</title>Marks the meteor's impact location."
+"role.eclipseU.ability.blast" : "<title>Meteor</title>Drops a meteor on the marked location.<br>Cannot be used without a marked location."
+
+# Options
+
+"options.role.eclipseU.detail" : "Eclipse is an Impostor who kills by raining meteors.<br>Meteors will kill teammates as well — no exceptions."
+"options.role.eclipseU.useOfMeteor" : "Meteor Uses"
+"options.role.eclipseU.meteorMarkCoolDown" : "Mark Cooldown"
+"options.role.eclipseU.meteorBlastCoolDown" : "Meteor Cooldown"
+"options.role.eclipseU.meteorWarningTime" : "Meteor Warning Time"
+"options.role.eclipseU.markStopTime" : "Mark Freeze Duration"
+"options.role.eclipseU.meteorSize" : "Meteor Size"
+"options.role.eclipseU.resetBlastCool"  : "Reset Meteor Cooldown when Mark is Used"
+"options.role.eclipseU.markMeetingReset" : "Reset Mark Location at Meeting"
+"options.role.eclipseU.markPlaySE" : "Mark Sound Effect"
+"options.role.eclipseU.seRange" : "Sound Range"
+
+# Game
+
+
+# UI
+
+"button.label.Emark" : "Mark"
+"button.label.Eblast" : "Meteor"
+
+# Stats
+
+"statistics.Bomb" : "Bombardment"
+
+# Titles

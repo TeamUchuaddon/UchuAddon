@@ -1,0 +1,34 @@
+# Assignable
+
+"role.warlockU.name" : "Warlock"
+"role.warlockU.short" : "Wrl"
+"role.warlockU.blurb" : "Master of Self and Others"
+
+# Document
+
+"role.warlockU.doc" : "An Impostor who forces cursed players to kill."
+"role.warlockU.ability.title" : "Unique Ability "Black Magic of Servitude""
+"role.warlockU.ability.main" : "Warlock can place a curse on a target. The cursed player is unaware they are cursed.<br>When another player is near a cursed player, the Curse Kill button activates,<br>and using it forces the cursed player to kill the nearby player."
+"role.warlockU.ability.curse" : "<title>Curse</title>Curses a player. Only one player can be cursed at a time."
+
+# Options
+
+"options.role.warlockU.detail" : "Warlock can place a curse on players.<br>A cursed player ends up killing players nearby."
+"options.role.warlockU.curseKillCooldown" : "Curse Kill Cooldown"
+"options.role.warlockU.curseCooldown" : "Curse Cooldown"
+"options.role.warlockU.canKillTeamPlayer" : "Can Curse-Kill Same-Team Players"
+"options.role.warlockU.killFreezeTime" : "Freeze Duration After Kill"
+
+# Game
+
+
+# UI
+
+"button.label.Curse" : "Curse"
+"button.label.CurseKill" : "Curse Kill"
+
+# Stats
+
+"statistics.curseKill" : "Curse Kills"
+
+# Titles

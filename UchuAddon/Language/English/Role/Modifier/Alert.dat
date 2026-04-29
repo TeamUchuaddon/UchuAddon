@@ -1,0 +1,26 @@
+# Assignable
+
+"role.alertU.name" : "Alert"
+"role.alertU.generalBlurb" : "Emergency Summons"
+"role.alertU.blurb" : "Summon All"
+
+# Document
+
+"role.alertU.doc" : "A modifier that holds a portable emergency button."
+
+# Options
+
+"options.role.alertU.detail" : "Alert is a modifier that can press an emergency button remotely."
+
+# Game
+
+
+# UI
+
+"button.label.emergency.ability" : "Emergency Meeting"
+
+# Stats
+
+
+# Titles
+

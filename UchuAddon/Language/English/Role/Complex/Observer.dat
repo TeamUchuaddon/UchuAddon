@@ -1,0 +1,18 @@
+# Document
+
+
+# Options
+
+"options.role.observerU.maxCameraCount" : "Maximum Cameras"
+"options.role.observerU.placeCoolDown" : "Camera Placement Cooldown"
+"options.role.observerU.canSeeCameraOtherPlayer" : "Other Players can see the camera"
+
+# Game
+
+
+# UI
+
+"button.label.self" : "Self Perspective"
+"button.label.next" : "Next"
+
+# Status

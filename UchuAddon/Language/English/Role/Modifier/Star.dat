@@ -1,0 +1,23 @@
+﻿# Assignable
+
+"role.StarU.name" : "Star"
+"role.StarU.generalblurb" : "Star of Hope"
+
+# Document
+
+"role.StarU.doc" : "An existence whose name always shines."
+
+# Options
+
+"options.role.StarU.detail" : "Name always shines."
+"options.role.StarU.RainbowStarOption" : "Rainbow Star Name Change Speed"
+"options.StarU.RainbowStar" : "Rainbow Star"
+"options.StarU.RainbowStar.detail" : "Name shines in rainbow colors."
+
+# Game
+
+# UI
+
+# Stats
+
+# Titles

@@ -1,0 +1,24 @@
+# Assignable
+
+"role.timerU.name" : "Timer"
+"role.timerU.generalBlurb" : "Precise Recorder"
+
+# Document
+
+"role.timerU.doc" : "Records the elapsed time of each turn."
+
+# Options
+
+"options.role.timerU.detail" : "A modifier that records the elapsed time of the task turn."
+
+# Game
+
+
+# UI
+
+"role.timerU.TimerTxt" : "Turn Elapsed Time"
+
+# Stats
+
+
+# Titles

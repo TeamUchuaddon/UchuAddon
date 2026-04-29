@@ -1,0 +1,22 @@
+﻿# Assignable
+
+"role.HighLowU.name" : "High Low"
+"role.HighLowU.generalBlurb" : "Meetings Bend to My Whim"
+
+# Document
+
+"role.HighLowU.doc" : "On a lucky vote, the configured number of votes is added.<br>On an unlucky vote, the configured number is subtracted."
+
+# Options
+
+"options.role.HighLowU.detail" : "Vote count fluctuates by chance."
+"options.role.HighLowU.FailureVote" : "Vote Count on Failure"
+"options.role.HighLowU.random" : "Success Chance"
+"options.role.HighLowU.SuccessVote" : "Vote Count on Success"
+# Game
+
+# UI
+
+# Stats
+
+# Titles

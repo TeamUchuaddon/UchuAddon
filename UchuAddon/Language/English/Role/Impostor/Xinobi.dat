@@ -1,0 +1,34 @@
+# Assignable
+
+"role.xinobiU.name" : "Shinobi"
+"role.xinobiU.short" : "Shn"
+"role.xinobiU.blurb" : "Bear the Heart of the Blade"
+
+# Document
+
+"role.xinobiU.doc" : "An Impostor who can transform into objects."
+"role.xinobiU.ability.title" : "Unique Ability "Silent Transformation""
+"role.xinobiU.ability.main" : "Shinobi can use two ninja arts: <b>Transform</b> and <b>Vent Escape</b>.<br>Vents have a cooldown and a duration, but in exchange every vent is connected."
+"role.xinobiU.ability.possess" : "<title>Transform</title>Transform into a target object."
+"role.xinobiU.ability.vent" : "<title>Vent Escape</title>Remotely enter the nearest vent."
+"role.xinobiU.tips" : "An arrow is shown pointing to the nearest vent."
+
+# Options
+
+"options.role.xinobiU.detail" : "Shinobi is an Impostor who can transform into objects."
+"options.role.xinobiU.killCooldown" : "Kill Cooldown"
+"options.role.xinobiU.xinobiUVentCooldown" : "Vent Escape Cooldown"
+
+# Game
+
+
+# UI
+
+"button.label.xinobiU.possess" : "Transform"
+"button.label.xinobiU.release" : "Reveal"
+"button.label.xinobiU.vent" : "Vent Escape"
+
+# Stats
+
+
+# Titles

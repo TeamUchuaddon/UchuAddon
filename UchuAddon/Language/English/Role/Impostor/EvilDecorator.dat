@@ -1,0 +1,29 @@
+# Assignable
+
+"role.evilDecoratorU.name" : "Evil Decorator"
+"role.evilDecoratorU.short" : "EDc"
+"role.evilDecoratorU.blurb" : "Beauty as Disguise"
+
+# Document
+
+"role.evilDecoratorU.doc" : "An Impostor who changes other players' roles."
+"role.evilDecoratorU.ability.title" : "Unique Ability "Decoration""
+"role.evilDecoratorU.ability.main" : "Evil Decorator can change other players' roles.<br>Using Decoration on a Neutral or Madmate wastes a use of the ability.<br>Only roles selected in the filter are drawn — a Crewmate cannot become an Impostor, etc."
+"role.evilDecoratorU.tips" : "If no filter is set, no roles can be assigned."
+
+# Options
+
+"options.role.evilDecoratorU.detail" : "Evil Decorator can change other players' roles."
+
+
+# Game
+
+
+# UI
+
+"button.label.decoration" : "Decorate"
+
+# Stats
+
+
+# Titles

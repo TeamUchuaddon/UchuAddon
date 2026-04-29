@@ -1,0 +1,43 @@
+# Assignable
+
+"role.loversbreakerU.name" : "LoversBreaker"
+"role.loversbreakerU.short" : "LB"
+"role.loversbreakerU.blurb" : "Blow the Lovebirds Up"
+"teams.loversbreakerU" : "LoversBreaker"
+
+# Document
+
+"role.loversbreakerU.doc" : "A Neutral that blows up the Lovers."
+"role.loversbreakerU.ability.title" : "Unique Ability "Judgment of Love""
+"role.loversbreakerU.ability.main" : "Blows up the Lovers. An explosion effect plays, and a sound effect is heard only by you."
+"role.loversbreakerU.ability.exp" : "<title>Blow Up</title>Blows up the Lovers."
+"role.loversbreakerU.tips" : "- LoversBreaker is never assigned to the Lovers."
+
+# Options
+
+"options.role.loversbreakerU.detail" : "LoversBreaker is a Neutral that blows up the Lovers."
+"options.role.loversbreakerU.ExpCooldown" : "Blow Up Cooldown"
+"options.role.loversbreakerU.NumOfExp" : "Detonations Required to Win"
+"options.role.loversbreakerU.NumOfDeathExp" : "Failures Until Self-Destruct"
+"options.role.loversbreakerU.TakeoverWinOption" : "Takeover Win"
+"options.role.loversbreakerU.TakeoverWinOption.detail" : "When off, you win immediately upon meeting the win condition."
+"options.role.loversbreakerU.BecomingLoversMeansDeath" : "Die Instantly Upon Becoming a Lover"
+
+# Game
+
+
+# UI
+
+"button.label.Explosion" : "Blow Up"
+"role.loversbreakerU.hudText" : "Failures Until Self-Destruct"
+"document.tip.winCond.loversbreakerU.normal.title" : "Special Win"
+"document.tip.winCond.loversbreakerU.normal" : "Wins solo upon blowing up the Lovers a set number of times."
+"document.tip.winCond.loversbreakerU.takeover.title" : "Takeover Win"
+"document.tip.winCond.loversbreakerU.takeover" : "After blowing up the Lovers a set number of times, wins by surviving to the end."
+
+# Stats
+
+"end.loversbreakerU" : "LoversBreaker%EXTRA% Wins"
+
+# Titles
+

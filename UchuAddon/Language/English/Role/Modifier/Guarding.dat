@@ -1,0 +1,24 @@
+# Assignable
+
+"role.GuardingU.name" : "Guarding"
+"role.GuardingU.generalBlurb" : "Divine Protection"
+
+# Document
+
+"role.GuardingU.doc" : "Blocks one kill."
+
+# Options
+
+"options.role.GuardingU.detail" : "Can block a kill exactly once."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+

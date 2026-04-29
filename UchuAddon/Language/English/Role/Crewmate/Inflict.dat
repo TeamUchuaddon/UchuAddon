@@ -1,0 +1,27 @@
+# Assignable
+
+"role.inflictU.name" : "Inflict"
+"role.inflictU.short" : "Inf"
+"role.inflictU.blurb" : "Model Assign"
+
+# Document
+
+"role.inflictU.doc" : "Development support only"
+
+# Options
+
+"options.role.inflictU.detail" : "Development only"
+
+# Game
+
+
+# UI
+
+"button.label.InflictSkill" : "Others"
+"button.label.InflictSkill2" : "Self"
+
+# Stats
+
+
+# Titles
+

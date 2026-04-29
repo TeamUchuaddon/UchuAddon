@@ -1,0 +1,51 @@
+# Assignable
+
+"role.kunoichiU.name" : "Kunoichi"
+"role.kunoichiU.short" : "Kno"
+"role.kunoichiU.blurb" : "A Flower Is Most Beautiful as It Falls"
+
+# Document
+
+"role.kunoichiU.doc" : "An Impostor who kills by throwing kunai."
+"role.kunoichiU.ability.title" : "Unique Ability "Cherry Blossom Shadow""
+"role.kunoichiU.ability.main" : "Throws kunai to kill players."
+"role.kunoichiU.ability.Kunai" : "<title>Equip</title>Equips or stows the kunai."
+"role.kunoichiU.ability.kill" : "<title>Kunai</title>Throws an equipped kunai.<br>A kill happens once a player is hit a set number of times."
+"role.kunoichiU.ability.invisibily" : "<title>Cloak</title>Become invisible by standing still for a time.<br>Pressing the button or moving ends the cloak."
+"role.kunoichiU.tips" : "- A kunai disappears after traveling 30m."
+
+# Options
+
+"options.role.kunoichiU.detail" : "Kunoichi is an Impostor who throws kunai to kill and can turn invisible."
+"options.role.kunoichiU.KunaiCooldown" : "Kunai Cooldown"
+"options.role.kunoichiU.KunaiSize" : "Kunai Hitbox"
+"options.role.kunoichiU.KunaiSpeed" : "Kunai Throw Speed"
+"options.role.kunoichiU.numofhit" : "Hits Needed to Kill"
+"options.role.kunoichiU.canKillImpostor" : "Friendly Fire"
+"options.role.kunoichiU.UseInvisibleButton" : "Use Button to Cloak"
+"options.role.kunoichiU.UseInvisibleButton.detail" : "When off, the cloak activates automatically."
+"options.role.kunoichiU.InvisibleTime" : "Cloak Cast Time"
+"options.role.kunoichi.group.kunai" : "Kunai Settings"
+"options.role.kunoichi.group.invisibily" : "Cloak Settings"
+"options.role.kunoichiU.KunaiIninvisibily" : "Can Throw Kunai While Cloaked"
+"options.role.kunoichiU.KunaiDisappearOnWall" : "Kunai Breaks on Wall"
+"options.role.kunoichiU.CanIninvisibily" : "Enable Cloak Ability"
+"options.role.kunoichiU.ResetHitCountOnMeeting" : "Reset Hit Count Each Meeting"
+
+# Game
+
+
+# UI
+
+"button.label.KunaiThrow" : "Kunai"
+"button.label.KunoichiInvisibily" : "Cloak"
+"button.label.Kunoichirelease" : "Reveal"
+"ui.action.kunoichiU.equip" : "Equip or stow the kunai."
+"ui.action.kunoichiU.kill" : "Throw the kunai."
+
+
+
+# Stats
+
+
+# Titles

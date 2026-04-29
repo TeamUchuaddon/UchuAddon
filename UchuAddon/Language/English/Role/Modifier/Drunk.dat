@@ -1,0 +1,25 @@
+# Assignable
+
+"role.drunkU.name" : "Drunk"
+"role.drunkU.generalBlurb" : "I drank too much yesterday..."
+"role.drunkU.blurb" : "I drank too much yesterday..."
+
+# Document
+
+"role.drunkU.doc" : "Movement direction is always off."
+
+# Options
+
+"options.role.drunkU.detail" : "A modifier with always off movement direction."
+"options.role.drunkU.meetingDrunkShuffle" : "Re-shuffle Direction After Meeting"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

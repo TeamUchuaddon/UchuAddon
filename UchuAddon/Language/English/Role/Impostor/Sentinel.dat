@@ -1,0 +1,25 @@
+# Assignable
+
+"role.sentinelU.name" : "Sentinel"
+"role.sentinelU.short" : "Snt"
+"role.sentinelU.blurb" : "Anti-Device"
+
+# Document
+
+"role.sentinelU.doc" : "Reports in real time when a player is near information equipment."
+
+# Options
+
+"options.role.sentinelU.detail" : "Sentinel is informed whenever a player is near information equipment."
+"options.role.sentinelU.impostorNoDevice" : "Do Not Detect Impostors"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

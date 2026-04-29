@@ -1,0 +1,44 @@
+# Assignable
+
+"role.magicianU.name" : "Magician"
+"role.magicianU.short" : "Mgc"
+"role.magicianU.blurb" : "Master of Illusions"
+
+# Document
+
+"role.magicianU.doc" : "An Impostor who shuffles player positions."
+
+# Options
+
+"options.role.magicianU.detail" : "Magician is an Impostor who shuffles player positions."
+"options.role.magicianU.magicCooldown" : "Magic Cooldown"
+"options.role.magicianU.numOfMagic" : "Magic Uses"
+
+# Game
+
+
+# UI
+
+"button.label.magic" : "Magic"
+
+# Stats
+
+
+# Titles
+
+"achievement.magicianU.common1.title" : "Master of Illusions"
+"achievement.magicianU.common1.goal" : "Use Magic 3 times in a single game"
+"achievement.magicianU.common1.cond" : ""
+
+"achievement.magicianU.another1.title" : "Just as Planned?"
+"achievement.magicianU.another1.goal" : "Have a body reported right after using Magic"
+"achievement.magicianU.another1.cond" : "A report must be made within 7 seconds of using Magic."
+
+"achievement.magicianU.hard1.title" : "Flawless Trick"
+"achievement.magicianU.hard1.goal" : "Get a kill yourself right after using Magic"
+"achievement.magicianU.hard1.cond" : "Get a kill within 7 seconds of using Magic."
+
+"achievement.magicianU.challenge1.title" : "Nothing Up My Sleeve"
+"achievement.magicianU.challenge1.goal" : "Use Magic to prevent 3 or more body reports"
+"achievement.magicianU.challenge1.cond" : ""
+"achievement.magicianU.challenge1.flavor" : "Yes, truly nothing at all."

@@ -1,0 +1,29 @@
+# Assignable
+
+"role.nimrodU.name" : "Nimrod"
+"role.nimrodU.short" : "Nim"
+"role.nimrodU.blurb" : "Arrow of Resolve"
+
+# Document
+
+"role.nimrodU.doc" : "A Crewmate who takes the chosen player down with them when voted out."
+
+# Options
+
+"options.role.nimrodU.detail" : "Nimrod is a Crewmate who can take a specified player down with them during a meeting.<br>Using the ability consumes a use regardless of the vote outcome."
+"options.role.nimrodU.numOfInvolve" : "Maximum Takedown Attempts"
+"options.role.nimrodU.maxLeftTimer" : "Max Remaining Meeting Time to Take Down"
+
+# Game
+
+
+# UI
+
+"role.nimrodU.hudText" : "Takedown Attempts Left"
+
+# Stats
+
+"stats.nimrodU.involve" : "Takedown Count"
+
+# Titles
+

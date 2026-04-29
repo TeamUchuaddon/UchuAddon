@@ -1,0 +1,51 @@
+# Assignable
+
+"role.moiraU.name" : "Moira"
+"role.moiraU.short" : "Mo"
+"role.moiraU.blurb" : "Weaver of all things"
+"teams.moiraU" : "Moira"
+
+# Document
+
+"role.moiraU.doc" : "Moira can swap players' roles. Swaps are announced to all players.<br>Moira can also see everyone's roles."
+"role.moiraU.ability.title" : "Unique Ability "Fate Manipulation""
+"role.moiraU.ability.main" : "After swapping roles the set number of times, %WIN% win."
+"role.moiraU.ability.main.normalWin" : "win <var>solo</var> immediately"
+"role.moiraU.ability.main.extraWin" : "<var>coexist</var> by surviving until the end of the game"
+"role.moiraU.ability.revelation" : "<title>Revelation</title>Adds a target to the swap candidates."
+"role.moiraU.ability.exchange" : "<title>Manipulate</title>Swaps the roles of two selected players."
+"document.tip.winCond.moiraU.title" : "Special Win"
+"document.tip.winCond.moiraU" : "Win by swapping roles the set number of times."
+
+
+# Options
+
+"options.role.moiraU.detail" : "Moira is a Neutral that swaps players' roles."
+"options.role.moiraU.needRevelation" : "Revelation Required for Swap"
+"options.role.moiraU.revelationCooldown" : "Revelation Cooldown"
+"options.role.moiraU.numOfSwappingWin" : "Swaps Required to Win"
+"options.role.moiraU.winCondition" : "Win Condition"
+"options.role.moiraU.winCondition.solo" : "Solo Win"
+"options.role.moiraU.winCondition.extra" : "Coexist Win"
+"options.role.moiraU.needAlive" : "Must Be Alive to Win"
+"options.role.moiraU.canSeeVote" : "Can See Votes"
+"options.role.moiraU.canSeeRole" : "Can See Others' Roles"
+"options.role.moiraU.canPushButton" : "Can Use Emergency Button"
+"options.role.moiraU.changeVoteButton" : "Also Swap Vote Counts"
+
+
+# Game
+
+"role.moiraU.leftWin" : "Swaps Remaining"
+"role.moiraU.denyReason" : "Even without my touch, fate guides all things."
+
+# UI
+
+"button.label.revelation" : "Revelation"
+
+# Stats
+
+"end.moiraU" : "Moira%EXTRA% Wins"
+"end.extra.moiraU" : " <color=#FFFFFF>+</color> Moira"
+
+# Titles

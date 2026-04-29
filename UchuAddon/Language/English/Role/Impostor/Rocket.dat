@@ -1,0 +1,37 @@
+# Assignable
+
+"role.rocketU.name" : "Rocket"
+"role.rocketU.short" : "Rkt"
+"role.rocketU.blurb" : "Atmospheric Tour, This Way"
+
+# Document
+
+"role.rocketU.doc" : "An Impostor who launches players away on a rocket."
+"role.rocketU.ability.title" : "Unique Ability "Rocket Launch!""
+"role.rocketU.ability.main" : "Rocket straps players to a rocket and launches them, getting kills that leave no body.<br>Any number of players can be grabbed at once, and Rocket can still enter meetings while holding them.<br>The launch produces a loud sound everyone hears, so the timing of the kill becomes obvious."
+"role.rocketU.ability.hold" : "<title>Grab</title>Grabs a player. The cooldown changes when grabbing a second player or more."
+"role.rocketU.ability.launch" : "<title>Launch</title>Launches the held players. If multiple players are held, all are launched together."
+"role.rocketU.tips" : "If Rocket enters a meeting while holding players and is not voted out,<br>the held players die after the meeting."
+
+# Options
+
+"options.role.rocketU.detail" : "Rocket is an Impostor who can grab and launch players into the sky.<br>Launched players leave no body, but a loud sound is heard by everyone."
+"options.role.rocketU.holdCooldown" : "Grab Cooldown"
+"options.role.rocketU.nextHoldCooldown" : "Grab Cooldown for 2nd Player Onward"
+"options.role.rocketU.launchCooldown" : "Launch Cooldown"
+"options.role.rocketU.canUseNormalKill" : "Normal Kill Available"
+"options.role.rocketU.canCounter" : "Held Players Can Counter"
+
+# Game
+
+
+# UI
+
+"button.label.Hold" : "Grab"
+"button.label.Launch" : "Launch"
+
+# Stats
+
+"statistics.Launch" : "Launches"
+
+# Titles

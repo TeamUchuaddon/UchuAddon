@@ -1,0 +1,28 @@
+# Assignable
+
+"role.waraningyouU.name" : "Straw Doll"
+"role.waraningyouU.short" : "Doll"
+"role.waraningyouU.blurb" : "Curse Another, Dig Two Graves"
+
+# Document
+
+"role.waraningyouU.doc" : "A Crewmate who accumulates votes cast against them."
+
+# Options
+
+"options.role.waraningyouU.detail" : "Straw Doll charges the votes cast against itself,<br>and uses those charged votes via the <b>Curse</b> button.<br>Self-votes cannot be charged."
+"options.role.waraningyouU.allowSkip" : "Allow Skip Vote When Cursing"
+"options.role.waraningyouU.defaultVote" : "Initial Vote Count"
+
+# Game
+
+
+# UI
+
+"button.label.curse" : "Curse"
+
+# Stats
+
+
+# Titles
+

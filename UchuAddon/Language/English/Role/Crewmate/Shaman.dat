@@ -1,0 +1,38 @@
+# Assignable
+
+"role.shamanU.name" : "Shaman"
+"role.shamanU.short" : "Shm"
+"role.shamanU.blurb" : "Memories Possessed"
+
+# Document
+
+"role.shamanU.doc" : "Can investigate the number of living non-Crewmates."
+"role.shamanU.ability.title" : "Unique Ability "Memory of the Spirits""
+"role.shamanU.ability.main" : "Uses a séance to find out the number of living non-Crewmates."
+"role.shamanU.ability.necromancy" : "<title>Séance</title>Investigates the number of living non-Crewmates.<br>The ability can only be used in a designated room,<br>and moving during the séance cancels it instantly.<br>The result is delivered at the next meeting."
+"role.shamanU.ability.necromancyBoost" : "<title>Enhanced Séance</title>After completing <var>%NUMBOOST%</var> tasks, the séance is enhanced.<br>An enhanced séance reveals<br>which non-Crewmates are still alive."
+"role.shamanU.tips" : "An arrow is shown pointing to the designated room.<br>The room is re-rolled when the séance completes.<br>The displayed result reflects the moment the séance was used."
+
+# Options
+
+"options.role.shamanU.detail" : "Shaman is a Crewmate who investigates the number of living non-Crewmates."
+"options.role.shamanU.necromancyCooldown" : "Séance Cooldown"
+"options.role.shamanU.necromancyDuration" : "Séance Duration"
+"options.role.shamanU.numOfnecromancy" : "Séance Uses"
+"options.role.shamanU.taskCompletesRoomReroll" : "Re-roll Room on Task Completion"
+"options.role.shamanU.skillBoost" : "Enable Enhanced Séance"
+"options.role.shamanU.numOfBoostTask" : "Tasks Required for Enhancement"
+
+# Game
+
+"options.role.shamanU.message.header" : "Séance Result"
+"role.shamanU.result" : "Living non-Crewmates"
+# UI
+
+"button.label.shamanU.necromancy" : "Séance"
+
+
+# Stats
+
+
+# Titles

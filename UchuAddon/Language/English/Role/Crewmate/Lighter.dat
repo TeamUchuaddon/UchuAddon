@@ -1,0 +1,43 @@
+# Assignable
+
+"role.lighterU.name" : "Lighter"
+"role.lighterU.short" : "Lt"
+"role.lighterU.blurb" : "Light My Way"
+
+# Document
+
+"role.lighterU.doc" : "A Crewmate who expands their vision with a light."
+
+# Options
+
+"options.role.lighterU.detail" : "Lighter is a Crewmate who can expand their own vision."
+"options.role.lighterU.lightCoolDown" : "Light Cooldown"
+"options.role.lighterU.lightDuration" : "Light Duration"
+"options.role.lighterU.lightRatio" : "Light Multiplier"
+"options.role.lighterU.blackoutIgnore" : "Always Ignore Blackout"
+
+# Game
+
+
+# UI
+
+"button.label.light" : "Light"
+
+# Stats
+
+
+# Titles
+
+"achievement.lighterU.common1.title" : "Light My Way"
+"achievement.lighterU.common1.goal" : "Use Light 5 times in a single game"
+"achievement.lighterU.common1.cond" : ""
+
+"achievement.lighterU.another1.title" : "Defective"
+"achievement.lighterU.another1.goal" : "Narrow your vision with the light"
+"achievement.lighterU.another1.cond" : "This item is non-returnable."
+"achievement.lighterU.another1.splitted.2" : "Defective"
+
+"achievement.lighterU.challenge1.title" : "The Light Shines on Us"
+"achievement.lighterU.challenge1.goal" : "While using Light, have 5 players within your vision"
+"achievement.lighterU.challenge1.cond" : ""
+"achievement.lighterU.challenge1.splitted.1" : "on Us"

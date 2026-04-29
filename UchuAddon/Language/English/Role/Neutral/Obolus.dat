@@ -1,0 +1,41 @@
+# Assignable
+
+"role.obolusU.name" : "Obolus"
+"role.obolusU.short" : "Obo"
+"role.obolusU.blurb" : "The final strike"
+"teams.obolusU" : "Obolus"
+
+# Document
+
+"role.obolusU.doc" : "Win by killing an Impostor.<br>However, you can only kill once per turn."
+"document.tip.winCond.obolusU.title" : "Special Win"
+"document.tip.winCond.obolusU" : "Win by killing an Impostor."
+
+# Options
+
+"options.role.obolusU.detail" : "Obolus is a Neutral that wins by killing an Impostor.<br>You can only kill once per turn."
+"options.role.obolusU.killCooldown" : "Kill Cooldown"
+"options.role.obolusU.killShieldTurn" : "Kill Lock Turns"
+"options.role.obolusU.killShieldTurn.detail" : "Locks the kill button until the <b>set number of turns</b> have passed."
+"options.role.obolusU.canKillHidingPlayer" : "Can Kill Players Hiding in Vents"
+"options.role.obolusU.impostorVision" : "Impostor Vision"
+"options.role.obolusU.blackOutVision" : "Unaffected by Blackouts"
+"options.role.obolusU.extraWin" : "Extra Win"
+"options.role.obolusU.extraWin.detail" : "Winning becomes an extra win upon meeting the win condition."
+"options.role.obolusU.group.win" : "Extended Win Settings"
+"options.role.obolusU.jackalOptions" : "Can Also Win by Killing <color=#08bef5>Jackal</color>"
+"options.role.obolusU.tyrantOptions" : "Can Also Win by Killing <color=#b98900>Tyrant</color>"
+"options.role.obolusU.obolusOptions" : "Can Also Win by Killing <color=#bd871a>Obolus</color>"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"end.obolusU" : "Obolus%EXTRA% Wins"
+"end.extra.aliceU" : "<color=#FFFFFF>+</color> Obolus"
+
+# Titles

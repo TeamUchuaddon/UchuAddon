@@ -1,0 +1,29 @@
+# Assignable
+
+"role.djU.name" : "DJ"
+"role.djU.short" : "DJ"
+"role.djU.blurb" : "Boil! Rainbow Festival"
+
+# Document
+
+"role.djU.doc" : "A Crewmate that makes the Floor Admin boil.。"
+
+# Options
+
+"options.role.djU.detail" : "DJ is a Crewmate that illuminates the vision of surrounding players."
+"options.role.djU.djSkillCooldown" : "ScratchCooldown"
+"options.role.djU.numOfFlash" : "Flash Count"
+"options.role.djU.numOfFlash.detail" : "Set the number of flashes when using the skill."
+"options.role.djU.djSkillRange" : "ScratchRange"
+
+# Game
+
+
+# UI
+
+"button.label.scratch" : "Scratch"
+
+# Stats
+
+
+# Titles

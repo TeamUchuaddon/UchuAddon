@@ -1,0 +1,34 @@
+# Assignable
+
+"role.enchanterU.name" : "Enchanter"
+"role.enchanterU.short" : "Enc"
+"role.enchanterU.blurb" : "In search of the ultimate gadget"
+"teams.enchanter" : "Enchanter"
+
+# Document
+
+"role.enchanterU.doc" : "A Neutral that can give Modifiers to chosen players."
+"role.enchanterU.ability.title" : "Unique Ability "Dress Code - Rewrite""
+"role.enchanterU.ability.main" : "Achieve an extra win by enchanting the set number of times."
+"role.EnchanterU.ability.enchant" : "<title>Enchant</title>Grants a Modifier to a target.<br>Only Modifiers added through enchanting will continue to change."
+"role.enchanterU.tips" : "When using this role, configure the filter settings before playing."
+
+# Options
+
+"options.role.enchanterU.detail" : "Enchanter is a Neutral that can grant Modifiers to other players.<br>Achieve an extra win by enchanting a set number of times."
+"options.role.enchanterU.enchantCount" : "Enchants Required to Win"
+"options.role.enchanterU.enchantCoolDown" : "Enchant Cooldown"
+"options.role.enchanterU.giveableFilter" : "Enchant Filter"
+
+# Game
+
+
+# UI
+
+"button.label.EnchanterU.enchant" : "Enchant"
+
+# Stats
+
+"end.extra.enchanterU" : "<color=#FFFFFF>+</color> Enchanter"
+
+# Titles

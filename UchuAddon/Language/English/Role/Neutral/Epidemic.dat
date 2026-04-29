@@ -1,0 +1,63 @@
+# Assignable
+
+"role.epidemicU.name" : "Epidemic"
+"role.epidemicU.short" : "Epd"
+"role.epidemicU.blurb" : "Malice Spreads"
+
+# Document
+
+"role.epidemicU.doc" : "A Neutral that infects others with an unknown virus."
+"role.epidemicU.winCond" : "Infect every surviving player with the virus."
+"role.epidemicU.ability.title" : "Unique Ability "Unseen Terror""
+"role.epidemicU.ability.main" : ""
+"role.epidemicU.ability.infection" : "<title>Infect</title>Infects a player. Initially usable only once."
+"role.epidemicU.ability.break" : "<title>Destroy</title>Temporarily disables a target decontamination box."
+"role.epidemicU.ability.box" : "<title>Decontamination Box</title>Using a decontamination box reduces the using player's infection rate.<br>It does not reduce the rate when infection is at 100%.<br><var>%NUMBOX%</var> decontamination boxes are placed."
+"role.epidemicU.ability.boxBreak" : "<title>Broken Decontamination Box</title>A decontamination box destroyed by the Destroy ability.<br>It cannot be used for tasks in this state<br>and is restored after <var>%PHASE% turns</var>."
+"role.epidemicU.tips" : "Your infection rate is always shown on the bar to the left.<br>If the first infectee dies before infecting anyone,<br>the Infect ability is restored <b>once</b>.<br><br>- Decontamination Box spawn locations<br>　-Skeld: Security, Above Cafeteria, Communications<br>　-MIRA HQ: Lab, Right Balcony, Office<br>　-Polus: Electrical, Right Reactor, Outside Bottom-Left of Office<br>　-Airship: Right of Elevator, Armory, Medical Bay<br>　-Fungle: Greenhouse, Kitchen, Mining"
+
+# Options
+
+"options.role.epidemicU.detail" : "Win by infecting every surviving player with the virus."
+
+"options.role.epidemicU.infectionCooldown" : "Infect Cooldown"
+"options.role.epidemicU.infectionDuration" : "Infect Cast Time"
+"options.role.epidemicU.infectionMaxTime" : "Time Until Infection Completes"
+"options.role.epidemicU.infectionRange" : "Virus Spread Range"
+
+"options.role.epidemicU.group.break" : "Destroy Settings"
+"options.role.epidemicU.breakCooldown" : "Destroy Cooldown"
+"options.role.epidemicU.breakDuration" : "Destroy Cast Time"
+"options.role.epidemicU.numOfBreak" : "Destroy Uses"
+"options.role.epidemicU.numOfBreakPhase" : "Turns Until Box Restocks"
+"options.role.epidemicU.numOfBreakPhase.detail" : "Set how many turns a destroyed decontamination box stays broken."
+
+"options.role.epidemicU.group.boxTask" : "Decontamination Box Settings"
+"options.role.epidemicU.numOfBox" : "Number of Decontamination Boxes"
+"options.role.epidemicU.numOfMaxBoxUse" : "Box Uses Per Player"
+"options.role.epidemicU.cleanUpDuration" : "Decontamination Time"
+"options.role.epidemicU.numOfResetInfection" : "Infection Rate Reduced"
+"options.role.epidemicU.numOfPenalty" : "Decontamination Penalty Multiplier"
+"options.role.epidemicU.numOfPenalty.detail" : "Each decontamination becomes gradually less effective by the configured amount."
+
+# Game
+
+"role.epidemicU.minigame.cleanUp" : "Decontaminating"
+
+# UI
+
+"button.label.epidemicU.infection" : "Infect"
+"button.label.epidemicU.break" : "Destroy"
+
+# Stats
+
+"state.epidemicU.dead" : "<color=#525252>Already Dead</color>"
+"state.epidemicU.complete" : "<color=#e9f78b>Infected</color>"
+
+# Team
+
+"teams.epidemicU" : "Epidemic"
+"end.epidemicU" : "Epidemic%EXTRA% Wins"
+"document.tip.winCond.epidemicU.title" : "Special Win"
+"document.tip.winCond.epidemicU" : "Wins by infecting every surviving player with the virus."
+
