@@ -43,7 +43,7 @@
 役職の仕様やシステムの詳細は Wiki にまとめています。  
 質問・確認はこちらを参照してください。
 
-👉 [UchuAddon Wiki](https://catudon1276.github.io/UchuAddonWiki/)
+👉 [UchuAddon Wiki](https://TeamUchuaddon.github.io/UchuAddonWiki/)
 
 ---
 
