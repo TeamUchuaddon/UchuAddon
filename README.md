@@ -51,7 +51,8 @@
 ## その他SNSリンク
 UchuAddonの情報を発信している公式アカウントです。
 - ## [Twitter(現X)](https://x.com/uchu_addons)
-  - UchuAddonの情報を不定期に発信します。
+  - UchuAddonの情報を不定期に発信します。  
+  また、当アドオンについてお問い合わせがある場合DMにて対応いたします。
 - ## [YouTube](https://www.youtube.com/@TeamUchuaddon)
   - UchuAddonの情報及び動画を不定期に投稿します。
 
