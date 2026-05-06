@@ -15,25 +15,26 @@
 ## 参考・影響を受けたMOD
 
 本MODは、以下のMODを参考にしています。  
-一部、役職アイデアやロゴを使用しています。
+一部、役職アイデアやクレジット掲載の為ロゴを使用しています。  
+以下のMod様に多大なる感謝を申し上げます。
 
-- **Nebula on the Ship** （制作：Dolly）  
+- **[Nebula on the Ship](https://github.com/Dolly1016/Nebula)** （制作：Dolly）  
   本アドオンのベースとなるMOD
-- **Super New Roles**（代表：ykundesu）  
+- **[Super New Roles](https://github.com/SuperNewRoles/SuperNewRoles)**（代表：ykundesu）  
   一部役職アイデア・ロゴを使用
-- **Extreme Roles**（制作：Yukieiji）  
-  一部アイデア・ロゴを使用
-- **Town of Host Y**（制作：Yumenopai）  
+- **[Extreme Roles](https://github.com/yukieiji/ExtremeRoles)**（制作：Yukieiji）  
   一部役職アイデア・ロゴを使用
-- **Town of Host K**（制作：KYMario）  
+- **[Town of Host_Y](https://github.com/Yumenopai/TownOfHost_Y)**（制作：Yumenopai）  
   一部役職アイデア・ロゴを使用
-- **Town of Us**（制作：slushiegoose）  
+- **[Town of Host-K](https://github.com/KYMario/TownOfHost-K)**（制作：KYMario）  
   一部役職アイデア・ロゴを使用
-- **Town of Us - Mira -**（制作：AU Avengers）  
+- **[Town of Us](https://github.com/slushiegoose/Town-Of-Us)**（制作：slushiegoose）  
   一部役職アイデア・ロゴを使用
-- **The Other Roles**（代表：Eisbison）  
+- **[Town of Us - Mira -](https://github.com/AU-Avengers/TOU-Mira)**（制作：AU Avengers）  
   一部役職アイデア・ロゴを使用
-- **The Other Roles: GM Edition**（代表：yukinogatari）  
+- **[The Other Roles](https://github.com/TheOtherRolesAU/TheOtherRoles)**（代表：Eisbison）  
+  一部役職アイデア・ロゴを使用
+- **[The Other Roles: GM Edition](https://github.com/yukinogatari/TheOtherRoles-GM)**（代表：yukinogatari）  
   一部役職アイデア・ロゴを使用
 
 ---
@@ -44,6 +45,15 @@
 質問・確認はこちらを参照してください。
 
 👉 [UchuAddon Wiki](https://TeamUchuaddon.github.io/UchuAddonWiki/)
+
+---
+
+## その他SNSリンク
+UchuAddonの情報を発信している公式アカウントです。
+- ## [Twitter(現X)](https://x.com/uchu_addons)
+  - UchuAddonの情報を不定期に発信します。
+- ## [YouTube](https://www.youtube.com/@TeamUchuaddon)
+  - UchuAddonの情報及び動画を不定期に投稿します。
 
 ---
 
