@@ -36,6 +36,8 @@
   一部役職アイデア・ロゴを使用
 - **[The Other Roles: GM Edition](https://github.com/yukinogatari/TheOtherRoles-GM)**（代表：yukinogatari）  
   一部役職アイデア・ロゴを使用
+- **[BetterPolus](https://github.com/Brybry16/BetterPolus)**（製作：Brybry16）  
+  Polusのマップ改造機能の参考元です。
 
 ---
 
