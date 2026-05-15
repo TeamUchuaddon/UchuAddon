@@ -4,6 +4,9 @@
 新しい役職やゲーム要素を追加し、プレイ体験を拡張します。
 
 ---
+# <span style="color: red; ">注意事項</span>
+# 本アドオンはNebula on the Ship公式とは関係ありません。本アドオンについて、Nebula on the Shipに報告しないようにお願いいたします。
+---
 
 ## 概要
 
