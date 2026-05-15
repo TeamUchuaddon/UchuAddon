@@ -5,7 +5,7 @@
 
 ---
 # <span style="color: red; ">注意事項</span>
-# 本アドオンはNebula on the Ship公式とは関係ありません。本アドオンについて、Nebula on the Shipに報告しないようにお願いいたします。
+# 本アドオンはNebula on the Ship公式とは関係ありません。本アドオンについて、本家Nebula on the Shipに報告しないようにお願いいたします。
 ---
 
 ## 概要
