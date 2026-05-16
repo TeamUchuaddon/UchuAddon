@@ -1,7 +1,6 @@
----
 # Readme
-日本語
-English
+[日本語](https://github.com/TeamUchuaddon/UchuAddon)  
+**English**
 ---
 # UchuAddon
 
