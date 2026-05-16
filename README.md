@@ -1,3 +1,8 @@
+---
+# Readme
+日本語
+English
+---
 # UchuAddon
 
 **UchuAddon** は、**Nebula on the Ship** 向けに作られたアドオンです。  
