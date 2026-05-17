@@ -28,3 +28,14 @@ public class MeetingButtonBlockAbility : AbstractPlayerAbility, IPlayerAbility
     bool IPlayerAbility.BlockCallingEmergencyMeeting => true;
 }
 
+public class ClearVisionAbility : AbstractPlayerAbility, IPlayerAbility
+{
+    public ClearVisionAbility(GamePlayer player) : base(player) { }
+
+    bool IPlayerAbility.EyesightIgnoreWalls => true;
+}
+
+
+
+
+

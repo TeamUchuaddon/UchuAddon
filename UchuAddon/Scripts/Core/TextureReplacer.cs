@@ -9,6 +9,7 @@ using Vector2 = UnityEngine.Vector2;
 
 namespace Hori.Core;
 
+/*
 internal class TextureReplacerUchu
 {
     ITextureLoader texture;
@@ -35,6 +36,53 @@ internal class TextureReplacerUchu
         }
         var loader = new CacheSpriteLoader(() => texture.GetTexture().ToSprite(rect, new(pivot.x / rect.width, pivot.y / rect.height), pixelsPerUnit));
         images.Add((new((int)rect.left, (int)rect.right, (int)rect.top, (int)rect.bottom), loader));
+        return loader;
+    }
+
+    public void ReplaceSprite(SpriteRenderer renderer)
+    {
+        renderer.sprite = Replace(renderer.sprite).GetSprite();
+    }
+
+    public Image Replace(Sprite original) => GetImage(original.rect, original.pivot, original.pixelsPerUnit);
+}
+
+*/
+
+internal class TextureReplacerUchu
+{
+    Texture2D texture;
+    List<(Tuple<int, int, int, int> rect, Image image)> images = [];
+
+    public TextureReplacerUchu(Texture2D texture)
+    {
+        this.texture = texture;
+    }
+
+    public Image GetImage(Rect rect, Vector2 pivot, float pixelsPerUnit)
+    {
+        foreach (var entry in images)
+        {
+            if (
+                entry.rect.Item1 == (int)rect.x &&
+                entry.rect.Item2 == (int)rect.y &&
+                entry.rect.Item3 == (int)rect.width &&
+                entry.rect.Item4 == (int)rect.height
+            )
+            {
+                return entry.image;
+            }
+        }
+
+        var loader = new CacheSpriteLoader(() =>
+            texture.ToSprite(
+                rect,
+                new Vector2(pivot.x / rect.width, pivot.y / rect.height),
+                pixelsPerUnit
+            )
+        );
+
+        images.Add((new((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height), loader));
         return loader;
     }
 

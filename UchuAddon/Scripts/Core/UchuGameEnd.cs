@@ -54,7 +54,7 @@ public class UchuGameEnd
     public static GameEnd BaphometWin = NebulaAPI.Preprocessor!.CreateEnd("baphometU", new Virial.Color(72, 40, 153), 61);
     public static GameEnd LoversBreakerUTeamWin = NebulaAPI.Preprocessor!.CreateEnd("loversbreakerU", new Virial.Color(235, 0, 192), 65);
     public static GameEnd AnchorUTeamWin = NebulaAPI.Preprocessor!.CreateEnd("anchorU", new Virial.Color(8, 0, 237), 34);
-    public static GameEnd CrewmateChickenWin = NebulaAPI.Preprocessor!.CreateEnd("crewmate", new Virial.Color(255, 255, 255), 127);
+    public static GameEnd CrewmateChickenWin = NebulaAPI.Preprocessor!.CreateEnd("crewmate", new Virial.Color(255, 238, 0), 127);
     public static GameEnd CaptainWin = NebulaAPI.Preprocessor!.CreateEnd("captainU", new Virial.Color(65, 73, 158), 32);
     public static GameEnd PandoraWin = NebulaAPI.Preprocessor!.CreateEnd("pandoraU", new Virial.Color(133, 9, 9), 32); 
     public static GameEnd EpidemicWin = NebulaAPI.Preprocessor!.CreateEnd("epidemicU", new Virial.Color(68, 255, 0), 33);

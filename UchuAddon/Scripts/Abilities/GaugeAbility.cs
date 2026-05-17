@@ -298,24 +298,26 @@ internal class BaphometGaugeAbility : FlexibleLifespan, IGameOperator
     private const float GaugeWidth = 0.4f;
     private const float GaugeHeight = 1.0f;
     private const float GaugeValueHeight = GaugeHeight - GaugeMargin;
-    private Image LowIconSprite { get; }
-    private Image HighIconSprite { get; }
 
     private static Vector2 RendererLocalPos = new(0.36f, -0.47f);
     private SpriteRenderer IconRenderer, GaugeRenderer, GaugeBaseRenderer;
     private GameObject Scaler;
     private Transform Adjuster;
     private bool isActive = true;
+    private float animTimer = 0.12f;
+    private int animIndex = 0;
+    public static MultiImage GaugeIcons = NebulaAPI.AddonAsset.GetResource("BaphometGaugeIcon.png")!.AsMultiImage(5, 1, 140f)!;
+    // 0がhigh 1~4がlowのanimation
+
+
     public void SetActive(bool active)
     {
         this.isActive = active;
     }
 
     GameObject GaugeObject;
-    public BaphometGaugeAbility(float max, float hue, Image lowIconSprite, Image highIconSprite, Func<float> value, Func<bool> isInProgress)
+    public BaphometGaugeAbility(float max, float hue, Func<float> value, Func<bool> isInProgress)
     {
-        this.LowIconSprite = lowIconSprite;
-        this.HighIconSprite = highIconSprite;
         this.value = value;
         this.isInProgress = isInProgress;
         this.Max = max;
@@ -327,12 +329,6 @@ internal class BaphometGaugeAbility : FlexibleLifespan, IGameOperator
 
         Scaler = UnityHelper.CreateObject("Scaler", Adjuster, RendererLocalPos);
         Scaler.transform.localScale = new Vector3(0.85f, 0.85f, 1f);
-
-
-        var background = UnityHelper.CreateObject<SpriteRenderer>("Background", Adjuster, new(0f, -0.37f, 0.01f));
-        background.SetAsExpandableRenderer();
-        background.sprite = GuageBackgroundSprite.GetSprite();
-        background.size = new(0.8f, 0.2f);
 
         GaugeBaseRenderer = UnityHelper.CreateObject<SpriteRenderer>("BaseSprite", Scaler.transform, new(0f, 0f, 0f));
         GaugeBaseRenderer.SetAsExpandableRenderer();
@@ -354,7 +350,6 @@ internal class BaphometGaugeAbility : FlexibleLifespan, IGameOperator
         GaugeRenderer.material.SetFloat("_Hue", 360f - 270f);
 
         IconRenderer = UnityHelper.CreateObject<SpriteRenderer>("Icon", Adjuster, new(-0.02f, -0.21f, -0.03f));
-        IconRenderer.sprite = lowIconSprite.GetSprite();
     }
     void OnUpdate(GameUpdateEvent ev)
     {
@@ -379,7 +374,25 @@ internal class BaphometGaugeAbility : FlexibleLifespan, IGameOperator
         }
 
         bool progressing = isInProgress.Invoke();
-        IconRenderer.sprite = progressing ? LowIconSprite.GetSprite() : HighIconSprite.GetSprite();
+        if (progressing)
+        {
+            animTimer -= Time.deltaTime;
+
+            if (animTimer <= 0f)
+            {
+                animTimer = 0.12f;
+
+                animIndex = (animIndex + 1) % 4; 
+
+                int iconIndex = 1 + animIndex;
+                IconRenderer.sprite = GaugeIcons.GetSprite(iconIndex);
+            }
+        }
+        else
+        {
+            IconRenderer.sprite = GaugeIcons.GetSprite(0);
+        }
+
         if (isInProgress.Invoke())
         {
             GaugeBaseRenderer.color = Color.white;

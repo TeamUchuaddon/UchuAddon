@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hori.Scripts.Role.Modifier;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,7 +51,7 @@ public class NearPlayerArrowAbility : FlexibleLifespan, IGameOperator
                 playerArrow = new Arrow(null)
                 {
                     TargetPos = pos
-                }.SetColor(Color.red).Register(this);
+                }.SetColor(RadarU.MyRole.UnityColor).Register(this);
             }
             else
             {

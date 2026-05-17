@@ -199,7 +199,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
         Possess = false;
     }
 
-    void CameraMeeting(MeetingPreStartEvent ev)
+    void CameraMeeting(MeetingPreEndEvent ev)
     {
         AmongUsUtil.ToggleCamTarget(null);
         RpcPublicName.Invoke(myPlayer);
