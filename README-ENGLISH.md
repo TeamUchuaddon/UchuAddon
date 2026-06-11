@@ -8,7 +8,9 @@
 It adds new roles and game elements to enhance the gameplay experience.
 ---
 # <span style="color: red; ">Important</span>
-## This addon is not affiliated with the official Nebula on the Ship team. Please do not report issues regarding this add-on to the official Nebula on the Ship servers or through their official report form. For inquiries regarding this addon, please use the in-game report form on UchuAddon, the [UchuAddon Wiki report form](https://teamuchuaddon.github.io/UchuAddonWiki/inquiry/), or send a DM via [Twitter (X)](https://x.com/uchu_addons).
+## This addon is not affiliated with the official Nebula on the Ship team. Please do not report issues regarding this add-on to the official Nebula on the Ship servers or through their report form. Additionally, if you encounter any issues after installing this addon, please do not report them directly to the NoS team. Instead, please verify that the issue occurs even when this addon is not installed before reporting it. For inquiries regarding this addon, please use the in-game report form on UchuAddon, the [UchuAddon Wiki report form](https://teamuchuaddon.github.io/UchuAddonWiki/inquiry/), or send a direct message via [Twitter (now X)](https://x.com/uchu_addons).
+
+Translated with DeepL.com (free version).
 ---
 
 ## Overview
