@@ -10,7 +10,7 @@
 
 ---
 # <span style="color: red; ">注意事項</span>
-## 本アドオンはNebula on the Ship公式様とは関係ありません。本アドオンについて、本家Nebula on the Shipの公式サーバー及び報告フォームに報告しないようにお願いいたします。また、本アドオンを入れて起きた不具合はそのままNoS公式様に報告せず、本アドオンを未導入の状態でも発生する不具合であることを確認してから報告するようにお願いします。本アドオンについてのお問い合わせは、UchuAddonのゲーム内報告フォーム、[UchuAddon Wikiの報告フォーム](https://teamuchuaddon.github.io/UchuAddonWiki/inquiry/)、及び[Twitter(現X)](https://x.com/uchu_addons)のDMにお願いいたします。
+## 本アドオンはNebula on the Ship公式様とは関係ありません。<br>本アドオンについて、本家Nebula on the Shipの公式サーバー及び報告フォームに報告しないようにお願いいたします。<br>また、本アドオンを入れて起きた不具合はそのままNoS公式様に報告せず、本アドオンを未導入の状態でも発生する不具合であることを確認してから報告するようにお願いします。<br>本アドオンについてのお問い合わせは、UchuAddonのゲーム内報告フォーム、[UchuAddon Wikiの報告フォーム](https://teamuchuaddon.github.io/UchuAddonWiki/inquiry/)、及び[Twitter(現X)](https://x.com/uchu_addons)のDMにお願いいたします。
 ---
 
 ## 概要
