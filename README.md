@@ -57,6 +57,9 @@
 👉 [UchuAddon Wiki](https://TeamUchuaddon.github.io/UchuAddonWiki/)
 
 ---
+# [Discord](https://discord.gg/B5kqzhp5Zv)
+バグ報告や新役職の提案、などを受け付けてるほか、アップデート情報なども発信します！
+---
 
 ## その他SNSリンク
 UchuAddonの情報を発信している公式アカウントです。

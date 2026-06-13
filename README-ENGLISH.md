@@ -57,6 +57,9 @@ Please refer to this page for questions or clarifications.
 👉 [UchuAddon Wiki](https://TeamUchuaddon.github.io/UchuAddonWiki/)
 
 ---
+# [Discord](https://discord.gg/B5kqzhp5Zv)
+We welcome bug reports and suggestions for new roles, and we’ll also be sharing update information!
+---
 
 ## Other social media links
 This is the official account for UchuAddon.
