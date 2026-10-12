@@ -5,11 +5,11 @@
 
 # Document
 
-"role.hexU.doc" : "追放された際、ランダムで1人が道連れにされます。"
+"role.hexU.doc" : "追放された際、ランダムで1人が道連れされます。"
 
 # Options
 
-"options.role.hexU.detail" : "追放された際、ランダムで1人を道連れにするモディファイアです。"
+"options.role.hexU.detail" : "追放された際、ランダムで1人を道連れするモディファイアです。"
 
 # Game
 

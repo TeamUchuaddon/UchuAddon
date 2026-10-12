@@ -47,16 +47,19 @@ using Virial.Text;
 using static Il2CppSystem.Net.MonoChunkParser;
 using static Nebula.Roles.Impostor.Cannon;
 using static Nebula.Roles.Modifier.Bloody;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+using Vector4 = Virial.Compat.Vector4;
+
 namespace Hori.Scripts.Role.Modifier;
 
 public class DrunkU : DefinedAllocatableModifierTemplate, DefinedAllocatableModifier
 {
     private DrunkU() : base("drunkU", "DRK", new(247, 195, 148), [MeetingDrunkShuffle])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Drunk.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -92,7 +95,7 @@ public class DrunkU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
             ApplyDrunkEffect();
         }
 
-        private static Vector4 RandomVec()
+        public static Vector4 RandomVec()
         {
             int step = UnityEngine.Random.Range(0, 4);
             float angle = step * 90f;

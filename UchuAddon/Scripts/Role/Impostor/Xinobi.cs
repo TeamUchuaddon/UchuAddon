@@ -59,17 +59,25 @@ namespace Hori.Scripts.Role.Impostor;
 [NebulaRPCHolder]
 public class XinobiU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
 {
-    private XinobiU() : base("xinobiU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [KillCoolDown,XinobiVentCooldown, ClairvoyanceOption,VentConfiguration])
+    private XinobiU() : base("xinobiU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [KillCoolDown,XinobiVentCooldown, ClairvoyanceOption,
+     new GroupConfiguration("options.role.xinobiU.group.vent", [ConnectVentsOption, VentConfiguration], GroupConfigurationColor.ImpostorRed)])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Xinobi.png")!.AsImage(115f);
+        UchuGameAction.XinobiVentAction = new("xinobiU.vent", this, isPhysicalAction: true);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
-    static private IRelativeCooldownConfiguration KillCoolDown = NebulaAPI.Configurations.KillConfiguration("options.role.xinobiU.killCooldown", CoolDownType.Relative, (0f, 60f, 2.5f), 25f, (-40f, 40f, 2.5f), -5f, (0.125f, 2f, 0.125f), 1f);
-    static private FloatConfiguration XinobiVentCooldown = NebulaAPI.Configurations.Configuration("options.role.xinobiU.xinobiUVentCooldown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
-    static private BoolConfiguration ClairvoyanceOption = NebulaAPI.Configurations.Configuration("options.role.spectre.clairvoyance", true);
-    static private IVentConfiguration VentConfiguration = NebulaAPI.Configurations.VentConfiguration("role.reaper.vent", false, null, -1, (0f, 60f, 2.5f), 10f, (0f, 30f, 2.5f), 20f);
+    AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
+
+    static public IRelativeCooldownConfiguration KillCoolDown = NebulaAPI.Configurations.KillConfiguration("options.role.xinobiU.killCooldown", CoolDownType.Relative, (0f, 60f, 2.5f), 25f, (-40f, 40f, 2.5f), -5f, (0.125f, 2f, 0.125f), 1f);
+    static public FloatConfiguration XinobiVentCooldown = NebulaAPI.Configurations.Configuration("options.role.xinobiU.xinobiUVentCooldown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
+    static public BoolConfiguration ClairvoyanceOption = NebulaAPI.Configurations.Configuration("options.role.spectre.clairvoyance", true);
+    static public BoolConfiguration ConnectVentsOption = NebulaAPI.Configurations.Configuration("options.role.reaper.connectAllVents", true);
+    static public IVentConfiguration VentConfiguration = NebulaAPI.Configurations.VentConfiguration("role.reaper.vent", false, null, -1, (0f, 60f, 2.5f), 10f, (0f, 30f, 2.5f), 20f);
+
     static public float KillCooldown => KillCoolDown.Cooldown;
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
+    IUsurpableAbility? DefinedRole.GetUsurpedAbility(Virial.Game.Player player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
+
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Xinobi.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public XinobiU MyRole = new XinobiU();
@@ -83,248 +91,55 @@ public class XinobiU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
     static private readonly Virial.Media.Image PossessImage = NebulaAPI.AddonAsset.GetResource("XinobiButton.png")!.AsImage(115f)!;
     static private readonly Virial.Media.Image ReleaseImage = NebulaAPI.AddonAsset.GetResource("XinobiButton.png")!.AsImage(115f)!;
     static private readonly Virial.Media.Image VentImage = NebulaAPI.AddonAsset.GetResource("XinobiVentButton.png")!.AsImage(115f)!;
+
+
+    public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
+    {
+        int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
+        public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
+        {
+            new Scripts.Abilities.XinobiAbility(MyPlayer).Register(new FunctionalLifespan(() => !IsDeadObject && !IsUsurped));
+        }
+    }
+
     public class Instance : RuntimeVentRoleTemplate, RuntimeRole
     {
         public override DefinedRole Role => MyRole;
 
         bool RuntimeRole.HasVanillaKillButton => false;
+        private bool isUsurped = false;
+        void Usurp() => isUsurped = true;
 
-        bool Possess = false;
-        float min = 0f;
-        Vent? ventLocal = null;
-        Vector3 previousPosition = Vector3.zero;
         public bool EyesightIgnoreWalls { get; private set; } = ClairvoyanceOption;
+
+        private AllVentConnectAbility? ventAbility;
+
         void IGameOperator.OnReleased()
         {
             AmongUsUtil.SetCamTarget(null);
+            if (ventAbility != null)
+            {
+                ventAbility.AllVentConnects(false);
+            }
         }
+
         public Instance(GamePlayer player) : base(player, VentConfiguration)
         {
         }
 
         public override void OnActivated()
         {
+            new Scripts.Abilities.XinobiAbility(MyPlayer).Register(new FunctionalLifespan(() => !IsDeadObject && !isUsurped));
             if (AmOwner)
             {
-                var abilityVent = new VentArrowAbility().Register(this);
-                var ability = new AllVentConnectAbility().Register(this);
-                ability.AllVentConnects(true);
-
-                var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
-                playerTracker.SetColor(MyRole.RoleColor);
-                ModAbilityButton killPossessButton = null!;
-                ModAbilityButton killButton = null!;
-                ModAbilityButton ventNinjaButton = null!;
-                ModAbilityButton ventPossessButton = null!;
-                ModAbilityButton possessButton = null!;
-                ModAbilityButton breakButton = null!;
-
-                killButton = NebulaAPI.Modules.KillButton(this, MyPlayer, true, Virial.Compat.VirtualKeyInput.Kill,
-                KillCooldown, "kill", ModAbilityButton.LabelType.Impostor, null!, (target, _) =>
+                if (ConnectVentsOption)
                 {
-                    if (Possess)
-                    {
-                        MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.RemoteKill);
-                    }
-                    else if (!Possess)
-                    {
-                        MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.NormalKill);
-                    }
-                    NebulaAPI.CurrentGame?.KillButtonLikeHandler.StartCooldown();
-                    killPossessButton.StartCoolDown();
-                    killButton.StartCoolDown();
-                },
-                null,
-                _ => playerTracker.CurrentTarget != null && !MyPlayer.IsDived,
-                _ => MyPlayer.AllowToShowKillButtonByAbilities
-                );
-                NebulaAPI.CurrentGame?.KillButtonLikeHandler.Register(killButton.GetKillButtonLike());
-                killButton.Visibility = (button) => !MyPlayer.IsDead && !Possess;
-
-                killPossessButton = NebulaAPI.Modules.KillButton(this, MyPlayer, true, Virial.Compat.VirtualKeyInput.Kill,
-                KillCooldown, "kill", ModAbilityButton.LabelType.Impostor, null!, (target, _) =>
-                {
-                    if (Possess)
-                    {
-                        MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.RemoteKill);
-                    }
-                    else if (!Possess)
-                    {
-                        MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.NormalKill);
-                    }
-                    killButton.StartCoolDown();
-                    killPossessButton.StartCoolDown();
-                    NebulaAPI.CurrentGame?.KillButtonLikeHandler.StartCooldown();
-                },
-                null,
-                _ => playerTracker.CurrentTarget != null && !MyPlayer.IsDived,
-                _ => MyPlayer.AllowToShowKillButtonByAbilities
-                );
-                NebulaAPI.CurrentGame?.KillButtonLikeHandler.Register(killButton.GetKillButtonLike());
-                killPossessButton.Visibility = (button) => !MyPlayer.IsDead && Possess;
-                killPossessButton.Availability = (button) => !MyPlayer.IsDead && Possess && playerTracker.CurrentTarget != null;
-
-                //通常ベン遁ボタン
-                ventNinjaButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.SecondaryAbility, XinobiVentCooldown, "xinobiU.vent", VentImage);
-                ventNinjaButton.Visibility = (button) => !MyPlayer.IsDead && !Possess;
-                var ventNinjaTimer = ventNinjaButton.CoolDownTimer as TimerImpl;
-                var ventNinjaLastPredicate = ventNinjaTimer!.Predicate;
-                ventNinjaTimer.SetPredicate(() => ventNinjaLastPredicate!.Invoke() || HudManager.Instance.PlayerCam.Target != null);
-                ventNinjaButton.OnClick = (button) =>
-                {
-                    
-                    Possess = false;
-                    AmongUsUtil.ToggleCamTarget(null);
-                    XinobiVent();
-                    ventNinjaButton.StartCoolDown();
-                    ventPossessButton.StartCoolDown();
-                };
-
-                //変化中のベン遁ボタン
-                ventPossessButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.SecondaryAbility, XinobiVentCooldown, "xinobiU.vent", VentImage);
-                ventPossessButton.Visibility = (button) => !MyPlayer.IsDead && Possess;
-                ventPossessButton.Availability = (button) => true;
-                var ventPossessTimer = ventPossessButton.CoolDownTimer as TimerImpl;
-                var ventPossessLastPredicate = ventPossessTimer!.Predicate;
-                ventPossessTimer.SetPredicate(() => ventPossessLastPredicate!.Invoke() || HudManager.Instance.PlayerCam.Target != null);
-                ventPossessButton.OnClick = (button) =>
-                {
-                    Possess = false;
-                    AmongUsUtil.ToggleCamTarget(null);
-                    XinobiVent();
-                    ventPossessButton.StartCoolDown();
-                    ventNinjaButton.StartCoolDown();
-                };
-
-                Virial.Components.ObjectTracker<Console> consoleTracker = new ObjectTrackerUnityImpl<Console, Console>(MyPlayer.VanillaPlayer, AmongUsLLImpl.Instance.VanillaKillDistance/*AmongUsUtil.VanillaKillDistance*/, 
-                    () => ShipStatus.Instance.AllConsoles,c => true, c => true, c => c,
-                    c => [c.transform.position], c => c.Image, Color.red,true, false).Register(this);
-
-                possessButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, 0.5f, "xinobiU.possess", PossessImage, _ => consoleTracker.CurrentTarget != null);
-                possessButton.Visibility = (button) => !MyPlayer.IsDead && !Possess;
-                possessButton.OnClick = (button) =>
-                {
-                    NameSeclet();
-
-                    possessButton.StartCoolDown();
-                    breakButton.StartCoolDown();
-                    Possess = true;
-                    var target = consoleTracker.CurrentTarget;
-                    if (target != null)
-                    {
-                        AmongUsUtil.ToggleCamTarget(target);
-                        Vector3 myPos = PlayerControl.LocalPlayer.transform.position;
-                        ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(),null,myPos,1f).StartOnScene();
-                    }
-                };
-
-                breakButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, 0.5f, "xinobiU.release", ReleaseImage);
-                breakButton.Visibility = (button) => !MyPlayer.IsDead && Possess;
-                breakButton.Availability = (button) => Possess;
-                var breakPosTimer = breakButton.CoolDownTimer as TimerImpl;
-                var breakPosPredicate = breakPosTimer!.Predicate;
-                breakPosTimer.SetPredicate(() => breakPosPredicate!.Invoke() || HudManager.Instance.PlayerCam.Target != null);
-                breakButton.OnClick = (button) =>
-                {
-                    NamePublic();
-
-                    possessButton.StartCoolDown();
-                    breakButton.StartCoolDown();
-                    AmongUsUtil.ToggleCamTarget(null);
-                    Possess = false;
-                    var target = consoleTracker.CurrentTarget;
-                    if (target != null)
-                    {
-                        Vector3 effectPos = target.transform.position;
-                        effectPos.z -= 0.0000001f;
-                        ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(), null, effectPos, 1.1f).StartOnScene();
-                    }
-                };
-            }
-        }
-        void Update(GameUpdateEvent ev)
-        {
-            if (!Possess) return;
-            MyPlayer.GainAttribute(PlayerAttributes.InternalInvisible, 0.1f, false, 1);
-            MyPlayer.GainSpeedAttribute(0f, 0.1f, false, 1);
-        }
-
-        void XinobiVent()
-        {
-            var ability = new AllVentConnectAbility().Register(this);
-            ability.AllVentConnects(true);
-            Possess = false;
-            MyPlayer.GainAttribute(PlayerAttributes.InternalInvisible, 0.39f, false, 1);
-            foreach (var v in ShipStatus.Instance.AllVents)
-            {
-                float d = PlayerControl.LocalPlayer.transform.position
-                    .Distance(v.gameObject.transform.position);
-                if (ventLocal == null || d < min)
-                {
-                    min = d;
-                    ventLocal = v;
+                    ventAbility = new AllVentConnectAbility().Register(this);
+                    ventAbility.AllVentConnects(true);
                 }
             }
-            if (ventLocal != null)
-            {            
-                var player = PlayerControl.LocalPlayer;
-                var physics = player.MyPhysics;
-
-                Vector2 ventPos = ventLocal.transform.position;
-                Vector2 warpPos = ventPos + new Vector2(0f, 0.35f);
-
-                physics.body.velocity = Vector2.zero;
-
-                player.NetTransform.SnapTo(warpPos);
-
-                ability.AllVentConnects(true);
-                physics.RpcEnterVent(ventLocal.Id);
-                
-                ventLocal.SetButtons(true);
-                ability.AllVentConnects(true);
-            }
-            Vector3 myPos = PlayerControl.LocalPlayer.transform.position;
-            myPos.z -= 0.0000001f;
-            ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(), null, myPos, 1f).StartOnScene();
-            ventLocal = null;
-            min = 0f;
         }
 
-        void NameSeclet()
-        {
-            var name = MyPlayer.VanillaPlayer.transform.Find("Names");
-            name.Find("NameText_TMP").gameObject.SetActive(false);
-            name.Find("ColorblindName_TMP").gameObject.SetActive(false);
-        }
-
-        void NamePublic()
-        {
-            var name = MyPlayer.VanillaPlayer.transform.Find("Names");
-            name.Find("NameText_TMP").gameObject.SetActive(true);
-            name.Find("ColorblindName_TMP").gameObject.SetActive(true);
-        }
-
-        [OnlyMyPlayer]
-        void CameraDead(PlayerDieEvent ev)
-        {
-            AmongUsUtil.ToggleCamTarget(null);
-            NamePublic();
-            Possess = false;
-        }
-
-        void CameraMeeting(MeetingPreStartEvent ev)
-        {
-            AmongUsUtil.ToggleCamTarget(null);
-            NamePublic();
-            Possess = false;
-        }
-
-        void a(PlayerTryToChangeRoleEvent ev)
-        {
-            AmongUsUtil.ToggleCamTarget(null);
-            Possess = false;
-            NamePublic();
-        }
     }
 }
 

@@ -17,6 +17,7 @@ public class HexU : DefinedAllocatableModifierTemplate, DefinedAllocatableModifi
 {
     private HexU() : base("hexU", "HEX", new(236, 0, 140), [])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Hex.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 

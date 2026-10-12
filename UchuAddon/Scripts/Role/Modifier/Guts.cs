@@ -42,6 +42,7 @@ public class GutsU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
     private GutsU() : base("gutsU", "GUT", new(255, 165, 0), [])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Guts.png")!.AsImage(115f);
     }
 
     static public GutsU MyRole = new GutsU();

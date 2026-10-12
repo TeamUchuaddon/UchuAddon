@@ -6,14 +6,18 @@
 
 # Document
 
-"role.alchemistU.doc" : "死体を錬金し、錬金弾を作成するクルーメイトです。"
+"role.alchemistU.doc" : "死体を錬金し、錬金弾と等価交換するクルーメイトです。"
 
 # Options
 
-"options.role.alchemistU.detail" : "死体を錬金し、会議中の殺害能力と等価交換することができます。"
+"options.role.alchemistU.detail" : "死体を錬金し、会議中のキル能力と等価交換することができます。"
 "options.role.AlchemistU.AlchemyCooldown" : "錬金クールダウン"
 "options.role.AlchemistU.alchemycount" : "一度の錬金で手に入る錬金弾"
-"options.role.AlchemistU.NumOfShotPerMeeting" : "1会議の最大弾数"
+"options.role.AlchemistU.NumOfShotPerMeeting" : "会議ごとのキル可能回数"
+"role.alchemistU.ability.title" : "固有能力 "魂の等価交換""
+"role.alchemistU.ability.main" : "死体を錬金し、プレイヤーを会議中にキル可能な錬金弾を取得できます。"
+"role.alchemistU.ability.alchemy" : "<title>錬金</title>死体を錬金します。死体は消えてレポート不可になり、錬金弾を<var>%SEC%個</var>獲得します。"
+"role.alchemistU.ability.alchemybullet" : "<title>錬金弾</title>会議中に使用した対象のプレイヤーをキルします。"
 
 # Game
 

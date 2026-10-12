@@ -29,6 +29,9 @@ public static class APICompat
     }
 }
 
+/// <summary>
+/// Uchu Addonのアドオンタグです。必ず役職に付けてください。
+/// </summary>
 public class AddonConfigurationTags
 {
     private static Virial.Media.Image AddonTagSprite = NebulaAPI.AddonAsset.GetResource("UchuAddonTag.png").AsImage(100f);
@@ -36,6 +39,9 @@ public class AddonConfigurationTags
     static public ConfigurationTag TagUchuAddon { get; private set; } = new(AddonTagSprite, GetTagTextWidget("UchuAddonTag"));
 }
 
+/// <summary>
+/// Uchu Addon独自の死因が格納されています。ここで生成しないと正しく読み込まれません。
+/// </summary>
 [NebulaPreprocess(PreprocessPhase.PostLoadAddons)]
 public class UchuTranslatable
 {
@@ -44,11 +50,13 @@ public class UchuTranslatable
     public static TranslatableTag ChickenDropDead = new("state.chickenDeadDrop"); //落下死　昇降機
     public static TranslatableTag ChickenDoorDead = new("state.chickenDeadDoor"); //挟圧死　ドア
     public static TranslatableTag ChickenMessDead = new("state.chickenDeadWuss"); //錯乱死　停電
-    public static TranslatableTag ChickenWussDead = new("state.chickenDeadMess"); //恐怖死　投票
     public static TranslatableTag EclipseBomb = new("state.eclipseBomb"); //エクリプス　爆撃
     public static TranslatableTag RocketLaunch = new("state.rocketLaunch"); //ロケット 発射
     public static TranslatableTag WitchSpell = new("state.witchSpell"); //ウィッチ 魔術
     public static TranslatableTag VoyagerParadox = new("state.voyagerParadox");
     public static TranslatableTag HjkBalloonDead = new("state.hjkBalloonDead");
     public static TranslatableTag tunaDead = new("state.tuna.dead"); //マグロ調理
+    public static TranslatableTag PierrotDead = new("state.pierrotKill"); //ピエロ 奇術
+    public static TranslatableTag Glitch = new("state.glitch"); //グリッチ
+    public static TranslatableTag PriestDead = new("state.priestU"); //司祭 殉教
 }

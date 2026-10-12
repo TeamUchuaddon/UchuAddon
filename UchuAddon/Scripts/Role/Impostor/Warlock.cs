@@ -13,7 +13,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Virial.Attributes;
 using Virial.Events.Player;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -23,6 +27,7 @@ public class WarlockU : DefinedSingleAbilityRoleTemplate<WarlockU.Ability>, Defi
 
     public WarlockU() : base("warlockU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [KillCooldownOption, CurseCooldownOption, CanKillTeamPlayerOption, KillFreezeTimeOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Warlock.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -48,6 +53,7 @@ public class WarlockU : DefinedSingleAbilityRoleTemplate<WarlockU.Ability>, Defi
         yield return new(SampleImage, "role.warlockU.ability.curse");
     }
     static private readonly Virial.Media.Image SampleImage = NebulaAPI.AddonAsset.GetResource("WarlockCurseButton.png")!.AsImage(115f)!;
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
 
@@ -73,7 +79,7 @@ public class WarlockU : DefinedSingleAbilityRoleTemplate<WarlockU.Ability>, Defi
 
                 ModAbilityButton? curseButton = null;
 
-                var killButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, true, false, Virial.Compat.VirtualKeyInput.Kill, "", KillCooldownOption.GetCoolDown(MyPlayer.TeamKillCooldown), "CurseKill", null, _ => killTracker != null ? killTracker.CurrentTarget != null : false);
+                var killButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, true, false, Virial.Compat.VirtualKeyInput.Kill, "", KillCooldownOption.GetCooldown(MyPlayer.TeamKillCooldown), "CurseKill", null, _ => killTracker != null ? killTracker.CurrentTarget != null : false);
                 killButton.OnClick = (button) =>
                 {
                     if (killTracker.CurrentTarget == null) return;

@@ -1,12 +1,17 @@
 ﻿using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Epic.OnlineServices.Presence;
+using Hazel.Dtls;
 using Hori.Core;
 using Nebula;
+using Nebula.Behavior;
 using Nebula.Behavior;
 using Nebula.Configuration;
 using Nebula.Game;
 using Nebula.Game.Statistics;
+using Nebula.Game.Statistics;
 using Nebula.Modules;
+using Nebula.Modules.Cosmetics;
+using Nebula.Modules.GUIWidget;
 using Nebula.Modules.ScriptComponents;
 using Nebula.Player;
 using Nebula.Roles;
@@ -31,38 +36,48 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Virial;
 using Virial;
+using Virial;
+using Virial.Assignable;
 using Virial.Assignable;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
 using Virial.Components;
+using Virial.Components;
+using Virial.Configuration;
 using Virial.Configuration;
 using Virial.Configuration;
 using Virial.DI;
 using Virial.Events.Game;
 using Virial.Events.Game.Meeting;
+using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Events.Role;
 using Virial.Game;
 using Virial.Game;
+using Virial.Game;
+using Virial.Helpers;
 using Virial.Runtime;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
 public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
 {
     public static Team MyTeam = new Team("teams.obolusU", new Virial.Color(189, 135, 26), TeamRevealType.OnlyMe);
-    private ObolusU() : base("obolusU", new(189, 135, 26), RoleCategory.NeutralRole, MyTeam, [KillCoolDownOption,KillShieldTurn,CanKillHidingPlayer,ImpostorVision,BlackOutVision,ExtraWin,
-    new GroupConfiguration("options.role.obolusU.group.win",[JackalOptions,TyrantOptions,ObolusOptions],GroupConfigurationColor.ToDarkenColor(MyTeam.Color.ToUnityColor()))])
+    private ObolusU() : base("obolusU", new(189, 135, 26), RoleCategory.NeutralRole, MyTeam, [KillCoolDownOption,KillShieldTurn,CanKillHidingPlayer, ImpostorVision, BlackOutVision, ObolusBreakdown, BreakdownAction,
+    new GroupConfiguration("options.role.obolusU.group.win",[JackalOptions,TyrantOptions, RogueOptions],GroupConfigurationColor.ToDarkenColor(MyTeam.Color.ToUnityColor()))])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Obolus.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
@@ -72,11 +87,13 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
     public static IntegerConfiguration KillShieldTurn = NebulaAPI.Configurations.Configuration("options.role.obolusU.killShieldTurn", (0, 7), 2);
     static private BoolConfiguration ImpostorVision = NebulaAPI.Configurations.Configuration("options.role.obolusU.impostorVision", true);
     static private BoolConfiguration BlackOutVision = NebulaAPI.Configurations.Configuration("options.role.obolusU.blackOutVision", true);
-    static internal BoolConfiguration ExtraWin = NebulaAPI.Configurations.Configuration("options.role.obolusU.extraWin", false);
+    static internal BoolConfiguration ObolusBreakdown = NebulaAPI.Configurations.Configuration("options.role.obolusU.obolusBreakdown", false);
+    static private ValueConfiguration<int> BreakdownAction = NebulaAPI.Configurations.Configuration("options.role.obolusU.breakdownAction", ["options.role.obolusU.breakdownAction.firstTurn", "options.role.obolusU.breakdownAction.unlockTurn"], 0 ,()=> ObolusBreakdown);
 
     static private BoolConfiguration JackalOptions = NebulaAPI.Configurations.Configuration("options.role.obolusU.jackalOptions", false);
     static private BoolConfiguration TyrantOptions = NebulaAPI.Configurations.Configuration("options.role.obolusU.tyrantOptions", false);
-    static private BoolConfiguration ObolusOptions = NebulaAPI.Configurations.Configuration("options.role.obolusU.obolusOptions", false);
+    static private BoolConfiguration RogueOptions = NebulaAPI.Configurations.Configuration("options.role.obolusU.rogueOptions", false);
+
     static public float KillCooldown => KillCoolDownOption.Cooldown;
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Obolus.png")!.AsImage(100f)!;
@@ -84,6 +101,9 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
 
     static public ObolusU MyRole = new ObolusU();
     bool DefinedRole.IsKiller => true;
+
+    private static Virial.Media.MultiImage Icon = NebulaAPI.AddonAsset.GetResource("NoticeIcon.png")!.AsMultiImage(4, 1, 250f)!;
+    static private Image NoticeIconImage => Icon.AsLoader(1);
 
     public class Instance : RuntimeAssignableTemplate, RuntimeRole
     {
@@ -95,6 +115,8 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
         int leftTurnKill = 1;
         int killLock = 0;
         SpriteRenderer? lockSprite = null;
+
+        bool IsFirst = false;
 
         public Instance(GamePlayer player) : base(player)
         {
@@ -123,8 +145,7 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                             
                             if (target.IsImpostor)
                             {
-                                if(!ExtraWin)NebulaAPI.CurrentGame?.TriggerGameEnd(UchuGameEnd.ObolusWin, GameEndReason.Special, BitMasks.AsPlayer(1u << MyPlayer.PlayerId));
-                                if (ExtraWin) Extra = true;
+                                NebulaGameManager.Instance.RpcInvokeSpecialWin(UchuGameEnd.ObolusWin, 1 << MyPlayer.PlayerId);
                                 MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.NormalKill);                        
                             }
                             else
@@ -133,20 +154,17 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                             }
                             if (JackalOptions && target.Role.Role is Jackal)
                             {
-                                if (!ExtraWin) NebulaAPI.CurrentGame?.TriggerGameEnd(UchuGameEnd.ObolusWin, GameEndReason.Special, BitMasks.AsPlayer(1u << MyPlayer.PlayerId));
-                                if (ExtraWin) Extra = true;
+                                NebulaGameManager.Instance.RpcInvokeSpecialWin(UchuGameEnd.ObolusWin, 1 << MyPlayer.PlayerId);
                                 MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.NormalKill);
                             }
                             if (TyrantOptions && target.Role.Role is Tyrant)
                             {
-                                if (!ExtraWin) NebulaAPI.CurrentGame?.TriggerGameEnd(UchuGameEnd.ObolusWin, GameEndReason.Special, BitMasks.AsPlayer(1u << MyPlayer.PlayerId));
-                                if (ExtraWin) Extra = true;
+                                NebulaGameManager.Instance.RpcInvokeSpecialWin(UchuGameEnd.ObolusWin, 1 << MyPlayer.PlayerId);
                                 MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.NormalKill);
                             }
-                            if (ObolusOptions && target.Role.Role is ObolusU)
+                            if (RogueOptions && target.Role.Role is RogueU)
                             {
-                                if (!ExtraWin) NebulaAPI.CurrentGame?.TriggerGameEnd(UchuGameEnd.ObolusWin, GameEndReason.Special, BitMasks.AsPlayer(1u << MyPlayer.PlayerId));
-                                if (ExtraWin) Extra = true;
+                                NebulaGameManager.Instance.RpcInvokeSpecialWin(UchuGameEnd.ObolusWin, 1 << MyPlayer.PlayerId);
                                 MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, Virial.Game.KillParameter.NormalKill);
                             }
 
@@ -165,14 +183,15 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                     killButton.UpdateUsesIcon(leftTurnKill.ToString());
                 };
                 killButton.ShowUsesIcon(2, leftTurnKill.ToString());
-                killButton.Visibility = (button) => leftTurnKill > 0;
+                killButton.Visibility = (button) => leftTurnKill > 0 && !MyPlayer.IsDead;
                 killButton.Availability = (button) => myTracker.CurrentTarget != null && this.MyPlayer.CanMove && lockSprite == null;
                 killButton.SetImage(KillImage);
                 if (KillShieldTurn > killLock)
                 {
                     lockSprite = (killButton as ModAbilityButtonImpl)!.VanillaButton.AddLockedOverlay();
                 }
-                (killButton as ModAbilityButtonImpl)!.OnMeeting = (button) =>
+
+                GameOperatorManager.Instance?.Subscribe<MeetingStartEvent>(ev =>
                 {
                     if (lockSprite != null)
                     {
@@ -181,9 +200,14 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                         {
                             UnityEngine.Object.Destroy(lockSprite.gameObject);
                             lockSprite = null;
+
+                            if (ObolusBreakdown && BreakdownAction.GetValue() == 1)
+                            {
+                                RpcObolusBreakdown.Invoke();
+                            }
                         }
                     }
-                };
+                }, this);
             }
         }
 
@@ -192,21 +216,38 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             leftTurnKill = 1;
         }
 
-        [Local]
-        void CheckAliceExtraWin(PlayerCheckExtraWinEvent ev)
+        void OnMeetingStart(MeetingStartEvent ev)
         {
-            if (!ExtraWin) return;
-            if (!Extra) return;
-            if (MyPlayer.IsDead) return;
-            ev.SetWin(true);
-            ev.ExtraWinMask.Add(UchuGameEnd.ObolusExtra);
+            if (ObolusBreakdown && BreakdownAction.GetValue() == 0 && !IsFirst)
+            {
+                IsFirst = true;
+                RpcObolusBreakdown.Invoke();
+            }
         }
+
         bool RuntimeRole.HasImpostorVision => ImpostorVision;
         bool RuntimeRole.IgnoreBlackout => BlackOutVision;
 
         bool RuntimeRole.CanUseVent => true;
         bool RuntimeRole.CanMoveInVent => true;
     }
+
+    public static RemoteProcess RpcObolusBreakdown = new("RpcObolusBreakdown_Uchu", (_) =>
+    {
+        var local = GamePlayer.LocalPlayer;
+        if (local == null) return;
+
+        if (local.IsImpostor 
+        || (JackalOptions && local.Role.Role is Jackal)
+        || (TyrantOptions && local.Role.Role is Tyrant)
+        || (RogueOptions && local.Role.Role is RogueU))
+        {
+            NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
+                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.obolusU.message.header")),
+                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(Language.Translate("options.role.obolusU.message.content")))),
+                NoticeIconImage, MyRole.RoleColor);
+        }
+    });
 }
 
 /*[NebulaPreprocess(PreprocessPhase.PostRoles)]

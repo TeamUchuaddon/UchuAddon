@@ -10,9 +10,9 @@
 "role.aliceU.doc" : "キルされると勝利する第三陣営です。"
 "role.aliceU.ability.title" : "固有能力 "チェシャの導き手""
 "role.aliceU.ability.main" : "%EXTRA%"
-"role.aliceU.ability.main.extraWin" : "アリスはキルされることで、ゲーム終了時に追加勝利します。"
+"role.aliceU.ability.main.extraWin" : "アリスはキルされることで、ゲーム終了時に追加勝利することが出来ます。"
 "role.aliceU.ability.main.normalWin" : "アリスはキルされると即座に単独勝利します。"
-"role.aliceU.ability.echo" : "<title>予感</title>キラーの位置を知ることができます。"
+"role.aliceU.ability.echo" : "<title>予感</title>キラーの位置を知ることが出来ます。"
 "role.aliceU.ability.kill" : "<title>キル</title>プレイヤーをキルします。<br>勝利には一定回数のキルが必要であり、回数を満たしてもキルボタンは使用可能です。"
 "document.tip.winCond.aliceU.title" : "特殊勝利"
 "document.tip.winCond.aliceU" : "設定数キルされると勝利します。"
@@ -21,6 +21,7 @@
 
 "options.role.aliceU.detail" : "アリスはキルされると勝利する第三陣営です。"
 "options.role.aliceU.numOfWin" : "勝利までのキル数"
+"options.role.aliceU.numOfWin.detail" : "設定数キルされると勝利します。"
 "options.role.aliceU.canFixLight" : "停電を修理可能"
 "options.role.aliceU.canFixComms" : "通信障害を修理可能"
 "options.role.aliceU.extraWin" : "追加勝利"
@@ -49,3 +50,22 @@
 "end.extra.aliceU" : "<color=#FFFFFF>+</color> アリス"
 
 # Titles
+
+"achievement.uchuaddon.aliceU.common1.title" : "白兎の警告"
+"achievement.uchuaddon.aliceU.common1.goal" : "通算で5回、予感する。"
+"achievement.uchuaddon.aliceU.common1.cond" : ""
+
+"achievement.uchuaddon.aliceU.hard1.title" : "ジョーカーの裏返し"
+"achievement.uchuaddon.aliceU.hard1.goal" : "キルされ、勝利する。"
+"achievement.uchuaddon.aliceU.hard1.cond" : ""
+"achievement.uchuaddon.aliceU.hard1.flavor" : ""テーブルから消えたジョーカーが、全てをひっくり返したんだ""
+
+"achievement.uchuaddon.aliceU.another1.title" : "ロイヤルストレートフラッシュ"
+"achievement.uchuaddon.aliceU.another1.goal" : "盤面上にアリスが5人いる状態で自身が勝利する。"
+"achievement.uchuaddon.aliceU.another1.cond" : ""
+"achievement.uchuaddon.aliceU.another1.flavor" : ""チェックメイト""
+
+"achievement.uchuaddon.aliceU.challenge1.title" : "一巡目の札"
+"achievement.uchuaddon.aliceU.challenge1.goal" : "一番最初の犠牲者になり勝利する。"
+"achievement.uchuaddon.aliceU.challenge1.cond" : ""
+"achievement.uchuaddon.aliceU.challenge1.flavor" : ""最初の一枚が、勝負を決めたんだ。" ―血に濡れたトランプを握った、名もなき声"

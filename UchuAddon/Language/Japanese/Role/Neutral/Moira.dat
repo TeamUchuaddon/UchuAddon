@@ -16,7 +16,7 @@
 "role.moiraU.ability.exchange" : "<title>操作</title>選択した二人の役職を入れ替えます。"
 "document.tip.winCond.moiraU.title" : "特殊勝利"
 "document.tip.winCond.moiraU" : "設定数役職を交換すると勝利します。"
-
+"role.moiraU.tips" : "複数人モイラをアサインすると不具合が起こる可能性が高いです。<br>モイラの複数アサインは控えていただけると助かります。"
 
 # Options
 

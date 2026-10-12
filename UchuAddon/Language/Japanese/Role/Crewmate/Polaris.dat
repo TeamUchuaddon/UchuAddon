@@ -39,22 +39,27 @@
 
 # Titles
 
-"achievement.polarisU.common1.title" : "蒼天の導星"
-"achievement.polarisU.common1.goal" : "非クルーメイトをキルする"
-"achievement.polarisU.common1.cond" : ""
+"achievement.uchuaddon.polarisU.common1.title" : "蒼天の導星"
+"achievement.uchuaddon.polarisU.common1.goal" : "非クルーメイトをキルする。"
+"achievement.uchuaddon.polarisU.common1.cond" : ""
 
-"achievement.polarisU.common2.title" : "幻"
-"achievement.polarisU.common2.goal" : "幻視能力を使用する"
-"achievement.polarisU.common2.cond" : ""
+"achievement.uchuaddon.polarisU.common2.title" : "幻"
+"achievement.uchuaddon.polarisU.common2.goal" : "幻視能力を使用する。"
+"achievement.uchuaddon.polarisU.common2.cond" : ""
 
-"achievement.polarisU.another1.title" : "哀色の疵"
-"achievement.polarisU.another1.goal" : "クルーメイトをキルする"
-"achievement.polarisU.another1.cond" : ""
+"achievement.uchuaddon.polarisU.another1.title" : "哀色の疵"
+"achievement.uchuaddon.polarisU.another1.goal" : "クルーメイトをキルする。"
+"achievement.uchuaddon.polarisU.another1.cond" : ""
 
-"achievement.polarisU.hard1.title" : "軌道上の英雄"
-"achievement.polarisU.hard1.goal" : "透明化中に、キルをする"
-"achievement.polarisU.hard1.cond" : ""
+"achievement.uchuaddon.polarisU.another2.title" : "真偽不明"
+"achievement.uchuaddon.polarisU.another2.goal" : "幻視中の死体を通報される。"
+"achievement.uchuaddon.polarisU.another2.flavor" : ""結局あいつは何者なんだ？""
+"achievement.uchuaddon.polarisU.another2.cond" : ""
 
-"achievement.polarisU.challenge1.title" : "炯々と煌めくアルタイル"
-"achievement.polarisU.challenge1.goal" : "2人以上の非クルーメイトをキルし、2人以上の非クルーメイトプレイヤーを幻視し勝利する"
-"achievement.polarisU.challenge1.cond" : "クルーメイト陣営をキルしないこと"
+"achievement.uchuaddon.polarisU.hard1.title" : "彗星"
+"achievement.uchuaddon.polarisU.hard1.goal" : "加速中にキルをする。"
+"achievement.uchuaddon.polarisU.hard1.cond" : ""
+
+"achievement.uchuaddon.polarisU.challenge1.title" : "英雄"
+"achievement.uchuaddon.polarisU.challenge1.goal" : "自身の手でインポスターを全員キルする。"
+"achievement.uchuaddon.polarisU.challenge1.cond" : "クルーメイトをキルしないこと。"

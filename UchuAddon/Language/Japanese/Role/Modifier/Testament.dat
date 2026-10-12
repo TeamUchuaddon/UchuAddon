@@ -1,0 +1,23 @@
+# Assignable
+
+"role.testamentU.name" : "テスタメント"
+"role.testamentU.generalBlurb" : "鎮魂検認"
+
+# Document
+
+"role.testamentU.doc" : "自身が追放されたとき、自身の役職を公開します。"
+
+# Options
+
+"options.role.testamentU.detail" : "追放されたとき、自身の役職を公開するモディファイアです。"
+
+# Game
+"role.testamentU.logText" : "%PLAYER%は%ROLE%だった。"
+
+# UI
+
+
+# Stats
+
+
+# Titles

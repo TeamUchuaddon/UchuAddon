@@ -1,0 +1,26 @@
+# Assignable
+
+"role.marshallU.name" : "マーシャル"
+"role.marshallU.short" : "マー"
+"role.marshallU.blurb" : "タクティカルシステム"
+
+# Document
+
+"role.marshallU.doc" : "プレイヤーにキルボタンを付与できるクルーメイトです。"
+"role.marshallU.ability.title" : "固有能力 "タクティカルオーダー""
+"role.marshallU.ability.main" : "プレイヤーにキルボタンを付与することができます。"
+"role.marshallU.ability.provision" : "<title>支給</title>プレイヤーに<b><color=#69b7bf>モディファイアデプロイド</color></b>を付与します。<br><b><color=#69b7bf>デプロイド</color></b>が付与されると、一度だけプレイヤーをキルできるようになります。"
+
+# Options
+
+"options.role.marshallU.detail" : "マーシャルはプレイヤーにキルボタンを付与できるクルーメイトです。"
+"options.role.marshalllU.ProvisionCooldown" : "支給クールダウン"
+"options.role.marshallU.numOfProvision" : "支給可能回数"
+"options.role.marshalllU.KillCooldown" : "キルクールダウン"
+
+# Game
+
+
+# UI
+
+"button.label.Provision" : "支給"

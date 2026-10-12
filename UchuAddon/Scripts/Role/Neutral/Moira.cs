@@ -3,7 +3,6 @@ using Hori.Core;
 using Nebula;
 using Nebula.Behavior;
 using Nebula.Configuration;
-using Nebula.Documents;
 using Nebula.Extensions;
 using Nebula.Game;
 using Nebula.Modules;
@@ -26,8 +25,10 @@ using Virial.Events.Game;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
@@ -242,8 +243,8 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
             PlayerVoteArea playerVoteArea1 = null!, playerVoteArea2 = null!;
             foreach (PlayerVoteArea temp in MeetingHud.Instance.playerStates)
             {
-                if (temp.TargetPlayerId == changeTarget1!.PlayerId) playerVoteArea1 = temp;
-                else if (temp.TargetPlayerId == changeTarget2!.PlayerId) playerVoteArea2 = temp;
+                if (temp.PlayerId == changeTarget1!.PlayerId) playerVoteArea1 = temp;
+                else if (temp.PlayerId == changeTarget2!.PlayerId) playerVoteArea2 = temp;
             }
 
             if (playerVoteArea1 == null || playerVoteArea2 == null) return;
@@ -273,7 +274,7 @@ public class MoiraU : DefinedRoleTemplate, DefinedRole, IAssignableDocument, Has
 
                 float t = Mathf.Clamp01(elapsedTime / duration);
                 t = Mathf.SmoothStep(0f, 1f, t);
-                movingTransform.localPosition = Vector3.Lerp(startPos, endPos, t);
+                movingTransform.localPosition = UnityEngine.Vector2.Lerp(startPos, endPos, t);
                 movingTransform.localPosition = new Vector3(movingTransform.localPosition.x, movingTransform.localPosition.y, isUpper ? -10 : movingTransform.localPosition.z);
 
                 yield return null;

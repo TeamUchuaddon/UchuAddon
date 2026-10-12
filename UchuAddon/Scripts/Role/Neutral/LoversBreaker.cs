@@ -23,7 +23,10 @@ using Virial.Attributes;
 using Virial.Events.Player;
 using Virial.Media;
 using static UnityEngine.GraphicsBuffer;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
@@ -33,6 +36,7 @@ public class LoversBreakerU : DefinedRoleTemplate, HasCitation, DefinedRole,IAss
     private LoversBreakerU() : base("loversbreakerU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [ExpCooldown, NumOfWinExp, NumOfDeathExp, TakeoverWin, BecomingLoversMeansDeath])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/LoversBreaker.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
@@ -123,7 +127,7 @@ public class LoversBreakerU : DefinedRoleTemplate, HasCitation, DefinedRole,IAss
         {
             if (TakeoverWin)
             {
-                if (ev.EndReason != GameEndReason.Sabotage && !MyPlayer.IsDead && leftExp <= 0)
+                if (ev.OriginalEndReason != GameEndReason.Sabotage && !MyPlayer.IsDead && leftExp <= 0)
                 {
                     ev.TryOverwriteEnd(UchuGameEnd.LoversBreakerUTeamWin, GameEndReason.Special);
                 }
@@ -144,13 +148,13 @@ public class LoversBreakerU : DefinedRoleTemplate, HasCitation, DefinedRole,IAss
         [OnlyMyPlayer]
         void CheckWins(PlayerCheckWinEvent ev) => ev.SetWinIf(ev.GameEnd == UchuGameEnd.LoversBreakerUTeamWin);
 
-        static private void Explosion(GamePlayer invoker, UnityEngine.Vector2 pos, float angle)
+        static private void Explosion(GamePlayer invoker, Vector2 pos, float angle)
         {
             //参考:死のメテオストーム
             //爆破エフェクト
             IDividedSpriteLoader ExplosionSprite = DividedSpriteLoader.FromResource("Nebula.Resources.ExplosionAnim.png", 100f, 4, 2);
 
-            IEnumerator CoExp(float delay, UnityEngine.Vector2 pos)
+            IEnumerator CoExp(float delay, Vector2 pos)
             {
                 yield return Effects.Wait(delay);
 
@@ -158,7 +162,7 @@ public class LoversBreakerU : DefinedRoleTemplate, HasCitation, DefinedRole,IAss
 
                 var explosion = UnityHelper.CreateObject<SpriteRenderer>("Explosion", null, pos.AsVector3(-10f));
 
-                explosion.transform.localScale = UnityEngine.Vector3.one * 1.8f;
+                explosion.transform.localScale = Vector3.One * 1.8f;
                 explosion.transform.localEulerAngles = new(0f, 0f, System.Random.Shared.NextSingle() * 360f);
 
                 for (int i = 0; i < 8; i++)
@@ -173,11 +177,11 @@ public class LoversBreakerU : DefinedRoleTemplate, HasCitation, DefinedRole,IAss
             NebulaManager.Instance.StartCoroutine(CoExp(0f, pos).WrapToIl2Cpp());
         }
 
-        static private readonly RemoteProcess<(UnityEngine.Vector2 pos, GamePlayer invoker, float size, float angle)> RpcExp = new("Exp", static (message, _) =>
+        static private readonly RemoteProcess<(Vector2 pos, GamePlayer invoker, float size, float angle)> RpcExp = new("Exp", static (message, _) =>
         {
             Explosion(message.invoker, message.pos, message.angle);
         });
-        static private readonly RemoteProcess<(UnityEngine.Vector2 pos, GamePlayer invoker, float size, float angle)> RpcExpCount = new("leftExpCount", static (message, _) =>
+        static private readonly RemoteProcess<(Vector2 pos, GamePlayer invoker, float size, float angle)> RpcExpCount = new("leftExpCount", static (message, _) =>
         {
             leftExp--;
         });

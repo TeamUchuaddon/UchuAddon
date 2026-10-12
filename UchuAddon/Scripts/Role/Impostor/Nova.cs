@@ -20,21 +20,29 @@ using Virial.Helpers;
 using Virial.Media;
 using Color = UnityEngine.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
-public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRole
+public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRole, HasCitation
 {
-    public NovaU() : base("novaU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [firingMode, EquipCooldownOption, BeamSizeOption, ChargeDurationOption])
+    public NovaU() : base("novaU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [firingMode, EquipCooldownOption, BeamSizeOption, ChargeDurationOption, ResetKillCooldownOption])
     {
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Nova.png")!.AsImage(115f);
     }
+
+    AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
+
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueKillAbility;
+
+    Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
 
     static readonly ValueConfiguration<int> firingMode = NebulaAPI.Configurations.Configuration("options.role.novaU.firingMode", ["options.role.novaU.firingMode.free", "options.role.novaU.firingMode.twoDirections", "options.role.novaU.firingMode.fourDirections"], 0);
     internal static readonly FloatConfiguration EquipCooldownOption = NebulaAPI.Configurations.Configuration("options.role.novaU.equipCooldown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
     internal static readonly FloatConfiguration BeamSizeOption = NebulaAPI.Configurations.Configuration("options.role.novaU.beamSize", (0.25f, 5f, 0.25f), 1f, FloatConfigurationDecorator.Ratio);
-    static readonly FloatConfiguration ChargeDurationOption = NebulaAPI.Configurations.Configuration("options.role.novaU.chargeDuration", (0.5f, 10f, 0.5f), 3f, FloatConfigurationDecorator.Second);
+    static readonly public FloatConfiguration ChargeDurationOption = NebulaAPI.Configurations.Configuration("options.role.novaU.chargeDuration", (0.5f, 10f, 0.5f), 3f, FloatConfigurationDecorator.Second);
     static readonly FloatConfiguration BeamDurationOption = NebulaAPI.Configurations.Configuration("options.role.novaU.beamDuration", (0.5f, 10f, 0.25f), 5f, FloatConfigurationDecorator.Second);
     static readonly BoolConfiguration ResetKillCooldownOption = NebulaAPI.Configurations.Configuration("options.role.novaU.resetKillCooldown", true);
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
@@ -126,6 +134,7 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
                 killButton = NebulaAPI.Modules.KillButton(this, MyPlayer, true, VirtualKeyInput.Kill, AmongUsLLImpl.Instance.VanillaKillCooldown, "kill", ModAbilityButton.LabelType.Impostor, null, (player, button) =>
                 {
                     MyPlayer.MurderPlayer(player, PlayerState.Dead, EventDetail.Kill, KillParameter.NormalKill);
+                    if(ResetKillCooldownOption) equipButton.StartCoolDown();
                     button.StartCoolDown();
                 });
                 killButton.Visibility = _ => MyBarrel == null && !launching && !MyPlayer.IsDead;
@@ -146,6 +155,11 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
             CancelFire();
         }
 
+        void IGameOperator.OnReleased()
+        {
+            CancelFire();
+        }
+
         void CancelFire()
         {
             UnEquip();
@@ -156,10 +170,16 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
             {
                 GameObject.Destroy(controller.gameObject);
             }
-
         }
 
-        void EnterVent(PlayerVentEnterEvent ev) => CancelFire();
+        [OnlyMyPlayer, Local]
+        void EnterVent(PlayerVentEnterEvent ev)
+        {
+            if (launching)
+            {
+                CancelFire();
+            }
+        }
 
         IEnumerator CoFire()
         {
@@ -184,11 +204,11 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
                     {
                         if (target.IsDead) continue;
 
-                        Vector2 diff = target.TruePosition.ToUnityVector() - beamOrigin;
+                        Vector2 diff = target.TruePosition - beamOrigin;
 
                         var vec = diff.Rotate(-beamAngle);
 
-                        float beamWidth = 1.85f * BeamSizeOption;
+                        float beamWidth = 1.82f * BeamSizeOption;
                         if (vec.x > 0f && Mathf.Abs(vec.y) < beamWidth)
                         {
                             MyPlayer.MurderPlayer(target, PlayerState.Dead, EventDetail.Kill, KillParameter.RemoteKill);
@@ -265,8 +285,8 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
             ability.controller.beamParticleSystem = allParticleSystems.First(p => p.name == "Beam");
             ability.controller.beamEntryParticleSystem = allParticleSystems.First(p => p.name == "Beam Entry");
 
-            ability.controller.Color1 = Color.white;
-            ability.controller.Color2 = Color.black;
+            ability.controller.Color1 = UnityEngine.Color.white;
+            ability.controller.Color2 = UnityEngine.Color.black;
 
             ability.controller.chargingDuration = ChargeDurationOption;
             ability.controller.beamDuration = BeamDurationOption;
@@ -294,8 +314,8 @@ public class NovaU : DefinedSingleAbilityRoleTemplate<NovaU.Ability>, DefinedRol
                     break;
             }
             ability.controller.rotation = rotation * 180f / MathF.PI;
-            beamObject.transform.localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * 1.85f).AsVector3(-4.9f);
-            beamObject.transform.Find("----Beam----/Beam Entry").localPosition += (new Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * ((1f / 8f) * NovaU.BeamSizeOption - (1f / 8f))).AsVector3(0);
+            beamObject.transform.localPosition += (new UnityEngine.Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * 1.85f).AsVector3(-4.9f);
+            beamObject.transform.Find("----Beam----/Beam Entry").localPosition += (new UnityEngine.Vector2(Mathn.Cos(rotation), Mathn.Sin(rotation)) * ((1f / 8f) * NovaU.BeamSizeOption - (1f / 8f))).AsVector3(0);
 
             ability.MyBarrel!.Lock(message.mouseAngle);
             ability.MyBarrel!.OnFire(message.mouseAngle);
@@ -496,14 +516,15 @@ public class VFXController : MonoBehaviour
     }
 
 
-    IEnumerator SoundEffectBeamFiring()
+    public IEnumerator SoundEffectBeamFiring()
     {
         var audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.loop = true;
-        audioSource.volume = 0.35f;
+        audioSource.volume = 0.15f;
         audioSource.clip = APICompat.GetSound("Nova_Charge");
         audioSource.Play();
 
+        delay = 1.16666666f * NovaU.ChargeDurationOption;
         yield return new WaitForSeconds(delay);
 
         audioSource.Stop();

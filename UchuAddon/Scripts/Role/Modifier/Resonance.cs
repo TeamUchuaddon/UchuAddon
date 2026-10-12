@@ -1,22 +1,25 @@
-﻿using Nebula.Roles.Crewmate;
+﻿using Nebula.Modules.Cosmetics;
+using Nebula.Roles.Crewmate;
+using Rewired.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
 
 namespace Hori.Scripts.Role.Modifier;
 
 public class ResonanceU : DefinedAllocatableModifierTemplate, DefinedModifier, DefinedAllocatableModifier
 {
-    private ResonanceU() : base("resonanceU", "RSO", NebulaTeams.ImpostorTeam.Color, [], allocateToCrewmate: false, allocateToNeutral: false)
+    private ResonanceU() : base("resonanceU", "RSO", NebulaTeams.ImpostorTeam.Color, [IsColorFlash], allocateToCrewmate: false, allocateToNeutral: false)
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Resonance.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
+
+    static private BoolConfiguration IsColorFlash = NebulaAPI.Configurations.Configuration("options.role.resonanceU.isColorFlash", false);
 
     static public ResonanceU MyRole = new ResonanceU();
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Resonance.png")!.AsImage(100f)!;
@@ -39,8 +42,19 @@ public class ResonanceU : DefinedAllocatableModifierTemplate, DefinedModifier, D
 
         void Flash(PlayerCheckKilledEvent ev)
         {
-            if (ev.Killer.IsTrueCrewmate || ev.Killer == MyPlayer) return;
-            AmongUsUtil.PlayFlash(Color.red);
+            if (!ev.Killer.IsImpostor || ev.Killer == MyPlayer) return;
+
+            if (AmOwner)
+            {
+                if (IsColorFlash)
+                {
+                    AmongUsUtil.PlayFlash(DynamicPalette.PlayerColors[ev.Player.PlayerId]);
+                }
+                else
+                {
+                    AmongUsUtil.PlayFlash(Color.Red);
+                }
+            }
         }
 
 

@@ -1,0 +1,49 @@
+# Assignable
+
+"role.bomberU.name" : "ボマー"
+"role.bomberU.short" : "ボ"
+"role.bomberU.blurb" : "深紅の小惑星"
+
+# Document
+
+"role.bomberU.doc" : "クルーに爆弾を仕掛けるインポスターです。"
+"role.bomberU.ability.title" : "固有能力 "手に眠る熱""
+"role.bomberU.ability.main" : ""
+"role.bomberU.ability.ignite" : "<title>着火</title>爆弾を着火します。起爆まで所持していると自爆してしまいます。<br>この状態の爆弾は他プレイヤーに見えません。"
+"role.bomberU.ability.pass" : "<title>渡す</title><b>ランダムな周囲のプレイヤーに着火された爆弾を渡します。</b><br>爆弾を持っているプレイヤーは他の人に爆弾を回すことが出来ます。<br>爆弾が起爆すると、今爆弾を持っているプレイヤーが死亡します。"
+"role.bomberU.ability.self" : "<title>自爆</title>周囲のプレイヤーを巻き込みながら自爆します。"
+"role.bomberU.tips" : "<var>%MEETING%</var>"
+"role.bomberU.ability.main.bomb" : "会議に入ると爆弾を持ってるプレイヤーは即座に死亡します。"
+"role.bomberU.ability.main.timer" : "会議中も爆弾のタイマーは進行します。"
+
+# Options
+
+"options.role.bomberU.detail" : "クルーに爆弾を仕掛けたり、自爆することのできるインポスターです。"
+"options.role.bomberU.BombCooldown" : "着火クールダウン"
+"options.role.bomberU.BombRangeOption" : "爆弾譲渡の範囲"
+"options.role.bomberU.SelfBombCooldown" : "自爆クールダウン"
+"options.role.bomberU.SelfBombDuration" : "巻き込み自爆までの時間"
+"options.role.bomberU.SelfBombDuration.detail" : "着火した後一定時間そのままでいると自爆します。"
+"options.role.bomberU.BombRangeOption.detail" : "この範囲内にいるプレイヤーにのみ爆弾が配られます。位置にかかわらずインポスターには配られません。"
+"options.role.bomberU.BombDuration" : "爆弾が爆発するまでの時間"
+"options.role.bomberU.cannormalkill" : "通常キル可能"
+"options.role.bomberU.meetingact" : "ミーティング開始時アクション"
+"options.role.bomberU.meetingact.detail" : "爆弾を持っている状態で会議に入ったときのアクションを設定します。"
+"options.role.bomberU.meetingact.Kill" : "即時爆破"
+"options.role.bomberU.meetingact.progress" : "会議中進行"
+
+# Game
+
+
+# UI
+"button.label.Bomb" : "爆弾"
+"button.label.LeftSelfBomb" : "自爆まで..."
+"button.label.Ignite" : "着火"
+"button.label.bomberU.pass" : "渡す"
+"button.label.bomberU.selfbomb" : "自爆"
+"role.bomberU.bombRange" : "ボマー<color=white>: 爆弾渡しの範囲</color>"
+
+# Stats
+
+
+# Titles

@@ -53,10 +53,10 @@ using Virial.Game;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
@@ -64,6 +64,7 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
 {
     public ShamanU() : base("shamanU", new(202, 80, 242), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NecromancyCooldown,NecromancyDuration,NumOfNecromancy,TaskCompletesRoomReroll,SkillBoost,NumOfBoostTask])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Shaman.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
@@ -72,7 +73,7 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
     public static FloatConfiguration NecromancyDuration = NebulaAPI.Configurations.Configuration("options.role.shamanU.necromancyDuration", (0.25f, 10f, 0.25f), 3f, FloatConfigurationDecorator.Second);
     public static IntegerConfiguration NumOfNecromancy = NebulaAPI.Configurations.Configuration("options.role.shamanU.numOfnecromancy", (1, 15), 1);
     public static BoolConfiguration TaskCompletesRoomReroll = NebulaAPI.Configurations.Configuration("options.role.shamanU.taskCompletesRoomReroll", false);
-    public static BoolConfiguration SkillBoost = NebulaAPI.Configurations.Configuration("options.role.shamanU.skillBoost", false);
+    public static BoolConfiguration SkillBoost = NebulaAPI.Configurations.Configuration("options.role.shamanU.skillBoost", true);
     public static IntegerConfiguration NumOfBoostTask = NebulaAPI.Configurations.Configuration("options.role.shamanU.numOfBoostTask", (1, 12), 8, () => SkillBoost);
 
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
@@ -127,7 +128,7 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
 
                 roomArrow = new Arrow().Register(this);
                 roomArrow.IsActive = false;
-                roomArrow.SetColor(MyRole.UnityColor);
+                roomArrow.SetColor(MyRole.RoleColor);
 
                 GameOperatorManager.Instance?.Subscribe<GameUpdateEvent>((ev) =>
                 {
@@ -139,16 +140,12 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
                 }, this);
 
                 NecromancyButton = NebulaAPI.Modules.EffectButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
-                    NecromancyCooldown, NecromancyDuration, "shamanU.necromancy", NecromancyImage, _ => CanUseHere() && leftNecromancy > 0 && Stopped);
+                    NecromancyCooldown, NecromancyDuration, "shamanU.necromancy", NecromancyImage, _ => CanUseHere() && leftNecromancy > 0 && Stopped).SetAsUsurpableButton(this);
                 NecromancyButton.OnClick = (button) => button.StartEffect();
-                NecromancyButton.OnEffectStart = (button) =>
-                {
-                };
-
                 NecromancyButton.OnEffectEnd = (button) =>
                 {
                     if (!Stopped) return;
-                    AmongUsUtil.PlayCustomFlash(ShamanU.MyRole.UnityColor, 0f, 0.25f, 0.45f);
+                    AmongUsUtil.PlayCustomFlash(ShamanU.MyRole.RoleColor, 0f, 0.25f, 0.45f);
                     NecromancyResult();
                     randomRoom = GetRandomRoom();
                     leftNecromancy--;
@@ -158,7 +155,7 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
 
                 NecromancyButton.OnUpdate = (button) =>
                 {
-                    if (!Stopped)
+                    if (!Stopped　&& NecromancyButton.IsInEffect)
                         NecromancyButton.InterruptEffect();
                 };
                 NecromancyButton.ShowUsesIcon(3, leftNecromancy.ToString());
@@ -232,8 +229,8 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
             randomRoom = GetRandomRoom();
         }
 
-        [Local]
-        void TaskCompleted(PlayerTaskCompleteEvent ev)
+        [OnlyMyPlayer]
+        void TaskCompleted(PlayerTaskCompleteLocalEvent ev)
         {
             if (TaskCompletesRoomReroll)
                 randomRoom = GetRandomRoom();

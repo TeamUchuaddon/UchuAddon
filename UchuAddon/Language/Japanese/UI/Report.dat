@@ -1,0 +1,14 @@
+"uchu.report" : "報告"
+"uchu.report.title" : "ご報告フォーム"
+"uchu.report.name" : "名前の入力欄です。匿名でも構いません。"
+"uchu.report.guide" : "バグ報告 リクエスト 感想などにご使用ください。<br>バグ修正やアドオン改善のために、ご協力いただけると助かります。<br>※バグ報告やリクエストの場合、詳しく状況や情報を記入していただけると非常に助かります。"
+"uchu.report.emptyError" : "送信内容を記入してください。"
+"uchu.report.send" : "送信"
+"uchu.report.wait" : "送信中・・・"
+"uchu.report.finished" : "フォームを送信しました。<br>ご協力ありがとうございます。"
+"uchu.report.checkBug" : "バグ報告"
+"uchu.report.checkRequest" : "リクエスト"
+"uchu.report.checkThoughts" : "感想"
+
+
+"ui.contact.guide" : "お気づきのバグやご要望、ご感想をお知らせください。<br>フォームは匿名で送信されるため、開発チームからの直接の返答は得られません。<br>返答が必要な場合は公式Discordサーバーにてお問い合わせください。<br><br>送信する内容の例: 各種機能のフィードバック(使いやすさ)、役職のご要望、バグのご報告、使用感などのご感想、等<br><br><size=260%>ここはNebulaの<br>報告フォームです。</size>"

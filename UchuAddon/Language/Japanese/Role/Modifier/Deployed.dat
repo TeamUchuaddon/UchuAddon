@@ -1,0 +1,25 @@
+# Assignable
+
+"role.deployedU.name" : "デプロイド"
+"role.deployedU.generalBlurb" : "託されし希望"
+"role.deployedU.blurb" : "託されし希望"
+
+# Document
+
+"role.deployedU.doc" : "マーシャルから支給されたキルボタンです。一度のみプレイヤーをキルできます。"
+
+# Options
+
+"options.role.deployedU.detail" : "マーシャルから支給されたキルボタンです。一度のみプレイヤーをキルできます。"
+
+# Game
+
+
+# UI
+
+"button.label.Kill" : "キル"
+
+# Stats
+
+
+# Titles

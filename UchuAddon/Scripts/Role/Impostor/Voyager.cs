@@ -31,16 +31,19 @@ using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
 using Virial.Text;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+using compat = Hori.Core.UchuTranslatable;
 
 namespace Hori.Scripts.Role.Impostor;
 public class VoyagerU : DefinedSingleAbilityRoleTemplate<VoyagerU.Ability>, DefinedRole,IAssignableDocument
 {
     public VoyagerU() : base("voyagerU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [DiveCooldown,DiveDuration,SpeedRatio])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Voyager.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
@@ -48,7 +51,6 @@ public class VoyagerU : DefinedSingleAbilityRoleTemplate<VoyagerU.Ability>, Defi
     static private FloatConfiguration DiveCooldown = NebulaAPI.Configurations.Configuration("options.role.voyagerU.diveCooldown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
     static private FloatConfiguration DiveDuration = NebulaAPI.Configurations.Configuration("options.role.voyagerU.diveDuration", (2.5f, 30f, 2.5f), 15f, FloatConfigurationDecorator.Second);
     static private FloatConfiguration SpeedRatio = NebulaAPI.Configurations.Configuration("options.role.voyagerU.speedRatio", (1f, 5f, 0.25f), 1.5f, FloatConfigurationDecorator.Ratio);
-    public static TranslatableTag paradox = new("state.paradox");
 
     static public VoyagerU MyRole = new();
 
@@ -62,6 +64,10 @@ public class VoyagerU : DefinedSingleAbilityRoleTemplate<VoyagerU.Ability>, Defi
         yield return new(DiveImage, "role.voyagerU.ability.dive");
         yield return new(AwayImage, "role.voyagerU.ability.away");
     }
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
+
+    static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Voyager.png")!.AsImage(100f)!;
+    Image? DefinedAssignable.IconImage => IconImage;
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
@@ -70,64 +76,65 @@ public class VoyagerU : DefinedSingleAbilityRoleTemplate<VoyagerU.Ability>, Defi
         public bool KillIgnoreTeam { get; private set; } = false;
         bool isDiving = false;
         float ParadoxTimer = DiveDuration;
-        private TMPro.TextMeshPro? hudText;
         private SpriteRenderer? fullScreen;
+        ModAbilityButton diveButton = null!;
+        ModAbilityButton awayButton = null!;
 
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
         {
             if (AmOwner)
             {
-                var diveButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, DiveCooldown, "pdiver.dive", DiveImage).SetAsUsurpableButton(this);
-                var awayButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, 0f, "pdiver.away", AwayImage).SetAsUsurpableButton(this);
+                diveButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, DiveCooldown, "pdiver.dive", DiveImage).SetAsUsurpableButton(this);
+                awayButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, 0f, "pdiver.away", AwayImage).SetAsUsurpableButton(this);
                 diveButton.Visibility = (button) => !isDiving && !MyPlayer.IsDead;
                 awayButton.Visibility = (button) => isDiving && !MyPlayer.IsDead;
-
-                diveButton.Availability = (button) => MyPlayer.CanMove;
-                awayButton.Availability = (button) => MyPlayer.CanMove;
 
                 diveButton.OnClick = (button) => button.StartEffect();
                 diveButton.OnEffectStart = (button) =>
                 {
                     MyPlayer.GainAttribute(PlayerAttributes.InvisibleElseImpostor, 9999999999999f, false, 1, "pdiverU:invisible");
                     MyPlayer.GainSpeedAttribute(SpeedRatio, 9999999999999f, true, 0, "pdiverU:speed");
+                    MyPlayer.GainAttribute(PlayerAttributes.Roughening, 1f, true, 5, "pdiverU:mosaic");
                     isDiving = true;
                     KillIgnoreTeam = true;
-                    AmongUsUtil.PlayCustomFlash(Color.magenta, 0f, 0.25f, 0.4f);
+                    AmongUsUtil.PlayCustomFlash(Color.Magenta, 0f, 0.25f, 0.4f);
                     NebulaAsset.PlaySE(NebulaAudioClip.SnatcherSuccess, false);
-                    MyPlayer.GainAttribute(PlayerAttributes.Roughening, 1f, false, 5, "pdiverU:mosaic");
 
+                    awayButton.StartEffect();
                     ShufflePlayerOutfits();
                 };
-                awayButton.OnClick = (button) => button.StartEffect();
-                awayButton.OnEffectStart = (button) =>
-                {
-                    isDiving = false;
-                    KillIgnoreTeam = false;
-                    ParadoxTimer = DiveDuration;
 
-                    MyPlayer.RemoveAttributeByTag("pdiverU:speed");
-                    MyPlayer.RemoveAttributeByTag("pdiverU:invisible");
+                awayButton.EffectTimer = NebulaAPI.Modules.Timer(this, DiveDuration);
+                awayButton.Availability = button => MyPlayer.CanMove;
+                awayButton.PlayFlashWhile = button => true;
+                awayButton.OnClick = (button) => reset();
 
-                    diveButton.StartCoolDown();
-
-                    ResetShuffledOutfits();
-
-                    if (fullScreen != null)
-                    {
-                        fullScreen.color = Color.clear; 
-                    }
-                };
                 fullScreen = GameObject.Instantiate(HudManager.Instance.FullScreen, HudManager.Instance.transform);
-                fullScreen.color = Color.magenta.AlphaMultiplied(0f); // 初期は透明
+                fullScreen.color = UnityEngine.Color.magenta.AlphaMultiplied(0f); // 初期は透明
                 fullScreen.gameObject.SetActive(true);
                 this.BindGameObject(fullScreen.gameObject);
-
-                hudText = Nebula.Utilities.Helpers.TextHudContent("ParadoxTimeHUD", this, (tmPro) =>
-                {
-                    tmPro.text = "";
-                }, true);
             }
         }
+
+        void reset()
+        {
+            isDiving = false;
+            KillIgnoreTeam = false;
+            ParadoxTimer = DiveDuration;
+
+            MyPlayer.RemoveAttributeByTag("pdiverU:speed");
+            MyPlayer.RemoveAttributeByTag("pdiverU:invisible");
+
+            diveButton.StartCoolDown();
+
+            ResetShuffledOutfits();
+
+            if (fullScreen != null)
+            {
+                fullScreen.color = UnityEngine.Color.clear;
+            }
+        }
+
 
         void Update(GameUpdateEvent ev)
         {
@@ -138,29 +145,28 @@ public class VoyagerU : DefinedSingleAbilityRoleTemplate<VoyagerU.Ability>, Defi
                 float targetAlpha = isDiving ? 0.25f : 0f;
                 float currentAlpha = fullScreen.color.a;
                 currentAlpha += (targetAlpha - currentAlpha) * Time.deltaTime * 4f; 
-                fullScreen.color = Color.magenta.AlphaMultiplied(currentAlpha);
+                fullScreen.color = UnityEngine.Color.magenta.AlphaMultiplied(currentAlpha);
             }
 
-            if (hudText != null)
-            {
-                string label = NebulaAPI.Language.Translate("role.voyagerU.paradoxTimerText");
-
-                if (ParadoxTimer >= 1)
-                {
-                    hudText.text = $"{label}: {ParadoxTimer:0.0}";
-                }
-                else
-                {
-                    hudText.text = $"<color=#FF0000>{label}: {ParadoxTimer:0.0}";
-                }
-            }
             if (MyPlayer == null || MyPlayer.IsDead || !MyPlayer.CanMove || MeetingHud.Instance) return;
             ParadoxTimer -= Time.deltaTime;
             if (ParadoxTimer <= 0f)
             {
-                MyPlayer.Suicide(PlayerState.Suicide, paradox, KillParameter.NormalKill, null);
+                MyPlayer.Suicide(PlayerState.Suicide, compat.VoyagerParadox, KillParameter.NormalKill, null);
+                reset();
                 return;
             }
+        }
+
+        [Local]
+        void Meeting(MeetingStartEvent ev)
+        {
+            reset();
+        }
+
+        void IGameOperator.OnReleased()
+        {
+            reset();
         }
 
         private void ShufflePlayerOutfits()

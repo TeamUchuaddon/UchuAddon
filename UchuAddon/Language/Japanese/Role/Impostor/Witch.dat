@@ -6,11 +6,14 @@
 
 # Document
 
-"role.witchU.doc" : "プレイヤーを呪うインポスターです。"
+"role.witchU.doc" : "魔術を唱えるインポスターです。"
+"role.witchU.ability.title" : "固有能力 "死の詠唱者""
+"role.witchU.ability.main" : "プレイヤーを呪えます。呪われたプレイヤーには<b>魔術のマーク</b>がネームプレートに表示されます。"
+"role.witchU.ability.spell" : "<title>魔術</title>プレイヤーに呪いの魔術をかけます。<br>呪われたプレイヤーは会議でウィッチを排除しないと死亡してしまいます。"
 
 # Options
 
-"options.role.witchU.detail" : "ウィッチは他プレイヤーに魔法をかけるインポスターです。<br>魔法をかけられたプレイヤーは、会議でウィッチを追放・推察しないと死亡してしまいます。"
+"options.role.witchU.detail" : "ウィッチは他プレイヤーに魔術をかけるインポスターです。"
 "options.role.witchU.spellCooldown" : "魔術クールダウン"
 "options.role.witchU.spellDuration" : "魔術所要時間"
 "options.role.witchU.numOfOneTurnSpell" : "1ターンの最大魔術使用可能数"
@@ -25,28 +28,27 @@
 
 # Stats
 
-"witch.spell" : "魔術"
+"state.witchSpell" : "魔術"
 
 # Titles
 
-"achievement.witchU.common1.title" : "死の魔術"
-"achievement.witchU.common1.goal" : "魔術でキルをする。"
-"achievement.witchU.common1.cond" : ""
+"achievement.uchuaddon.witchU.common1.title" : "死の魔術"
+"achievement.uchuaddon.witchU.common1.goal" : "魔術でキルをする。"
+"achievement.uchuaddon.witchU.common1.cond" : ""
 
-"achievement.witchU.another1.title" : "武の時代"
-"achievement.witchU.another1.goal" : "魔術を使用せず、ゲームを終える。"
-"achievement.witchU.another1.cond" : ""
-"achievement.witchU.another1.splitted.2" : "時代"
+"achievement.uchuaddon.witchU.another1.title" : "武の時代"
+"achievement.uchuaddon.witchU.another1.goal" : "魔術を使用せず、ゲームを終える。"
+"achievement.uchuaddon.witchU.another1.cond" : ""
 
-"achievement.witchU.another2.title" : "詠唱失敗"
-"achievement.witchU.another2.goal" : "自身が追放・推察され、魔術でのキルを失敗する"
-"achievement.witchU.another2.cond" : ""
-"achievement.witchU.another2.flavor" : ""ANNOUNCE" マナ不足です。"
+"achievement.uchuaddon.witchU.another2.title" : "詠唱失敗"
+"achievement.uchuaddon.witchU.another2.goal" : "自身が追放・推察され、魔術でのキルを失敗する"
+"achievement.uchuaddon.witchU.another2.cond" : ""
+"achievement.uchuaddon.witchU.another2.flavor" : ""ANNOUNCE" マナ不足です。"
 
-"achievement.witchU.hard1.title" : "まだ、終わらない"
-"achievement.witchU.hard1.goal" : "魔術を使った次の会議で、ウィッチ以外のプレイヤーが追放される。"
-"achievement.witchU.hard1.cond" : ""
+"achievement.uchuaddon.witchU.hard1.title" : "まだ、終わらない"
+"achievement.uchuaddon.witchU.hard1.goal" : "魔術を使った次の会議で、ウィッチ以外のプレイヤーが追放される。"
+"achievement.uchuaddon.witchU.hard1.cond" : "自身がその会議で死亡しないこと。"
 
-"achievement.witchU.challenge1.title" : "灰燼なるワルプルギス"
-"achievement.witchU.challenge1.goal" : "同時に3人以上のプレイヤーに魔術を付与する。"
-"achievement.witchU.challenge1.cond" : ""
+"achievement.uchuaddon.witchU.challenge1.title" : "灰燼なるワルプルギス"
+"achievement.uchuaddon.witchU.challenge1.goal" : "同時に3人以上のプレイヤーに魔術を付与し、その全員が魔術によって死亡する。"
+"achievement.uchuaddon.witchU.challenge1.cond" : ""

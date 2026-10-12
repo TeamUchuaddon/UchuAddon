@@ -77,7 +77,7 @@ internal class StorageBoxU : PerkFunctionalInstance
         {
             var colliderObj = UnityHelper.CreateObject<CircleCollider2D>(MapData.NonMapColliderName,null, pos.AsVector3(0f), LayerExpansion.GetShortObjectsLayer() );
 
-            colliderObj.radius = 0.78f;
+            colliderObj.radius = 0.73f;
             colliderObj.isTrigger = false;
 
             this.BindGameObject(colliderObj.gameObject);

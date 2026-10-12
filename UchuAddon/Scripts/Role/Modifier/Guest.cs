@@ -14,6 +14,7 @@ public class GuestU : DefinedAllocatableModifierTemplate, DefinedModifier, Defin
 {
     private GuestU() : base("guestU", "GST", new(66, 207, 144))
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Guest.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -44,29 +45,15 @@ public class GuestU : DefinedAllocatableModifierTemplate, DefinedModifier, Defin
 
         }
 
+        [Local]
+        void BlockCallEmergencyMeeting(CheckCanPushEmergencyButtonEvent ev)
+        {
+            ev.DenyButton("role.guestU.denyReason");
+        }
+
         void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
         {
             if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
-        }
-
-        void GameUpdate(GameUpdateEvent ev)
-        {
-            foreach (var player in PlayerControl.AllPlayerControls)
-            {
-                float h = Input.GetAxis("Horizontal");
-                float v = Input.GetAxis("Vertical");
-
-                var dir = new Vector2(h, v);
-
-                if (dir.sqrMagnitude > 0.01f)
-                {
-                    player.MyPhysics.body.velocity = dir.normalized * player.MyPhysics.Speed;
-                }
-                else
-                {
-                    player.MyPhysics.body.velocity = Vector2.zero;
-                }
-            }
         }
     }
 }

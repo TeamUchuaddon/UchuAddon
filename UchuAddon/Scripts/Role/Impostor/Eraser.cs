@@ -15,7 +15,10 @@ using UnityEngine;
 using Virial.Assignable;
 using Virial.Helpers;
 using static Il2CppSystem.DateTimeParse;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -23,6 +26,7 @@ public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCit
 {
     public EraserU() : base("EraserU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [EraseCooldown, NumOfErase])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Eraser.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
         ConfigurationHolder?.ScheduleAddRelated(() => [SeedU.MyRole.ConfigurationHolder!]);
     }
@@ -50,7 +54,7 @@ public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCit
     {
         yield return new(EraseImage, "role.EraserU.ability.erase");
     }
-
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
@@ -64,7 +68,7 @@ public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCit
                 var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
 
                 var EraseButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
-                    EraseCooldown, "Erase", EraseImage, _ => playerTracker.CurrentTarget != null && playerTracker.CurrentTarget.RealPlayer.Role.Role.Team != NebulaTeams.ImpostorTeam);
+                    EraseCooldown, "Erase", EraseImage, _ => playerTracker.CurrentTarget != null && playerTracker.CurrentTarget.RealPlayer.Role.Role.Team != NebulaTeams.ImpostorTeam).SetAsUsurpableButton(this);
                 EraseButton.Visibility = (button) => !MyPlayer.IsDead && leftErase > 0;
                 EraseButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Impostor);
                 EraseButton.OnClick = (button) =>

@@ -1,12 +1,48 @@
-# Perk
+# Standard Perk
+
+"perk.chameleonU.name" : "カメレオン"
+"perk.chameleonU.detail" : "停止している間透明になる。<br><b>透明化までには3秒間かかる。</b>"
+
+"perk.fullOpenU.name" : "フルオープン"
+"perk.fullOpenU.detail" : "トイレのドアを全開にする。<br>このパークには%CD%秒のクールダウンがある。"
+"perk.fullOpenU.cooldown" : "フルオープンクールダウン"
 
 "perk.masterKeyU.name" : "マスターキー"
-"perk.masterKeyU.detail" : "ドアを即座に開錠します。<br>このパークには%CD%秒のクールダウンがあります。"
-"perk.masterKeyU.cooldown" : "クールダウン"
+"perk.masterKeyU.detail" : "ドアを即座に開錠する。<br>このパークには%CD%秒のクールダウンがある。"
+"perk.masterKeyU.cooldown" : "開錠クールダウン"
+
+"perk.noiseBuzzerU.name" : "防犯ブザー"
+"perk.noiseBuzzerU.detail" : "死亡時に、死亡地点を指すアラートを発生させる。"
+
+"perk.plumbingMaintenanceU.name" : "配管点検"
+"perk.plumbingMaintenanceU.detail" : "ベント内に入ってるプレイヤーを追い出す。<br>追い出しに成功すると全プレイヤーに見える通知が出る。<br>このパークには%CD%秒のクールダウンがある。"
+"perk.plumbingMaintenanceU.cooldown" : "配管点検クールダウン"
 
 "perk.repairU.name" : "リペア"
-"perk.repairU.detail" : "サボタージュを即座に修理します。"
+"perk.repairU.detail" : "サボタージュを即座に修理する。<br>このパークは一度のみ使用できる。"
+
+# NonCrewmateOnly Perk
+
+"perk.bruteSabotageU.name" : "剛腕サボタージュ"
+"perk.bruteSabotageU.detail" : "己の腕で扉を強引に閉める。<br>このパークには%CD%秒のクールダウンがある。"
+"perk.bruteSabotageU.cooldown" : "剛腕クールダウン"
+
+"perk.fakeNovaU.name" : "偽砲"
+"perk.fakeNovaU.detail" : "ノヴァの星砲音を鳴らす。<br>このパークには%CD%秒のクールダウンがある。"
+"perk.fakeNovaU.cooldown" : "偽砲クールダウン"
+
+"perk.mushroomPandemicU.name" : "キノコの侵略"
+"perk.mushroomPandemicU.detail" : "ファングルのキノコをその場に設置する。<br>このパークには%CD%秒のクールダウンがあり、一度のみ使用できる。<br>設置から<b>5秒後</b>にキノコが有効化する。"
+"perk.mushroomPandemicU.cooldown" : "設置クールダウン"
+
+"perk.nuunMoveU.name" : "ぬーん"
+"perk.nuunMoveU.detail" : "昇降機をボタン一つで動かす。<br>このパークには%CD%秒のクールダウンがある。"
+"perk.nuunMoveU.cooldown" : "ぬーんクールダウン"
 
 "perk.storageBoxU.name" : "通行止め"
 "perk.storageBoxU.detail" : "%D%秒間、当たり判定のある箱を設置する。<br>このパークには%CD%秒のクールダウンがあり<br>一度のみ使用できる。"
-"perk.storageBoxU.duration" : "箱持続時間"
+"perk.storageBoxU.duration" : "箱の持続時間"
+
+"perk.xinobiVentU.name" : "ベン遁の術"
+"perk.xinobiVentU.detail" : "一番近くのベントに遠隔で入る。<br>このパークには%CD%秒のクールダウンがある。<br><color=#FF1100>インポスター</color>以外は使用できない。"
+"perk.xinobiVentU.cooldown" : "ベン遁クールダウン"

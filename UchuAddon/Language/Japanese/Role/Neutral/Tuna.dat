@@ -34,6 +34,7 @@
 "options.role.tuna.group.gauge" : "マグロゲージ設定"
 "options.role.tunaU.requiredGaugeToWin" : "勝利に必要なゲージ量"
 "options.role.tunaU.stopGaugeRatio" : "停止中のゲージ上昇倍率"
+"options.role.tunaU.taskStopTime" : "タスク中に自殺タイマーを作動"
 
 "options.role.tunaModiU.detail" : "マグロは一定時間止まったら死んでしまうモディファイアです。"
 

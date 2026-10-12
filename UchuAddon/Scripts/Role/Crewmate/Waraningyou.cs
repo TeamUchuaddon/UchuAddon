@@ -35,7 +35,7 @@ public class WaraningyouU : DefinedSingleAbilityRoleTemplate<WaraningyouU.Abilit
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Waraningyou.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public readonly WaraningyouU MyRole = new();
-
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         static private Image curseButtonSprite = NebulaAPI.AddonAsset.GetResource("CurseButton.png")!.AsImage(115f)!;
@@ -57,8 +57,8 @@ public class WaraningyouU : DefinedSingleAbilityRoleTemplate<WaraningyouU.Abilit
 
                 bool usedInTheMeeting = true;
                 var meetingButton = new Nebula.Modules.ScriptComponents.ModAbilityButtonImpl(alwaysShow: true).Register(this);
-                meetingButton.Availability = (button) => MeetingHud.Instance && MeetingHud.Instance.CurrentState == MeetingHud.VoteStates.NotVoted && voterCount != 0;
-                meetingButton.Visibility = (button) => !MyPlayer.IsDead && MeetingHud.Instance && (MeetingHud.Instance.CurrentState == MeetingHud.VoteStates.NotVoted || MeetingHud.Instance.CurrentState == MeetingHud.VoteStates.Discussion) && !usedInTheMeeting;
+                meetingButton.Availability = (button) => MeetingHud.Instance && MeetingHud.Instance.CurrentState == MeetingHud.MeetingStates.NotVoted && voterCount != 0;
+                meetingButton.Visibility = (button) => !MyPlayer.IsDead && MeetingHud.Instance && (MeetingHud.Instance.CurrentState == MeetingHud.MeetingStates.NotVoted || MeetingHud.Instance.CurrentState == MeetingHud.MeetingStates.Discussion) && !usedInTheMeeting;
                 meetingButton.SetLabel("curse");
                 meetingButton.SetSprite(curseButtonSprite.GetSprite());
                 meetingButton.OnClick = (button) =>

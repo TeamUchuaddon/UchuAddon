@@ -13,18 +13,22 @@ using Virial.Attributes;
 using Virial.Events.Player;
 using Virial.Media;
 using static Nebula.Modules.Cosmetics.DynamicPalette;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 
 namespace Hori.Scripts.Role.Neutral;
 
-public class CitrusU : DefinedRoleTemplate, DefinedRole
+public class CitrusU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 {
     static readonly public RoleTeam MyTeam = NebulaAPI.Preprocessor!.CreateTeam("teams.citrusU", new(255, 255, 0), TeamRevealType.OnlyMe);
 
     private CitrusU() : base("citrusU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [InfectionCooldownOption, CanUseVentOption, CanUseStampOption])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon, ConfigurationTags.TagChaotic);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Citrus.png")!.AsImage(115f);
     }
     static private readonly FloatConfiguration InfectionCooldownOption = NebulaAPI.Configurations.Configuration("options.role.citrusU.infectionCooldown", (5f, 60f, 2.5f), 15f, FloatConfigurationDecorator.Second);
     static private readonly BoolConfiguration CanUseVentOption = NebulaAPI.Configurations.Configuration("options.role.citrusU.canUseVent", true);
@@ -36,10 +40,21 @@ public class CitrusU : DefinedRoleTemplate, DefinedRole
 
     static public CitrusU MyRole = new CitrusU();
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
+
+    bool IAssignableDocument.HasWinCondition => true;
+    bool IAssignableDocument.HasAbility => true;
+
+    IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
+    {
+        yield return new(InfectionButtonImage, "role.citrusU.ability.infection");
+        yield return new(SelfInfectionButonImage, "role.citrusU.ability.selfInfection");
+    }
+
+    static private Image InfectionButtonImage = NebulaAPI.AddonAsset.GetResource("CitrusInfectionButton.png")!.AsImage(115f)!;
+    static private Image SelfInfectionButonImage = NebulaAPI.AddonAsset.GetResource("CitrusSelfInfectionButton.png")!.AsImage(115f)!;
+
     public class Instance : RuntimeAssignableTemplate, RuntimeRole, RuntimeAssignable, ILifespan, IBindPlayer, IGameOperator, IReleasable
     {
-        static private Image InfectionButtonImage = NebulaAPI.AddonAsset.GetResource("CitrusInfectionButton.png")!.AsImage(115f)!;
-        static private Image SelfInfectionButonImage = NebulaAPI.AddonAsset.GetResource("CitrusSelfInfectionButton.png")!.AsImage(115f)!;
 
         DefinedRole RuntimeRole.Role => MyRole;
 
@@ -89,6 +104,19 @@ public class CitrusU : DefinedRoleTemplate, DefinedRole
 
         [OnlyMyPlayer]
         void OnPlayerDieOrDisconnect(PlayerDieOrDisconnectEvent ev)
+        {
+            foreach (var player in infected)
+            {
+                if (player.TryGetModifier<CitrusStateU.Instance>(out _))
+                {
+                    player.RemoveModifierLocal(player.GetModifiers<CitrusStateU.Instance>().First(modifier => modifier.Owner == MyPlayer));
+                }
+            }
+
+            infected.Clear();
+        }
+
+        void IGameOperator.OnReleased()
         {
             foreach (var player in infected)
             {
@@ -211,7 +239,7 @@ public class CitrusStateU : DefinedModifierTemplate, DefinedModifier
 
             PlayerColors[playerId] = citrusList[random].mainColor;
             ShadowColors[playerId] = citrusList[random].shadowColor;
-            VisorColors[playerId] = Palette.VisorColor;
+            VisorColors[playerId] = Palette.VisorColor.ToVirialColor();
             ColorNameDic[playerId] = (byte.MaxValue, 0, "");
 
             MyPlayer.VanillaPlayer.SetColor(MyPlayer.VanillaPlayer.PlayerId);
@@ -229,7 +257,7 @@ public class CitrusStateU : DefinedModifierTemplate, DefinedModifier
         }
 
         [OnlyMyPlayer]
-        void OnPlayerDie(PlayerDieEvent ev)
+        void OnPlayerDie(PlayerDieOrDisconnectEvent ev)
         {
             MyPlayer.RemoveModifierLocal(MyPlayer.GetModifiers<Instance>().First(modifier => modifier.Owner == Owner));
         }

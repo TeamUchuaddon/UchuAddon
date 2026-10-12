@@ -10,7 +10,7 @@ internal class SabotageFixAbility
 {
     static public void SabotageFix()
     {
-        switch (AmongUsUtil.CurrentMapId)
+        switch (NebulaAPI.AmongUs.MapId)
         {
             case 0:
             case 3:

@@ -7,6 +7,7 @@ using Nebula.Configuration;
 using Nebula.Extensions;
 using Nebula.Game;
 using Nebula.Game.Statistics;
+using Nebula.Game.Statistics;
 using Nebula.Modules;
 using Nebula.Modules.ScriptComponents;
 using Nebula.Player;
@@ -16,6 +17,8 @@ using Nebula.Roles.Ghost.Neutral;
 using Nebula.Roles.Impostor;
 using Nebula.Roles.Neutral;
 using Nebula.Utilities;
+using Sentry.Internal;
+using System;
 using System;
 using System;
 using System;
@@ -23,52 +26,54 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Generic;
 using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq;
 using System.Linq;
 using System.Text;
 using System.Text;
+using System.Text;
+using System.Threading.Tasks;
 using System.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using Virial;
+using Virial;
+using Virial.Assignable;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
 using Virial.Configuration;
+using Virial.Configuration;
+using Virial.Events.Game;
+using Virial.Events.Game.Meeting;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Game.Minimap;
 using Virial.Events.Player;
+using Virial.Events.Player;
+using Virial.Game;
 using Virial.Game;
 using Virial.Media;
 using Virial.Text;
 using static Nebula.Roles.Ghost.Neutral.Grudge;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
-using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Virial.Assignable;
-using Virial.Configuration;
-using Virial.Game;
-using Virial;
-using Sentry.Internal;
-using Nebula.Game.Statistics;
-using Virial.Events.Game.Meeting;
-using Virial.Events.Player;
 using static UnityEngine.GridBrushBase;
-using Virial.Events.Game;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Ghost.Impostor;
 
 [NebulaRPCHolder]
-public class MistU : DefinedGhostRoleTemplate, DefinedGhostRole
+public class MistU : DefinedGhostRoleTemplate, DefinedGhostRole,IAssignableDocument
 {
-    public MistU() : base("mistU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, [NightCooldown, NightDuration, NumOfNight, NightSize, inNightLightSize]) { }
+    public MistU() : base("mistU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, [NightCooldown, NightDuration, NumOfNight, NightSize, inNightLightSize]) 
+    { 
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Mist.png")!.AsImage(115f);
+    }
 
     string ICodeName.CodeName => "MST";
 
@@ -85,13 +90,21 @@ public class MistU : DefinedGhostRoleTemplate, DefinedGhostRole
     RuntimeGhostRole RuntimeAssignableGenerator<RuntimeGhostRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
     static internal readonly GameStatsEntry StatsNight = NebulaAPI.CreateStatsEntry("stats.mistU.night", GameStatsCategory.Roles, MyRole);
 
+    static private readonly Virial.Media.Image MistImage = NebulaAPI.AddonAsset.GetResource("MistButton.png")!.AsImage(115f)!;
+
+    bool IAssignableDocument.HasTips => false;
+    bool IAssignableDocument.HasAbility => true;
+    IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
+    {
+        yield return new(MistImage, "role.mistU.ability.mist");
+    }
+
     public class Instance : RuntimeAssignableTemplate, RuntimeGhostRole
     {
         DefinedGhostRole RuntimeGhostRole.Role => MyRole;
 
         public Instance(GamePlayer player) : base(player) { }
 
-        static private readonly Virial.Media.Image MistImage = NebulaAPI.AddonAsset.GetResource("MistButton.png")!.AsImage(115f)!;
         int leftNight = NumOfNight;
 
         void RuntimeAssignable.OnActivated()

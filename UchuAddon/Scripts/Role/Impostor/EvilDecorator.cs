@@ -1,4 +1,5 @@
 ﻿using Hori.Core;
+using Hori.Scripts.Role.Crewmate;
 using Hori.Scripts.Role.Neutral;
 using Nebula.Configuration;
 using Nebula.Modules;
@@ -23,57 +24,21 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
     }
 
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
-    static List<DefinedRole> IgiveableRoles = new List<DefinedRole>();
-    static List<DefinedRole> CgiveableRoles = new List<DefinedRole>();
+
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
-    static private IntegerConfiguration NumOfDecorationOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.maxdecorationCount", (1, 10), 5);
-    static private FloatConfiguration DecorationCoolDownOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.decorationCoolDown", (20f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
-    static internal IConfiguration ImpostorFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.decoratorU.ImpostorgiveFilter", _ => OpenImpostorFilterEditor()));
-    static internal IConfiguration CrewmateFilterOption = NebulaAPI.Configurations.Configuration(() => null, () => NebulaAPI.GUI.LocalizedButton(Virial.Media.GUIAlignment.Center, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OptionsTitleHalf), "options.role.decoratorU.CrewmategiveFilter", _ => OpenCrewmateFilterEditor()));
+    static private IntegerConfiguration NumOfDecorationOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.maxdecorationCount", (1, 99), 5);
+    static private FloatConfiguration DecorationCoolDownOption = NebulaAPI.Configurations.Configuration("options.role.decoratorU.decorationCoolDown", (5f, 60f, 5f), 15f, FloatConfigurationDecorator.Second);
+    static internal SimpleRoleFilterConfiguration ImpostorFilterOption = new("options.role.decoratorU.ImpostorgiveFilter") { RolePredicate = r => r.Team == NebulaTeams.ImpostorTeam && r.Category == RoleCategory.ImpostorRole && r.ShowOnHelpScreen && r != SpectrumU.MyRole, ScrollerTag = "ImpostorFilter", InvertOption = false, PreviewOnlySpawnableRoles = false };
+    static internal SimpleRoleFilterConfiguration CrewmateFilterOption = new("options.role.decoratorU.CrewmategiveFilter") { RolePredicate = r => r.Team == NebulaTeams.CrewmateTeam && r.Category == RoleCategory.CrewmateRole && r.ShowOnHelpScreen && r != GlitchU.MyRole, ScrollerTag = "CrewmateFilter", InvertOption = false, PreviewOnlySpawnableRoles = false };
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Decorator.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
+
     static public EvilDecoratorU MyRole = new EvilDecoratorU();
 
     static private GameStatsEntry StatsDecorated = NebulaAPI.CreateStatsEntry("stats.evildecorator.Decorated", GameStatsCategory.Roles, MyRole);
-    static void OpenImpostorFilterEditor()
-    {
-        var impostorRoles = Roles.AllRoles.Where(r => r.Team == NebulaTeams.ImpostorTeam && r.Category == RoleCategory.ImpostorRole);
-        RoleOptionHelper.OpenFilterScreen(
-            "giveableImpostorsFilter",
-            impostorRoles,
-            role => IgiveableRoles.Contains(role),
-            (role, val) =>
-            {
-                if (val) { if (!IgiveableRoles.Contains(role)) IgiveableRoles.Add(role); }
-                else { IgiveableRoles.Remove(role); }
-            },
-            role =>
-            {
-                if (IgiveableRoles.Contains(role)) IgiveableRoles.Remove(role);
-                else IgiveableRoles.Add(role);
-            });
 
-    }
-    static void OpenCrewmateFilterEditor()
-    {
-        var crewmateRoles = Roles.AllRoles.Where(r => r.Team == NebulaTeams.CrewmateTeam);
-        RoleOptionHelper.OpenFilterScreen(
-            "giveableCrewmatesFilter",
-            crewmateRoles,
-            role => CgiveableRoles.Contains(role),
-            (role, val) =>
-            {
-                if (val) { if (!CgiveableRoles.Contains(role)) CgiveableRoles.Add(role); }
-                else { CgiveableRoles.Remove(role); }
-            },
-            role =>
-            {
-                if (CgiveableRoles.Contains(role)) CgiveableRoles.Remove(role);
-                else CgiveableRoles.Add(role);
-            });
-    }
     static private readonly Virial.Media.Image DecorationImage = NebulaAPI.AddonAsset.GetResource("DecorationButton.png")!.AsImage(115f)!;
     bool IAssignableDocument.HasTips => true;
     bool IAssignableDocument.HasAbility => true;
@@ -81,6 +46,7 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
     {
         yield return new(DecorationImage, "role.decoratorU.ability.decoration");
     }
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];     
@@ -92,17 +58,17 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
             {
                 var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
 
-                var DecorationButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, DecorationCoolDownOption, "decoration", DecorationImage, _ => playerTracker.CurrentTarget != null);
-                DecorationButton.Visibility = (button) => !MyPlayer.IsDead;
+                var DecorationButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, DecorationCoolDownOption, "decoration", DecorationImage, _ => playerTracker.CurrentTarget != null).SetAsUsurpableButton(this);
+                DecorationButton.Visibility = (button) => !MyPlayer.IsDead && leftDecoration > 0;
                 DecorationButton.ShowUsesIcon(0, leftDecoration.ToString());
                 DecorationButton.OnClick = (button) =>
                 {
                     var target = playerTracker.CurrentTarget;
-                    var IallOptions = IgiveableRoles;
-                    var CallOptions = CgiveableRoles;
-                    if (target != null && CgiveableRoles.Count > 0 && IgiveableRoles.Count > 0)
+                    var IallOptions = Roles.AllRoles.Where(r => ImpostorFilterOption.Contains(r)).ToList();
+                    var CallOptions = Roles.AllRoles.Where(r => CrewmateFilterOption.Contains(r)).ToList();
+                    if (target != null)
                     {
-                        if (target.IsCrewmate) //クルーメイト
+                        if (target.IsTrueCrewmate) //クルーメイト
                         {
                             byte targetId = target.RealPlayer.PlayerId;
                             var availableOptions = CallOptions;
@@ -117,16 +83,6 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
                             var selectedRole = availableOptions[UnityEngine.Random.Range(0, availableOptions.Count)];
                             target.RealPlayer.SetRole(selectedRole);
                             lastDecoratedRole[targetId] = selectedRole;
-                            DecorationButton.Visibility = (button) => !MyPlayer.IsDead && leftDecoration > 0;
-                            button.StartCoolDown();
-                            StatsDecorated.Progress();
-                            leftDecoration--;
-                            DecorationButton.OnUpdate = (button) =>
-                            {
-                                DecorationButton.UpdateUsesIcon(leftDecoration.ToString());
-                            };
-
-                            DecorationButton.ShowUsesIcon(0, leftDecoration.ToString());
                         }
                         else if (target.IsImpostor) //インポスター
                         {
@@ -139,36 +95,21 @@ public class EvilDecoratorU : DefinedSingleAbilityRoleTemplate<EvilDecoratorU.Ab
                                 availableOptions = IallOptions.Where(m => m.Id != currentMod.Id).ToList();
                             }
 
+
                             if (availableOptions.Count == 0) availableOptions = IallOptions;
                             var selectedRole = availableOptions[UnityEngine.Random.Range(0, availableOptions.Count)];
-                            var index = UnityEngine.Random.Range(0, IgiveableRoles.Count);
-                            lastDecoratedRole[targetId] = (DefinedRole)selectedRole;
-                            target.RealPlayer.SetRole((DefinedRole)selectedRole);
-                            DecorationButton.Visibility = (button) => !MyPlayer.IsDead && leftDecoration > 0;
-                            button.StartCoolDown();
-                            StatsDecorated.Progress();
-                            leftDecoration--;
-                            DecorationButton.UpdateUsesIcon(leftDecoration.ToString());
-                            DecorationButton.OnUpdate = (button) =>
-                            {
-                                DecorationButton.UpdateUsesIcon(leftDecoration.ToString());
-                            };
-
-                            DecorationButton.ShowUsesIcon(0, leftDecoration.ToString());
+                            target.RealPlayer.SetRole(selectedRole);
+                            lastDecoratedRole[targetId] = selectedRole;
                         }
                         else //それ以外(マッドメイト、第三陣営の場合)
                         {
-                            DecorationButton.Visibility = (button) => !MyPlayer.IsDead && leftDecoration > 0;
-                            button.StartCoolDown();
-                            StatsDecorated.Progress();
-                            leftDecoration--;
-                            DecorationButton.OnUpdate = (button) =>
-                            {
-                                DecorationButton.UpdateUsesIcon(leftDecoration.ToString());
-                            };
 
-                            DecorationButton.ShowUsesIcon(0, leftDecoration.ToString());
                         }
+
+                        button.StartCoolDown();
+                        StatsDecorated.Progress();
+                        leftDecoration--;
+                        DecorationButton.UpdateUsesIcon(leftDecoration.ToString());
                     }
                 };
             }

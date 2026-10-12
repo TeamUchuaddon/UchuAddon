@@ -3,6 +3,7 @@ using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Epic.OnlineServices;
 using Hori.Core;
 using Hori.Scripts.Abilities;
+using Hori.Scripts.Core;
 using Il2CppSystem.Runtime.Remoting.Messaging;
 using Nebula;
 using Nebula.Behavior;
@@ -42,24 +43,28 @@ using Virial.Media;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 
 namespace Hori.Scripts.Role.Impostor;
 
-public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, DefinedRole
+public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, DefinedRole, IAssignableDocument
 {
-    public SentinelU() : base("sentinelU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [ImpostorNoDevice])
+    public SentinelU() : base("sentinelU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [ImpostorNoDevice, ShorteningCooldownInKilling])
     {
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Sentinel.png")!.AsImage(115f);
     }
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
     static private BoolConfiguration ImpostorNoDevice = NebulaAPI.Configurations.Configuration("options.role.sentinelU.impostorNoDevice", true);
+    static private FloatConfiguration ShorteningCooldownInKilling = NebulaAPI.Configurations.Configuration("options.role.sentinelU.shorteningCooldownInKilling", (0f, 30f, 2.5f), 10f, FloatConfigurationDecorator.Second);
 
     static public SentinelU MyRole = new();
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
 
     static public bool IsPlayerNearAdmin { get; private set; }
     static public bool IsPlayerNearVital { get; private set; }
@@ -84,10 +89,10 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
 
         private static Vector3 GetShakeOffset(bool active)
         {
-            if (!active) return Vector3.zero;
+            if (!active) return Vector3.Zero;
 
-            float x = Mathf.Sin(Time.time * 50f) * 0.03f;
-            float y = Mathf.Cos(Time.time * 50f) * 0.03f;
+            float x = Mathf.Sin(Time.time * 40f) * 0.01f;
+            float y = Mathf.Cos(Time.time * 40f) * 0.01f;
             return new Vector3(x, y, 0f);
         }
 
@@ -115,16 +120,16 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
             SpriteRenderer? TelescopeRenderer = null;
             SpriteRenderer? DoorLogRenderer = null;
 
-            switch (AmongUsUtil.CurrentMapId)
+            switch (NebulaAPI.AmongUs.MapId)
             {
                 case 0:
                     if (GeneralConfigurations.SkeldAdminOption.Value)
                     {
-                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.zero);
+                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.Zero);
                         AdminRenderer.sprite = DeviceIcon.GetSprite(0);
                     }
 
-                    CameraRenderer = UnityHelper.CreateObject<SpriteRenderer>("CameraIcon", center.transform, Vector3.zero);
+                    CameraRenderer = UnityHelper.CreateObject<SpriteRenderer>("CameraIcon", center.transform, Vector3.Zero);
                     CameraRenderer.sprite = DeviceIcon.GetSprite(4);
 
                     break;
@@ -132,11 +137,11 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
                 case 1:
                     if (GeneralConfigurations.MiraAdminOption.Value)
                     {
-                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.zero);
+                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.Zero);
                         AdminRenderer.sprite = DeviceIcon.GetSprite(0);
                     }
 
-                    DoorLogRenderer = UnityHelper.CreateObject<SpriteRenderer>("DoorLogIcon", center.transform, Vector3.zero);
+                    DoorLogRenderer = UnityHelper.CreateObject<SpriteRenderer>("DoorLogIcon", center.transform, Vector3.Zero);
                     DoorLogRenderer.sprite = DeviceIcon.GetSprite(8);
 
                     break;
@@ -144,14 +149,14 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
                 case 2:
                     if (GeneralConfigurations.PolusAdminOption.Value)
                     {
-                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.zero);
+                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.Zero);
                         AdminRenderer.sprite = DeviceIcon.GetSprite(0);
                     }
 
-                    VitalRenderer = UnityHelper.CreateObject<SpriteRenderer>("VitalIcon", center.transform, Vector3.zero);
+                    VitalRenderer = UnityHelper.CreateObject<SpriteRenderer>("VitalIcon", center.transform, Vector3.Zero);
                     VitalRenderer.sprite = DeviceIcon.GetSprite(2);
 
-                    CameraRenderer = UnityHelper.CreateObject<SpriteRenderer>("CameraIcon", center.transform, Vector3.zero);
+                    CameraRenderer = UnityHelper.CreateObject<SpriteRenderer>("CameraIcon", center.transform, Vector3.Zero);
                     CameraRenderer.sprite = DeviceIcon.GetSprite(4);
 
                     break;
@@ -163,23 +168,23 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
                 case 4:
                     if (GeneralConfigurations.AirshipCockpitAdminOption.Value || GeneralConfigurations.AirshipRecordAdminOption.Value)
                     {
-                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.zero);
+                        AdminRenderer = UnityHelper.CreateObject<SpriteRenderer>("AdminIcon", center.transform, Vector3.Zero);
                         AdminRenderer.sprite = DeviceIcon.GetSprite(0);
                     }
 
-                    VitalRenderer = UnityHelper.CreateObject<SpriteRenderer>("VitalIcon", center.transform, Vector3.zero);
+                    VitalRenderer = UnityHelper.CreateObject<SpriteRenderer>("VitalIcon", center.transform, Vector3.Zero);
                     VitalRenderer.sprite = DeviceIcon.GetSprite(2);
 
-                    CameraRenderer = UnityHelper.CreateObject<SpriteRenderer>("CameraIcon", center.transform, Vector3.zero);
+                    CameraRenderer = UnityHelper.CreateObject<SpriteRenderer>("CameraIcon", center.transform, Vector3.Zero);
                     CameraRenderer.sprite = DeviceIcon.GetSprite(4);
 
                     break;
 
                 case 5:
-                    VitalRenderer = UnityHelper.CreateObject<SpriteRenderer>("VitalIcon", center.transform, Vector3.zero);
+                    VitalRenderer = UnityHelper.CreateObject<SpriteRenderer>("VitalIcon", center.transform, Vector3.Zero);
                     VitalRenderer.sprite = DeviceIcon.GetSprite(2);
 
-                    TelescopeRenderer = UnityHelper.CreateObject<SpriteRenderer>("TelescoreIcon", center.transform, Vector3.zero);
+                    TelescopeRenderer = UnityHelper.CreateObject<SpriteRenderer>("TelescoreIcon", center.transform, Vector3.Zero);
                     TelescopeRenderer.sprite = DeviceIcon.GetSprite(6);
 
                     break;
@@ -194,8 +199,8 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
                 }
                 else
                 {
-                    adjuster.localScale = Vector3.one;
-                    adjuster.localPosition = Vector3.zero;
+                    adjuster.localScale = Vector3.One;
+                    adjuster.localPosition = Vector3.Zero;
                 }
                 if (AdminRenderer != null)AdminRenderer.sprite = DeviceIcon.GetSprite(IsPlayerNearAdmin ? 1 : 0);
                 if (VitalRenderer != null)VitalRenderer.sprite = DeviceIcon.GetSprite(IsPlayerNearVital ? 3 : 2);
@@ -228,6 +233,14 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
         }
     }
 
+    static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Sentinel.png")!.AsImage(100f)!;
+    Image? DefinedAssignable.IconImage => IconImage;
+
+    bool IAssignableDocument.HasAbility => true;
+    IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
+    {
+        yield return new(DeviceIcon.AsLoader(0), "role.sentinelU.ability.device");
+    }
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
@@ -251,27 +264,60 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
         {
             var allPlayers = GamePlayer.AllPlayers;
 
+            foreach (var player in allPlayers)
+            {
+                if (player.IsDead || (ImpostorNoDevice && player.IsImpostor))
+                {
+                    DetectedPlayers.Remove(player);
+                    continue;
+                }
+
+                Vector2 pos = player.VanillaPlayer.GetTruePosition();
+
+                if (IsNearDevice(pos, AdminDevice) ||
+                    IsNearDevice(pos, VitalDevice) ||
+                    IsNearDevice(pos, CameraDevice) ||
+                    IsNearDevice(pos, TelescopeDevice) ||
+                    IsNearDevice(pos, DoorLogDevice))
+                {
+                    DetectedPlayers.Add(player);
+                }
+                else
+                {
+                    DetectedPlayers.Remove(player);
+                }
+            }
+
             IsPlayerNearAdmin = IsAnyPlayerNear(allPlayers, AdminDevice);
             IsPlayerNearVital = IsAnyPlayerNear(allPlayers, VitalDevice);
             IsPlayerNearCamera = IsAnyPlayerNear(allPlayers, CameraDevice);
             IsPlayerNearTelescope = IsAnyPlayerNear(allPlayers, TelescopeDevice);
             IsPlayerNearDoorLog = IsAnyPlayerNear(allPlayers, DoorLogDevice);
         }
+        
+        private bool IsNearDevice(Vector2 pos, List<Vector2> devices)
+        {
+            foreach (var devicePos in devices)
+            {
+                if (Vector2.Distance(pos, devicePos) <= 1.6f)
+                    return true;
+            }
 
+            return false;
+        }
 
         private bool IsAnyPlayerNear(IEnumerable<GamePlayer> players, List<Vector2> devices)
         {
             foreach (var player in players)
             {
                 if (player.IsDead) continue;
-                Vector2 pos = player.VanillaPlayer.GetTruePosition();
+                Vector2 pos = player.TruePosition;
 
                 if (ImpostorNoDevice && player.IsImpostor) continue;
 
                 foreach (var devicePos in devices)
                 {
-                    if (Vector2.Distance(pos, devicePos) <= 1.7f)
-                        return true;
+                    if (Vector2.Distance(pos, devicePos) <= 1.6f) return true;
                 }
             }
             return false;
@@ -285,7 +331,7 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
             TelescopeDevice.Clear();
             DoorLogDevice.Clear();
 
-            switch (AmongUsUtil.CurrentMapId)
+            switch (NebulaAPI.AmongUs.MapId)
             {
                 case 0: // Skeld
                     if (GeneralConfigurations.SkeldAdminOption.Value)
@@ -308,8 +354,16 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
                         AdminDevice.Add(new Vector2(24.6f, -21.2f)); // 右アドミン
                     }
 
-                    VitalDevice.Add(new Vector2(26.6f, -17.0f)); // バイタル
+                    if (CustomPolusConfiguration.PolusVitalOption.Value)
+                    {
+                        VitalDevice.Add(new Vector2(30.27f, -6.65f)); //研究室バイタル
+                    }
+                    else
+                    {
+                        VitalDevice.Add(new Vector2(26.6f, -17.0f)); // オフィスバイタル
+                    }
                     CameraDevice.Add(new Vector2(2.9f, -12.6f));  // カメラ
+
                     break;
 
                 case 4: // Airship
@@ -328,6 +382,26 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
                     TelescopeDevice.Add(new Vector2(6.6f, 0.8f));   // 望遠鏡
                     break;
             }
-        }       
+        }
+
+        private List<GamePlayer> DetectedPlayers = new();
+
+        GamePlayer? LastKilled;
+        void OnKillPlayer(PlayerKillPlayerEvent ev)
+        {
+            if (ev.Murderer == MyPlayer)
+            {
+                LastKilled = ev.Dead;
+            }
+        }
+
+        [OnlyMyPlayer, Local]
+        void OnKill(ResetKillCooldownLocalEvent ev)
+        {
+            if (LastKilled != null && DetectedPlayers.Contains(LastKilled))
+            {
+                ev.SetFixedCooldown(ShorteningCooldownInKilling);
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ public class RadarU : DefinedAllocatableModifierTemplate, DefinedModifier, Defin
 {
     private RadarU() : base("radarU", "RDR", new(11, 51, 107), [])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Radar.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 

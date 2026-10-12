@@ -46,11 +46,11 @@
 
 # Stats
 
-"state.chickenDeadVent" : "Stumbled to Death"
-"state.chickenDeadFall" : "Tumbled to Death"
-"state.chickenDeadDrop" : "Fell to Death"
-"state.chickenDeadDoor" : "Crushed to Death"
-"state.chickenDeadWuss" : "Scared to Death"
-"state.chickenDeadMess" : "Confused to Death"
+"state.chickenDeadVent" : "Stumbled"
+"state.chickenDeadFall" : "Fall"
+"state.chickenDeadDrop" : "Drop"
+"state.chickenDeadDoor" : "CrushedHand"
+"state.chickenDeadWuss" : "Wuss"
+"state.chickenDeadMess" : "Mess"
 
 # Titles

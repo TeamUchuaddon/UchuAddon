@@ -7,6 +7,9 @@
 # Document
 
 "role.harvesterU.doc" : "死者の役職を調べるインポスターです。"
+"role.harvesterU.ability.title" : "固有能力 "魂の回収""
+"role.harvesterU.ability.main" : ""
+"role.harvesterU.ability.medium" : "<title>回収</title>死者の魂を回収し、役職を調べます。"
 
 # Options
 

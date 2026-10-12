@@ -12,7 +12,7 @@
 
 "role.chickenU.doc" : "とても臆病で貧弱なクルーメイトです。"
 "role.chickenU.ability.title" : "固有能力 "貧弱""
-"role.chickenU.ability.main" : "とても貧弱ですぐ死んでしまいますが、最後まで生存するとクルーメイトが乗っ取り勝利します。"
+"role.chickenU.ability.main" : "とても貧弱ですぐ死んでしまいますが<b>最後まで生存するとクルーメイトが乗っ取り勝利します。</b><br>乗っ取り勝利するには<var>%TASK%%</var>以上のタスクを完了させないといけません。"
 "role.chicken.ability.Door" : "<title>挟圧死</title>ドアに指を挟み死んでしまいます。"
 "role.chicken.ability.Vent" : "<title>転倒死</title>ベントで足をつまづいて死んでしまいます。"
 "role.chicken.ability.Mess" : "<title>錯乱死</title>停電が一定時間続くと、錯乱し死んでしまいます。"
@@ -25,6 +25,12 @@
 # Options
 
 "options.role.chickenU.detail" : "チキンはとても貧弱なクルーメイトです。"
+"options.role.chickenU.numOfWinTask" : "必要タスク数"
+"options.role.chickenU.numOfWinTask.detail" : "乗っ取り勝利に必要なタスク数を設定します。"
+
+"options.role.chickenModifierU.detail" : "チキンはとても貧弱なモディファイアです。"
+
+"options.role.chickenU.group.dead" : "死因の設定"
 "options.role.chickenU.deadPercentVent" : "ベント確率"
 "options.role.chickenU.deadPercentLadder" : "はしご確率"
 "options.role.chickenU.deadPercentZipLine" : "ジップライン確率"
@@ -33,24 +39,49 @@
 "options.role.chickenU.deadElectricSecond" : "死亡する停電経過時間"
 "options.role.chickenU.deadElectricSecond.detail" : "停電が何秒継続したら死亡するかを設定します。"
 "options.role.admiralU.deadNumOfVote" : "死亡する投票数"
-"options.role.chickenU.ventRange" : "転倒死の範囲"
-"options.role.chickenU.ventRange.detail" : "ベントでの死亡の範囲を設定します。"
-
-"options.role.chickenModifierU.detail" : "チキンはとても貧弱なモディファイアです。"
 
 # Game
 
+"role.chickenU.onWin" : " (達成済み)"
+"role.chickenU.noWin" : " (必要タスク未達成)"
 
 # UI
 
 
 # Stats
 
-"state.chickenDeadVent" : "転倒死"
-"state.chickenDeadFall" : "転落死"
-"state.chickenDeadDrop" : "落下死"
-"state.chickenDeadDoor" : "挟圧死"
-"state.chickenDeadWuss" : "錯乱死"
-"state.chickenDeadMess" : "恐怖死"
+"state.chickenDeadVent" : "転倒"
+"state.chickenDeadFall" : "転落"
+"state.chickenDeadDrop" : "落下"
+"state.chickenDeadDoor" : "挟圧"
+"state.chickenDeadWuss" : "錯乱"
+"state.chickenDeadMess" : "恐怖"
 
 # Titles
+
+"achievement.uchuaddon.chickenU.common1.title" : "チキンレース"
+"achievement.uchuaddon.chickenU.common1.goal" : "通算で15回、危機を乗り越える。"
+"achievement.uchuaddon.chickenU.common1.flavor" : ""
+
+"achievement.uchuaddon.chickenU.common2.title" : "アルティメットチキン"
+"achievement.uchuaddon.chickenU.common2.goal" : "1ゲームで10回以上、危機を乗り越える。"
+"achievement.uchuaddon.chickenU.common2.flavor" : ""
+
+"achievement.uchuaddon.chickenU.hard1.title" : "鶏冠の眩き"
+"achievement.uchuaddon.chickenU.hard1.goal" : "特殊な条件の勝利を乗っ取り、勝利する。"
+"achievement.uchuaddon.chickenU.hard1.flavor" : ""
+
+"achievement.uchuaddon.chickenU.horse1.title" : "アルティメットチキンホース"
+"achievement.uchuaddon.chickenU.horse1.goal" : "ホースが付与されている状態で10回以上危機を乗り越える"
+"achievement.uchuaddon.chickenU.horse1.cond" : "1ゲーム中に10回以上乗り越えること。"
+"achievement.uchuaddon.chickenU.horse1.flavor" : ""
+
+"achievement.uchuaddon.chickenU.challenge1.title" : "最後の一鶏"
+"achievement.uchuaddon.chickenU.challenge1.goal" : "インポスターが全員生存したまま勝利する。"
+"achievement.uchuaddon.chickenU.challenge1.cond" : "インポスター勝利を乗っ取ること。"
+"achievement.uchuaddon.chickenU.challenge1.flavor" : ""
+
+# Team
+
+"document.tip.winCond.chickenU.title" : "乗っ取り勝利"
+"document.tip.winCond.chickenU" : "タスクを設定量終えているかつ、<color=#ffee00>チキン</color>が生存していると勝利を乗っ取ります。<br>サボタージュ勝利は上書きできません。"

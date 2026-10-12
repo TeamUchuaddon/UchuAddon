@@ -17,7 +17,6 @@ using Nebula.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
@@ -27,8 +26,10 @@ using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -44,6 +45,9 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
+
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueKillAbility;
+
     Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
 
     static private FloatConfiguration KunaiCooldown = NebulaAPI.Configurations.Configuration("options.role.kunoichiU.KunaiCooldown", (0f, 60f, 0.25f), 0.5f, FloatConfigurationDecorator.Second);
@@ -81,15 +85,15 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
     public class KunaiDeadbody : NebulaSyncStandardObject, IGameOperator
     {
         public const string MyTag = "KunoichiDeadBody";
-        private static Image DeadbodyKunai = NebulaAPI.AddonAsset.GetResource("DeadbodyKunai.png")!.AsImage(500f)!;
+        private static Image DeadbodyKunai = NebulaAPI.AddonAsset.GetResource("KunaiDeadbody.png")!.AsImage(500f)!;
         float indexT = 0f;
         int index = 0;
-             public KunaiDeadbody(UnityEngine.Vector2 pos) : base(pos, ZOption.Just, true, DeadbodyKunai.GetSprite())    {
+             public KunaiDeadbody(Vector2 pos) : base(pos, ZOption.Just, true, DeadbodyKunai.GetSprite())    {
         }
 
         static KunaiDeadbody()
         {
-            RegisterInstantiater(MyTag, (args) => new KunaiDeadbody(new UnityEngine.Vector2(args[0], args[1])));
+            RegisterInstantiater(MyTag, (args) => new KunaiDeadbody(new Vector2(args[0], args[1])));
         }
     }
     public class KunoichiKunai : NebulaSyncStandardObject, IGameOperator
@@ -124,11 +128,13 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
             {
                 if (AmOwner) Owner.Unbox().RequireUpdateMouseAngle();
                 var mouseAngle = Owner.Unbox().MouseAngle;
-                MyRenderer.transform.localEulerAngles = new UnityEngine.Vector3(0, 0, (mouseAngle * 180f / Mathn.PI) + 90f);
+                MyRenderer.transform.localEulerAngles = new Vector3(0, 0, (mouseAngle * 180f / Mathn.PI) + 90f);
 
-                var pos = Owner.VanillaPlayer.transform.position + new UnityEngine.Vector3(Mathn.Cos(mouseAngle), Mathn.Sin(mouseAngle), -1f) * 0.67f;
-                var diff = (pos - MyRenderer.transform.position) * Time.deltaTime * 7.5f;
-                Position += (UnityEngine.Vector2)diff;
+                var unityPos = Owner.VanillaPlayer.transform.position;
+                var pos = new Vector3(unityPos.x, unityPos.y, unityPos.z) + new Vector3(Mathn.Cos(mouseAngle), Mathn.Sin(mouseAngle), -1f) * 0.67f;
+                var rendererPos = MyRenderer.transform.position;
+                var diff = (pos - new Vector3(rendererPos)) * Time.deltaTime * 7.5f;
+                Position += new Vector2(diff.x, diff.y);
 
                 MyRenderer.flipX = true;
                 MyRenderer.flipY = false;
@@ -136,7 +142,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
                 if (AmOwner)
                 {
                     var vec = MyRenderer.transform.position - PlayerControl.LocalPlayer.transform.position;
-                    if (KunaiDisappearOnWall && PhysicsHelpers.AnyNonTriggersBetween(PlayerControl.LocalPlayer.GetTruePosition(), (UnityEngine.Vector2)vec.normalized, ((UnityEngine.Vector2)vec).magnitude, Constants.ShipAndAllObjectsMask) && !Physics2D.Raycast(PlayerControl.LocalPlayer.GetTruePosition(), vec, vec.magnitude, 1 << LayerExpansion.GetRaiderColliderLayer()))
+                    if (KunaiDisappearOnWall && PhysicsHelpers.AnyNonTriggersBetween(PlayerControl.LocalPlayer.GetTruePosition(), (Vector2)vec.normalized, ((Vector2)vec).Magnitude, Constants.ShipAndAllObjectsMask) && !Physics2D.Raycast(PlayerControl.LocalPlayer.GetTruePosition(), vec, vec.magnitude, 1 << LayerExpansion.GetRaiderColliderLayer()))
                         MyRenderer.color = UnityEngine.Color.red;
                     else
                         MyRenderer.color = UnityEngine.Color.white;
@@ -144,7 +150,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
             }
             else if (state == 1)
             {
-                var vec = new UnityEngine.Vector2(Mathn.Cos(thrownAngle), Mathn.Sin(thrownAngle));
+                var vec = new Vector2(Mathn.Cos(thrownAngle), Mathn.Sin(thrownAngle));
                 var pos = Position;
                 var size = KunaiSize;
 
@@ -158,7 +164,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
                         if (p.IsDived || p.Logic.InVent || p.IsBlown || p.WillDie) continue;
                         if (tryKillSet.Contains(p)) continue;
 
-                        if (!Helpers.AnyNonTriggersBetween(p.TruePosition, pos, out var diff, Constants.ShipAndAllObjectsMask) && diff.magnitude < size * 0.4f)
+                        if (!Helpers.AnyNonTriggersBetween(p.TruePosition, pos, out var diff, Constants.ShipAndAllObjectsMask) && diff.Magnitude < size * 0.4f)
                         {
                             if (p.IsInvisible) continue;
                             if (GameOperatorManager.Instance?.Run(new PlayerInteractPlayerLocalEvent(Owner, p, new(IsKillInteraction: true))).IsCanceled ?? false) continue;
@@ -201,26 +207,26 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
                         Position += vec * originalD;
                         thrownDistance += originalD;
                     }
-                    MyRenderer.transform.position = new UnityEngine.Vector3(Position.x, Position.y, -1f);
+                    MyRenderer.transform.position = new Vector3(Position.x, Position.y, -1f);
                 }
             }
         }
 
         public bool CanThrow => MyRenderer.color.b > 0.5f;
 
-        public void Throw(UnityEngine.Vector2 pos, float angle)
+        public void Throw(Vector2 pos, float angle)
         {
             thrownAngle = angle;
             state = 1;
             Position = pos;
             ZOrder = ZOption.Just;
-            MyRenderer.transform.position = new UnityEngine.Vector3(pos.x, pos.y, -1f);
+            MyRenderer.transform.position = new Vector3(pos.x, pos.y, -1f);
             CanSeeInShadow = true;
             MyRenderer.sprite = ThrownKunai.GetSprite();
             MyRenderer.color = UnityEngine.Color.white;
             MyRenderer.gameObject.SetActive(true);
 
-            MyRenderer.transform.eulerAngles = new UnityEngine.Vector3(0f, 0f, (angle * 180f / Mathf.PI) + 90f);
+            MyRenderer.transform.eulerAngles = new Vector3(0f, 0f, (angle * 180f / Mathf.PI) + 90f);
             MyRenderer.flipX = true;
             MyRenderer.flipY = false;
         }
@@ -238,7 +244,7 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
 
         private ModAbilityButton? equipButton, invisibleButton;
         public KunoichiKunai? MyKunai = null;
-        private UnityEngine.Vector2 lastPosition;
+        private Vector2 lastPosition;
         private float MoveTime = 0f;
         private List<NebulaSyncStandardObject> DeadbodyKunai = [];
         private bool isInvisible = false;
@@ -363,9 +369,9 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
                 return;
             }
 
-            UnityEngine.Vector2 currentPosition = MyPlayer.TruePosition;
+            Vector2 currentPosition = MyPlayer.TruePosition;
 
-            if ((currentPosition - lastPosition).magnitude > 0.01f)
+            if ((currentPosition - lastPosition).Magnitude > 0.01f)
             {
                 MoveTime = 0f;
                 if (isInvisible && CanInvisibily)
@@ -452,8 +458,13 @@ public class KunoichiU : DefinedSingleAbilityRoleTemplate<KunoichiU.Ability>, Ha
             MyKunai = null;
         }
 
+        void IGameOperator.OnReleased()
+        {
+            UnequipKunai();
+        }
+
 
         private static int KunaiIgnoreLayerMask = 1 << LayerExpansion.GetRaiderColliderLayer();
-        public static bool OverlapKunaiIgnoreArea(UnityEngine.Vector2 pos) => Physics2D.OverlapPoint(pos, KunaiIgnoreLayerMask);
+        public static bool OverlapKunaiIgnoreArea(Vector2 pos) => Physics2D.OverlapPoint(pos, KunaiIgnoreLayerMask);
     }
 }

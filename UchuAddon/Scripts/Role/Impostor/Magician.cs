@@ -34,10 +34,10 @@ using Virial.Events.Player;
 using Virial.Game;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -54,10 +54,13 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
 
     static private FloatConfiguration MagicCooldown = NebulaAPI.Configurations.Configuration("options.role.magicianU.magicCooldown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
     static private IntegerConfiguration NumOfMagic = NebulaAPI.Configurations.Configuration("options.role.magicianU.numOfMagic", (1, 99), 4);
+
     Citation? HasCitation.Citation => Hori.Core.Citations.ExtremeRoles;
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Magician.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public MagicianU MyRole = new();
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         static private readonly Virial.Media.Image MagicImage = NebulaAPI.AddonAsset.GetResource("MagicButton.png")!.AsImage(115f)!;
@@ -94,7 +97,7 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
 
                  
                     if (Magic < 3) return;
-                    new StaticAchievementToken("magicianU.common1");
+                    //new StaticAchievementToken("magicianU.common1");
                 };
 
                 magicButton.ShowUsesIcon(0, leftMagic.ToString());
@@ -125,7 +128,7 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
                 {
                 }
             }
-            AmongUsUtil.PlayFlash(Color.red);
+            AmongUsUtil.PlayFlash(Color.Red);
 
 
             if (localplayer.inVent)
@@ -134,13 +137,13 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
                 localplayer.MyPhysics.ExitAllVents();
             }
 
-            var pcs = PlayerControl.AllPlayerControls.ToArray();
+            var pcs = GamePlayer.AllPlayers.Where(p => p != null && p != null && !p.IsDead  && !p.IsDisconnected).ToArray();
             int count = pcs.Length;
 
             List<Vector2> posList = new();
             foreach (var pc in pcs)
             {
-                Vector3 pos = pc.transform.position;
+                Vector3 pos = pc.VanillaPlayer.transform.position;
                 posList.Add(new Vector2(pos.x, pos.y));
             }
 
@@ -148,16 +151,19 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
 
             for (int i = 0; i < count; i++)
             {
-                pcs[i].NetTransform.RpcSnapTo(posList[i]);
+                pcs[i].VanillaPlayer.NetTransform.RpcSnapTo(posList[i]);
             }         
         });
+
         public static List<Vector2> GetAllPlayersPositions()
         {
             List<Vector2> result = new();
 
             foreach (var pc in PlayerControl.AllPlayerControls)
             {
-                if (pc == null) continue;
+                if (pc == null || pc.Data == null) continue;
+                if (pc == null || pc.Data == null) continue;
+                if (pc.Data.IsDead || pc.Data.Disconnected) continue;
 
                 Vector3 pos = pc.transform.position;
                 result.Add(new Vector2(pos.x, pos.y));
@@ -166,7 +172,7 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
             return result;
 
         }
-
+        /*
         [Local,OnlyMyPlayer]
         void Kill(PlayerKillPlayerEvent ev)
         {
@@ -254,5 +260,6 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
         {
             OneturnMagic = false;
         }
+        */
     }
 }

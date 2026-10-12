@@ -37,7 +37,6 @@ using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TMPro;
@@ -54,9 +53,13 @@ using Virial.Media;
 using Virial.Text;
 using static Rewired.Glyphs.UnityUI.UnityUITextMeshProGlyphHelper;
 using static UnityEngine.ProBuilder.UvUnwrapping;
-using Color = UnityEngine.Color;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+using System.Net.Http;
+using Nebula.Roles.Crewmate;
+using Hori.Scripts.Core;
 
 namespace Hori.Core;
 
@@ -82,9 +85,9 @@ public class PatchManager
         harmony = new Harmony("UchuAddonPatch");
 
         harmony.Patch(typeof(LobbyBehaviour).GetMethod(nameof(LobbyBehaviour.Start)),postfix: new HarmonyMethod(typeof(PatchManager).GetMethod("LobbyStart")));
-        harmony.Patch(typeof(KeyboardJoystick).GetMethod(nameof(KeyboardJoystick.Update)), postfix:new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(LobbyDisableCollider))));
+        //harmony.Patch(typeof(KeyboardJoystick).GetMethod(nameof(KeyboardJoystick.Update)), postfix:new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(LobbyDisableCollider))));
 
-        //harmony.Patch(typeof(ModNewsHistory).GetMethod(nameof(ModNewsHistory.GetLoaderEnumerator)),prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(GetLoaderEnumeratorPatch))));
+        harmony.Patch(typeof(ModNewsHistory).GetMethod(nameof(ModNewsHistory.GetLoaderEnumerator)),prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(GetLoaderEnumeratorPatch))));
         harmony.Patch(typeof(AnnouncementPanel).GetMethod(nameof(AnnouncementPanel.SetUp)),postfix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(SetUpPatch))));
 
         //HastyU.LoadPatch(harmony);
@@ -100,11 +103,11 @@ public class PatchManager
 
         if (NebulaAPI.GetAddon("Plan17ResourcesPlana") != null) addonLogoHolder.transform.localPosition = new Vector3(-4.3f, 0.7f, 0f);
 
-        var logo = UnityHelper.CreateObject<SpriteRenderer>("UchuAddonLogo", addonLogoHolder.transform, Vector3.zero);
+        var logo = UnityHelper.CreateObject<SpriteRenderer>("UchuAddonLogo", addonLogoHolder.transform, Vector3.Zero);
         logo.sprite = NebulaAPI.AddonAsset.GetResource("TitleLogo.png")!.AsImage(100f)!.GetSprite();
         logo.color = new(1f, 1f, 1f, 0.75f);
 
-        var logoButton = logo.gameObject.SetUpButton(true, logo, selectedColor: new Color(0.5f, 0.5f, 0.5f));
+        var logoButton = logo.gameObject.SetUpButton(true, logo, selectedColor: new (0.5f, 0.5f, 0.5f));
         logoButton.OnClick.AddListener(() => AddonScreen.OpenUchuAddonScreen(HudManager.Instance.transform));
 
         logo.gameObject.AddComponent<BoxCollider2D>().size = new Vector2(7f, 3.5f);
@@ -141,7 +144,7 @@ public class PatchManager
         var lang = Language.GetCurrentLanguage();
 
         string response = null!;
-        yield return NebulaWebRequest.CoGet(Helpers.ConvertUrl($"https://raw.githubusercontent.com/Dolly1016/Nebula/master/Announcement_{lang}.json"), true, r => response = r);
+        yield return NebulaWebRequest.CoGet(Helpers.ConvertUrl($"https://raw.githubusercontent.com/TeamUchuaddon/UchuAddon/master/UchuAddonAnnouncement_{lang}.json"), true, r => response = r);
 
         if (response == null) yield break;
 
@@ -192,6 +195,26 @@ public class PatchManager
         GameOperatorManager.Instance?.Run(new MeetingEvent());
     }
 
+    [HarmonyPatch(typeof(ExileController), nameof(ExileController.Begin)), HarmonyPriority(Priority.VeryLow)]
+    class JesterMessagePatch
+    {
+        public static void Postfix(ExileController __instance, [HarmonyArgument(0)] ref ExileController.InitProperties init)
+        {
+            var p = GamePlayer.GetPlayer(init.networkedPlayer.PlayerId);
+            var role = p.Role;
+            if (role != null)
+            {
+                if (role.Role == Nebula.Roles.Neutral.Jester.MyRole)
+                {
+                    if (!Jester.RequiresTasksForWin || (p?.Tasks.IsCompletedCurrentTasks ?? false))
+                    {
+                        __instance.completeString = Language.Translate("game.meeting.roleJesterText");
+                        __instance.ImpostorText.text = "";
+                    }
+                }
+            }
+        }
+    }
 }
 
 public static class AddonScreen
@@ -211,31 +234,32 @@ public static class AddonScreen
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "\n<size=110%>このアドオンはNebula on the Shipを基に製作されています。</size>"),
             NebulaAPI.GUI.VerticalMargin(0.15f),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentTitle, "Credit"),
- NebulaAPI.GUI.VerticalMargin(0.15f),
+            NebulaAPI.GUI.VerticalMargin(0.15f),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Code</b>\n</size>"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ごま。(goma_), あらいもん(araimon), アンハッピーセット(unhappyset), たこ焼き(takoyaki), いおむ(iom)\n</size>\n"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Illustration</b>\n</size>"),
-            NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ねこかぼちゃ(nekokabocha), マカロン(macaron), シート(Sheat), りょい(ryoi), こむぎこ(komugipan)\n</size>\n"),
+            NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ねこかぼちゃ(nekokabocha), マカロン(macaron), シート(Sheat), りょい(ryoi), こむぎこ(komugipan), たくえもん(takuemon)\n</size>\n"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Language</b>\n</size>"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>KpCam, HW, Plana, 回往\n</size>"),
-            NebulaAPI.GUI.VerticalMargin(0.3f),
-            new  GUIModernButton(GUIAlignment.Center, AttributeAsset.OptionsButtonMedium, new TranslateTextComponent("uchu.report"))
+            NebulaAPI.GUI.VerticalMargin(0.3f)),
+            /*new  GUIModernButton(GUIAlignment.Center, AttributeAsset.OptionsButtonMedium, new TranslateTextComponent("uchu.report"))
             {
                 OnClick = clickable =>
                 {
                     OpenReporGUI(HudManager.Instance.transform);
                 },
-            }), 
+            }*/ 
             new Vector2(0.5f, 1f), out _);
 
         return window;
     }
 
+    /*
     static public MetaScreen OpenReporGUI(Transform parent)
     {
         var Repowindow = MetaScreen.GenerateWindow(new Vector2(7.5f, 4.6f), parent, new Vector3(0f, 0f, -200f), true, false, true, BackgroundSetting.Modern);
-        var inputField = new GUITextField(Virial.Media.GUIAlignment.Center, new(6f, 2.5f)) { IsSharpField = false, MaxLines = 12, FontSize = 1.4f, HintText = Language.Translate("uchu.report.guide").Color(Color.gray) };
-        var nameField = new GUITextField(Virial.Media.GUIAlignment.Left, new(4.2f, 0.21f)) { IsSharpField = false, MaxLines = 12, FontSize = 1.4f, HintText = Language.Translate("uchu.report.name").Color(Color.gray) };
+        var inputField = new GUITextField(Virial.Media.GUIAlignment.Center, new(6f, 2.5f)) { IsSharpField = false, MaxLines = 12, FontSize = 1.4f, HintText = Language.Translate("uchu.report.guide").Color(UnityEngine.Color.gray) };
+        var nameField = new GUITextField(Virial.Media.GUIAlignment.Left, new(4.2f, 0.21f)) { IsSharpField = false, MaxLines = 12, FontSize = 1.4f, HintText = Language.Translate("uchu.report.name").Color(UnityEngine.Color.gray) };
         var checkBoxRequest = new NoSGUICheckbox(Virial.Media.GUIAlignment.Center, false);
         var checkBoxThoughts = new NoSGUICheckbox(Virial.Media.GUIAlignment.Center, false);
         var checkBoxBug = new NoSGUICheckbox(Virial.Media.GUIAlignment.Center, false);
@@ -330,8 +354,8 @@ public static class AddonScreen
         return new FormUrlEncodedContent([new("content", text)]);
     }
 
-    private const string u1 = "1488531335927828715";
-    private const string u2 = "kBXtTcv32nq4YcxE4lNfZ2612QLNqChxjFT_vgHxkGd9uOzUguvG1Y6PPbd7GtDYeiOe";
+    private const string uis1 = "1488531335927828715";
+    private const string uis2 = "kBXtTcv32nq4YcxE4lNfZ2612QLNqChxjFT_vgHxkGd9uOzUguvG1Y6PPbd7GtDYeiOe";
 
     static private bool Webhook(string text, Action<System.Net.Http.HttpResponseMessage> onFinished)
     {
@@ -339,7 +363,7 @@ public static class AddonScreen
         {
             HttpContent content = GenerateContent(text);
 
-            var task = NebulaPlugin.HttpClient.PostAsync("https://discord.com/api/webhooks/" + u1 + "/" + u2, content);
+            var task = NebulaPlugin.HttpClient.PostAsync("https://discord.com/api/webhooks/" + uis1 + "/" + uis2, content);
             NebulaManager.Instance.StartCoroutine(ManagedEffects.Sequence(
                 task.WaitAsCoroutine(),
                 ManagedEffects.Action(() =>
@@ -356,6 +380,7 @@ public static class AddonScreen
             return false;
         }
     }
+    */
 }
 
 public class MeetingEvent : Virial.Events.Event
@@ -387,106 +412,10 @@ public static class AnonymousVoteBypass
     }
 }
 
-internal class  SabotageCheck
+public static class VirialColorEx
 {
-    public static bool IsComms()
-    {
-        try
-        {
-            if (!ShipStatus.Instance.Systems.TryGetValue(SystemTypes.Comms, out ISystemType system)) return false;
-            HudOverrideSystemType hudOverride;
-            HqHudSystemType hqHud;
-            if ((hudOverride = system.TryCast<HudOverrideSystemType>()) != null) return hudOverride.IsActive;
-            if ((hqHud = system.TryCast<HqHudSystemType>()) != null) return hqHud.IsActive;
+    public static Virial.Color ToVirialColor(this UnityEngine.Color unityColor) => new Virial.Color(unityColor);
+    public static Virial.Color ToVirialColor(this UnityEngine.Color32 unityColor) => new Virial.Color(unityColor);
 
-            return false;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
-    public static bool IsElectrical()
-    {
-        try
-        {
-            if (!ShipStatus.Instance.Systems.TryGetValue(SystemTypes.Electrical, out ISystemType system)) return false;
-            SwitchSystem electrical;
-            if ((electrical = system.TryCast<SwitchSystem>()) != null) return electrical.IsActive;
-            return false;
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-    }
-}
-
-static public class FreeColorRoleIcon
-{
-    static private Dictionary<string, Material> materialCache = new();
-
-    static private Material CreateMaterial(Color roleColor, Color subColor)
-    {
-        var mat = new Material(NebulaAsset.RoleIconShader);
-
-        mat.SetColor("_RedTo", roleColor);
-        mat.SetColor("_GreenTo", subColor);
-        mat.SetFloat("_Outline", 1.07f - 0.45f);
-
-        return mat;
-    }
-
-    static public string GetRoleIconCustomColorTag( this DefinedAssignable assignable, Color roleColor, Color subColor, bool masked = false, int size = 100)
-    {
-        if (assignable == null) return "";
-
-        string key = assignable.InternalName + roleColor.ToString() + subColor.ToString() +masked;
-
-        if (!materialCache.TryGetValue(key, out var mat))
-        {
-            mat = CreateMaterial(roleColor, subColor);
-            materialCache[key] = mat;
-        }
-
-        var sprite = assignable.GetRoleIcon()?.GetSprite();
-        if (sprite == null) return "";
-
-        var tag = RuntimeDynamicSpriteGenerator.GetSpriteTag(sprite, mat, assignable.InternalName, masked);
-
-        if (size == 100) return tag;
-        return tag.Sized(size);
-    }
-
-    static public string GetRoleIconCustomColorTagSmall(this DefinedAssignable assignable, Color roleColor, Color subColor, bool masked = false) => GetRoleIconCustomColorTag(assignable, roleColor, subColor, masked, 70);
-}
-
-static public class RuntimeDynamicSpriteGenerator
-{
-    static private Dictionary<string, int> idMap = new();
-
-    static public TMP_SpriteAsset SpriteAsset { get; private set; }
-
-    static public string GetSpriteTag( Sprite sprite, Material mat, string name, bool masked)
-    {
-        int id = Register(sprite, mat, name);
-
-        if (masked)
-            return $"<sprite name=\"masked_{name}_{id}\">";
-        else
-            return $"<sprite name=\"dynamic_{name}_{id}\">";
-    }
-
-    static private int Register(Sprite sprite, Material mat, string name)
-    {
-        string key = name + mat.GetHashCode();
-
-        if (idMap.TryGetValue(key, out var id))
-            return id;
-
-        id = idMap.Count;
-        idMap[key] = id;
-
-        return id;
-    }
+    public static UnityEngine.Color ToUnityColorUchu(this Virial.Color virialColor) => new UnityEngine.Color(virialColor.R, virialColor.G, virialColor.B, virialColor.A);
 }

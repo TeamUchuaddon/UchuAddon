@@ -31,6 +31,7 @@
 "options.role.kunoichiU.KunaiDisappearOnWall" : "クナイの壁衝突"
 "options.role.kunoichiU.CanIninvisibily" : "透明化能力"
 "options.role.kunoichiU.ResetHitCountOnMeeting" : "会議ごとにヒット数をリセット"
+"options.role.kunoichiU.remainkunai" : "キル時にクナイが残る"
 
 # Game
 

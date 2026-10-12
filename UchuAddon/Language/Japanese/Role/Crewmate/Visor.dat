@@ -1,34 +1,37 @@
 # Assignable
 
-"role.superVisorU.name" : "バイザー"
-"role.superVisorU.short" : "バ"
-"role.superVisorU.blurb" : "船の管理人"
-
-"role.visorModifierU.name" : "バイザー"
-"role.visorModifierU.short" : "バ"
-"role.visorModifierU.blurb": "船の管理人"
+"role.visorU.name" : "バイザー"
+"role.visorU.short" : "バ"
+"role.visorU.blurb" : "船の管理人"
 
 # Document
 
-"role.superVisorU.doc" : "ポータブルアドミンを持つクルーメイトです。"
-"role.visorModifierU.doc" : "ポータブルアドミンを持つモディファイアです。"
+"role.visorU.doc" : "ポータブルアドミンを持つクルーメイトです。"
+"role.visorU.ability.title" : "固有能力 "ポータブルアドミン""
+"role.visorU.ability.main" : "充電式のアドミン端末を持ち歩いています。<br>アドミン端末のバッテリーは、タスクをこなすと充電できます。"
+"role.visorU.ability.admin" : "<title>アドミン</title>ポータブルアドミンを開きます。"
+"role.visorU.tips" : "・ゲームの設定にかかわらず、バイザーのアドミンでは死体が計上されます。"
+
+"role.visorModifierU.doc" : "いつでもアドミン情報を確認できます。"
+"role.visorModifierU.tips" : "・ゲームの設定にかかわらず、バイザーのアドミンでは死体が計上されます。"
 
 # Options
 
-"options.role.superVisorU.detail" : "バイザーはどこからでもアドミンを見ることが出来るクルーメイトです。"
-"options.role.superVisorU.group.charge" : "充電設定"
-"options.role.superVisorU.charge" : "充電機能"
-"options.role.superVisorU.AdminCharge" : "初期チャージ量"
-"options.role.superVisorU.chargesPerTasks" : "タスクでのチャージ増加量"
-
-"options.role.visorModifierU.detail" : "どこからでもアドミンを見ることが出来るモディファイアです。"
+"options.role.visorU.detail" : "バイザーはどこからでもアドミンを確認できるクルーメイトです。"
+"options.role.visorU.canMoveWithMapWatching" : "アドミンマップを開きながらの移動"
+"options.role.visorU.canUseAdminOnMeeting" : "会議中のアドミンの使用"
+"options.role.visorU.group.charge" : "充電の設定"
+"options.role.visorU.portableAdminCharge" : "ポータブルアドミンの初期使用可能時間"
+"options.role.visorU.maxPortableAdminCharge" : "ポータブルアドミンの最大チャージ"
+"options.role.visorU.chargesPerTasks" : "タスクによる使用時間チャージ" 
 
 # Game
 
+"role.visorU.battery" : "%SECOND%s"
 
 # UI
 
-"button.label.Admin" : "アドミン"
+"button.label.visorU.admin" : "アドミン"
 
 # Stats
 

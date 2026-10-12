@@ -1,0 +1,41 @@
+# Assignable
+
+"role.acemateU.name" : "エースメイト"
+"role.acemateU.short" : "エー"
+"role.acemateU.blurb" : "究極のマルチタスク"
+
+# Document
+
+"role.acemateU.doc" : "タスク画面を開いていても移動することが出来ます。"
+"role.acemateU.tips" : "エースメイトのタスク画面は半透明になっています。"
+# Options
+
+"options.role.acemateU.detail" : "エースメイトはタスク画面を開きながら移動できます。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+
+"achievement.uchuaddon.acemateU.common1.title" : "日々の務め"
+"achievement.uchuaddon.acemateU.common1.goal" : "通算で20回、タスクを完了する。"
+"achievement.uchuaddon.acemateU.common1.cond" : ""
+
+"achievement.uchuaddon.acemateU.common2.title" : "ながら作業"
+"achievement.uchuaddon.acemateU.common2.goal" : "タスクを開きながら通算で300m移動する。"
+"achievement.uchuaddon.acemateU.common2.cond" : ""
+"achievement.uchuaddon.acemateU.common2.falvor" : ""これが最新のワークスタイルか...!"<br>"ながら作業で全く進んでないみたいだよ。""
+
+"achievement.uchuaddon.acemateU.hard1.title" : "次々と舞い込む仕事"
+"achievement.uchuaddon.acemateU.hard1.goal" : "タスクを終わらせ、すぐに次のタスクを開始する。"
+"achievement.uchuaddon.acemateU.hard1.cond" : "タスク完了から1秒以内"
+
+"achievement.uchuaddon.acemateU.challenge1.title" : "疾風迅雷のサラリーマン"
+"achievement.uchuaddon.acemateU.challenge1.goal" : "1ターンでタスクを6個終らせる。"
+"achievement.uchuaddon.acemateU.challenge1.cond" : "そのターンでタスクを開きながら50m以上移動していること。"

@@ -1,5 +1,6 @@
 ﻿using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Hori.Core;
+using Hori.Scripts.Core;
 using Il2CppInterop.Runtime.Injection;
 using Il2CppSystem.Runtime.Remoting.Messaging;
 using Nebula;
@@ -12,7 +13,6 @@ using Nebula.Player;
 using Nebula.Roles;
 using Nebula.Roles.Impostor;
 using Nebula.Utilities;
-using NebulaLoader;
 using System;
 using System;
 using System;
@@ -39,17 +39,19 @@ using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static Nebula.Roles.Impostor.Hadar;
 using static StarGen;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
 public class SonarU : DefinedSingleAbilityRoleTemplate<SonarU.Ability>, DefinedRole,IAssignableDocument
 {
-    public SonarU() : base("sonarU", new(52, 115, 68), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NumOfPlace,PlaceCooldown,SonarRange,NoiseDuration])
+    public SonarU() : base("sonarU", new(52, 115, 68), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NumOfPlace,PlaceCooldown,SonarRange,NoiseDuration, DeadPositionNoise, RpcBreakAntenna])
     {
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Sonar.png")!.AsImage(115f);
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
 
@@ -57,6 +59,8 @@ public class SonarU : DefinedSingleAbilityRoleTemplate<SonarU.Ability>, DefinedR
     static private IntegerConfiguration NumOfPlace = NebulaAPI.Configurations.Configuration("options.role.sonarU.numOfPlace", (1, 10), 2);
     static private FloatConfiguration SonarRange = NebulaAPI.Configurations.Configuration("options.role.sonarU.sonarRange", (0.25f, 10f, 0.25f), 1f, FloatConfigurationDecorator.Ratio);
     static public readonly FloatConfiguration NoiseDuration = NebulaAPI.Configurations.Configuration("options.role.sonarU.noiseDuration", (1f, 10f, 1f), 3f, FloatConfigurationDecorator.Second);
+    static public BoolConfiguration DeadPositionNoise = NebulaAPI.Configurations.Configuration("options.role.sonarU.noisePosition", true);
+    static public BoolConfiguration RpcBreakAntenna = NebulaAPI.Configurations.Configuration("options.role.sonarU.rpcBreakAntenna", true);
 
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
@@ -93,7 +97,7 @@ public class SonarU : DefinedSingleAbilityRoleTemplate<SonarU.Ability>, DefinedR
         }
         static SonarAntennaBreak()
         {
-            RegisterInstantiater(MyTag, (args) => new SonarAntenna(new Vector2(args[0], args[1])));
+            RegisterInstantiater(MyTag, (args) => new SonarAntennaBreak(new Vector2(args[0], args[1])));
         }
     }
     static private readonly Virial.Media.Image PlaceImage = NebulaAPI.AddonAsset.GetResource("SonarPlaceButton.png")!.AsImage(115f)!;
@@ -123,7 +127,6 @@ public class SonarU : DefinedSingleAbilityRoleTemplate<SonarU.Ability>, DefinedR
             if (AmOwner)
             {
                 var PlaceButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, PlaceCooldown, "sonarU.place", PlaceImage).SetAsUsurpableButton(this);
-                PlaceButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Crewmate);
                 PlaceButton.ShowUsesIcon(3, leftPlace.ToString());
                 PlaceButton.Visibility = (button) => !MyPlayer.IsDead && leftPlace > 0;
                 PlaceButton.OnClick = (button) =>
@@ -163,12 +166,27 @@ public class SonarU : DefinedSingleAbilityRoleTemplate<SonarU.Ability>, DefinedR
 
                 if (antennaPos.Distance(deadPos) <= SonarRange)
                 {
-                    RpcSonarNoise.Invoke(deadPos);
+                    if (DeadPositionNoise)
+                    {
+                        RpcSonarNoise.Invoke(deadPos);
+                    }
+                    else
+                    {
+                        RpcSonarNoise.Invoke(antennaPos);
+                    }
                     StatsNoise.Progress();
 
                     var target = sonarAntennas.OrderBy(a => a.Position.Distance(deadPos)).First();
                     sonarAntennas.Remove(target);
-                    NebulaSyncObject.LocalInstantiate(SonarAntennaBreak.MyTag, new float[] { target.Position.x, target.Position.y });
+
+                    if (RpcBreakAntenna)
+                    {
+                        NebulaSyncObject.RpcInstantiate(SonarAntennaBreak.MyTag, new float[] { target.Position.x, target.Position.y });
+                    }
+                    else
+                    {
+                        NebulaSyncObject.LocalInstantiate(SonarAntennaBreak.MyTag, new float[] { target.Position.x, target.Position.y });
+                    }
                     NebulaSyncObject.LocalDestroy(target.ObjectId);
                 }
             }

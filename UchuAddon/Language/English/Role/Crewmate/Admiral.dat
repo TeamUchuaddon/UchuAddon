@@ -2,14 +2,14 @@
 
 "role.admiralU.name" : "Admiral"
 "role.admiralU.short" : "Adm"
-"role.admiralU.blurb" : "Absolute Authority"
+"role.admiralU.blurb" : "Absolute Command"
 
 # Document
 
-"role.admiralU.doc" : "A Crewmate that exercises Admiral Authority to prevent Expulsion."
-"role.admiralU.ability.title" : "UniqueAbility "AbsoluteAdmiral Authority""
+"role.admiralU.doc" : "A Crewmate who can exercise Admiral Authority to prevent Expulsion."
+"role.admiralU.ability.title" : "Inherent Ability "Absolute Admiral Command""
 "role.admiralU.ability.main" : "Admiral is a Crewmate that prevents Expulsion. Meetings using the ability prevent Expulsion."
-"role.admiralU.ability.skill" : "<title>Admiral Authority</title>Prevents Expulsion. Deaths are prevented in meetings where the ability is activated even if someone is expelled."
+"role.admiralU.ability.skill" : "<title>Admiral Command</title>Prevents Expulsion. Deaths are prevented in meetings where the ability is activated even if someone is expelled."
 
 # Options
 
@@ -27,11 +27,11 @@
 
 # UI
 
-"button.label.admiral" : "Admiral Authority"
+"button.label.admiral" : "Admiral Command"
 "role.admiralU.message1" : "Expulsion has been nullified by Admiral Authority."
 "role.admiralU.hudText" : "Remaining Use Count"
 
 # Stats
 
 
-# Titles
+# Titles

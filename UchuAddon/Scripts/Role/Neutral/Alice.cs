@@ -1,6 +1,8 @@
 ﻿using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Hori.Core;
 using Hori.Scripts.Abilities;
+using Hori.Scripts.Core;
+using Hori.Scripts.Role.Crewmate;
 using Nebula;
 using Nebula.Behavior;
 using Nebula.Configuration;
@@ -30,6 +32,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using Virial;
+using Virial.Achievements;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
@@ -38,24 +41,27 @@ using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
+using Virial.Runtime;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using Color = UnityEngine.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
+[NebulaPreprocess(PreprocessPhase.Roles)]
 public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDocument
 {
     public static Team MyTeam = new Team("teams.aliceU", new Virial.Color(255, 255, 15), TeamRevealType.OnlyMe);
     private AliceU() : base("aliceU", new(255, 255, 15), RoleCategory.NeutralRole, MyTeam, [NumOfWin,CanFixLightOption,CanFixCommsOption,ExtraWin,VentConfiguration,
-      new GroupConfiguration("options.role.aliceU.group.echo",[EchoCooldownOption,EchoRangeOption,NumOfEcho],GroupConfigurationColor.ToDarkenColor(Color.yellow)),
-      new GroupConfiguration("options.role.aliceU.group.winKill",[WinForKill,KillCoolDownOption,NumOfWinKill,KillVentPlayer],GroupConfigurationColor.ToDarkenColor(Color.yellow)),
-        TaskConfiguration.AsGroup(new(GroupConfigurationColor.ToDarkenColor(MyTeam.Color.ToUnityColor()))) ])
+      new GroupConfiguration("options.role.aliceU.group.echo",[EchoCooldownOption,EchoRangeOption,NumOfEcho], UnityEngine.Color.yellow),
+      new GroupConfiguration("options.role.aliceU.group.winKill",[WinForKill,KillCoolDownOption,NumOfWinKill,KillVentPlayer], UnityEngine.Color.yellow),
+        TaskConfiguration.AsGroup(UnityEngine.Color.yellow.ToVirialColor())])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Alice.png")!.AsImage(115f);
     }
     Citation? HasCitation.Citation => Hori.Core.Citations.ExtremeRoles;
 
@@ -95,6 +101,41 @@ public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableD
     }
     static private readonly Virial.Media.Image KillImage = NebulaAPI.AddonAsset.GetResource("KillButtonYellow.png")!.AsImage(100f)!;
     static private Image EchoImage = NebulaAPI.AddonAsset.GetResource("AlicePremonitionButton.png")!.AsImage(115f)!;
+
+    static private void Preprocess(NebulaPreprocessor preprocessor)
+    {
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "aliceU.common1")
+        {
+            RelatedRole = AliceU.MyRole,
+            Goal = 5,
+            Rank = TrophyLevel.Silver,
+            RelatedRecord = "uchuaddon.aliceU.common1"
+        });
+        preprocessor.Titles.Register(new RecordBuilder("uchuaddon", "aliceU.common1")
+        {
+            Goal = 5
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "aliceU.hard1")
+        {
+            RelatedRole = AliceU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Gold
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "aliceU.another1")
+        {
+            RelatedRole = AliceU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Gold,
+            IsSecret = true
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "aliceU.challenge1")
+        {
+            RelatedRole = AliceU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Rainbow
+        });
+    }
+
     public class Instance : RuntimeVentRoleTemplate, RuntimeRole
     {
         public override DefinedRole Role => MyRole;
@@ -107,9 +148,6 @@ public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableD
         public Instance(GamePlayer player) : base(player, VentConfiguration)
         {
         }
-
-
-
 
         public override void OnActivated()
         {
@@ -158,6 +196,7 @@ public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableD
                     leftEcho--;
                     searchButton.UpdateUsesIcon(leftEcho.ToString());
                     button.StartCoolDown();
+                    AchievementUnLock.TitleUnLock("uchuaddon.aliceU.common1");
                 };
 
             }
@@ -168,12 +207,18 @@ public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableD
             numDead--;
             if (numDead > 0)
             {
+                if (RequiresTasksForWin && !(MyPlayer.Tasks.IsCompletedCurrentTasks)) return;
+                if (WinForKill && totalKill < NumOfWinKill) return;
                 ev.Result = KillResult.ObviousGuard;
             }
             else if(!ExtraWin)
             {
                 if (RequiresTasksForWin && !(MyPlayer.Tasks.IsCompletedCurrentTasks))return;
                 if (WinForKill && totalKill < NumOfWinKill)return;
+
+                var isdead = GamePlayer.AllPlayers.Where(p => p.IsDead && p != MyPlayer).ToList();
+                if (isdead.Count == 0) IsChallenge = true;
+
                 NebulaAPI.CurrentGame?.TriggerGameEnd(UchuGameEnd.AliceWin,GameEndReason.Special,BitMasks.AsPlayer(1u << MyPlayer.PlayerId));
             }
             else if (ExtraWin)
@@ -188,11 +233,11 @@ public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableD
         {
             EditableBitMask<GamePlayer> pMask = BitMasks.AsPlayer();
             float radious = 0f;
-            var circle = EffectCircle.SpawnEffectCircle(null, MyPlayer.Position.ToUnityVector(), Color.yellow, 0f, null, true);
+            var circle = EffectCircle.SpawnEffectCircle(null, MyPlayer.Position.ToUnityVector(), Virial.Color.Yellow, 0f, null, true);
             this.BindGameObject(circle.gameObject);
             circle.OuterRadius = () => radious;
 
-            MyRole.UnityColor.ToHSV(out var hue, out _, out _);
+            MyRole.RoleColor.ToHSV(out var hue, out _, out _);
             bool isFirst = true;
             while (radious < EchoRangeOption)
             {
@@ -231,13 +276,29 @@ public class AliceU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableD
         void OnGameStart(GameStartEvent ev) => SetAliceTasks();
         RoleTaskType RuntimeRole.TaskType => TaskConfiguration.RequiresTasks ? RoleTaskType.RoleTask : RoleTaskType.NoTask;
 
-        [Local]
+        [Local, OnlyMyPlayer]
         void CheckAliceExtraWin(PlayerCheckExtraWinEvent ev)
         {
             if (!ExtraWin) return;
             if (!extra) return;
             ev.SetWin(true);
             ev.ExtraWinMask.Add(UchuGameEnd.AliceExtra);
+        }
+
+        bool IsAnother = false;
+        bool IsChallenge = false;
+        [Local]
+        void OnGameEnd(GameEndEvent ev)
+        {
+            if (ev.EndState.EndCondition == UchuGameEnd.AliceWin && ev.EndState.Winners.Test(MyPlayer))
+            {
+                var alices = GamePlayer.AllPlayers.Where(p => p.Role.Role is AliceU).ToList();
+                if (alices.Count == 5) IsAnother = true;
+
+                AchievementUnLock.TitleUnLock("uchuaddon.aliceU.hard1");
+                if (IsAnother) AchievementUnLock.TitleUnLock("uchuaddon.aliceU.another1");
+                if (IsChallenge) AchievementUnLock.TitleUnLock("uchuaddon.aliceU.challenge1");
+            }
         }
 
         bool RuntimeAssignable.CanFixComm => CanFixCommsOption;

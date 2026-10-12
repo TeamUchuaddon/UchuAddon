@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UnityColor = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate
 {
@@ -60,10 +62,8 @@ namespace Hori.Scripts.Role.Crewmate
             {
                 if (AmOwner)
                 {
-                    var JumboButton = NebulaAPI.Modules.AbilityButton(this,MyPlayer,Virial.Compat.VirtualKeyInput.Ability,"slimeU.jumbo",JumboCoolDown,"Jumbo",JumboImage
-                    );
-                    var MiniButton = NebulaAPI.Modules.AbilityButton(this,MyPlayer,Virial.Compat.VirtualKeyInput.SecondaryAbility,"slimeU.mini",MiniCoolDown,"Mini",MiniImage
-                    );
+                    var JumboButton = NebulaAPI.Modules.AbilityButton(this,MyPlayer,Virial.Compat.VirtualKeyInput.Ability,"slimeU.jumbo",JumboCoolDown,"Jumbo",JumboImage);
+                    var MiniButton = NebulaAPI.Modules.AbilityButton(this,MyPlayer,Virial.Compat.VirtualKeyInput.SecondaryAbility,"slimeU.mini",MiniCoolDown,"Mini",MiniImage);
                     JumboButton!.OnClick = (button) =>
                     {
                         button.StartEffect();
@@ -72,14 +72,15 @@ namespace Hori.Scripts.Role.Crewmate
                     {
                         MiniButton!.StartCoolDown();
                         MyPlayer.GainAttribute(PlayerAttributes.Eyesight, JumboDuration, JumboVision, false, 0, "jumbo::vision");
-                        MyPlayer.GainAttribute(PlayerAttributes.CooldownSpeed, JumboDuration, 0, false, 1, "slime::stopcooldown");
+                        (MiniButton.CoolDownTimer as GameTimer)?.Pause();
                         MyPlayer.GainAttribute(PlayerAttributes.ScreenSize, JumboDuration, JumboScreen, false, 1, "jumbo::screen");
-                        MyPlayer.GainSizeAttribute(new UnityEngine.Vector2(JumboSize, JumboSize),JumboDuration,true,1,"slime:jumbo");
+                        MyPlayer.GainSizeAttribute(new Vector2(JumboSize, JumboSize),JumboDuration,true,1,"slime:jumbo");
                         StatsSlime.Progress();
                     };
                     JumboButton.OnEffectEnd = (button) =>
                     {
                         MiniButton!.StartCoolDown();
+                        (MiniButton.CoolDownTimer as GameTimer)?.Resume();
                         button.StartCoolDown();
                     };
                     JumboButton.StartCoolDown();
@@ -96,15 +97,16 @@ namespace Hori.Scripts.Role.Crewmate
                     MiniButton.OnEffectStart = (button) =>
                     {
                         JumboButton.StartCoolDown();
+                        (JumboButton.CoolDownTimer as GameTimer)?.Pause();
                         MyPlayer.GainSpeedAttribute(MiniSpeed, MiniDuration, false, 1, "mini::speed");
-                        MyPlayer.GainAttribute(PlayerAttributes.CooldownSpeed, MiniDuration, 0, false, 1, "slime::stopcooldown");
                         MyPlayer.GainAttribute(PlayerAttributes.ScreenSize, MiniDuration, MiniScreen, false, 1, "mini::screen");
-                        MyPlayer.GainSizeAttribute(new UnityEngine.Vector2(MiniSize, MiniSize),MiniDuration,true,1,"slime:mini");
+                        MyPlayer.GainSizeAttribute(new Vector2(MiniSize, MiniSize),MiniDuration,true,1,"slime:mini");
                         StatsSlime.Progress();
                     };
                     MiniButton.OnEffectEnd = (button) =>
                     {
                         JumboButton.StartCoolDown();
+                        (JumboButton.CoolDownTimer as GameTimer)?.Resume();
                         button.StartCoolDown();
                     };
                     MiniButton.StartCoolDown();
@@ -112,19 +114,6 @@ namespace Hori.Scripts.Role.Crewmate
                     MiniButton.SetLabel("mini");
                 }
             }
-        }
-    }
-
-    internal record struct NewStruct(FloatConfiguration MiniDuration, float Item2, bool Item3, int Item4, string Item5)
-    {
-        public static implicit operator (FloatConfiguration MiniDuration, float, bool, int, string)(NewStruct value)
-        {
-            return (value.MiniDuration, value.Item2, value.Item3, value.Item4, value.Item5);
-        }
-
-        public static implicit operator NewStruct((FloatConfiguration MiniDuration, float, bool, int, string) value)
-        {
-            return new NewStruct(value.MiniDuration, value.Item2, value.Item3, value.Item4, value.Item5);
         }
     }
 }

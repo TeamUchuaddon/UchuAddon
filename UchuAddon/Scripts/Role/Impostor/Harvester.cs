@@ -53,18 +53,19 @@ using static Il2CppSystem.DateTimeParse;
 using static Nebula.Roles.Impostor.Cannon;
 using static Rewired.UnknownControllerHat;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 
 namespace Hori.Scripts.Role.Impostor;
 
-public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, DefinedRole
+public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, DefinedRole,IAssignableDocument
 {
     public HarvesterU() : base("harvesterU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [NumOfHarvest, NumOfPerMeeting,HarvestAddKill,NumOfAddHarvest])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Harvester.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -78,12 +79,23 @@ public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Harvester.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public HarvesterU MyRole = new();
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
+
+    static readonly DividedSpriteLoader MyIcons = DividedSpriteLoader.FromResource("Nebula.Resources.MeetingButtons.png", 100f, 100, 110, true);
+    static readonly Image MediumImage = MyIcons.AsLoader(5);
+
+    bool IAssignableDocument.HasTips => false;
+    bool IAssignableDocument.HasAbility => true;
+
+    IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
+    {
+        yield return new(MediumImage, "role.harvesterU.ability.medium");
+
+    }
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
 
-        static readonly DividedSpriteLoader MyIcons =DividedSpriteLoader.FromResource("Nebula.Resources.MeetingButtons.png",100f, 100, 110, true);
-        static readonly Image MediumImage = MyIcons.AsLoader(5);
         int leftHarvest = NumOfHarvest;
         int leftHarvestPer = NumOfPerMeeting;
         static List<GamePlayer>? MediumTargets = new List<GamePlayer>();
@@ -119,9 +131,7 @@ public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, 
                         leftHarvest--;
                         leftHarvestPer--;
                     }
-                }, p => p.MyPlayer.IsDead  && !p.MyPlayer.AmOwner && !MediumTargets!.Contains(p.MyPlayer) && leftHarvest > 0 && leftHarvestPer > 0 && !PlayerControl.LocalPlayer.Data.IsDead &&
-                GameOperatorManager.Instance!.Run(new PlayerCanGuessPlayerLocalEvent(NebulaAPI.CurrentGame!.LocalPlayer, p.MyPlayer, true)).CanGuess
-
+                }, p => p.MyPlayer.IsDead  && !p.MyPlayer.AmOwner && !MediumTargets!.Contains(p.MyPlayer) && leftHarvest > 0 && leftHarvestPer > 0 && !PlayerControl.LocalPlayer.Data.IsDead
             ));
         }
 

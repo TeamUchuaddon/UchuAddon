@@ -20,18 +20,20 @@ using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
 using Virial.Text;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+using compat = Hori.Core.UchuTranslatable;
 
 namespace Hori.Scripts.Role.Impostor;
 
-//オブジェクトを専用のものにするのは後で
 [NebulaRPCHolder]
 public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, DefinedRole,IAssignableDocument
 {
-    private EclipseU() : base("eclipseU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [UseOfMeteor, MeteorMarkCooldown, MeteorBlastCooldown, MeteorWarningTime, MarkStopTime, MeteorSize, ResetBlastCool, MarkMeetingReset, MarkPlaySE, SERange])
+    private EclipseU() : base("eclipseU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [
+         new GroupConfiguration("options.role.eclipseU.group.mark", [MeteorMarkCooldown, MarkStopTime, MarkMeetingReset, ResetBlastCool, MarkPlaySE, SERange], GroupConfigurationColor.ImpostorRed),
+         new GroupConfiguration("options.role.eclipseU.group.meteor", [MeteorBlastCooldown, UseOfMeteor, MeteorSize, MeteorWarningTime], GroupConfigurationColor.ImpostorRed)])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Eclipse.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -43,13 +45,13 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
     static private readonly IntegerConfiguration UseOfMeteor = NebulaAPI.Configurations.Configuration("options.role.eclipseU.useOfMeteor", (1, 99), 3);
     static private readonly FloatConfiguration MeteorMarkCooldown = NebulaAPI.Configurations.Configuration("options.role.eclipseU.meteorMarkCoolDown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
     static private readonly FloatConfiguration MeteorBlastCooldown = NebulaAPI.Configurations.Configuration("options.role.eclipseU.meteorBlastCoolDown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
-    static private readonly FloatConfiguration MeteorWarningTime = NebulaAPI.Configurations.Configuration("options.role.eclipseU.meteorWarningTime", (0f, 3f, 0.25f), 1f, FloatConfigurationDecorator.Second);
+    static private readonly FloatConfiguration MeteorWarningTime = NebulaAPI.Configurations.Configuration("options.role.eclipseU.meteorWarningTime", (0f, 3f, 0.25f), 0.5f, FloatConfigurationDecorator.Second);
     static private readonly FloatConfiguration MarkStopTime = NebulaAPI.Configurations.Configuration("options.role.eclipseU.markStopTime", (0.5f, 5f, 0.5f), 1f, FloatConfigurationDecorator.Second);
-    static private readonly FloatConfiguration MeteorSize = NebulaAPI.Configurations.Configuration("options.role.eclipseU.meteorSize", (1f, 15f, 0.25f), 1.5f, FloatConfigurationDecorator.Ratio);
+    static private readonly FloatConfiguration MeteorSize = NebulaAPI.Configurations.Configuration("options.role.eclipseU.meteorSize", (1f, 15f, 0.25f), 2f, FloatConfigurationDecorator.Ratio);
     static private readonly BoolConfiguration ResetBlastCool = NebulaAPI.Configurations.Configuration("options.role.eclipseU.resetBlastCool", false);
-    static private readonly BoolConfiguration MarkMeetingReset = NebulaAPI.Configurations.Configuration("options.role.eclipseU.markMeetingReset", true);
+    static private readonly BoolConfiguration MarkMeetingReset = NebulaAPI.Configurations.Configuration("options.role.eclipseU.markMeetingReset", false);
     static private readonly BoolConfiguration MarkPlaySE = NebulaAPI.Configurations.Configuration("options.role.eclipseU.markPlaySE", true);
-    static private readonly FloatConfiguration SERange = NebulaAPI.Configurations.Configuration("options.role.eclipseU.seRange", (2.5f, 20f, 2.5f), 10f, FloatConfigurationDecorator.Ratio, () => MarkPlaySE);
+    static private readonly FloatConfiguration SERange = NebulaAPI.Configurations.Configuration("options.role.eclipseU.seRange", (2.5f, 20f, 2.5f), 5f, FloatConfigurationDecorator.Ratio, () => MarkPlaySE);
 
     static private readonly Image MeteorMarkImage = NebulaAPI.AddonAsset.GetResource("MeteorMark.png")!.AsImage(115f)!;
     static private readonly Image MeteorBlastImage = NebulaAPI.AddonAsset.GetResource("MeteorButton.png")!.AsImage(115f)!;
@@ -90,6 +92,9 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
         yield return new(MeteorMarkImage, "role.eclipseU.ability.mark");
         yield return new(MeteorBlastImage, "role.eclipseU.ability.blast");
     }
+
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueKillAbility;
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         NebulaSyncStandardObject? mark;
@@ -111,9 +116,9 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
         {
             float warningTime = (float)MeteorWarningTime;
             float meteorSize = message.size;
-            NebulaAsset.PlaySE(NebulaAudioClip.MeteorAlert, true);
+            NebulaAsset.PlaySE(NebulaAudioClip.MeteorAlert, true, 0.65f);
 
-            var warningCircle = EffectCircle.SpawnEffectCircle(null, message.pos.AsVector3(-9f), Color.red.AlphaMultiplied(0.5f), message.size, null, true);
+            var warningCircle = EffectCircle.SpawnEffectCircle(null, message.pos.AsVector3(-9f), Color.Red.AlphaMultiplied(0.5f), message.size, null, true);
             yield return Effects.Wait(warningTime);
             warningCircle.Disappear();
 
@@ -121,25 +126,19 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
             IDividedSpriteLoader MeteorSprite = DividedSpriteLoader.FromResource("Nebula.Resources.Meteor.png", 100f, 2, 1).SetPivot(new(0f, 0f));
 
             var explosion = UnityHelper.CreateObject<SpriteRenderer>("Explosion", null, message.pos.AsVector3(-10f));
+            explosion.transform.localScale = Vector3.One * meteorSize * 0.9f;
             for (int i = 0; i < 2; i++)
             {
                 explosion.sprite = MeteorSprite.GetSprite(i);
                 yield return Effects.Wait(0.05f);
             }
-            NebulaAsset.PlaySE(NebulaAudioClip.ExplosionNear, message.pos, 20f, 20f);
+            NebulaAsset.PlaySE(NebulaAudioClip.ExplosionNear, message.pos, 20f, 20f, 0.8f);
             foreach (var player in NebulaGameManager.Instance.AllPlayerInfo)
             {
                 if (player.IsDead) continue;
                 if (player.Position.Distance(message.pos) <= message.size)
                 {
-                    message.invoker.MurderPlayer(
-                        player,
-                        EclipseTags.Bomb,
-                        EclipseTags.Bomb,
-                        KillParameter.WithAssigningGhostRole | KillParameter.WithDeadBody,
-                        KillCondition.TargetAlive,
-                        result => { }
-                    );
+                    message.invoker.MurderPlayer(player, compat.EclipseBomb, compat.EclipseBomb, KillParameter.RemoteKill);
                 }
             }
 
@@ -159,11 +158,23 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
             {
                 leftMeteor = UseOfMeteor;
                 mark = null!;
-                var markButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, VirtualKeyInput.Ability, MeteorMarkCooldown, "Emark", MeteorMarkImage).SetAsUsurpableButton(this);
-                ModAbilityButton blastButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, VirtualKeyInput.SecondaryAbility, null, MeteorBlastCooldown, "Eblast", MeteorBlastImage, (ModAbilityButton _) => mark != null && leftMeteor > 0, (b) => !MyPlayer.IsDead, false);
-                markButton.Visibility = b => !MyPlayer.IsDead;
-                markButton.Availability = b => MyPlayer.CanMove;
-                markButton.OnClick = m =>
+                var markButton = NebulaAPI.Modules.EffectButton(this, MyPlayer, VirtualKeyInput.Ability, MeteorMarkCooldown, MarkStopTime,"Emark", MeteorMarkImage, _=> leftMeteor > 0).SetAsUsurpableButton(this);
+                var blastButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.SecondaryAbility, MeteorBlastCooldown, "Eblast", MeteorBlastImage, _ => mark != null && leftMeteor > 0).SetAsUsurpableButton(this);
+                markButton.OnClick = (button) => button.StartEffect();
+                markButton.OnEffectStart = (_) => 
+                {
+                    MyPlayer.GainSpeedAttribute(0f, MarkStopTime, false, 10, "eclipseU::stop");
+
+                    if (MarkPlaySE)
+                    {
+                        NebulaAsset.RpcPlaySE.Invoke((NebulaAudioClip.Destroyer1, MyPlayer.Position, 0.6f, SERange));
+                    }
+                    else if (!MarkPlaySE)
+                    {
+                        NebulaAsset.PlaySE(NebulaAudioClip.Destroyer1, MyPlayer.Position, 0.6f, SERange, 1f);
+                    }
+                };
+                markButton.OnEffectEnd = (button) =>
                 {
                     if (mark != null) NebulaSyncStandardObject.LocalDestroy(mark.ObjectId);
 
@@ -172,24 +183,9 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
                     PlayerControl.LocalPlayer.transform.localPosition.x,
                     PlayerControl.LocalPlayer.transform.localPosition.y
                     }).SyncObject as NebulaSyncStandardObject)!;
-
-                    float markStopDuration = (float)MarkStopTime;
-                    MyPlayer.GainSpeedAttribute(0f, markStopDuration, false, 10, "eclipseU::stop");
-                    if (MarkPlaySE)
-                    {
-                        NebulaAsset.RpcPlaySE.Invoke((NebulaAudioClip.Destroyer1, MyPlayer.Position, 0.6f, SERange));
-                    }
-                    else if(!MarkPlaySE)
-                    {
-                        NebulaAsset.PlaySE(NebulaAudioClip.Destroyer1, MyPlayer.Position, 0.6f, SERange, 1f);
-                    }
-                        m.StartCoolDown();
-
-                    if (ResetBlastCool)
-                    {
-                        blastButton.StartCoolDown();
-                    }
-
+          
+                    button.StartCoolDown();
+                    if (ResetBlastCool) blastButton.StartCoolDown();
                 };
 
                 markButton.SetLabelType(ModAbilityButton.LabelType.Utility);
@@ -230,10 +226,5 @@ public class EclipseU : DefinedSingleAbilityRoleTemplate<EclipseU.Ability>, Defi
             }
         }
     }
-}
-
-public static class EclipseTags
-{
-    public static TranslatableTag Bomb = new("statistics.Bomb");
 }
 

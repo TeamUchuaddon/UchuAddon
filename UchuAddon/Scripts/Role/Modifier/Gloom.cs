@@ -15,6 +15,7 @@ public class GloomU : DefinedAllocatableModifierTemplate, DefinedModifier, Defin
     private GloomU() : base("gloomU", "GLM", new(68, 148, 83), [], allocateToImpostor: false, allocateToNeutral: false)
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Gloom.png")!.AsImage(115f);
     }
     RuntimeModifier RuntimeAssignableGenerator<RuntimeModifier>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
 

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Ghost.Complex;
 
@@ -14,6 +14,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
 {
     public MiracleU() : base("miracleU", new(243, 255, 163), RoleCategory.CrewmateRole | RoleCategory.ImpostorRole, [SwapCooldown,NumOfSwap,MiracleAction])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Miracle.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     string ICodeName.CodeName => "MIR";
@@ -26,7 +27,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
 
     static public readonly MiracleU MyRole = new();
 
-    static private readonly Virial.Media.Image MiracleImage = NebulaAPI.AddonAsset.GetResource("WitchSpellButton.png")!.AsImage(115f)!;
+    static private readonly Virial.Media.Image MiracleImage = NebulaAPI.AddonAsset.GetResource("MiracleButton.png")!.AsImage(115f)!;
 
     bool IAssignableDocument.HasTips => false;
     bool IAssignableDocument.HasAbility => true;
@@ -79,7 +80,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
                         {
                             swapTarget = playerTracker.CurrentTarget;
                             left--;
-                            ImswapButton.UpdateUsesIcon(left.ToString());
+                            ImswapButton.HideUsesIcon();
                             swapIcon = (ImswapButton as ModAbilityButtonImpl)?.GeneratePlayerIcon(swapTarget);
                             RpcCheckSwap.Invoke((MyPlayer, swapTarget!));
                         }
@@ -97,7 +98,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
                         {
                             swapTarget = playerTracker.CurrentTarget;
                             left--;
-                            CrswapButton.UpdateUsesIcon(left.ToString());
+                            CrswapButton.HideUsesIcon();
                             swapIcon = (CrswapButton as ModAbilityButtonImpl)?.GeneratePlayerIcon(swapTarget);
                             RpcCheckSwap.Invoke((MyPlayer, swapTarget!));
                         }
@@ -116,7 +117,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
                         {
                             swapTarget = playerTracker.CurrentTarget;
                             left--;
-                            OtherswapButton.UpdateUsesIcon(left.ToString());
+                            OtherswapButton.HideUsesIcon();
                             swapIcon = (OtherswapButton as ModAbilityButtonImpl)?.GeneratePlayerIcon(swapTarget);
                             RpcCheckSwap.Invoke((MyPlayer, swapTarget!));
                         }
@@ -134,7 +135,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
                         {
                             swapTarget = playerTracker.CurrentTarget;
                             left--;
-                            AllswapButton.UpdateUsesIcon(left.ToString());
+                            AllswapButton.HideUsesIcon();
                             swapIcon = (AllswapButton as ModAbilityButtonImpl)?.GeneratePlayerIcon(swapTarget);
                             RpcCheckSwap.Invoke((MyPlayer, swapTarget!));
                         }
@@ -180,6 +181,7 @@ public class MiracleU : DefinedGhostRoleTemplate, DefinedGhostRole, IAssignableD
             swapTarget = null;
             currentTargetList.Clear();
         }
+
         [Local]
         void OnMeetingPreEnd(MeetingPreEndEvent ev)
         {

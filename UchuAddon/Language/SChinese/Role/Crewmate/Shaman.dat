@@ -1,0 +1,36 @@
+# Assignable
+
+"role.shamanU.name" : "萨满"
+"role.shamanU.short" : "萨"
+"role.shamanU.blurb" : "追忆凭依"
+
+# Document
+
+"role.shamanU.doc" : "萨满可以调查存活的非船员人数。"
+"role.shamanU.ability.title" : "固有能力【英灵记忆】"
+"role.shamanU.ability.main" : "使用降灵术，询问存活的非船员人数。"
+"role.shamanU.ability.necromancy" : "<title>降灵术</title>调查存活的非船员人数。<br>技能只能在指定房间使用<br>降灵过程中移动会立即取消技能。<br>结果会在会议中显示。"
+"role.shamanU.ability.necromancyBoost" : "<title>强化降灵术</title>完成<var>%NUMBOOST%</var>个任务后，降灵术将会强化。<br>强化后的降灵术，<br>可以知道具体是哪些非船员还活着。"
+"role.shamanU.tips" : "指定房间会显示箭头。<br>降灵术完成后房间会重新随机。<br>显示结果为使用降灵术时的状态。"
+
+# Options
+
+"options.role.shamanU.detail" : "萨满是可以调查存活非船员玩家数量的船员。"
+"options.role.shamanU.necromancyCooldown" : "降灵术冷却时间"
+"options.role.shamanU.necromancyDuration" : "降灵术施放时间"
+"options.role.shamanU.numOfnecromancy" : "降灵术可用次数"
+"options.role.shamanU.taskCompletesRoomReroll" : "完成任务时重新随机房间"
+"options.role.shamanU.skillBoost" : "强化降灵术"
+"options.role.shamanU.numOfBoostTask" : "强化所需任务数"
+
+# Game
+
+"options.role.shamanU.message.header" : "降灵术结果"
+"role.shamanU.result" : "存活非船员人数"
+# UI
+
+"button.label.shamanU.necromancy" : "降灵术"
+
+# Stats
+
+# Titles

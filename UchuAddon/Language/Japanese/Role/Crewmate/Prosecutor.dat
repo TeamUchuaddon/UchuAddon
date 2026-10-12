@@ -9,14 +9,16 @@
 "role.prosecutorU.doc" : "プレイヤーを強制追放します。"
 "role.prosecutorU.ability.title" : "固有能力 "有罪判決""
 "role.prosecutorU.ability.main" : "プレイヤーを強制追放することが出来ます。"
-"role.prosecutorU.ability.prosecute" : "<title>プロセキュート</title>使用後、投票したプレイヤーを強制追放します。"
-　
+"role.prosecutorU.ability.prosecute" : "<title>プロセキュート</title>対象のプレイヤーを強制的に追放します。<br><var>%EXILED%</var>"
+"role.prosecutorU.ability.main.exiled" : "対象がクルーメイトの場合、自身も追放されてしまいます。"
+"role.prosecutorU.ability.main.notExiled" : ""
+
 # Options
 
 "options.role.prosecutorU.detail" : "プロセキューターはプレイヤーを強制追放するクルーメイトです。"
 "options.role.prosecutorU.numOfProsecute" : "プロセキュート使用可能回数"
 "options.role.prosecutorU.prosecuteCrewmateCheck" : "対象がクルーメイトの場合死亡する"
-
+"options.role.prosecutorU.canCallEmergencyMeeting" : "緊急会議ボタンの使用"
 # Game
 
 
@@ -24,7 +26,6 @@
 
 "button.label.prosecute" : "プロセキュート"
 "role.prosecutorU.hudText" : "残りプロセキュート回数"
-"role.prosecutorU.message1" : "<color=#3477eb>プロセキュート</color>"
 
 # Stats
 

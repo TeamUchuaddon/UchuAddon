@@ -20,26 +20,28 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Virial.Attributes;
-using Image = Virial.Media.Image;
 using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+using compat = Hori.Core.UchuTranslatable;
 
 namespace Hori.Scripts.Role.Impostor;
 
 public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, DefinedRole, HasCitation,IAssignableDocument
 {
-
-    public static TranslatableTag Launch = new("statistics.Launch");
-
-
     public RocketU() : base("rocketU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [HoldCooldownOption, NextHoldCooldownOption, LaunchCooldownOption, CanUseNormalKillOption, CanCounterOption])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Rocket.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon, ConfigurationTags.TagFunny);
     }
     Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.SuperNewRoles; } }
+
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
+
     static bool holded = false;
 
 
@@ -62,6 +64,7 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
         yield return new(HoldButtonSprite, "role.rocketU.ability.hold");
         yield return new(LaunchButtonSprite, "role.rocketU.ability.launch");
     }
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueKillAbility;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         int[] IPlayerAbility.AbilityArguments => new int[] { IsUsurped.AsInt() };
@@ -99,7 +102,7 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
                     foreach (var id in holdingPlayers)
                     {
                         var player = GamePlayer.GetPlayer(id);
-                        MyPlayer.MurderPlayer(player, Launch, null, KillParameter.WithAssigningGhostRole | KillParameter.WithoutSelfSE);
+                        MyPlayer.MurderPlayer(player, compat.RocketLaunch, null, KillParameter.WithAssigningGhostRole | KillParameter.WithoutSelfSE);
 
                         RpcRocketKill.Invoke(new(MyPlayer, player, MyPlayer.TruePosition, Array.IndexOf(holdingPlayers, id)));
                     }
@@ -123,7 +126,7 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
                     foreach (var id in holdingPlayers)
                     {
                         var player = GamePlayer.GetPlayer(id);
-                        MyPlayer.MurderPlayer(player, Launch, null, KillParameter.WithAssigningGhostRole | KillParameter.WithoutSelfSE, KillCondition.NoCondition);
+                        MyPlayer.MurderPlayer(player, compat.RocketLaunch, null, KillParameter.WithAssigningGhostRole | KillParameter.WithoutSelfSE, KillCondition.NoCondition);
                     }
                     holdingPlayers = Array.Empty<byte>();
                     usedMeetingLaunch = true;
@@ -178,7 +181,7 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
             if (ev.IsMeetingKill || ev.EventDetail != EventDetails.Kill) return;
             if (ev.Killer.PlayerId == MyPlayer.PlayerId) return;
 
-            ev.Result = KillResult.Guard;
+            ev.Result = KillResult.ObviousGuard;
         }
 
     }
@@ -198,12 +201,12 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
                 var rocketPlayer = GamePlayer.GetPlayer(message.rocketPlayer);
                 if (rocketPlayer == null || rocketPlayer.IsDead) continue;
 
-                player.VanillaPlayer.NetTransform.SnapTo(new UnityEngine.Vector2(rocketPlayer.TruePosition.x, rocketPlayer.TruePosition.y + 0.35f));
+                player.VanillaPlayer.NetTransform.SnapTo(new Vector2(rocketPlayer.TruePosition.x, rocketPlayer.TruePosition.y + 0.35f));
             }
         }
         );
 
-    static readonly RemoteProcess<(GamePlayer rocket, GamePlayer dead, UnityEngine.Vector2 pos, int number)> RpcRocketKill = new(
+    static readonly RemoteProcess<(GamePlayer rocket, GamePlayer dead, Vector2 pos, int number)> RpcRocketKill = new(
            "RocketKill",
            (message, _) =>
            {
@@ -219,31 +222,31 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
     static private readonly IDividedSpriteLoader explosionSprite = DividedSpriteLoader.FromResource("Nebula.Resources.ExplosionAnim.png", 70f, 4, 2);
 
 
-    static void SpawnRocket(GamePlayer killer, GamePlayer player, UnityEngine.Vector2 position, int number)
+    static void SpawnRocket(GamePlayer killer, GamePlayer player, Vector2 position, int number)
     {
         var rocketHolder = UnityHelper.CreateObject("Rocket", null, position.AsVector3(-1f), LayerExpansion.GetDefaultLayer());
         var myBehaviour = rocketHolder.gameObject.AddComponent<EmptyBehaviour>();
         allRockets.Add(rocketHolder);
 
         rocketHolder.transform.localPosition += GetCustomCirclePos(number);
-        rocketHolder.transform.localScale = new UnityEngine.Vector3(1f, 1f, 0.1f);
-        var rocket = UnityHelper.CreateObject("Sin", rocketHolder.transform, UnityEngine.Vector3.zero);
+        rocketHolder.transform.localScale = new Vector3(1f, 1f, 0.1f);
+        var rocket = UnityHelper.CreateObject("Sin", rocketHolder.transform, Vector3.Zero);
 
-        var rocketRenderer = UnityHelper.CreateObject<SpriteRenderer>("Sprite", rocket.transform, new UnityEngine.Vector3(0f, 0f, 10f));
+        var rocketRenderer = UnityHelper.CreateObject<SpriteRenderer>("Sprite", rocket.transform, new Vector3(0f, 0f, 10f));
 
         rocketRenderer.transform.localScale = new(0.43f, 0.43f, 1f);
         rocketRenderer.sprite = rocketSprite.GetSprite();
 
-        var rocketRopeRenderer = UnityHelper.CreateObject<SpriteRenderer>("Rope", rocket.transform, new UnityEngine.Vector3(0f, 0f, 0f));
+        var rocketRopeRenderer = UnityHelper.CreateObject<SpriteRenderer>("Rope", rocket.transform, new Vector3(0f, 0f, 0f));
         rocketRopeRenderer.sprite = rocketRopeSprite.GetSprite();
 
 
-        var launchPlayer = UnityHelper.CreateObject("LaunchPlayer", rocket.transform, UnityEngine.Vector3.zero);
+        var launchPlayer = UnityHelper.CreateObject("LaunchPlayer", rocket.transform, Vector3.Zero);
 
         var deadBody = GameObject.Instantiate(HudManager.Instance.KillOverlay.KillAnims[0].victimParts, launchPlayer.transform);
         if (player.AmOwner) AmongUsUtil.SetCamTarget(myBehaviour);
 
-        deadBody.transform.localPosition = new UnityEngine.Vector3(-0.28f, 0.42f, 5f);
+        deadBody.transform.localPosition = new Vector3(-0.28f, 0.42f, 5f);
 
         deadBody.transform.localScale = new(-0.35f, 0.35f, 0.5f);
         deadBody.gameObject.ForEachAllChildren(obj => obj.layer = LayerExpansion.GetDefaultLayer());
@@ -251,8 +254,8 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
 
 
         deadBody.UpdateFromPlayerOutfit(player.CurrentOutfit.outfit, PlayerMaterial.MaskType.None, false, false, (System.Action)(() =>
-        {
-            deadBody.transform.Find("Cosmetics/Skin").transform.localPosition = new UnityEngine.Vector3(-0.8f, -0.5f, 0f);
+        {   
+            deadBody.transform.Find("Cosmetics/Skin").transform.localPosition = new Vector3(-0.8f, -0.5f, 0f);
         }));
         deadBody.ToggleName(false);
         NebulaManager.Instance.StartCoroutine(CoLaunchLocket().WrapToIl2Cpp());
@@ -318,7 +321,7 @@ public class RocketU : DefinedSingleAbilityRoleTemplate<RocketU.Ability>, Define
             float angleDeg = angles[idx];
             float rad = angleDeg * Mathf.Deg2Rad;
 
-            return new UnityEngine.Vector3(Mathf.Cos(rad) * radius, Mathf.Sin(rad) * radius, 0f);
+            return new Vector3(Mathf.Cos(rad) * radius, Mathf.Sin(rad) * radius, 0f);
         }
 
     }

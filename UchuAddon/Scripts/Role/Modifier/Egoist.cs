@@ -14,6 +14,7 @@ public class EgoistU : DefinedAllocatableModifierTemplate, HasCitation, DefinedA
 {
     private EgoistU() : base("egoistU", "EGO", new(170, 32, 201), allocateToImpostor: false, allocateToNeutral: false)
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Egoist.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     RuntimeModifier RuntimeAssignableGenerator<RuntimeModifier>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);

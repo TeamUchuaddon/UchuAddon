@@ -8,20 +8,32 @@
 
 "role.proxyU.doc" : "モニターと連携するインポスターです。"
 "role.proxyU.ability.title" : "固有能力 "巡れ、電脳連携""
-"role.proxyU.ability.main" : "プロキシはモニターとのコンビネーションです。上手く連携しましょう。"
-"role.proxyU.ability.request" : "<title>申請</title>モニターと役職をチェンジします。"
+"role.proxyU.ability.main" : "プロキシはモニターとのコンビネーションです。上手く連携しましょう"
+"role.proxyU.ability.request" : "<title>交換</title>モニターと役職を即座にチェンジします。"
+"role.proxyU.embroilAction.not" : ""
+"role.proxyU.embroilAction.proxy" : "<var>プロキシが死亡すると、モニターは後追いで死亡します。</var>"
+"role.proxyU.embroilAction.monitor" : "<var>モニターが死亡すると、プロキシは後追いで死亡します。</var>"
+"role.proxyU.embroilAction.all" : "<var>プロキシ モニターのどちらかが死亡すると、片方が後追いで死亡します。</var>"
+"role.proxyU.tips" : "%EMBROIL%"
 
 # Options
 
 "options.role.proxyU.detail" : "プロキシはモニターと連携するインポスターです。"
-"options.role.proxyU.requestCooldown" : "申請クールダウン"
+"options.role.proxyU.requestCooldown" : "交換クールダウン"
+"options.role.proxyU.showPairArrow" : "プロキシ モニター間で矢印表示"
+"options.role.proxyU.embroilAction" : "後追いアクション"
+"options.role.proxyU.embroilAction.detail" : "プロキシ モニターのペアが後追いする条件を設定します。"
+"options.role.proxyU.embroilAction.not" : "後追いなし"
+"options.role.proxyU.embroilAction.proxy" : "プロキシ死亡時"
+"options.role.proxyU.embroilAction.monitor" : "モニター死亡時"
+"options.role.proxyU.embroilAction.all" : "どちらか死亡時"
 
 # Game
 
 
 # UI
 
-"button.label.Request" : "申請"
+"button.label.Request" : "交換"
 "button.label.approval" : "承認"
 
 # Stats

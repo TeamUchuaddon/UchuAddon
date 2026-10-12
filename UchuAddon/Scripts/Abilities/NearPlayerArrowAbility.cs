@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Abilities;
 
@@ -32,7 +32,7 @@ public class NearPlayerArrowAbility : FlexibleLifespan, IGameOperator
             if (all.AmOwner) continue;
             if (all.Data.IsDead) continue;
 
-            float d = Vector3.Distance(myPos, all.transform.position);
+            float d = UnityEngine.Vector3.Distance(myPos, all.transform.position);
             if (closest == null || d < minDistance)
             {
                 minDistance = d;
@@ -51,7 +51,7 @@ public class NearPlayerArrowAbility : FlexibleLifespan, IGameOperator
                 playerArrow = new Arrow(null)
                 {
                     TargetPos = pos
-                }.SetColor(RadarU.MyRole.UnityColor).Register(this);
+                }.SetColor(RadarU.MyRole.Color).Register(this);
             }
             else
             {

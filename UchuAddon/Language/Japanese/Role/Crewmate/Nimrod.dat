@@ -13,6 +13,9 @@
 "options.role.nimrodU.detail" : "ニムロッドは、会議中に指定したプレイヤーを道連れにできるクルーメイトです。<br>能力を使用すると、追放の結果に関わらず使用回数を消費します。"
 "options.role.nimrodU.numOfInvolve" : "道連れ試行最大回数"
 "options.role.nimrodU.maxLeftTimer" : "道連れ可能な最大残会議時間"
+"options.role.nimrodU.multiInvolve" : "複数人の道連れ"
+"options.role.nimrodU.multiInvolve.detail" : "複数人選択して道連れすることが出来るようになります。"
+"options.role.nimrodU.numOfInvolvePerMeting" : "会議ごとの道連れ使用可能数"
 
 # Game
 
@@ -26,3 +29,26 @@
 "stats.nimrodU.involve" : "道連れ回数"
 
 # Titles
+
+"achievement.uchuaddon.nimrodU.common1.title" : "狩猟対象"
+"achievement.uchuaddon.nimrodU.common1.goal" : "非クルーメイトを道連れする。"
+"achievement.uchuaddon.nimrodU.common1.cond" : ""
+
+"achievement.uchuaddon.nimrodU.another1.title" : "誤射"
+"achievement.uchuaddon.nimrodU.another1.goal" : "クルーメイトを道連れする。"
+"achievement.uchuaddon.nimrodU.another1.flavor" : ""そういう日もある。" ─未熟な狩人"
+"achievement.uchuaddon.nimrodU.another1.cond" : ""
+
+"achievement.uchuaddon.nimrodU.another2.title" : "いさぎよし。"
+"achievement.uchuaddon.nimrodU.another2.goal" : "誰も道連れせずに追放される。"
+"achievement.uchuaddon.nimrodU.another2.flavor" : ""これが最善なんだ・・・""
+"achievement.uchuaddon.nimrodU.another2.cond" : ""
+
+"achievement.uchuaddon.nimrodU.hard1.title" : "心眼"
+"achievement.uchuaddon.nimrodU.hard1.goal" : "最後のインポスターを道連れし、ゲームが終了する。"
+"achievement.uchuaddon.nimrodU.hard1.cond" : "自分自身が勝利すること。"
+
+"achievement.uchuaddon.nimrodU.challenge1.title" : "狩人の信念"
+"achievement.uchuaddon.nimrodU.challenge1.goal" : "3人以上の非クルーメイトを同時に追放する。"
+"achievement.uchuaddon.nimrodU.challenge1.flavor" : ""だから私は狩人なんだ。""
+"achievement.uchuaddon.nimrodU.challenge1.cond" : ""

@@ -23,7 +23,10 @@ using Virial.Helpers;
 using Virial.Media;
 using static Il2CppSystem.DateTimeParse;
 using static UnityEngine.GraphicsBuffer;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
@@ -44,7 +47,7 @@ public class BakeryU : DefinedSingleAbilityRoleTemplate<BakeryU.Ability>, Define
     static private IntegerConfiguration BreadPerMeetingOption = NebulaAPI.Configurations.Configuration("options.role.bakeryU.breadPerMeeting", (1, 10), 3);
     static public BakeryU MyRole = new BakeryU();
 
-
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
@@ -69,7 +72,7 @@ public class BakeryU : DefinedSingleAbilityRoleTemplate<BakeryU.Ability>, Define
 
                 var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
                 playerTracker.SetColor(MyRole.RoleColor);
-                var passBreadButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, PassBreadCooldownOption, "bakeryU.passBread", passBreadButtonSprite, _ => playerTracker.CurrentTarget != null && !haveBread.Contains(playerTracker.CurrentTarget) && left != 0);
+                var passBreadButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, PassBreadCooldownOption, "bakeryU.passBread", passBreadButtonSprite, _ => playerTracker.CurrentTarget != null && !haveBread.Contains(playerTracker.CurrentTarget) && left != 0).SetAsUsurpableButton(this);
                 passBreadButton.OnClick = (button) =>
                 {
                     RpcPassBread.Invoke(playerTracker.CurrentTarget!);
@@ -120,20 +123,82 @@ public class BakeryU : DefinedSingleAbilityRoleTemplate<BakeryU.Ability>, Define
 
         void MeetingEndEvent(MeetingEndEvent ev)
         {
-            haveBread.Clear();
+            RpcClearBread.Invoke();
             left = BreadPerMeetingOption;
         }
 
-        void DecoratePlayerName(PlayerDecorateNameEvent ev)
+        void OnMeetingStart(MeetingStartEvent ev)
         {
-            if (haveBread.Contains(ev.Player) && MeetingHud.Instance) ev.Name += " <color=#03fc6f>@";
+            if (haveBread == null) return;
+            foreach (var p in haveBread)
+            {
+                UpdateBreadMark(p.PlayerId);
+            }
         }
 
-
-        RemoteProcess<GamePlayer> RpcPassBread = new("PassBread", (message, _) =>
+        RemoteProcess<GamePlayer> RpcPassBread = new("RpcPassBread_Uchu", (message, _) =>
         {
             haveBread.Add(message);
 
+            if (MeetingHud.Instance != null)
+            {
+                UpdateBreadMark(message.PlayerId);
+            }
         });
+
+        RemoteProcess RpcClearBread = new("RpcClearBread_Uchu", (_) =>
+        {
+            haveBread?.Clear();
+
+            ClearAllBreadMarks();
+        });
+
+        static Dictionary<byte, GameObject> marks = new();
+        static private readonly Virial.Media.Image BreadMark = NebulaAPI.AddonAsset.GetResource("MarkBakery.png")!.AsImage(100f)!;
+
+        static void UpdateBreadMark(byte playerId)
+        {
+            if (marks.TryGetValue(playerId, out var oldObj) && oldObj)
+            {
+                UnityEngine.Object.Destroy(oldObj);
+                marks.Remove(playerId);
+            }
+
+            var pva = MeetingHud.Instance?.GetPlayer(playerId);
+            if (!pva) return;
+            if (pva == null) return;
+
+            var obj = UnityHelper.SimpleAnimator(pva.transform, new UnityEngine.Vector3(0f, 0f, -0.5f), 0.15f, _ => BreadMark.GetSprite()).gameObject;
+
+            obj.name = "BakeryMark";
+            obj.transform.localScale = Vector3.One;
+            obj.transform.localPosition = new Vector3(0f, 0f, -0.0002f);
+
+            var renderer = obj.GetComponent<SpriteRenderer>();
+                
+
+            marks[playerId] = obj;
+        }
+
+        static void ClearAllBreadMarks()
+        {
+            foreach (var obj in marks.Values)
+            {
+                if (obj) UnityEngine.Object.Destroy(obj);
+            }
+            marks.Clear();
+        }
+
+        [Local]
+        void start(GameStartEvent ev)
+        {
+            ClearAllBreadMarks();
+        }
+
+        [Local]
+        void end(GameEndEvent ev)
+        {
+            ClearAllBreadMarks();
+        }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AsmResolver.PE;
+﻿using AsmResolver.PE;
 using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Hori.Core;
 using Il2CppInterop.Runtime.Injection;
@@ -15,14 +10,24 @@ using Nebula.Game.Statistics;
 using Nebula.Modules;
 using Nebula.Modules.ScriptComponents;
 using Nebula.Player;
+using Nebula.Roles.Crewmate;
 using Nebula.Roles.Modifier;
 using Nebula.Roles.Neutral;
 using Nebula.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Virial.Attributes;
 using Virial.Events.Game.Minimap;
+using Virial.Events.Player;
 using Virial.Media;
 using static Nebula.Modules.ScriptComponents.NebulaSyncStandardObject;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
@@ -32,6 +37,7 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
     private AnchorU() : base("anchorU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [AnchorPlaceCooldown, NumOfAnchor, NumOfAnchorPerTurn, FakeNoticeCooldown, NumOfFakeNotice, AnchorRange, AnchorVentConfiguration])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Anchor.png")!.AsImage(115f);
     }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Anchor.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
@@ -63,13 +69,13 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
         private static MultiImage AnchorSprite = NebulaAPI.AddonAsset.GetResource("Anchor.png")!.AsMultiImage(5, 1, 200f)!;
         float indexT = 0f;
         int index = 0;
-        public FocusUPlace(UnityEngine.Vector2 pos) : base(pos, ZOption.Just, true, AnchorSprite.GetSprite(0))
+        public FocusUPlace(Vector2 pos) : base(pos, ZOption.Just, true, AnchorSprite.GetSprite(0))
         {
         }
 
         static FocusUPlace()
         {
-            RegisterInstantiater(MyTag, (args) => new FocusUPlace(new UnityEngine.Vector2(args[0], args[1])));
+            RegisterInstantiater(MyTag, (args) => new FocusUPlace(new Vector2(args[0], args[1])));
         }
         void OnUpdate(GameUpdateEvent ev)//アニメーション
         {
@@ -92,15 +98,15 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 
         public void AddMark(NebulaSyncStandardObject obj, Action onClick)
         {
-            var center = VanillaAsset.GetMapCenter(AmongUsUtil.CurrentMapId);
-            var scale = VanillaAsset.GetMapScale(AmongUsUtil.CurrentMapId);
+            var center = VanillaAsset.GetMapCenter(NebulaAPI.AmongUs.MapId);
+            var scale = VanillaAsset.GetMapScale(NebulaAPI.AmongUs.MapId);
             var localPos = VanillaAsset.ConvertToMinimapPos(obj.Position, center, scale);
 
             var renderer = UnityHelper.CreateObject<SpriteRenderer>("AnchorMapButton", transform, localPos.AsVector3(-0.5f));
 
             renderer.sprite = mapButtonSprite.GetSprite();
 
-            var inner = UnityHelper.CreateObject<SpriteRenderer>("Inner", renderer.transform, new UnityEngine.Vector3(0f, 0f, -0.1f));
+            var inner = UnityHelper.CreateObject<SpriteRenderer>("Inner", renderer.transform, new Vector3(0f, 0f, -0.1f));
             inner.sprite = mapButtonInnerSprite.GetSprite();
             inner.gameObject.AddComponent<MinimapScaler>();
 
@@ -127,9 +133,9 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
         private AnchorMapLayer mapLayer = null!;
         int currentIndex = 0;
         Arrow? currentArrow;
-        int PlaceCount;
-        int NoticeCount;
-        int TurnPlace;
+        int PlaceCount = NumOfAnchor;
+        int NoticeCount = NumOfFakeNotice;
+        int TurnPlace = NumOfAnchorPerTurn;
         private ModAbilityButton? mapButton;
         private bool isAnchorMapOpen = false;
 
@@ -163,7 +169,7 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                     PlaceCount--;
                     TurnPlace--;
                     RpcAnchorIcon.Invoke(MyPlayer.Position);
-                    AmongUsUtil.PlayFlash(Color.cyan);
+                    AmongUsUtil.PlayFlash(Color.Cyan);
                     AnchorPlaceButton.StartCoolDown();
                     AnchorPlaceButton.UpdateUsesIcon(PlaceCount.ToString());
                 };
@@ -192,11 +198,11 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
             }
         }
         static private Virial.Media.Image FocusAnchorIcon = NebulaAPI.AddonAsset.GetResource("AnchorIcon.png")!.AsImage(200f)!;
-        public static RemoteProcess<UnityEngine.Vector2> RpcAnchorIcon = new(
+        public static RemoteProcess<Vector2> RpcAnchorIcon = new(
             "ShowAnchorNotice",
             (message, _) =>
             {
-                if ((message - (UnityEngine.Vector2)PlayerControl.LocalPlayer.transform.position).magnitude < AnchorRange)
+                if ((message - (Vector2)PlayerControl.LocalPlayer.transform.position).Magnitude < AnchorRange)
                 {
                     var arrow = new Arrow(FocusAnchorIcon.GetSprite(), false) { IsSmallenNearPlayer = false, IsAffectedByComms = false, FixedAngle = true, OnJustPoint = true };
                     arrow.Register(arrow);
@@ -213,7 +219,7 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
             {
                 if (!mapLayer)
                 {
-                    mapLayer = UnityHelper.CreateObject<AnchorMapLayer>("MapLayer", MapBehaviour.Instance.transform, new UnityEngine.Vector3(0, 0, -1f));
+                    mapLayer = UnityHelper.CreateObject<AnchorMapLayer>("MapLayer", MapBehaviour.Instance.transform, new Vector3(0, 0, -1f));
 
                     Marks.ForEach(m => mapLayer.AddMark(m, () =>
                     {
@@ -237,7 +243,7 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
             if (mapLayer) mapLayer.gameObject.SetActive(false);
         }
 
-        private void ShowMapClickArrow(UnityEngine.Vector2 pos)
+        private void ShowMapClickArrow(Vector2 pos)
         {
             RpcAnchorIcon.Invoke(pos);
             NoticeCount--;
@@ -250,7 +256,14 @@ public class AnchorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 
         public override void OnActivated()
         {
-            throw new NotImplementedException();
+
+        }
+
+        void Set(PlayerRoleSetEvent ev)
+        {
+            PlaceCount = NumOfAnchor;
+            NoticeCount = NumOfFakeNotice;
+            TurnPlace = NumOfAnchorPerTurn;
         }
     }
 }

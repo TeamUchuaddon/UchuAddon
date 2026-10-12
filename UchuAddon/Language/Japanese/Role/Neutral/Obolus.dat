@@ -13,29 +13,37 @@
 
 # Options
 
-"options.role.obolusU.detail" : "オボルスはインポスターをキルすると勝利する第三陣営です。<br>キルは1ターンに1度しか行えません。"
+"options.role.obolusU.detail" : "オボルスはインポスターをキルすると勝利する第三陣営です。<br>キルは1ターンに1度しか行うことが出来ません"
 "options.role.obolusU.killCooldown" : "キルクールダウン"
 "options.role.obolusU.killShieldTurn" : "キル封印ターン数"
-"options.role.obolusU.killShieldTurn.detail" : "<b>設定ターン</b>が経過するまで、キルボタンをロックします。"
+"options.role.obolusU.killShieldTurn.detail" : "<b>設定ターン</b>が経過するまで、キルボタンをロックします"
 "options.role.obolusU.canKillHidingPlayer" : "隠れているプレイヤーをキル可能"
 "options.role.obolusU.impostorVision" : "インポスター視界"
 "options.role.obolusU.blackOutVision" : "停電の影響を受けない"
-"options.role.obolusU.extraWin" : "追加勝利"
-"options.role.obolusU.extraWin.detail" : "勝利条件を満たすと追加勝利するようになります。"
+"options.role.obolusU.obolusBreakdown" : "オボルスの存在をキラーに開示"
+"options.role.obolusU.obolusBreakdown.detail" : "オボルスの存在がキル対象に知らされるようになります。"
+"options.role.obolusU.breakdownAction" : "いつ開示するか"
+"options.role.obolusU.breakdownAction.firstTurn" : "初手会議"
+"options.role.obolusU.breakdownAction.unlockTurn" : "キル解放時"
 "options.role.obolusU.group.win" : "勝利拡張設定"
 "options.role.obolusU.jackalOptions" : "<color=#08bef5>ジャッカル</color>へのキルでも勝利可能"
 "options.role.obolusU.tyrantOptions" : "<color=#b98900>タイラント</color>へのキルでも勝利可能"
 "options.role.obolusU.obolusOptions" : "<color=#bd871a>オボルス</color>へのキルでも勝利可能"
+"options.role.obolusU.rogueOptions" : "<color=#004a61>ローグ</color>へのキルでも勝利可能"
+"options.role.obolusU.extraWin" : "追加勝利"
+"options.role.obolusU.extraWin.detail" : "勝利条件を満たすと追加勝利するようになります。"
 
 # Game
 
 
 # UI
 
+"options.role.obolusU.message.header" : "オボルスに気をつけろ。"
+"options.role.obolusU.message.content" : "何物かが影からあなたを狙っているようだ。"
 
 # Stats
 
 "end.obolusU" : "オボルス%EXTRA%勝利"
-"end.extra.aliceU" : "<color=#FFFFFF>+</color> オボルス"
+"end.extra.obolusU" : "<color=#FFFFFF>+</color> オボルス"
 
 # Titles

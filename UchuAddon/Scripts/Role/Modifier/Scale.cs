@@ -41,7 +41,7 @@ namespace Hori.Scripts.Role.Modifier;
 public class ScaleU : DefinedAllocatableModifierTemplate, DefinedAllocatableModifier
 {
     private ScaleU() : base("scaleU", "SCL", new(115, 107, 107), [ScaleAction,
-     new GroupConfiguration("options.role.scaleU.group.size",[SizeFixed,SizeMax,SizeMin,SizeMeetingRandom,NumOfSelect,SizeSelect1,SizeSelect2,SizeSelect3,SizeSelect4,SizeSelect5,SizeMeetingSelect],GroupConfigurationColor.ToDarkenColor(Color.gray)),])
+     new GroupConfiguration("options.role.scaleU.group.size",[SizeFixed,SizeMax,SizeMin,SizeMeetingRandom,NumOfSelect,SizeSelect1,SizeSelect2,SizeSelect3,SizeSelect4,SizeSelect5,SizeMeetingSelect],GroupConfigurationColor.ToDarkenColor(Virial.Color.Gray)),])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Scale.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -71,6 +71,9 @@ public class ScaleU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
         float RandomSize = 1f;
         float SelectSize = 1f;
         static readonly FloatConfiguration[] SizeSelects ={SizeSelect1,SizeSelect2,SizeSelect3,SizeSelect4,SizeSelect5};
+        bool isSmall = false;
+        bool isBig = false;
+        int NumOfReroll = 0;
 
         public Instance(GamePlayer player) : base(player)
         {
@@ -85,7 +88,7 @@ public class ScaleU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
             }
             else if (ScaleAction.GetValue() == 1)
             {
-                RandomSize = UnityEngine.Random.Range(SizeMin, SizeMax); 
+                RandomSize = UnityEngine.Random.Range(SizeMin, SizeMax);
                 MyPlayer.GainSizeAttribute(new UnityEngine.Vector2(RandomSize, RandomSize), float.MaxValue, true, 0, "scaleU:size");
             }
             else if (ScaleAction.GetValue() == 2)
@@ -93,15 +96,19 @@ public class ScaleU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
                 SelectSize = SelectRandomSize();
                 MyPlayer.GainSizeAttribute(new UnityEngine.Vector2(SelectSize, SelectSize), float.MaxValue, true, 0, "scaleU:size");
             }
+            MySize();
+            NumOfReroll++;
         }
 
         void IGameOperator.OnReleased()
         {
             MyPlayer.RemoveAttributeByTag("scaleU:size");
+            NumOfReroll = 0;
         }
 
         void RandomMeeting(MeetingPreEndEvent ev)
         {
+            if (MyPlayer.IsDead) return;
             if (ScaleAction.GetValue() == 1 && SizeMeetingRandom)
             {
                 MyPlayer.RemoveAttributeByTag("scaleU:size");
@@ -114,13 +121,62 @@ public class ScaleU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
                 SelectSize = SelectRandomSize();
                 MyPlayer.GainSizeAttribute(new UnityEngine.Vector2(SelectSize, SelectSize), float.MaxValue, true, 0, "scaleU:size");
             }
+            MySize();
+            NumOfReroll++;
         }
 
         float SelectRandomSize()
         {
             int count = Mathf.Clamp(NumOfSelect, 1, SizeSelects.Length);
             int index = UnityEngine.Random.Range(0, count);
+
             return SizeSelects[index];
+        }
+
+        void MySize()
+        {
+            if (ScaleAction.GetValue() == 0)
+            {
+                isSmall = SizeFixed < 1f;
+                isBig = SizeFixed > 1f;
+            }
+            else if (ScaleAction.GetValue() == 1)
+            {
+                isSmall = RandomSize < 1f;
+                isBig = RandomSize > 1f;
+            }
+            else if (ScaleAction.GetValue() == 2)
+            {
+                isSmall = SelectSize < 1f;
+                isBig = SelectSize > 1f;
+            }
+
+            if (isBig)
+            {
+                new StaticAchievementToken("scaleU.common1"); //ワオ！ジャンボ！！！
+            }
+            else if (isSmall)
+            {
+                new StaticAchievementToken("scaleU.common2"); //小惑星
+            }
+        }
+
+        [OnlyMyPlayer]
+        void PlayerDeath(PlayerDieEvent ev)
+        {
+            if (isSmall)
+            {
+                new StaticAchievementToken("scaleU.another1"); //踏みつぶし
+            }
+        }
+
+        [OnlyMyPlayer]
+        void GameEnd(GameEndEvent ev)
+        {
+            if (NumOfReroll >= 7)
+            {
+                new StaticAchievementToken("scaleU.challenge1"); //超変異生命
+            }
         }
 
         void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)

@@ -76,10 +76,10 @@ using static Nebula.Roles.Impostor.Whammy;
 using static Rewired.Utils.Classes.Data.SerializedObject;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.ProBuilder.AutoUnwrapSettings;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -87,6 +87,8 @@ public class CommanderU : DefinedSingleAbilityRoleTemplate<CommanderU.Ability>, 
 {
     public CommanderU() : base("commanderU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [NumOfCommand,CommandCooldown,CommandKillCooldown,CommandEndedDuration,KillButtonLostTime])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Commander.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
     static private IntegerConfiguration NumOfCommand = NebulaAPI.Configurations.Configuration("options.role.commanderU.numOfCommand", (1, 15), 2);
@@ -154,15 +156,6 @@ public class CommanderU : DefinedSingleAbilityRoleTemplate<CommanderU.Ability>, 
                     leftCommand--;
                     Command = true;
                     commandButton.UpdateUsesIcon(leftCommand.ToString());
-
-                    if (MyPlayer.IsImpostor)
-                    {
-                        foreach (var p in ImpostorPlayers.Where(p => !p.AmOwner && !p.IsDead))
-                        {
-                            if (!activeArrows.Any(a => a.MyPlayer == p))
-                                activeArrows.Add(new TrackingArrowAbility(p.Unbox(), 0f, Palette.ImpostorRed).Register(this));
-                        }
-                    }
                 };
 
                 commandButton.OnEffectEnd = (button) =>
@@ -170,9 +163,6 @@ public class CommanderU : DefinedSingleAbilityRoleTemplate<CommanderU.Ability>, 
                     Command = false;
                     RpcKillLost.Invoke(MyPlayer);
                     commandButton.StartCoolDown();
-
-                    foreach (var arrow in activeArrows) arrow.Release();
-                    activeArrows.Clear();
                 };
                 commandButton.ShowUsesIcon(0, leftCommand.ToString());
 
@@ -192,7 +182,7 @@ public class CommanderU : DefinedSingleAbilityRoleTemplate<CommanderU.Ability>, 
 
             NebulaAPI.CurrentGame?.KillButtonLikeHandler.SetCooldown(CommandKillCooldown);
             NebulaAsset.PlaySE(NebulaAudioClip.Justice1, false);
-            NebulaManager.Instance.StartCoroutine(CoCommanderCutin(imp).WrapToIl2Cpp());
+            NebulaManager.Instance.StartCoroutine(CoCommanderCutin(message).WrapToIl2Cpp());
             NebulaManager.Instance.StartCoroutine(FlashRoutine().WrapToIl2Cpp());
             NebulaManager.Instance.StartCoroutine(CommandTimer().WrapToIl2Cpp());
 
@@ -212,14 +202,14 @@ public class CommanderU : DefinedSingleAbilityRoleTemplate<CommanderU.Ability>, 
         {
             for (int i = 0; i < 3; i++)
             {
-                AmongUsUtil.PlayFlash(Color.red);
+                AmongUsUtil.PlayFlash(Color.Red);
                 yield return new WaitForSeconds(1.56f);   
             }
         }
 
         static IEnumerator CoCommanderCutin(GamePlayer player)
         {
-            var commanderCutinHolder = UnityHelper.CreateObject("CommanderCutinHolder", HudManager.Instance.transform, Vector3.zero);
+            var commanderCutinHolder = UnityHelper.CreateObject("CommanderCutinHolder", HudManager.Instance.transform, Vector3.Zero);
 
             var cutinBG = UnityHelper.CreateObject<SpriteRenderer>("BackGround", commanderCutinHolder.transform, new Vector3(0f, 0f, -70f));
             cutinBG.maskInteraction = UnityEngine.SpriteMaskInteraction.VisibleInsideMask;
@@ -329,7 +319,5 @@ public class CommanderU : DefinedSingleAbilityRoleTemplate<CommanderU.Ability>, 
                 KillLost = false;
             }
         }
-
-
     }
 }

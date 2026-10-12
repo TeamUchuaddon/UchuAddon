@@ -27,7 +27,6 @@ using Virial.Events.Player;
 using Virial.Game;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
 using Image = Virial.Media.Image;
 
 namespace Hori.Scripts.Role.Modifier;
@@ -39,7 +38,6 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Star.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
-
     static private BoolConfiguration RainbowStar = NebulaAPI.Configurations.Configuration("options.StarU.RainbowStar", false);
     static private IntegerConfiguration RainbowStarOption = NebulaAPI.Configurations.Configuration("options.role.StarU.RainbowStarOption", (5, 15), 8, () => RainbowStar);
 
@@ -52,7 +50,6 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
 
     public class Instance : RuntimeAssignableTemplate, RuntimeModifier
     {
-        private bool IsGameEnding = false;
         DefinedModifier RuntimeModifier.Modifier => MyRole;
 
         public Instance(GamePlayer player) : base(player)
@@ -67,12 +64,9 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
             }
         }
 
+
         float colorTimer = 0f;
 
-        void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
-        {
-            if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
-        }
         [OnlyMyPlayer]
         void DecorateName(PlayerDecorateNameEvent ev)
         {
@@ -87,6 +81,11 @@ public class StarU : DefinedAllocatableModifierTemplate, DefinedAllocatableModif
             {
                 ev.Color = new Virial.Color(1f, 1f, 0.1f, 1f);
             }
+        }
+
+        void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
+        {
+            if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
         }
     }
 }

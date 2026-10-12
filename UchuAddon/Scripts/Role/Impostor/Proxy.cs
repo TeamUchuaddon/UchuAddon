@@ -40,10 +40,10 @@ using Virial.Text;
 using static Il2CppSystem.Net.FtpWebRequest;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -56,44 +56,71 @@ file static class ProxyAsset
 
 public class ProxyU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 {
-    private ProxyU() : base("proxyU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, othersAssignments: () =>{
+    private ProxyU() : base("proxyU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam,[RequestCooldown, EmbroilAction], othersAssignments: () =>{
         return [new((_, playerId) =>{int groupId = playerId; return (MonitorU.MyRole, new[] { groupId });}, RoleCategory.CrewmateRole)];})
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Proxy.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
         ConfigurationHolder?.ScheduleAddRelated(() => [MonitorU.MyRole.ConfigurationHolder!]);
     }
 
     static public FloatConfiguration RequestCooldown = NebulaAPI.Configurations.Configuration("options.role.proxyU.requestCooldown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
+    //static public BoolConfiguration ShowPairArrow = NebulaAPI.Configurations.Configuration("options.role.proxyU.showPairArrow", true);
+    static public ValueConfiguration<int> EmbroilAction = NebulaAPI.Configurations.Configuration("options.role.proxyU.embroilAction", ["options.role.proxyU.embroilAction.not", "options.role.proxyU.embroilAction.proxy", "options.role.proxyU.embroilAction.monitor", "options.role.proxyU.embroilAction.all"], 0);
 
     DefinedRole[] DefinedRole.AdditionalRoles => [MonitorU.MyRole];
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments)=> new Instance(player, arguments.Get(0, player.PlayerId));
 
     static public ProxyU MyRole = new ProxyU();
-    public static RemoteProcess<GamePlayer> RpcRequest = new("RpcProxyRequest", (player, _) =>
-    {
-        if (player.Role is ProxyU.Instance proxy)
-        {
-            proxy.SetRequest(true);
-        }
-    });
 
-    bool IAssignableDocument.HasTips => false;
+
+    bool IAssignableDocument.HasTips => tips;
     bool IAssignableDocument.HasAbility => true;
     IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
     {
         yield return new(ProxyAsset.RequestImage, "role.proxyU.ability.request");
     }
+    IEnumerable<AssignableDocumentReplacement> IAssignableDocument.GetDocumentReplacements()
+    {
+        string text = EmbroilAction.GetValue() switch
+        {
+            0 => Language.Translate("role.proxyU.embroilAction.not"),
+            1 => Language.Translate("role.proxyU.embroilAction.proxy"),
+            2 => Language.Translate("role.proxyU.embroilAction.monitor"),
+            3 => Language.Translate("role.proxyU.embroilAction.all"),
+            _ => ""
+        };
+
+        yield return new("%EMBROIL%", text);
+    }
+
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Proxy&Monitor.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
+
+    bool tips = EmbroilAction.GetValue() != 0;
 
     public class Instance : RuntimeAssignableTemplate, RuntimeRole
     {
         DefinedRole RuntimeRole.Role => MyRole;
         public int GroupId { get; }
-        static public bool Request { get; private set; }
-        public void SetRequest(bool value)
+
+        TrackingArrowAbility? pairArrow = null;
+
+        void SetPairArrow()
         {
-            Request = value;
+            //if (!ShowPairArrow) return;
+
+            if (pairArrow != null)
+            {
+                pairArrow.Release();
+                pairArrow = null;
+            }
+
+            var monitor = NebulaGameManager.Instance?.AllPlayerInfo.FirstOrDefault(p => IsMyMonitor(p) && !p.IsDead);
+            if (monitor == null) return;
+
+            if (pairArrow != null) pairArrow.Release();
+            pairArrow = new TrackingArrowAbility(monitor, 0f, Color.Red, false).Register(this);
         }
 
         int[] RuntimeAssignable.RoleArguments => [GroupId];
@@ -129,10 +156,11 @@ public class ProxyU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 
             if (AmOwner)
             {
-                Request = false;
-                AmongUsUtil.PlayCustomFlash(Color.red, 0f, 0.25f, 0.4f);
+                //SetPairArrow();
+                AmongUsUtil.PlayCustomFlash(Color.Red, 0f, 0.25f, 0.4f);
 
                 var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
+                playerTracker.SetColor(MyRole.RoleColor);
 
                 var RequestButton = NebulaAPI.Modules.AbilityButton(this,MyPlayer,Virial.Compat.VirtualKeyInput.Ability, RequestCooldown,"Request", ProxyAsset.RequestImage,
                     _ =>{var target = playerTracker.CurrentTarget;　return target != null && IsMyMonitor(target);});
@@ -143,25 +171,32 @@ public class ProxyU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                     if (target != null && target != MyPlayer && IsMyMonitor(target))
                     {
                         RpcRequestSwap.Invoke((MyPlayer, target));
+                        RequestButton.StartCoolDown();
                     }
-                };
-
-                var ApprovalButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, false, true, Virial.Compat.VirtualKeyInput.SidekickAction, null,
-                   2.5f, "approval", ProxyAsset.ButtonImage, null);
-                ApprovalButton.Visibility = (button) => Request && !MyPlayer.IsDead;
-                ApprovalButton.OnClick = (button) =>
-                {
-                    var monitor = NebulaGameManager.Instance!.AllPlayerInfo.FirstOrDefault(p => IsMyMonitor(p));
-
-                    RpcRequestSwap.Invoke((MyPlayer, monitor.RealPlayer));
                 };
             }
         }
 
-        static private RemoteProcess<(GamePlayer proxy, GamePlayer monitor)> RpcRequestSwap= new("ProxyUSwap", (message, _) =>
+        /*
+        void IGameOperator.OnReleased()
+        {
+            if (pairArrow != null)
+            {
+                pairArrow.Release();
+                pairArrow = null;
+            }
+        }
+
+        [Local]
+        void OnSetRole(PlayerRoleSetEvent ev)
+        {
+            SetPairArrow();
+        }
+        */
+
+        static public RemoteProcess<(GamePlayer proxy, GamePlayer monitor)> RpcRequestSwap= new("ProxyUSwap", (message, _) =>
         {
             if (!AmongUsClient.Instance.AmHost) return;
-            Request = false;
 
             var proxy = message.proxy;
             var monitor = message.monitor;
@@ -193,13 +228,34 @@ public class ProxyU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
             if (IsMyMonitor(GamePlayer.LocalPlayer) && !ev.Player.AmOwner) ev.Color = ProxyU.MyRole.RoleColor;
         }
 
+        void OnProxyDead(PlayerDieOrDisconnectEvent ev)
+        {
+            //SetPairArrow();
+
+            if (ev.Player == MyPlayer && (ProxyU.EmbroilAction.GetValue() == 1 || ProxyU.EmbroilAction.GetValue() == 3))
+            {
+                var monitor = NebulaGameManager.Instance?.AllPlayerInfo.FirstOrDefault(p => IsMyMonitor(p) && !p.IsDead);
+
+                if (monitor == null) return;
+
+                if (ev is PlayerExiledEvent)
+                {
+                    monitor.VanillaPlayer.ModMarkAsExtraVictim(null, PlayerState.Suicide, PlayerState.Suicide);
+                }
+                else
+                {
+                    monitor.Suicide(PlayerState.Suicide, PlayerState.Suicide, KillParameter.RemoteKill);
+                }
+            }
+        }
     }
 }
 
 public class MonitorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 {
-    private MonitorU() : base("monitorU",NebulaTeams.ImpostorTeam.Color,RoleCategory.CrewmateRole,NebulaTeams.CrewmateTeam,[],false,optionHolderPredicate: () => (ProxyU.MyRole as ISpawnable).IsSpawnable)
+    private MonitorU() : base("monitorU",NebulaTeams.ImpostorTeam.Color,RoleCategory.CrewmateRole,NebulaTeams.CrewmateTeam,[CanFixLightOption, CanFixCommsOption, HasImpostorVisionOption, CanUseVentsOption, CanMoveInVentsOption],false,optionHolderPredicate: () => (ProxyU.MyRole as ISpawnable).IsSpawnable)
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Monitor.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
         ConfigurationHolder?.ScheduleAddRelated(() => [ProxyU.MyRole.ConfigurationHolder!]);
     }
@@ -207,25 +263,49 @@ public class MonitorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
 
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments)=> new Instance(player, arguments.Get(0, -1));
 
+    static private readonly BoolConfiguration CanFixLightOption = NebulaAPI.Configurations.Configuration("options.role.monitorU.canFixLight", false);
+    static private readonly BoolConfiguration CanFixCommsOption = NebulaAPI.Configurations.Configuration("options.role.monitorU.canFixComms", false);
+    static private readonly BoolConfiguration HasImpostorVisionOption = NebulaAPI.Configurations.Configuration("options.role.monitorU.hasImpostorVision", false);
+    static private readonly BoolConfiguration CanUseVentsOption = NebulaAPI.Configurations.Configuration("options.role.monitorU.canUseVents", false);
+    static private readonly BoolConfiguration CanMoveInVentsOption = NebulaAPI.Configurations.Configuration("options.role.monitorU.canMoveInVents", false);
+
     static public MonitorU MyRole = new MonitorU();
     bool ISpawnable.IsSpawnable => false;
     bool DefinedRole.IsMadmate => true;
 
-    bool IAssignableDocument.HasTips => false;
+    bool IAssignableDocument.HasTips => true;
     bool IAssignableDocument.HasAbility => true;
     IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
     {
-        yield return new(ProxyAsset.RequestImage, "role.monitorU.ability.request");
-        yield return new(ProxyAsset.ButtonImage, "role.monitorU.ability.approval");
+        yield return new(ProxyAsset.ButtonImage, "role.monitorU.ability.request");
     }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Proxy&Monitor.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
-
     public class Instance : RuntimeAssignableTemplate, RuntimeRole
     {
         DefinedRole RuntimeRole.Role => MyRole;
         public int GroupId { get; private set; }
+
+        TrackingArrowAbility? pairArrow = null;
+
         int[] RuntimeAssignable.RoleArguments => [GroupId];
+
+        void SetPairArrow()
+        {
+            //if (!ProxyU.ShowPairArrow) return;
+
+            if (pairArrow != null)
+            {
+                pairArrow.Release();
+                pairArrow = null;
+            }
+
+            var proxy = NebulaGameManager.Instance?.AllPlayerInfo.FirstOrDefault(p => IsMyProxy(p) && !p.IsDead);
+            if (proxy == null) return;
+
+            if (pairArrow != null) pairArrow.Release();
+            pairArrow = new TrackingArrowAbility(proxy, 0f, Color.Red, false).Register(this);
+        }
 
         RoleTaskType RuntimeRole.TaskType => RoleTaskType.NoTask;
 
@@ -243,42 +323,112 @@ public class MonitorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
             return false;
         }
 
-        bool trunRequest = false;
-
         void RuntimeAssignable.OnActivated()
         {
             if (AmOwner)
             {
-                trunRequest = false;
-                AmongUsUtil.PlayCustomFlash(Color.red, 0f, 0.25f, 0.4f);
+                //SetPairArrow();
+
+                AmongUsUtil.PlayCustomFlash(Color.Red, 0f, 0.25f, 0.4f);
 
                 var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
+                playerTracker.SetColor(MyRole.RoleColor);
 
-                var RequestButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, ProxyU.RequestCooldown, "Request", ProxyAsset.RequestImage,
+                var RequestButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, ProxyU.RequestCooldown, "monitorU.Request", ProxyAsset.ButtonImage,
                     _ => { var target = playerTracker.CurrentTarget; return target != null && IsMyProxy(target); });
-                RequestButton.Visibility = (button) => !MyPlayer.IsDead && !trunRequest;
+                RequestButton.Visibility = (button) => !MyPlayer.IsDead;
                 RequestButton.OnClick = _ =>
                 {
                     GamePlayer? target = playerTracker.CurrentTarget;
                     if (target != null && target != MyPlayer && IsMyProxy(target))
                     {
-                        ProxyU.RpcRequest.Invoke(target);
-                        trunRequest = true;
+                        RpcRequestSwap_FromMonitor.Invoke((target, MyPlayer));
                         RequestButton.StartCoolDown();
                     }
                 };
             }
         }
 
-        void MeetingEnd(MeetingEndEvent ev)
+        /*
+        void IGameOperator.OnReleased()
         {
-            trunRequest = false;
+            if (pairArrow != null)
+            {
+                pairArrow.Release();
+                pairArrow = null;
+            }
         }
+
+        [Local]
+        void OnSetRole(PlayerRoleSetEvent ev)
+        {
+            SetPairArrow();
+        }
+        */
+
+        static private RemoteProcess<(GamePlayer proxy, GamePlayer monitor)> RpcRequestSwap_FromMonitor = new("ProxyUSwap_FromMonitor", (message, _) =>
+        {
+            if (!AmongUsClient.Instance.AmHost) return;
+
+            var proxy = message.proxy;
+            var monitor = message.monitor;
+
+            if (proxy == null || monitor == null) return;
+            if (proxy.IsDead || monitor.IsDead) return;
+
+            if (proxy.Role is not ProxyU.Instance proxyRole) return;
+            if (monitor.Role is not MonitorU.Instance monitorRole) return;
+
+            int groupId = proxyRole.GroupId;
+
+            proxy.SetRole(MonitorU.MyRole, new int[] { groupId });
+            monitor.SetRole(ProxyU.MyRole, new int[] { groupId });
+
+            PlayerExtension.SendRoleSwapping(proxy, monitor, ProxyU.MyRole, PlayerRoleSwapEvent.SwapType.Swap);
+            PlayerExtension.SendRoleSwapping(monitor, proxy, MonitorU.MyRole, PlayerRoleSwapEvent.SwapType.Swap);
+        });
 
         [OnlyMyPlayer]
         void CheckWins(PlayerCheckWinEvent ev) => ev.IsWin |= ev.GameEnd == NebulaGameEnd.ImpostorWin;
 
         [OnlyMyPlayer]
         void BlockWins(PlayerBlockWinEvent ev) => ev.IsBlocked |= ev.GameEnd == NebulaGameEnd.CrewmateWin;
+
+        void OnDead(PlayerDieOrDisconnectEvent ev)
+        {
+            //SetPairArrow();
+
+            if (ev.Player == MyPlayer && (ProxyU.EmbroilAction.GetValue() == 2 || ProxyU.EmbroilAction.GetValue() == 3))
+            {
+                var proxy = NebulaGameManager.Instance?.AllPlayerInfo.FirstOrDefault(p => IsMyProxy(p) && !p.IsDead);
+
+                if (proxy == null) return;
+
+                if (ev is PlayerExiledEvent)
+                {
+                    proxy.VanillaPlayer.ModMarkAsExtraVictim(null, PlayerState.Suicide, PlayerState.Suicide);
+                }
+                else
+                {
+                    proxy.Suicide(PlayerState.Suicide, PlayerState.Suicide, KillParameter.RemoteKill);
+                }
+            }
+        }
+
+        [Local]
+        void OnPlayerMurdered(PlayerMurderedEvent ev)
+        {
+            if (IsMyProxy(ev.Murderer))
+            {
+                AmongUsUtil.PlayQuickFlash(Virial.Color.Red);
+            }
+        }
+
+        bool RuntimeAssignable.CanFixComm => CanFixCommsOption;
+        bool RuntimeAssignable.CanFixLight => CanFixLightOption;
+        bool RuntimeRole.CanMoveInVent => CanMoveInVentsOption;
+        bool RuntimeRole.CanUseVent => CanUseVentsOption;
+        bool RuntimeRole.HasImpostorVision => HasImpostorVisionOption;
+        bool RuntimeRole.IgnoreBlackout => HasImpostorVisionOption;
     }
 }

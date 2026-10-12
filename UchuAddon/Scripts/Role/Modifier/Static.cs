@@ -13,6 +13,7 @@ public class StaticU : DefinedAllocatableModifierTemplate, DefinedModifier, Defi
 {
     private StaticU() : base("staticU", "TIC", new(228, 255, 25), [CanSeeAllOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Static.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 

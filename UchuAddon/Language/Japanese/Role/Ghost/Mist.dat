@@ -7,6 +7,9 @@
 # Document
 
 "role.mistU.doc" : "視界を狭める影を作り出せます。"
+"role.mistU.ability.title" : "固有能力 "夜霧""
+"role.mistU.ability.main" : ""
+"role.mistU.ability.mist" : "<title>夜霧</title>その場に視界を狭める影を生み出します。"
 
 # Options
 

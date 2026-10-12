@@ -14,7 +14,6 @@ using UnityEngine;
 using Virial;
 using Virial.Assignable;
 using Virial.Attributes;
-using Image = Virial.Media.Image;
 using Virial.Components;
 using Virial.Configuration;
 using Virial.Events.Game;
@@ -24,6 +23,10 @@ using Virial.Game;
 using Virial.Helpers;
 using Virial.Media;
 using static Nebula.Modules.ScriptComponents.NebulaSyncStandardObject;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
@@ -35,7 +38,6 @@ public class EvilObserverU : DefinedSingleAbilityRoleTemplate<EvilObserverU.Abil
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Observer.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon, ConfigurationTags.TagFunny);
     }
-
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
 
     static private IntegerConfiguration MaxCameraCountOption = NebulaAPI.Configurations.Configuration("options.role.observerU.maxCameraCount", (1, 10), 3);
@@ -54,7 +56,7 @@ public class EvilObserverU : DefinedSingleAbilityRoleTemplate<EvilObserverU.Abil
 
         float indexT = 0f;
         int index = 0;
-        public Camera(UnityEngine.Vector2 pos, bool reverse, bool isLocal) : base(pos, ZOption.Just, true, cameraSprite.GetSprite(0), isLocal)
+        public Camera(Vector2 pos, bool reverse, bool isLocal) : base(pos, ZOption.Just, true, cameraSprite.GetSprite(0), isLocal)
         {
             MyRenderer.flipX = reverse;
             MyBehaviour = MyRenderer.gameObject.AddComponent<EmptyBehaviour>();
@@ -65,8 +67,8 @@ public class EvilObserverU : DefinedSingleAbilityRoleTemplate<EvilObserverU.Abil
 
         static Camera()
         {
-            NebulaSyncObject.RegisterInstantiater(MyGlobalTag, (args) => new Camera(new UnityEngine.Vector2(args[0], args[1]), args[2] < 0f, false));
-            NebulaSyncObject.RegisterInstantiater(MyLocalTag, (args) => new Camera(new UnityEngine.Vector2(args[0], args[1]), args[2] < 0f, true));
+            NebulaSyncObject.RegisterInstantiater(MyGlobalTag, (args) => new Camera(new Vector2(args[0], args[1]), args[2] < 0f, false));
+            NebulaSyncObject.RegisterInstantiater(MyLocalTag, (args) => new Camera(new Vector2(args[0], args[1]), args[2] < 0f, true));
         }
         void OnUpdate(GameUpdateEvent ev)
         {

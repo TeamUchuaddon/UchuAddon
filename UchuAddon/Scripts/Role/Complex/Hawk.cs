@@ -11,7 +11,7 @@ using Image = Virial.Media.Image;
 
 namespace Hori.Scripts.Role.Complex;
 
-public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRole, HasCitation
+public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRole, HasCitation,IAssignableDocument
 {
     public HawkU() : base("evilHawkU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam,[HawkeyeCoolDownOption, HawkeyeDurationOption, HawkeyeRatioOption, HawkeyeStop])
     {
@@ -33,9 +33,10 @@ public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRol
     static public HawkU MyRole = new();
     static private readonly GameStatsEntry StatsHawkeye = NebulaAPI.CreateStatsEntry("stats.hawkU.hawkeyeSKill", GameStatsCategory.Roles, MyRole);
     MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
+    static private readonly Virial.Media.Image HawkImage = NebulaAPI.AddonAsset.GetResource("HawkButton.png")!.AsImage(115f)!;
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
-        static private readonly Virial.Media.Image HawkImage = NebulaAPI.AddonAsset.GetResource("HawkButton.png")!.AsImage(115f)!;
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
         public bool EyesightIgnoreWalls { get; private set; } = false;
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
@@ -72,7 +73,7 @@ public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRol
     }
 }
 
-public class NiceHawkU : DefinedSingleAbilityRoleTemplate<NiceHawkU.Ability>, DefinedRole, HasCitation
+public class NiceHawkU : DefinedSingleAbilityRoleTemplate<NiceHawkU.Ability>, DefinedRole, HasCitation,IAssignableDocument
 {
     public NiceHawkU() : base("niceHawkU", new(255, 255, 112), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [HawkeyeCoolDownOption, HawkeyeDurationOption, HawkeyeRatioOption, HawkeyeStop])
     {
@@ -93,9 +94,11 @@ public class NiceHawkU : DefinedSingleAbilityRoleTemplate<NiceHawkU.Ability>, De
 
     static public NiceHawkU MyRole = new();
     static private readonly GameStatsEntry StatsHawkeyeNice = NebulaAPI.CreateStatsEntry("stats.NicehawkU.hawkeyeSKill", GameStatsCategory.Roles, MyRole);
+
+    static private readonly Virial.Media.Image HawkImage = NebulaAPI.AddonAsset.GetResource("HawkButtonNice.png")!.AsImage(115f)!;
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
-        static private readonly Virial.Media.Image HawkImage = NebulaAPI.AddonAsset.GetResource("HawkButtonNice.png")!.AsImage(115f)!;
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
         public bool EyesightIgnoreWalls { get; private set; } = false;
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)

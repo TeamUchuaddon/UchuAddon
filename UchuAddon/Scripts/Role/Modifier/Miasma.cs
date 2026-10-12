@@ -12,6 +12,7 @@ public class MiasmaU : DefinedAllocatableModifierTemplate, DefinedModifier, Defi
 {
     private MiasmaU() : base("miasmaU", "MSA", new(135, 135, 135), [KillerLight])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Miasma.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 

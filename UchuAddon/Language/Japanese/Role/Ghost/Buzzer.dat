@@ -7,7 +7,7 @@
 # Document
 
 "role.buzzerU.doc" : "生きているインポスターに通知を送ります。"
-"role.buzzerU.ability.title" : "固有能力 "狼サイレン""
+"role.buzzerU.ability.title" : "固有能力 "警戒サイレン""
 "role.buzzerU.ability.main" : ""
 "role.buzzerU.ability.buzzer" : "<title>ブザー</title>インポスターのみに見える通知をその場に出します。"
 

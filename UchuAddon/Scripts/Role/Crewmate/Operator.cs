@@ -36,10 +36,10 @@ using Virial.Events.Player;
 using Virial.Game;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
@@ -48,11 +48,12 @@ public class OperatorU : DefinedSingleAbilityRoleTemplate<OperatorU.Ability>, De
     public OperatorU() : base("operatorU", new Virial.Color(107, 242, 154), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NumOfOperate,OperateAddTime,SkipBan])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Operator.png")!.AsImage(115f);
     }
     public static IntegerConfiguration NumOfOperate = NebulaAPI.Configurations.Configuration("options.role.operatorU.numOfOperate", (1, 15), 1);
     public static FloatConfiguration OperateAddTime = NebulaAPI.Configurations.Configuration("options.role.operatorU.operateAddTime", (10f, 160f, 5f), 50f, FloatConfigurationDecorator.Second);
     public static BoolConfiguration  SkipBan = NebulaAPI.Configurations.Configuration("options.role.operatorU.skipBan", true);
-    bool AssignableFilterHolder.CanLoadDefault(DefinedAssignable assignable) => CanLoadDefaultTemplate(assignable) && assignable is not AlertU;
+    bool AssignableFilterHolder.CanLoadDefault(DefinedAssignable assignable) => CanLoadDefaultTemplate(assignable) && assignable is not AlertU && assignable is not GuestU;
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
     static private readonly GameStatsEntry StatsOperate = NebulaAPI.CreateStatsEntry("stats.operatorU.operate", GameStatsCategory.Roles, MyRole);
@@ -61,7 +62,7 @@ public class OperatorU : DefinedSingleAbilityRoleTemplate<OperatorU.Ability>, De
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Operator.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
-
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         static private Image OperateImage = NebulaAPI.AddonAsset.GetResource("OperateButton.png")!.AsImage(115f)!;
@@ -78,8 +79,8 @@ public class OperatorU : DefinedSingleAbilityRoleTemplate<OperatorU.Ability>, De
                 if (!OperateSkill) Nebula.Utilities.Helpers.TextHudContent("OperatorUText", this, (tmPro) => tmPro.text = NebulaAPI.Language.Translate("role.operatorU.hudText") + ": " + leftOperate, true);
                 var OperateButton = new Nebula.Modules.ScriptComponents.ModAbilityButtonImpl(alwaysShow: true).Register(this);
                 OperateButton.SetSprite(OperateImage.GetSprite());
-                OperateButton.Availability = (button) => MeetingHud.Instance && MeetingHud.Instance.CurrentState == MeetingHud.VoteStates.NotVoted && leftOperate > 0;
-                OperateButton.Visibility = (button) => !MyPlayer.IsDead && MeetingHud.Instance && (MeetingHud.Instance.CurrentState == MeetingHud.VoteStates.NotVoted || MeetingHud.Instance.CurrentState == MeetingHud.VoteStates.Discussion) && !usedInTheMeeting && leftOperate > 0;
+                OperateButton.Availability = (button) => MeetingHud.Instance && MeetingHud.Instance.CurrentState == MeetingHud.MeetingStates.NotVoted && leftOperate > 0;
+                OperateButton.Visibility = (button) => !MyPlayer.IsDead && MeetingHud.Instance && (MeetingHud.Instance.CurrentState == MeetingHud.MeetingStates.NotVoted || MeetingHud.Instance.CurrentState == MeetingHud.MeetingStates.Discussion) && !usedInTheMeeting && leftOperate > 0;
                 OperateButton.SetLabel("operatorU.operate");
                 OperateButton.OnClick = (button) =>
                 {
@@ -110,6 +111,19 @@ public class OperatorU : DefinedSingleAbilityRoleTemplate<OperatorU.Ability>, De
         void MeetingEnd(MeetingPreEndEvent ev)
         {
             OperateSkill = false;
+        }
+
+        void GameUpdateEvent(GameUpdateEvent ev)
+        {
+            if (OperateSkill && SkipBan && MeetingHud.Instance != null)
+            {
+                if (MeetingHud.Instance.SkipVoteButton.gameObject == null) return;
+
+                if (MeetingHud.Instance.SkipVoteButton.gameObject.active == true)
+                {
+                    RpcOperateSkipBan.Invoke(MyPlayer);
+                }
+            }
         }
 
         RemoteProcess<GamePlayer> RpcOperateSkipBan= new("OperatorSkipBan", (message, _) =>

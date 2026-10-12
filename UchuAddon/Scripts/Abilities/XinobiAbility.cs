@@ -1,9 +1,8 @@
 ﻿using Hori.Core;
-using Rewired.Utils.Platforms.Windows;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Abilities;
 
@@ -18,7 +17,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
     bool Possess = false;
     float min = 0f;
     Vent? ventLocal = null;
-    Vector3 previousPosition = Vector3.zero;
+    Vector3 previousPosition = Vector3.Zero;
     public XinobiAbility(GamePlayer player)
     {
         this.myPlayer = player;
@@ -77,9 +76,9 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
             };
 
 
-            Virial.Components.ObjectTracker<Console> consoleTracker = new ObjectTrackerUnityImpl<Console, Console>(player.VanillaPlayer, AmongUsLLImpl.Instance.VanillaKillDistance/*AmongUsUtil.VanillaKillDistance*/,
+            Virial.Components.ObjectTracker<Console> consoleTracker = new ObjectTrackerUnityImpl<Console, Console>(player.VanillaPlayer, 1.4f/*AmongUsUtil.VanillaKillDistance*/,
                 () => ShipStatus.Instance.AllConsoles, c => true, c => true, c => c,
-                c => [c.transform.position], c => c.Image, Color.red, true, false).Register(this);
+                c => [c.transform.position], c => c.Image, UnityEngine.Color.red, true, false).Register(this);
 
             possessButton = NebulaAPI.Modules.AbilityButton(this, player, Virial.Compat.VirtualKeyInput.Ability, 0.5f, "xinobiU.possess", PossessImage, _ => consoleTracker.CurrentTarget != null);
             possessButton.Visibility = (button) => !player.IsDead && !Possess;
@@ -95,7 +94,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
                 {
                     AmongUsUtil.ToggleCamTarget(target);
                     Vector3 myPos = PlayerControl.LocalPlayer.transform.position;
-                    ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(), null, myPos, 1f).StartOnScene();
+                    RpcPlayEffect.Invoke(myPos);
                 }
             };
 
@@ -118,7 +117,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
                 {
                     Vector3 effectPos = target.transform.position;
                     effectPos.z -= 0.0000001f;
-                    ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(), null, effectPos, 1.1f).StartOnScene();
+                    RpcPlayEffect.Invoke(effectPos);
                 }
             };
         }
@@ -127,7 +126,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
     public void XinobiVent()
     {
         Possess = false;
-        myPlayer.GainAttribute(PlayerAttributes.InternalInvisible, 0.39f, false, 1);
+        myPlayer.GainAttribute(PlayerAttributes.InternalInvisible, 0.39f, true, 1);
         foreach (var v in ShipStatus.Instance.AllVents)
         {
             float d = PlayerControl.LocalPlayer.transform.position
@@ -146,7 +145,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
             Vector2 ventPos = ventLocal.transform.position;
             Vector2 warpPos = ventPos + new Vector2(0f, 0.35f);
 
-            physics.body.velocity = Vector2.zero;
+            physics.body.velocity = Vector2.Zero;
 
             player.NetTransform.RpcSnapTo(warpPos);
 
@@ -156,7 +155,7 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
         }
         Vector3 myPos = PlayerControl.LocalPlayer.transform.position;
         myPos.z -= 0.0000001f;
-        ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(), null, myPos, 1f).StartOnScene();
+        RpcPlayEffect.Invoke(myPos);
         ventLocal = null;
         min = 0f;
     }
@@ -164,8 +163,8 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
     void Update(GameUpdateEvent ev)
     {
         if (!Possess) return;
-        myPlayer.GainAttribute(PlayerAttributes.InternalInvisible, 0.1f, false, 1);
-        myPlayer.GainSpeedAttribute(0f, 0.1f, false, 1);
+        myPlayer.GainAttribute(PlayerAttributes.InternalInvisible, 0.1f, true, 1);
+        myPlayer.GainSpeedAttribute(0f, 0.1f, true, 1);
     }
 
     static void NameSeclet(GamePlayer target)
@@ -191,6 +190,11 @@ public class XinobiAbility : FlexibleLifespan, IGameOperator, IBindPlayer
         NamePublic(player);
     });
 
+    public static readonly RemoteProcess<Vector3> RpcPlayEffect = new("RpcPlayXinobiEffect_Uchu", (vec, _) =>
+    {
+        ManagedEffects.CoDisappearEffect(LayerExpansion.GetObjectsLayer(), null, vec, 1f).StartOnScene();
+    });
+    
     [OnlyMyPlayer]
     void CameraDead(PlayerDieEvent ev)
     {

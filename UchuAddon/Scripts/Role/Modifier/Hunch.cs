@@ -38,17 +38,17 @@ using Virial.Game;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.RectTransform;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 
 namespace Hori.Scripts.Role.Sample;
 
 public class FlashAbility : IGameOperator
 {
-    public Color FlashColor { get; set; } = Color.white;
+    public Color FlashColor { get; set; } = Color.White;
 
     void OnPlayerMurdered(PlayerMurderedEvent ev)
     {
@@ -62,9 +62,9 @@ public class FlashAbility : IGameOperator
     }
 }
 
-    public class DetectedFlashAbility : IGameOperator
+public class DetectedFlashAbility : IGameOperator
 {
-    public Color FlashColor { get; set; } = Color.white;
+    public Color FlashColor { get; set; } = Color.White;
 
     void OnPlayerMurdered(PlayerMurderedEvent ev)
     {
@@ -89,6 +89,7 @@ public class HunchU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
 {
     private HunchU() : base("hunchU", "HNC", new(73, 166, 104), [DetectedOption, DetectedRangeOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Hunch.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     static private readonly BoolConfiguration DetectedOption = NebulaAPI.Configurations.Configuration("options.role.hunchU.detected", false);
@@ -115,12 +116,12 @@ public class HunchU : DefinedAllocatableModifierTemplate, DefinedAllocatableModi
             {
                 if (DetectedOption)
                 {
-                    new DetectedFlashAbility() { FlashColor = MyRole.UnityColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
+                    new DetectedFlashAbility() { FlashColor = MyRole.RoleColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
 
                 }
                 else
                 {
-                    new FlashAbility() { FlashColor = MyRole.UnityColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
+                    new FlashAbility() { FlashColor = MyRole.RoleColor }.Register(new FunctionalLifespan(() => !this.IsDeadObject));
                 }
             }
         }

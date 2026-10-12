@@ -75,7 +75,7 @@ public class AllVentConnectAbility : FlexibleLifespan, IGameOperator
 
     public void AllVentConnects(bool activate)
     {
-        switch (AmongUsUtil.CurrentMapId)
+        switch (NebulaAPI.AmongUs.MapId)
         {
             case 0:
                 //Skeld
@@ -194,11 +194,5 @@ public class AllVentConnectAbility : FlexibleLifespan, IGameOperator
                 }
                 break;
         }
-    }
-
-    [OnlyMyPlayer]
-    void VentEnters(PlayerVentEnterEvent ev)
-    {
-        AllVentConnects(true);
     }
 }

@@ -2,16 +2,20 @@
 
 "role.sentinelU.name" : "センチネル"
 "role.sentinelU.short" : "セン"
-"role.sentinelU.blurb" : "アンチデバイス"
+"role.sentinelU.blurb" : "テクノロジーの歩哨兵"
 
 # Document
 
 "role.sentinelU.doc" : "情報機器の周囲にプレイヤーがいるとリアルタイムで報告されます。"
+"role.sentinelU.ability.title" : "固有能力 "アンチデバイス""
+"role.sentinelU.ability.main" : ""
+"role.sentinelU.ability.device" : "情報機器の周辺にプレイヤーがいるかどうかを左下のUIで確認できます。<br>また、情報機器周辺のプレイヤーをキルすると<b>キルクールが短縮されます。</b>"
 
 # Options
 
 "options.role.sentinelU.detail" : "センチネルは情報機器の周辺にプレイヤーがいることを受け取れます。"
 "options.role.sentinelU.impostorNoDevice" : "インポスターを検知しない"
+"options.role.sentinelU.shorteningCooldownInKilling" : "機器周辺のプレイヤーキル時のキルクール"
 
 # Game
 
@@ -23,3 +27,7 @@
 
 
 # Titles
+
+"achievement.uchuaddon.sentinelU.common1.title" : ""
+"achievement.uchuaddon.sentinelU.common1.goal" : "情報機器の周囲でキルする。"
+"achievement.uchuaddon.sentinelU.common1.cond" : ""

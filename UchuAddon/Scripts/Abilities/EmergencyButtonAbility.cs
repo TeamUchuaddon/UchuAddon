@@ -53,7 +53,7 @@ public class EmergencyButtonAbility : FlexibleLifespan, IGameOperator
     public EmergencyButtonAbility()
     {
         GamePlayer? my = GamePlayer.LocalPlayer;
-        var emergencyButton = NebulaAPI.Modules.AbilityButton(this, my!, false, true, Virial.Compat.VirtualKeyInput.None, null, 15f, "emergency.ability", EmergencyImage, null);
+        var emergencyButton = NebulaAPI.Modules.AbilityButton(this, my!, false, true, Virial.Compat.VirtualKeyInput.None, null, 0f, "emergency.ability", EmergencyImage, null);
         emergencyButton.OnClick = (button) =>
         {
             if (!my!.CanMove) return;

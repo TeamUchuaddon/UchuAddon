@@ -1,6 +1,6 @@
 # Document
 
-
+"role.hawk.ability.hawkeye" : "<title>ホークアイ</title>視野を拡大します。"
 # Options
 
 "options.role.hawkU.hawkeyeCoolDown" : "ホークアイクールダウン"
@@ -13,6 +13,6 @@
 
 # UI
 
-"button.label.summonerU.hawkeye" : "ホークアイ"
+"button.label.hawkeye" : "ホークアイ"
 
 # Status

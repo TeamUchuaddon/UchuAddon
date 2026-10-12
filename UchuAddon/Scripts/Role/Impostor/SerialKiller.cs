@@ -24,37 +24,46 @@ using Virial.Events.Player;
 using Virial.Events.Game;
 using Virial.Events.Game.Meeting;
 using static Nebula.Modules.ScriptComponents.NebulaSyncStandardObject;
-using UnityColor = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 using UnityEngine;
 using static Nebula.Modules.MetaWidgetOld;
 
 namespace Hori.Scripts.Role.Impostor;
 
-public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Ability>, DefinedRole, HasCitation
+public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Ability>, DefinedRole, HasCitation, IAssignableDocument
 {
-    public SerialKillerU() : base("SerialKillerU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [SuicideCooldownOption, SerikillCooldownOption, MeetingEndsTimerActiveOption])
+    public SerialKillerU() : base("SerialKillerU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [SuicideCooldownOption, SerikillCooldownOption, CanUseSuicideButtonOption])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/SerialKiller.png")!.AsImage(115f);
     }
-    AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
+    AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.Killers;
+
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueKillAbility;
+
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
     static private FloatConfiguration SuicideCooldownOption = NebulaAPI.Configurations.Configuration("options.role.serialkillerU.SuicideCooldown", (10f, 120f, 5f), 60f, FloatConfigurationDecorator.Second);
     static private FloatConfiguration SerikillCooldownOption = NebulaAPI.Configurations.Configuration("options.role.serialkillerU.SerikillCooldown", (0f, 60f, 5f), 20f, FloatConfigurationDecorator.Second);
-    static private BoolConfiguration MeetingEndsTimerActiveOption = NebulaAPI.Configurations.Configuration("options.role.serialkillerU.MeetingEndsTimerActive", false);
-    Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.TheOtherRoles; } }
+    static private BoolConfiguration CanUseSuicideButtonOption = NebulaAPI.Configurations.Configuration("options.role.serialkillerU.SeriSuicidebutton", false);
+    Citation? HasCitation.Citation { get { return Nebula.Roles.Citations.TheOtherRolesGM; } }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/SerialKiller.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public SerialKillerU MyRole = new();
+
+    bool IAssignableDocument.HasTips => true;
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         private ModAbilityButtonImpl suicideDisplay = null!;
         private TimerImpl suicideTimerImpl = null!;
 
         private bool isTimerActive = false;
-        private bool isKilled = false;
         private float SuicideTime = SuicideCooldownOption;
+        bool FarstKill = false;
 
         static private Virial.Media.Image SuicideCooldownButton = NebulaAPI.AddonAsset.GetResource("SuicideButton.png")!.AsImage(115f)!;
 
@@ -64,12 +73,14 @@ public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Abil
         {
             if (AmOwner)
             {
+                FarstKill = false;
+
                 var killButton = NebulaAPI.Modules.KillButton(this, MyPlayer, true, VirtualKeyInput.Kill, SerikillCooldownOption, "kill", ModAbilityButton.LabelType.Impostor, null, (player, button) =>
                 {
                     MyPlayer.MurderPlayer(player, PlayerStates.Dead, EventDetails.Kill, KillParameter.NormalKill);
                     button.StartCoolDown();
                     isTimerActive = true;
-                    isKilled = true;
+                    FarstKill = true;
                     SuicideTime = SuicideCooldownOption;
                     if (suicideDisplay?.EffectTimer != null)
                     {
@@ -84,13 +95,25 @@ public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Abil
                 suicideDisplay = new Nebula.Modules.ScriptComponents.ModAbilityButtonImpl().Register(this);
                 suicideDisplay.SetSprite(SuicideCooldownButton.GetSprite());
                 suicideDisplay.Availability = (button) => true;
-                suicideDisplay.Visibility = (button) => !MyPlayer.IsDead && isTimerActive;
+                suicideDisplay.Visibility = (button) => !MyPlayer.IsDead && isTimerActive　&& FarstKill;
                 suicideTimerImpl = new TimerImpl(SuicideCooldownOption).Register(this);
                 suicideDisplay.EffectTimer = suicideTimerImpl;
-                suicideDisplay.SetLabel("serialkill");
-                /*suicideDisplay.SetLabel(Mathn.CeilToInt(SuicideTime).ToString());*/
+                suicideDisplay.SetLabel("serialKillerU.suicide");
+
+                if (CanUseSuicideButtonOption)
+                {
+                    suicideDisplay.OnClick = (button) =>
+                    {
+                        if (!MyPlayer.IsDead) MyPlayer.Suicide(PlayerState.Suicide, EventDetail.Kill, KillParameter.NormalKill);
+                        isTimerActive = false;
+                        SuicideTime = SuicideCooldownOption;
+                    };
+                    suicideDisplay.KeyBind(VirtualKeyInput.Ability);
+                }
             }
         }
+
+        [Local]
         void OnMeetingStart(MeetingStartEvent ev)
         {
             isTimerActive = false;
@@ -99,16 +122,8 @@ public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Abil
 
         void OnMeetingEnd(MeetingEndEvent ev)
         {
-            if (MeetingEndsTimerActiveOption)
-            {
-                isTimerActive = true;
-                SuicideTime = SuicideCooldownOption;
-            }
-            else if (isKilled)
-            {
-                isTimerActive = true;
-                SuicideTime = SuicideCooldownOption;
-            }
+            isTimerActive = true;
+            SuicideTime = SuicideCooldownOption;
             if (suicideDisplay?.EffectTimer != null)
             {
                 if (suicideDisplay.EffectTimer is TimerImpl impl)
@@ -118,15 +133,17 @@ public class SerialKillerU : DefinedSingleAbilityRoleTemplate<SerialKillerU.Abil
                 suicideDisplay.ActivateEffect();
             }
         }
+
         void OnGameUpdate(GameUpdateEvent ev)
         {
-            if (isTimerActive)
+            if (isTimerActive && FarstKill)
             {
                 SuicideTime -= Time.deltaTime;
                 if (SuicideTime <= 0f)
                 {
                     if (!MyPlayer.IsDead) MyPlayer.Suicide(PlayerState.Suicide, EventDetail.Kill, KillParameter.NormalKill);
                     isTimerActive = false;
+                    FarstKill = false;
                     SuicideTime = SuicideCooldownOption;
                 }
             }

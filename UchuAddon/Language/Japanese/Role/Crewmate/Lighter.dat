@@ -6,7 +6,7 @@
 
 # Document
 
-"role.lighterU.doc" : "ライトで視界を広げるクルーメイトです。"
+"role.lighterU.doc" : "ライトを使って視界を広げることができ、停電の影響を常に受けません。"
 
 # Options
 
@@ -14,7 +14,7 @@
 "options.role.lighterU.lightCoolDown" : "ライトクールダウン"
 "options.role.lighterU.lightDuration" : "ライト持続時間"
 "options.role.lighterU.lightRatio" : "ライト倍率"
-"options.role.lighterU.blackoutIgnore" : "停電を常に無視"
+"options.role.lighterU.visibileIsLighting" : "ライト使用中に透明プレイヤーを視認可能"
 
 # Game
 
@@ -28,16 +28,19 @@
 
 # Titles
 
-"achievement.lighterU.common1.title" : "私を照らして"
-"achievement.lighterU.common1.goal" : "1ゲーム中に5回ライトを使用する"
-"achievement.lighterU.common1.cond" : ""
+"achievement.uchuaddon.lighterU.common1.title" : "私を照らして"
+"achievement.uchuaddon.lighterU.common1.goal" : "通算10回ライトを使う。"
+"achievement.uchuaddon.lighterU.common1.cond" : ""
 
-"achievement.lighterU.another1.title" : "不良品"
-"achievement.lighterU.another1.goal" : "ライトで視野を狭める"
-"achievement.lighterU.another1.cond" : "こちら、返品不可となっております。"
-"achievement.lighterU.another1.splitted.2" : "不良品"
+"achievement.uchuaddon.lighterU.another1.title" : "不良品"
+"achievement.uchuaddon.lighterU.another1.goal" : "ライトで視野を狭める"
+"achievement.uchuaddon.lighterU.another1.flavor" : "こちら、返品不可となっております。"
+"achievement.uchuaddon.lighterU.another1.cond" : ""
 
-"achievement.lighterU.challenge1.title" : "光は我らを照らす"
-"achievement.lighterU.challenge1.goal" : "ライト使用中、5人を視界に収める"
-"achievement.lighterU.challenge1.cond" : ""
-"achievement.lighterU.challenge1.splitted.1" : "我らを"
+"achievement.uchuaddon.lighterU.hard1.title" : "怪奇！透明人間は実在した！！"
+"achievement.uchuaddon.lighterU.hard1.goal" : "透明化したプレイヤーを視認する。"
+"achievement.uchuaddon.lighterU.hard1.cond" : ""
+
+"achievement.uchuaddon.lighterU.challenge1.title" : "光は我らを照らす"
+"achievement.uchuaddon.lighterU.challenge1.goal" : "ライト使用中、5人を視界に収める"
+"achievement.uchuaddon.lighterU.challenge1.cond" : ""

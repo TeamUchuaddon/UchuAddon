@@ -28,3 +28,25 @@
 
 
 # Titles
+
+"achievement.uchuaddon.amnesiaU.common1.title" : "REMEMBER"
+"achievement.uchuaddon.amnesiaU.common1.goal" : "死体を通報し役職を思い出す。"
+"achievement.uchuaddon.amnesiaU.common1.cond" : ""
+
+"achievement.uchuaddon.amnesiaU.another1.title" : "一つの終わり方"
+"achievement.uchuaddon.amnesiaU.another1.goal" : "何物か思い出せないままゲームが終了する。"
+"achievement.uchuaddon.amnesiaU.another1.cond" : ""
+"achievement.uchuaddon.amnesiaU.another1.flavor" : ""これもまたいいのかも。""
+
+"achievement.uchuaddon.amnesiaU.another2.title" : "再来"
+"achievement.uchuaddon.amnesiaU.another2.goal" : "自身がチェインシフターだと思い出す。"
+"achievement.uchuaddon.amnesiaU.another2.cond" : ""
+
+"achievement.uchuaddon.amnesiaU.hard1.title" : "開いたパンドラ"
+"achievement.uchuaddon.amnesiaU.hard1.goal" : "非クルーメイトの死体を通報し、役職を思い出す。"
+"achievement.uchuaddon.amnesiaU.hard1.cond" : ""
+
+"achievement.uchuaddon.amnesiaU.challenge1.title" : "本当の自分"
+"achievement.uchuaddon.amnesiaU.challenge1.goal" : "役職を思い出し、勝利する。"
+"achievement.uchuaddon.amnesiaU.challenge1.cond" : ""
+"achievement.uchuaddon.amnesiaU.challenge1.flavor" : "溢れ出す、勝者の記憶"

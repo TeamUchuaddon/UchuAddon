@@ -15,6 +15,7 @@
 "options.role.seedU.seedCooldown" : "共生クールダウン"
 "options.role.seedU.numOfSeed" : "共生使用可能回数"
 "options.role.seedU.dieBlockWins" : "死亡時勝利ブロック"
+"options.role.seedU.playerDieBlockWins" : "死亡した共生対象に追加勝利不可"
 "options.role.seed.group.gauge" : "シードゲージの設定"
 "options.role.seedU.seedGauge" : "シードゲージ"
 "options.role.seedU.seedGauge.detail" : "勝利にシードゲージを必要にします。"

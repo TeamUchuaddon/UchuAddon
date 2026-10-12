@@ -6,8 +6,8 @@
 
 "options.role.decoratorU.maxdecorationCount" : "デコレーション使用回数"
 "options.role.decoratorU.decorationCoolDown" : "デコレーションクールダウン"
-"options.role.decoratorU.ImpostorgiveFilter" : "インポスター排出可能フィルター"
-"options.role.decoratorU.CrewmategiveFilter" : "クルーメイト排出可能フィルター"
+"options.role.decoratorU.ImpostorgiveFilter" : "インポスターフィルター"
+"options.role.decoratorU.CrewmategiveFilter" : "クルーメイトフィルター"
 
 # Game
 

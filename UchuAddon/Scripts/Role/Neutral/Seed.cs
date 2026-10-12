@@ -48,9 +48,10 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
 {
     public static Team MyTeam = new Team("teams.seedU", new Virial.Color(106, 178, 189), TeamRevealType.OnlyMe);
     public static ExtraWin SeedExtra = NebulaAPI.Preprocessor!.CreateExtraWin("seedU", SeedU.MyTeam.Color);
-    private SeedU() : base("seedU", new(106, 178, 189), RoleCategory.NeutralRole, MyTeam, [SeedCooldown,NumOfSeed,DieBlockWins,
+    private SeedU() : base("seedU", new(106, 178, 189), RoleCategory.NeutralRole, MyTeam, [SeedCooldown,NumOfSeed,DieBlockWins,PlayerDieBlockWins,
      new GroupConfiguration("options.role.seed.group.gauge",[SeedWinGauge, RequiredGaugeToWin, SurplusGauge, GaugeReductionSpeed], GroupConfigurationColor.ToDarkenColor(MyTeam.UnityColor))])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Seed.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
         ConfigurationHolder?.ScheduleAddRelated(() => [EraserU.MyRole.ConfigurationHolder!]);
     }
@@ -59,6 +60,7 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
     static private FloatConfiguration SeedCooldown = NebulaAPI.Configurations.Configuration("options.role.seedU.seedCooldown", (2.5f, 30f, 2.5f), 20f, FloatConfigurationDecorator.Second);
     static private IntegerConfiguration NumOfSeed = NebulaAPI.Configurations.Configuration("options.role.seedU.numOfSeed", (1, 10), 2);
     static private BoolConfiguration DieBlockWins = NebulaAPI.Configurations.Configuration("options.role.seedU.dieBlockWins", true);
+    static private BoolConfiguration PlayerDieBlockWins = NebulaAPI.Configurations.Configuration("options.role.seedU.playerDieBlockWins", true);
     static private BoolConfiguration SeedWinGauge = NebulaAPI.Configurations.Configuration("options.role.seedU.seedGauge", true);
     static private FloatConfiguration RequiredGaugeToWin = NebulaAPI.Configurations.Configuration("options.role.seedU.requiredGaugeToWin", (10f, 150f, 5f), 20f, FloatConfigurationDecorator.Second, () => SeedWinGauge);
     static private FloatConfiguration SurplusGauge = NebulaAPI.Configurations.Configuration("options.role.seedU.surplusGauge", (5f, 80f, 5f), 20f, FloatConfigurationDecorator.Second, () => SeedWinGauge);
@@ -127,7 +129,7 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
                 ev.Name += " ▼".Color(new Color(106f / 255f, 178f / 255f, 189f / 255f));
             }
         }
-        [Local]
+        [OnlyMyPlayer, Local]
         void CheckSeedExtraWin(PlayerCheckExtraWinEvent ev)
         {
             if (SeedWinGauge)
@@ -137,14 +139,23 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
             }
             if (SeedTargets == null || !SeedTargets.Any()) return;
 
-            bool anyoneWon = SeedTargets.Any(p => ev.WinnersMask.Test(p));
+            bool anyoneWon = SeedTargets.Any(p =>
+            {
+                if (!ev.WinnersMask.Test(p)) return false;
+                if (PlayerDieBlockWins && p.IsDead) return false;
+
+                return true;
+            });
+
             if (!anyoneWon) return;
 
             if (DieBlockWins && MyPlayer.IsDead) return;
 
             ev.SetWin(true);
             ev.ExtraWinMask.Add(SeedExtra);
+            ev.IsExtraWin = true;
         }
+        
         [Local]
         void OnGameEnd(GameEndEvent ev)
         {
@@ -167,7 +178,7 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
                 }
             }
         }
-
+        
         float shareInterval = 0.5f;
         float progressGrace = 0f;
         private bool SeedGaugeActive { get; set; } = false;

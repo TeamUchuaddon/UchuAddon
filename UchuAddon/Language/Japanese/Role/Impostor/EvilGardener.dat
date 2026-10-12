@@ -1,0 +1,34 @@
+# Assignable
+
+"role.evilGardenerU.name" : "イビルガーデナー"
+"role.evilGardenerU.short" : "ガー"
+"role.evilGardenerU.blurb" : "Anemone Petricor"
+
+# Document
+
+"role.evilGardenerU.doc" : "人外専用パークを植えるインポスターです。"
+"role.evilGardenerU.ability.title" : "固有能力 "サプライズガーデン""
+"role.evilGardenerU.ability.main" : ""
+"role.evilGardenerU.tips" : "パークオプションで出現するパークを設定できます。<br>ゲーム内にパークが出現しない設定でも、設定していたパークが開花します。"
+
+# Options
+
+"options.role.evilGardenerU.detail" : "イビルガーデナーは、人外専用パークを植えるインポスターです。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"achievement.uchuaddon.evilGardenerU.common1.title" : "違法栽培"
+"achievement.uchuaddon.evilGardenerU.common1.goal" : "通算で15回人外専用パークを植える。"
+
+"achievement.uchuaddon.evilGardenerU.common2.title" : "危険な花の香り"
+"achievement.uchuaddon.evilGardenerU.common2.goal" : "通算で10回パークを育てる"
+
+"achievement.uchuaddon.evilGardenerU.challenge1.title" : "奇麗な花にも棘が咲く"
+"achievement.uchuaddon.evilGardenerU.challenge1.goal" : "2回以上パークを植え、植えたパークの周りでキルをする。"
+"achievement.uchuaddon.evilGardenerU.challenge1.flavor" : ""お前が花なら花言葉何？""

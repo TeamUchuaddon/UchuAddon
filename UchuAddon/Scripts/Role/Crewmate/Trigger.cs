@@ -55,6 +55,7 @@ using Virial.Components;
 using Virial.Configuration;
 using Virial.Configuration;
 using Virial.DI;
+using Virial.DI;
 using Virial.Events.Game;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Game.Meeting;
@@ -71,11 +72,11 @@ using static Il2CppSystem.DateTimeParse;
 using static Nebula.Roles.Impostor.Cannon;
 using static Rewired.UnknownControllerHat;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using static UnityEngine.Tilemaps.Tilemap;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
-using Virial.DI;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
@@ -83,13 +84,15 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
 {
     public TriggerU() : base("triggerU", new(227, 227, 227), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [AnalysisCooldown,NumOfAnalysis,PlayerColor,RelocationCooldown,RelocationDuration])
     {
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Trigger.png")!.AsImage(115f);
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
 
     public static FloatConfiguration AnalysisCooldown = NebulaAPI.Configurations.Configuration("options.role.triggerU.analysisCooldown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
-    public static IntegerConfiguration NumOfAnalysis = NebulaAPI.Configurations.Configuration("options.role.triggerU.numOfAnalysis", (1, 15), 2);
+    public static IntegerConfiguration NumOfAnalysis = NebulaAPI.Configurations.Configuration("options.role.triggerU.numOfAnalysis", (1, 15), 4);
     public static FloatConfiguration RelocationCooldown = NebulaAPI.Configurations.Configuration("options.role.triggerU.relocationCooldown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
-    public static FloatConfiguration RelocationDuration = NebulaAPI.Configurations.Configuration("options.role.triggerU.relocationDuration", (2.5f, 30f, 2.5f), 15f, FloatConfigurationDecorator.Second);
+    public static FloatConfiguration RelocationDuration = NebulaAPI.Configurations.Configuration("options.role.triggerU.relocationDuration", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
     static public readonly BoolConfiguration PlayerColor = NebulaAPI.Configurations.Configuration("options.role.triggerU.playerColor", true);
 
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
@@ -113,7 +116,7 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
 
         public Dictionary<int, GamePlayer> VentHolders = [];
         private Vent? currentLocalHolding = null;
-
+        float syncTimer = 0f;
         public void RequestHoldVent(Vent vent)
         {
             RpcCheckHoldVent.Invoke((GamePlayer.LocalPlayer, vent.Id));
@@ -154,17 +157,25 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
             if (Helpers.AmHost(PlayerControl.LocalPlayer) && TryGetVent(message.ventId, out var vent)) ModSingleton<VentHolderManager>.Instance.CheckHoldVent(message.player, vent);
         });
 
-        static private RemoteProcess<(GamePlayer player, int ventId)> RpcHoldVent = new("PlumberHoldVent", (message, _) =>
+        static private RemoteProcess<(GamePlayer player, int ventId)> RpcHoldVent = new("TriggerHoldVent_Uchu", (message, _) =>
         {
             if (TryGetVent(message.ventId, out var vent)) ModSingleton<VentHolderManager>.Instance.HoldVent(message.player, vent);
         });
 
-        static private RemoteProcess<(GamePlayer player, int ventId, Vector3 pos)> RpcReleaseVent = new("PlumberReleaseVent", (message, _) =>
+        static private RemoteProcess<(GamePlayer player, int ventId, Vector3 pos)> RpcReleaseVent = new("TriggerReleaseVent_Uchu", (message, _) =>
         {
             if (TryGetVent(message.ventId, out var vent)) ModSingleton<VentHolderManager>.Instance.CheckAndReleaseVent(message.player, vent, message.pos);
         });
 
-        private bool CheckVentPosition(Vector3 position)
+        static private RemoteProcess<(int ventId, Vector3 pos)> RpcSyncVentPos = new("TriggerSyncPos_Uchu", (message, _) =>
+        {
+            if (TryGetVent(message.ventId, out var vent))
+            {
+                vent.transform.position = message.pos;
+            }
+        });
+
+        private bool CheckVentPosition(UnityEngine.Vector3 position)
         {
             var data = MapData.GetCurrentMapData();
             return data.CheckMapArea(position, 0.3f);
@@ -178,15 +189,23 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
                     var currentPos = currentLocalHolding.transform.position;
                     var targetPos = GamePlayer.LocalPlayer.VanillaPlayer.GetTruePosition();
 
-                    Vector3 nextPos;
+                    UnityEngine.Vector3 nextPos;
                     if (currentPos.Distance(targetPos) < 0.7f)
-                        nextPos = currentPos + (Vector3)((Vector2)(targetPos - (Vector2)currentPos).Delta(5.5f, 0.02f));
+                        nextPos = currentPos + (UnityEngine.Vector3)((UnityEngine.Vector2)(targetPos - (UnityEngine.Vector2)currentPos).Delta(5.5f, 0.02f));
                     else
                         nextPos = targetPos;
 
                     nextPos.z = nextPos.y / 1000f + 0.01f;
 
                     if (CheckVentPosition(nextPos)) currentLocalHolding.transform.position = nextPos;
+
+                    syncTimer -= Time.deltaTime; 
+                    if (currentLocalHolding != null && syncTimer <= 0f)
+                    {
+                        syncTimer = 0.02f;
+
+                        RpcSyncVentPos.Invoke((currentLocalHolding.Id, currentLocalHolding.transform.position));
+                    }
                 }
             }
         }
@@ -216,6 +235,10 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Trigger.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
+
+    private static MultiImage Icon = NebulaAPI.AddonAsset.GetResource("NoticeIcon.png")!.AsMultiImage(4, 1, 250f)!;
+    static private Image NoticeIconImage => Icon.AsLoader(3);
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         private Vent? holdingVent = null;
@@ -229,10 +252,10 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
         {
             if (AmOwner)
             {
-                ventTracker = ObjectTrackers.ForVents(this, 0.8f, MyPlayer, vent => true /* !ModSingleton<VentHolderManager>.Instance.AnyoneHolds(vent) */, Color.white);
+                ventTracker = ObjectTrackers.ForVents(this, 0.8f, MyPlayer, vent => true /* !ModSingleton<VentHolderManager>.Instance.AnyoneHolds(vent) */, UnityEngine.Color.white);
 
                 var AnalysisButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
-                    AnalysisCooldown, "analysis", AnalysisImage, _ => ventTracker.CurrentTarget != null && !AnalysisVent.Contains(ventTracker.CurrentTarget.Id) && left > 0);
+                    AnalysisCooldown, "analysis", AnalysisImage, _ => ventTracker.CurrentTarget != null && !AnalysisVent.Contains(ventTracker.CurrentTarget.Id) && left > 0).SetAsUsurpableButton(this);
                 AnalysisButton.ShowUsesIcon(3, left.ToString());
                 AnalysisButton.Visibility = (button) => !MyPlayer.IsDead && left > 0;
                 AnalysisButton.OnClick = (button) =>
@@ -249,10 +272,10 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
 
 
                 var RelocationButton = NebulaAPI.Modules.EffectButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.SecondaryAbility,
-                    RelocationCooldown, RelocationDuration,"relocation", DragImage, _ => ventTracker.CurrentTarget != null);
+                    RelocationCooldown, RelocationDuration,"relocation", DragImage, _ => ventTracker.CurrentTarget != null).SetAsUsurpableButton(this);
                 RelocationButton.OnClick = (button) =>
                 {
-                    RelocationButton.StartEffect();
+                    RelocationButton.ToggleEffect();
                     if (RelocationButton.IsInEffect)
                     {
                         if (!isDragging)
@@ -265,16 +288,6 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
 
                                 ModSingleton<VentHolderManager>.Instance.RequestHoldVent(targetVent);
                             }
-                        }
-                        else
-                        {
-                            ModSingleton<VentHolderManager>.Instance.RequestReleaseVent(holdingVent);
-
-                            holdingVent = null;
-                            isDragging = false;
-
-                            RelocationButton.ToggleEffect();
-                            RelocationButton.StartCoolDown();
                         }
                     }
                 };
@@ -296,6 +309,7 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
         void VentCheck(PlayerVentEnterEvent ev)
         {
             var player = ev.Player;
+            var roomName = NebulaAPI.CurrentGame?.CurrentMap?.GetRoomName(player.TruePosition, true, false, false) ?? "ERROR";
 
             Vector2 playerPos = player.VanillaPlayer.transform.position;
 
@@ -304,7 +318,7 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
 
             foreach (var v in ShipStatus.Instance.AllVents)
             {
-                float d = playerPos.Distance(v.transform.position);
+                float d = playerPos.Distance((Virial.Compat.Vector2)v.transform.position);
                 if (d < minDistance)
                 {
                     minDistance = d;
@@ -317,22 +331,36 @@ public class TriggerU : DefinedSingleAbilityRoleTemplate<TriggerU.Ability>, Defi
             {
                 List<(string tag, string message)> cand = new();
 
+                AmongUsUtil.PlayFlash(Color.Cyan);
+
+                var lifespan = new FlexibleLifespan(this);
+                var timer = NebulaAPI.Modules.Timer(lifespan, 5f);
+                new TrackingArrowAbility(ev.Player.RealPlayer, 0f, Color.Cyan, false).Register(lifespan);
+                timer.Start();
+                GameOperatorManager.Instance?.Subscribe<GameUpdateEvent>(ev =>
+                {
+                    if (!timer.IsProgressing)
+                    {
+                        lifespan.Release();
+                    }
+                }, lifespan);
+
                 if (PlayerColor)
                 {
-                    cand.Add(("PlayerColor", Language.Translate("options.role.trigger.message.ventColor").Replace("%COLOR%", Language.Translate(ModSingleton<BalancedColorManager>.Instance.IsLightColor(DynamicPalette.PlayerColors[ev.Player.PlayerId]) ? "options.role.triggerU.message.inner.lightColor" : "options.role.triggerU.message.inner.darkColor"))));
+                    cand.Add(("PlayerColor", Language.Translate("options.role.triggerU.message.ventColor").Replace("%COLOR%", Language.Translate(ModSingleton<BalancedColorManager>.Instance.IsLightColor(DynamicPalette.PlayerColors[ev.Player.PlayerId]) ? "options.role.triggerU.message.inner.lightColor" : "options.role.triggerU.message.inner.darkColor"))));
 
                     (string tag, string rawText) = cand.Random();
                     NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
                         new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.triggerU.message.header")),
-                        new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new TranslateTextComponent("options.role.triggerU.message" + "<br>" +rawText))),
-                        MeetingOverlayHolder.IconsSprite[1], MyRole.RoleColor);
+                        new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(Language.Translate("options.role.triggerU.message") + "<br>" +rawText))),
+                       NoticeIconImage, MyRole.RoleColor);
                 }
                 else
                 {
                     NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
                         new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.triggerU.message.header")),
-                        new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new TranslateTextComponent("options.role.triggerU.message"))),
-                        MeetingOverlayHolder.IconsSprite[1], MyRole.RoleColor);
+                        new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(Language.Translate("options.role.triggerU.message")))),
+                        NoticeIconImage, MyRole.RoleColor);
                 }
             }
         }

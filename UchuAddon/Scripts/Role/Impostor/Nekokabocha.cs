@@ -15,7 +15,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Virial.Attributes;
 using Virial.Events.Player;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 

@@ -1,0 +1,31 @@
+# Assignable
+
+"role.shapeshifterU.name" : "シェイプシフター"
+"role.shapeshifterU.short" : "シェイプ"
+"role.shapeshifterU.blurb" : "殺戮者のウラオモテ"
+
+# Document
+
+"role.shapeshifterU.doc" : "他人に変身できるインポスターです。"
+"role.shapeshifterU.tips" : "・他インポスターにも変身することができます。"
+"role.shapeshifterU.ability.title" : "固有能力 "シェイプシフト""
+"role.shapeshifterU.ability.main" : "他プレイヤーに変身することができます。"
+"role.shapeshifterU.ability.shapeshift" : "他プレイヤーに変身することができます。"
+"role.shapeshifterU.ability.shapeshift" : "<title>変身</title>パネルを開き、選択したプレイヤーに変身します。<br>この時、自身にアニメーションが再生されます。"
+# Options
+
+"options.role.shapeshifterU.detail" : "プレイヤーを選択し、そのプレイヤーに変身することのできるインポスターです。"
+"options.role.shapeshifterU.shapeshiftCoolDown" : "変身クールダウン"
+"options.role.shapeshifterU.shapeshiftDuration" : "変身持続時間"
+
+# Game
+
+# UI
+
+"button.label.shapeshifterU.shapeshift" : "変身"
+"button.label.shapeshifterU.UnShift" : "解除"
+
+
+# Stats
+
+# Titles

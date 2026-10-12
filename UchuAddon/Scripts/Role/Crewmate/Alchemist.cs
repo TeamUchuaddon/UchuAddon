@@ -16,15 +16,19 @@ using System.Threading.Tasks;
 using TMPro;
 using Virial.Attributes;
 using Virial.Events.Player;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
-public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, DefinedRole
+public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, DefinedRole, IAssignableDocument
 {
     public AlchemistU() : base("alchemistU", new(42, 44, 80), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [AlchemyUCooldown, alchemycount, NumOfPerMeeting])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Alchemist.png")!.AsImage(115f);
     }
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.CanLoadToMadmate;
     static private FloatConfiguration AlchemyUCooldown = NebulaAPI.Configurations.Configuration("options.role.AlchemistU.AlchemyCooldown", (0f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
@@ -36,13 +40,25 @@ public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, 
         return null;
     }
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Alchemist.png")!.AsImage(100f)!;
+    static private readonly Virial.Media.Image AlchemySprite = NebulaAPI.AddonAsset.GetResource("Alchemy.png")!.AsImage(115f)!;
+    static private readonly Virial.Media.Image BulletSprite = NebulaAPI.AddonAsset.GetResource("AlchemyBullet.png")!.AsImage(115f)!;
     Image? DefinedAssignable.IconImage => IconImage;
+    bool IAssignableDocument.HasAbility => true;
+    IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
+    {
+        yield return new(AlchemySprite, "role.alchemistU.ability.alchemy");
+        yield return new(BulletSprite, "role.alchemistU.ability.alchemybullet");
+    }
+
+    IEnumerable<AssignableDocumentReplacement> IAssignableDocument.GetDocumentReplacements()
+    {
+        yield return new("%SEC%", alchemycount.GetValue().ToString());
+    }
+
     static public AlchemistU MyRole = new();
     static private readonly GameStatsEntry StatsSample = NebulaAPI.CreateStatsEntry("stats.alchemistU.alchemy", GameStatsCategory.Roles, MyRole);
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
-        static private readonly Virial.Media.Image AlchemySprite = NebulaAPI.AddonAsset.GetResource("Alchemy.png")!.AsImage(115f)!;
-        static private readonly Virial.Media.Image BulletSprite = NebulaAPI.AddonAsset.GetResource("AlchemyBullet.png")!.AsImage(115f)!;
         int leftAlchemy = 0;
 
 
@@ -53,7 +69,7 @@ public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, 
             {
                 var AlchemyTracker = ObjectTrackers.ForDeadBody(this, null, MyPlayer, (d) => true);
 
-                var AlchemyButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, "alchemistU.Alchemy",
+                var AlchemyButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
                     AlchemyUCooldown, "Alchemy", AlchemySprite,
                     _ => AlchemyTracker.CurrentTarget != null).SetAsUsurpableButton(this);
                 AlchemyButton.OnClick = (button) => {

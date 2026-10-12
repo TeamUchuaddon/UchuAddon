@@ -40,10 +40,10 @@ using Virial.Runtime;
 using Virial.Text;
 using static Nebula.Roles.Crewmate.Madmate;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 
 namespace Hori.Scripts.Role.Impostor;
@@ -65,6 +65,7 @@ public class SpectrumU : DefinedRoleTemplate,  DefinedRole
     private SpectrumU() : base("spectrumU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [KillCoolDown])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Spectrum.png")!.AsImage(115f);
     }
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player, Roles.GetRole(arguments.Get(0, -1)), arguments.Skip(1).ToArray());
 

@@ -17,11 +17,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Events.Player;
 using Virial.Media;
 using static Hori.Scripts.Role.Impostor.VampireU;
+using Color = Virial.Color;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+
 
 namespace Hori.Scripts.Role.Impostor;
 
@@ -55,11 +61,9 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
         static private readonly Virial.Media.Image BiteImage = NebulaAPI.AddonAsset.GetResource("BiteButton.png")!.AsImage(115f)!;
 
         ModAbilityButton? biteButton = null;
-        private int[]? globalgarlics = null;
-        List<NebulaSyncStandardObject> localGarlics = null!;
+
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
         bool IPlayerAbility.HideKillButton => !(biteButton?.IsBroken ?? false);
-        public bool IsInGarlicRange { get; set; }
 
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
         {
@@ -76,7 +80,7 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
                         {
                             NebulaManager.Instance.StartCoroutine(CoDelayKill(target.RealPlayer).WrapToIl2Cpp());
                         }
-                        biteButton.StartEffect();
+                        biteButton?.StartEffect();
                     },
                     null,
                     _ => myTracker.CurrentTarget != null && !MyPlayer.IsDived,
@@ -87,7 +91,7 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
                 {
                     biteButton.StartCoolDown();
                 };
-                biteButton.Availability = (button) => myTracker.CurrentTarget != null && MyPlayer.CanMove && !IsInGarlicRange;
+                biteButton.Availability = (button) => myTracker.CurrentTarget != null && MyPlayer.CanMove && ModSingleton<GarlicSystem>.Instance.IsOutsideGarlicRange(MyPlayer.TruePosition);
                 biteButton.SetImage(BiteImage);
                 biteButton.EffectTimer = NebulaAPI.Modules.Timer(this, KillDelayOption);
                 biteButton.CoolDownTimer = NebulaAPI.Modules.Timer(this, KillCooldown).SetAsAbilityTimer().Start();
@@ -96,17 +100,9 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
 
         IEnumerator CoDelayKill(GamePlayer victim)
         {
-            if (!IsInGarlicRange)
-            {
-                yield return Effects.Wait(KillDelayOption);
-            }
+            yield return Effects.Wait(KillDelayOption);
+            
             MyPlayer.MurderPlayer(victim, PlayerState.Dead, EventDetail.Kill, KillParameter.RemoteKill);
-        }
-
-        void OnUpdate(GameUpdateEvent ev)
-        {
-            if (!AmOwner) return;
-            IsInGarlicRange = false;
         }
     }
 
@@ -115,33 +111,21 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
     {
         public const string MyTag = "Garlic";
         private static readonly Image garlicImage = NebulaAPI.AddonAsset.GetResource("Garlic.png")!.AsImage(350f)!;
-        public Garlic(UnityEngine.Vector2 pos) : base(pos, ZOption.Just, true, garlicImage.GetSprite()) { }
+        public Garlic(Vector2 pos) : base(pos, ZOption.Just, true, garlicImage.GetSprite()) 
+        {
+            ModSingleton<GarlicSystem>.Instance.RegisterGarlic(this);
+        }
 
         public override void OnInstantiated()
         {
             base.OnInstantiated();
 
-            var smokeObj = UnityHelper.CreateObject<SpriteRenderer>("GarlicSmoke", null, new UnityEngine.Vector3(Position.x, Position.y, -6f));
+            var smokeObj = UnityHelper.CreateObject<SpriteRenderer>("GarlicSmoke", null, new Vector3(Position.x, Position.y, -6f));
             smokeObj.sprite = NebulaAPI.AddonAsset.GetResource("Smoke.png")!.AsImage(100f)!.GetSprite();
             float scale = ((float)MineSizeOption * 2f) / 3f;
-            smokeObj.transform.localScale = new UnityEngine.Vector3(scale, scale, 1f);
-            smokeObj.color = new UnityEngine.Color(0.4f, 0.9f, 0.2f, 0.35f);
+            smokeObj.transform.localScale = new Vector3(scale, scale, 1f);
+            smokeObj.color = new (0.4f, 0.9f, 0.2f, 0.35f);
             smokeObj.sortingOrder = 0;
-        }
-
-        void OnUpdate(GameUpdateEvent ev)
-        {
-            if (MeetingHud.Instance || ExileController.Instance) return;
-
-            var local = GamePlayer.LocalPlayer;
-            if (local == null || local.IsDead) return;
-
-            if (!local.TryGetAbility<VampireU.Ability>(out var ability)) return;
-
-            if (Position.Distance(local.TruePosition) < MineSizeOption)
-            {
-                ability.IsInGarlicRange = true;
-            }
         }
 
         static Garlic()
@@ -154,12 +138,15 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
     public class GarlicSystem : AbstractModule<Virial.Game.Game>, IGameOperator
     {
         static GarlicSystem() => DIManager.Instance.RegisterModule(() => new GarlicSystem());
-        protected override void OnInjected(Virial.Game.Game container) => this.Register(container);
-        static public GarlicSystem Instance { get; private set; }
+
         private GarlicSystem()
         {
-            Instance = this;
+            ModSingleton<GarlicSystem>.Instance = this;
+            this.RegisterPermanently();
         }
+
+
+        List<NebulaSyncStandardObject>? garlics = new List<NebulaSyncStandardObject>();
 
         void OnGameStart(GameStartEvent ev)
         {
@@ -186,6 +173,27 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
                     placeButton.UpdateUsesIcon(leftGarlic.ToString());
                 };
             }
+        }
+
+        public void RegisterGarlic(NebulaSyncStandardObject garlic)
+        {
+            garlics?.Add(garlic);
+        }
+
+        public bool IsOutsideGarlicRange(Vector2 pos)
+        {
+            if (MeetingHud.Instance || ExileController.Instance) return false;
+            
+            foreach (var g in garlics!)
+            {
+                if (g.Position.Distance(pos) < MineSizeOption)
+                {
+
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

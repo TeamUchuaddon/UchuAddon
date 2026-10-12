@@ -6,24 +6,22 @@
 
 # Document
 
-"role.SerialKillerU.doc" : "キルクールダウンが早い代わりに一定時間で自殺するインポスターです。"
-
+"role.SerialKillerU.doc" : "キルクールダウンが早い変わりに時間で自殺するインポスターです。"
+"role.SerialKillerU.tips" : "一度キルをするまで自殺タイマーは有効化しません。"
 # Options
 
 "options.role.SerialKillerU.detail" : "シリアルキラーはキルクールダウンが早い代わりに、<br>一定時間キルをしないと自殺してしまうインポスターです。"
-"options.role.serialkillerU.SerikillCooldown" : "シリアルキルクールダウン"
-"options.role.serialkillerU.SuicideCooldown" : "自殺秒数"
-"options.role.serialkillerU.MeetingEndsTimerActive" : "自殺ボタンの初回会議終了時有効化"
-"options.role.serialkillerU.SuicideCooldown" : "自殺秒数"
-"options.role.serialkillerU.SerikillCooldown" : "シリアルキルクールダウン"
-"options.role.serialkillerU.MeetingEndsTimerActive" : "自殺ボタンの初回会議終了時有効化"
+"options.role.serialkillerU.SerikillCooldown" : "キルクールダウン"
+"options.role.serialkillerU.SuicideCooldown" : "自殺までの秒数"
+"options.role.serialkillerU.SeriSuicidebutton" : "自殺ボタンを有効にする"
+"options.role.serialkillerU.SeriSuicidebutton.detail" : "ボタンを押すことで自殺できるようになります。"
 
 # Game
 
 # UI
 
 "kill" : "キル"
-"button.label.serialkill" : "自殺"
+"button.label.serialKillerU.suicide" : "自殺まで"
 
 # Stats
 

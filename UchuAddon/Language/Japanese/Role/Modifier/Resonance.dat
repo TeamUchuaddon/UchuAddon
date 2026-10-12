@@ -10,6 +10,7 @@
 # Options
 
 "options.role.resonanceU.detail" : "レゾナンスは味方のインポスターがキルした時フラッシュします。"
+"options.role.resonanceU.isColorFlash" : "死亡者のプレイヤーカラーでフラッシュ"
 
 # Game
 

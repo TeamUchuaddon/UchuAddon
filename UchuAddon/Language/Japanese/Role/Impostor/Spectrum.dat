@@ -15,10 +15,10 @@
 
 # Game
 
-"options.role.count.custom" : "インポスター割当人数"
-"options.role.chance.custom" : "インポスター割当確率"
-"help.rolePreview.inner.custom.100" : "インポスター化 確定出現"
-"help.rolePreview.inner.custom.random" : "インポスター化 ランダム出現"
+"options.role.count.custom" : "スペクトラム割当人数"
+"options.role.chance.custom" : "スペクトラム割当確率"
+"help.rolePreview.inner.custom.100" : "スペクトラム化 確定出現"
+"help.rolePreview.inner.custom.random" : "スペクトラム化 ランダム出現"
 
 # UI
 

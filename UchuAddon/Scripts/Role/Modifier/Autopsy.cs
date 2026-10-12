@@ -52,6 +52,7 @@ public class AutopsyU : DefinedAllocatableModifierTemplate, DefinedAllocatableMo
     private AutopsyU() : base("autopsyU", "ATP", new(128, 255, 221), [])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Autopsy.png")!.AsImage(115f);
     }
 
     static private Image buttonSprite = new WrapSpriteLoader(() => HudManager.Instance.UseButton.fastUseSettings[ImageNames.VitalsButton].Image);

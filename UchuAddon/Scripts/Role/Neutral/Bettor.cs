@@ -29,8 +29,10 @@ using Virial.Attributes;
 using Virial.Events.Player;
 using Virial.Media;
 using Color = UnityEngine.Color;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Image = Virial.Media.Image;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
+
 
 namespace Hori.Scripts.Role.Neutral;
 
@@ -150,7 +152,7 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                     else if (player.IsCrewmate) analyzedPlayers[player] = NebulaAPI.Language.Translate("help.rolePreview.category.crewmate").Color(Palette.CrewmateBlue);
                     else analyzedPlayers[player] = NebulaAPI.Language.Translate("help.rolePreview.category.neutral").Color(new Color(244f / 255f, 211f / 255f, 53f / 255f));
 
-                    NebulaAPI.CurrentGame?.GetModule<BettorOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(GUIAlignment.Left, GetAnalyzeResult()), InformationIcon.AsLoader(1), MyRole.RoleColor, false);
+                    NebulaAPI.CurrentGame?.GetModule<BettorOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(GUIAlignment.Left, GetAnalyzeResult()), InformationIcon.AsLoader(1), MyRole.UnityColor, false);
 
                     leftAnalyze --;
                     analyzeButton?.UpdateUsesIcon(leftAnalyze.ToString());
@@ -202,7 +204,9 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
         [Local]
         void OnMeetingStart(MeetingStartEvent ev)
         {
-                var buttonManager = NebulaAPI.CurrentGame?.GetModule<MeetingPlayerButtonManager>();
+            MyPlayer.VanillaPlayer.moveable = true;
+            
+            var buttonManager = NebulaAPI.CurrentGame?.GetModule<MeetingPlayerButtonManager>();
                 buttonManager?.RegisterMeetingAction(new(IdentifyButtonSprite,
                    p =>
                    {
@@ -243,7 +247,7 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                 while (MeetingHud.Instance)
                 {
                     const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!#$%&=^@:/\\+-";
-                    text.text = new string(Enumerable.Range(0, 10).Select(_ => chars[UnityEngine.Random.Range(0, chars.Length)]).ToArray()).Color(Color.gray);
+                    text.text = new string(Enumerable.Range(0, 10).Select(_ => chars[UnityEngine.Random.Range(0, chars.Length)]).ToArray()).Color(UnityEngine.Color.gray);
 
                     yield return new WaitForSeconds(0.05f);
                 }
@@ -277,7 +281,7 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
         public MetaScreen OpenGuessScreen()
         {
             MyPlayer.VanillaPlayer.moveable = false;
-            MyPlayer.VanillaPlayer.MyPhysics.body.velocity = Vector2.zero;
+            MyPlayer.VanillaPlayer.MyPhysics.body.velocity = Vector2.Zero;
 
             roleSelectWindow = null!;
 
@@ -293,7 +297,7 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                         NebulaAPI.GUI.HorizontalMargin(0.3f),
                         new NoSGameObjectGUIWrapper(GUIAlignment.Center, () =>
                         {
-                            var poolablePlayer = AmongUsUtil.GetPlayerIcon(player.DefaultOutfit.outfit, null, Vector3.zero, new Vector3(0.35f, 0.35f, 1f), false, false);
+                            var poolablePlayer = AmongUsUtil.GetPlayerIcon(player.DefaultOutfit.outfit, null, Vector3.Zero, new Vector3(0.35f, 0.35f, 1f), false, false);
                             poolablePlayer.SetAsGUIComponent(true);
                             return (poolablePlayer.gameObject, new(1f, 1f));
                         }),
@@ -336,7 +340,7 @@ public class BettorU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                             missRoles = missRoles.Distinct().ToList();
 
 
-                            NebulaAPI.CurrentGame?.GetModule<BettorOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(GUIAlignment.Left, NebulaAPI.GUI.LocalizedText(GUIAlignment.Left, AttributeAsset.OverlayTitle, "role.bettorU.information.title"), NebulaAPI.GUI.VerticalMargin(0.1f), NebulaAPI.GUI.LocalizedText(GUIAlignment.Left, AttributeAsset.OverlayBold, "role.bettorU.information.blow"), NebulaAPI.GUI.RawText(GUIAlignment.Left, AttributeAsset.OverlayContent, blowRoles.Count == 0 ? NebulaAPI.Language.Translate("role.bettorU.information.none") : string.Join("", blowRoles.Select((role, index) =>role.DisplayColoredName + (index < blowRoles.Count - 1 ? ", " : "") + ((index + 1) % 3 == 0 && index < blowRoles.Count - 1 ? "\n" : "")))), NebulaAPI.GUI.VerticalMargin(0.075f), NebulaAPI.GUI.LocalizedText(GUIAlignment.Left, AttributeAsset.OverlayBold, "role.bettorU.information.miss"), NebulaAPI.GUI.RawText(GUIAlignment.Left, AttributeAsset.OverlayContent, missRoles.Count == 0 ? NebulaAPI.Language.Translate("role.bettorU.information.none") : string.Join("", missRoles.Select((role, index) => role.DisplayColoredName + (index < missRoles.Count - 1 ? ", " : "") + ((index + 1) % 3 == 0 && index < missRoles.Count - 1 ? "\n" : ""))))), InformationIcon.AsLoader(0), MyRole.RoleColor, true);
+                            NebulaAPI.CurrentGame?.GetModule<BettorOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(GUIAlignment.Left, NebulaAPI.GUI.LocalizedText(GUIAlignment.Left, AttributeAsset.OverlayTitle, "role.bettorU.information.title"), NebulaAPI.GUI.VerticalMargin(0.1f), NebulaAPI.GUI.LocalizedText(GUIAlignment.Left, AttributeAsset.OverlayBold, "role.bettorU.information.blow"), NebulaAPI.GUI.RawText(GUIAlignment.Left, AttributeAsset.OverlayContent, blowRoles.Count == 0 ? NebulaAPI.Language.Translate("role.bettorU.information.none") : string.Join("", blowRoles.Select((role, index) =>role.DisplayColoredName + (index < blowRoles.Count - 1 ? ", " : "") + ((index + 1) % 3 == 0 && index < blowRoles.Count - 1 ? "\n" : "")))), NebulaAPI.GUI.VerticalMargin(0.075f), NebulaAPI.GUI.LocalizedText(GUIAlignment.Left, AttributeAsset.OverlayBold, "role.bettorU.information.miss"), NebulaAPI.GUI.RawText(GUIAlignment.Left, AttributeAsset.OverlayContent, missRoles.Count == 0 ? NebulaAPI.Language.Translate("role.bettorU.information.none") : string.Join("", missRoles.Select((role, index) => role.DisplayColoredName + (index < missRoles.Count - 1 ? ", " : "") + ((index + 1) % 3 == 0 && index < missRoles.Count - 1 ? "\n" : ""))))), InformationIcon.AsLoader(0), MyRole.UnityColor, true);
 
                             window.CloseScreen();
                             OpenGuessScreen();
@@ -423,7 +427,7 @@ internal class BettorOverlayHolder : AbstractModule<Virial.Game.Game>, IGameOper
     SpriteRenderer informationRenderer = null!;
     SpriteRenderer resultRenderer = null!;
 
-    public void RegisterOverlay(GUIWidgetSupplier overlay, Image icon, Virial.Color color/*, bool isNew*/, bool isInformation)
+    public void RegisterOverlay(GUIWidgetSupplier overlay, Image icon, UnityEngine.Color color/*, bool isNew*/, bool isInformation)
     {
         if (!shower) return;
 
@@ -437,7 +441,7 @@ internal class BettorOverlayHolder : AbstractModule<Virial.Game.Game>, IGameOper
 
         renderer = UnityHelper.CreateObject<SpriteRenderer>("Icon", shower, new((isInformation ? -0.2f : 0.28f), 0f, 0f));
         renderer.sprite = IconSprite.GetSprite(0);
-        renderer.color = Color.Lerp(color.ToUnityColor(), Color.white, 0.3f);
+        renderer.color = Color.Lerp(color, Color.white, 0.3f);
 
         var iconInner = UnityHelper.CreateObject<SpriteRenderer>("Inner", renderer.transform, new(0f, 0f, -1f));
         iconInner.sprite = icon.GetSprite();
@@ -456,12 +460,12 @@ internal class BettorOverlayHolder : AbstractModule<Virial.Game.Game>, IGameOper
                 if (p > 1f) break;
 
                 if (p > 0f)
-                    renderer.transform.localScale = Vector3.one * (p + Mathn.Pow(Mathn.Cos(0.5f * p * Mathn.PI), 1.5f) * Mathn.Pow(p, 0.3f) * 2.5f);
+                    renderer.transform.localScale = Vector3.One * (p + Mathn.Pow(Mathn.Cos(0.5f * p * Mathn.PI), 1.5f) * Mathn.Pow(p, 0.3f) * 2.5f);
                 else
-                    renderer.transform.localScale = Vector3.zero;
+                    renderer.transform.localScale = Vector3.Zero;
                 yield return null;
             }
-            renderer.transform.localScale = Vector3.one;
+            renderer.transform.localScale = Vector3.One;
         }
 
         if (isNew) NebulaManager.Instance.StartCoroutine(CoAppear().WrapToIl2Cpp());
@@ -470,7 +474,7 @@ internal class BettorOverlayHolder : AbstractModule<Virial.Game.Game>, IGameOper
         collider.isTrigger = true;
         collider.size = new(0.4f, 0.4f);
 
-        var button = renderer.gameObject.SetUpButton(false, renderer, color.ToUnityColor());
+        var button = renderer.gameObject.SetUpButton(false, renderer, BettorU.MyTeam.Color);
         button.OnMouseOver.AddListener(() => { VanillaAsset.PlayHoverSE(); NebulaManager.Instance.SetHelpWidget(button, overlay.Invoke()); notification.gameObject.SetActive(false);});
         button.OnMouseOut.AddListener(() => NebulaManager.Instance.HideHelpWidgetIf(button));
 

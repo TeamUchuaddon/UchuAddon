@@ -30,13 +30,14 @@ using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
 using Virial.Text;
+using static Il2CppSystem.Globalization.CultureInfo;
 using static Nebula.Roles.Impostor.Hadar;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.GridLayoutGroup;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
@@ -47,12 +48,13 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
         new GroupConfiguration("options.role.epidemicU.group.break",[BreakCooldown,BreakDuration,NumOfBreak,NumOfBreakPhase],GroupConfigurationColor.ToDarkenColor(MyTeam.Color.ToUnityColor())),
         new GroupConfiguration("options.role.epidemicU.group.boxTask",[NumOfBox,NumOfMaxBoxUse,CleanUpDuration,NumOfResetInfection,NumOfPenalty],GroupConfigurationColor.ToDarkenColor(MyTeam.Color.ToUnityColor())),VentConfiguration])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Epidemic.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
     public static FloatConfiguration InfectionCooldown = NebulaAPI.Configurations.Configuration("options.role.epidemicU.infectionCooldown", (5f, 60f, 5f), 20f, FloatConfigurationDecorator.Second);
     public static FloatConfiguration InfectionDuration = NebulaAPI.Configurations.Configuration("options.role.epidemicU.infectionDuration", (1f, 10f, 0.5f), 3f, FloatConfigurationDecorator.Second);
-    public static FloatConfiguration InfectionMaxTime = NebulaAPI.Configurations.Configuration("options.role.epidemicU.infectionMaxTime", (30f, 120f, 5f), 60f, FloatConfigurationDecorator.Second);
+    public static FloatConfiguration InfectionMaxTime = NebulaAPI.Configurations.Configuration("options.role.epidemicU.infectionMaxTime", (20f, 120f, 5f), 45f, FloatConfigurationDecorator.Second);
     public static FloatConfiguration InfectionRange = NebulaAPI.Configurations.Configuration("options.role.epidemicU.infectionRange", (1f, 10f, 0.25f), 3.5f, FloatConfigurationDecorator.Ratio);
 
     public static FloatConfiguration BreakCooldown = NebulaAPI.Configurations.Configuration("options.role.epidemicU.breakCooldown", (5f, 60f, 5f), 30f, FloatConfigurationDecorator.Second);
@@ -100,10 +102,10 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
     public class Instance : RuntimeVentRoleTemplate, RuntimeRole
     {
         public override DefinedRole Role => MyRole;
-        static private readonly Dictionary<GamePlayer, float> infection = new();
-        public static HashSet<GamePlayer>? InfectionCompletes = new HashSet<GamePlayer>(); // 感染済みプレイヤー
+        private readonly Dictionary<GamePlayer, float> infection = new();
+        public HashSet<GamePlayer>? InfectionCompletes = new HashSet<GamePlayer>(); // 感染済みプレイヤー
         private HashSet<GamePlayer> IsInfection = new(); //感染進行中のプレイヤー
-        public static List<GamePlayer>? FirstInfection = new List<GamePlayer>();
+        public List<GamePlayer>? FirstInfection = new List<GamePlayer>();
         float ratePerSecond = 100f / InfectionMaxTime;
         int leftInfection = 1;
         int leftBreak = NumOfBreak;
@@ -209,7 +211,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             }
         }
 
-        static public void ReduceInfectionFor(GamePlayer player) //除染効果
+        public void ReduceInfectionFor(GamePlayer player) //除染効果
         {
             if (player == null) return;
             if (!infection.ContainsKey(player)) return;
@@ -286,7 +288,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
 
 
                 var breakButton = NebulaAPI.Modules.EffectButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.SecondaryAbility,
-                    BreakCooldown, BreakDuration, "epidemicU.break", InfectionImage,
+                    BreakCooldown, BreakDuration, "epidemicU.break", BreakImage,
                     _ => boxTracker.CurrentTarget != null && leftBreak > 0);
                 breakButton.Visibility = (button) => !MyPlayer.IsDead && leftBreak > 0;
                 breakButton.ShowUsesIcon(1, leftBreak.ToString());
@@ -304,6 +306,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                     {
                         var target = boxTracker.CurrentTarget;
                         if (target == null) return;
+
 
                         ModSingleton<CleanUpBoxManager>.Instance.Break(target);
                     }
@@ -391,6 +394,8 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
         [Local]
         void CheckWin(GameUpdateEvent ev) //勝利条件チェック
         {
+            if (MyPlayer.IsDead) return;
+
             if (MeetingHud.Instance) return;
 
             foreach (var player in GamePlayer.AllPlayers)
@@ -398,11 +403,10 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                 if (player == MyPlayer) continue;
                 if (player.IsDead) continue;
 
-                if (!InfectionCompletes!.Contains(player))
-                    return;
+                if (!InfectionCompletes!.Contains(player)) return;
             }
 
-            NebulaAPI.CurrentGame?.TriggerGameEnd(UchuGameEnd.EpidemicWin, GameEndReason.Special, BitMasks.AsPlayer(1u << MyPlayer.PlayerId));
+            NebulaGameManager.Instance.RpcInvokeSpecialWin(UchuGameEnd.EpidemicWin, 1 << MyPlayer.PlayerId);
         }
     }
 
@@ -421,10 +425,10 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             ModSingleton<CleanUpBoxManager>.Instance.RegisterBox(this);
             MyRenderer.material = VanillaAsset.GetHighlightMaterial();
 
-            shadowRenderer = UnityHelper.CreateObject<SpriteRenderer>("ConsoleBack",null,Vector3.zero);
+            shadowRenderer = UnityHelper.CreateObject<SpriteRenderer>("ConsoleBack",null,Vector3.Zero);
 
             shadowRenderer.sprite = sprites.GetSprite(2);
-            shadowRenderer.transform.position = MyRenderer.transform.position + new Vector3(0f, -0.31f, 0.0001f);
+            shadowRenderer.transform.position = MyRenderer.transform.position + new UnityEngine.Vector3(0f, -0.31f, 0.0001f);
 
             shadowBaseWorldPos = shadowRenderer.transform.position;
 
@@ -458,7 +462,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                     cleanUpGame.Console = null;
                     cleanUpGame.Begin(null!);
                 },
-                OutlineColor = Color.white
+                OutlineColor = UnityEngine.Color.white
             };
         }
         public const string MyTag = "CleanUpBox";
@@ -554,12 +558,18 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             UchuDebug.Log($"[EpidemicU] Rpc - AddUseTask");
         });
 
-        static public RemoteProcess<GamePlayer> RpcCleanUpInfection = new("CleanUpReduceInfection_Uchu", (player, _) =>
+        static public RemoteProcess<(GamePlayer target, byte epidemicId)> RpcCleanUpInfection = new("CleanUpReduceInfection_Uchu", (data, _) =>
         {
-            if (player == null) return;
+            var (target, epidemicId) = data;
+            if (target == null) return;
 
-            UchuDebug.Log($"[EpidemicU] Rpc - CleanUpInfection");
-            Role.Neutral.EpidemicU.Instance.ReduceInfectionFor(player);
+            foreach (var p in GamePlayer.AllPlayers)
+            {
+                if (p.Role is EpidemicU.Instance epi && epi.MyPlayer.PlayerId == epidemicId)
+                {
+                    epi.ReduceInfectionFor(target);
+                }
+            }
         });
 
         public bool CanUseBox(GamePlayer player, CleanUpBox targetBox)
@@ -598,7 +608,8 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
         }
     }
 
-    static TextureReplacerUchu cleanUpImages = new(new ResourceTextureLoader("Nebula.Resources.Depoison.png"));
+    private static readonly TextureReplacerUchu cleanUpImages = 
+        new TextureReplacerUchu(NebulaAPI.AddonAsset.GetResource("CleanUp.png")!.AsImage(100f).GetSprite().texture);
 
     public class CleanUpMinigame : Minigame
     {
@@ -650,7 +661,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                 {
                     UchuDebug.Log($"[EpidemicU] Task Complete");
                     CleanUpBoxManager.RpcAddUseCountUchu.Invoke(GamePlayer.LocalPlayer!);
-                    CleanUpBoxManager.RpcCleanUpInfection.Invoke(GamePlayer.LocalPlayer!);
+                    CleanUpBoxManager.RpcCleanUpInfection.Invoke((GamePlayer.LocalPlayer!, GamePlayer.LocalPlayer!.PlayerId));
                 }
             }
         }
@@ -678,7 +689,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
         }
         mgr.allBoxes.Clear();
 
-        switch (AmongUsUtil.CurrentMapId)
+        switch (NebulaAPI.AmongUs.MapId)
         {
             case 0:
                 List<Vector2> spawnPointsSkeld = new()
@@ -744,7 +755,7 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                 {
                     new Vector2(29.41f, -6.21f),
                     new Vector2(11.83f, 9.19f),
-                    new Vector2(-12.31f, -9.52f)
+                    new Vector2(-10.32f, -6.94f)
                 };
                 int spawnCounta = Mathf.Clamp(NumOfBox, 0, spawnPointsAirShip.Count);
 
@@ -788,14 +799,16 @@ internal class EpidemicU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
 
         public void Awake()
         {
-            var center = VanillaAsset.GetMapCenter(AmongUsUtil.CurrentMapId);
-            var scale = VanillaAsset.GetMapScale(AmongUsUtil.CurrentMapId);
+            var center = VanillaAsset.GetMapCenter(NebulaAPI.AmongUs.MapId);
+            var scale = VanillaAsset.GetMapScale(NebulaAPI.AmongUs.MapId);
             allBoxs = [];
 
             foreach (var box in ModSingleton<CleanUpBoxManager>.Instance.allBoxes)
             {
-                var renderer = UnityHelper.CreateObject<SpriteRenderer>("Box", transform, VanillaAsset.ConvertToMinimapPos(box.Position, center, scale));
-                renderer.transform.localScale = new(0.7f, 0.7f, 1f);
+                var pos = VanillaAsset.ConvertToMinimapPos(box.Position, center, scale);
+
+                var renderer = UnityHelper.CreateObject<SpriteRenderer>("Box", transform, new Vector3(pos.x, pos.y, 0f));
+                renderer.transform.localScale = new(0.45f, 0.45f, 1f);
                 renderer.gameObject.AddComponent<MinimapScaler>();
                 allBoxs.Add((box.BoxId, renderer));
             }

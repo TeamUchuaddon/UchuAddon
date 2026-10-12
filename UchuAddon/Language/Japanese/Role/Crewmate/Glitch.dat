@@ -1,0 +1,42 @@
+# Assignable
+
+"role.GlitchU.name" : "グリッチ"
+"role.GlitchU.short" : "グリ"
+"role.GlitchU.blurb" : "歪みの存在"
+
+# Document
+
+"role.GlitchU.doc" : "初手会議で死亡するクルーメイトです。<br>タスクを終えることで復活することが出来ます。<br>復活すると<b>設定された相手にグリッチへの矢印</b>が表示されます。"
+"role.GlitchU.tips" : "グリッチは霊界での情報を一切視認できません。"
+
+# Options
+
+"options.role.GlitchU.detail" : "グリッチは死亡した状態から始まるクルーメイトです。<br>タスクを完了させることで復活できます。"
+
+"options.role.GlitchU.InstantReviveOption" : "即時復活"
+"options.role.GlitchU.InstantReviveOption.detail" : "タスクを完了させると会議を挟まず、すぐに復活します。"
+"options.role.GlitchU.BlockMeetGlitch" : "緊急会議ボタンの歪み"
+"options.role.GlitchU.BlockMeetGlitch.detail" : "緊急会議ボタンが押せなくなります。"
+
+"options.role.GlitchU.group.ReplaceTasks" : "タスクの設定"
+"options.role.GlitchU.NumOfExtraCommonTasksOption" : "通常タスク"
+"options.role.GlitchU.NumOfExtraShortTasksOption" : "ショートタスク"
+"options.role.GlitchU.NumOfExtraLongTasksOption" : "ロングタスク"
+
+"options.role.GlitchU.group.GlitchArrows" : "矢印表示の設定"
+"options.role.GlitchU.GlitchArrowImpostor" : "インポスター"
+"options.role.GlitchU.GlitchArrowImpostor.detail" : "マッドメイトも含まれます"
+"options.role.GlitchU.GlitchArrowCrewmate" : "クルーメイト"
+"options.role.GlitchU.GlitchArrowNeutral" : "第三陣営"
+
+# Game
+
+"role.GlitchU.denyReason" : "歪みが干渉している..."
+
+# UI
+
+# Stats
+
+"state.glitch.dead" : "歪み"
+
+# Titles

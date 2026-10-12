@@ -42,10 +42,10 @@ using Virial.Game;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Abilities;
 
@@ -64,7 +64,7 @@ public class VentArrowAbility : FlexibleLifespan, IGameOperator
 
         foreach (var v in ShipStatus.Instance.AllVents)
         {
-            float d = Vector3.Distance(myPos, v.transform.position);
+            float d = UnityEngine.Vector3.Distance(myPos, v.transform.position);
             if (closestVent == null || d < minDistance)
             {
                 minDistance = d;
@@ -80,7 +80,7 @@ public class VentArrowAbility : FlexibleLifespan, IGameOperator
                 ventArrow = new Arrow(null)
                 {
                     TargetPos = new Vector2(ventLocal.transform.position.x, ventLocal.transform.position.y)
-                }.SetColor(Color.yellow)
+                }.SetColor(Color.Yellow)
                  .Register(this);
             }
             else

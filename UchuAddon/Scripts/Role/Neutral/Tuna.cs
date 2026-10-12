@@ -34,22 +34,24 @@ using Virial.Configuration;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
+using Virial.Helpers;
 using Virial.Media;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using Color = UnityEngine.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
 public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDocument
 {
     public static Team MyTeam = new Team("teams.tunaU", new Virial.Color(171, 245, 255), TeamRevealType.OnlyMe);
-    private TunaU() : base("tunaU", new Virial.Color(171, 245, 255), RoleCategory.NeutralRole, MyTeam, [TunaAction,UseallyStopTime,TotalStopTime,MeetingTotalTimeReset,MeetingStopTime,VentOption,
+    private TunaU() : base("tunaU", new Virial.Color(171, 245, 255), RoleCategory.NeutralRole, MyTeam, [TunaAction,UseallyStopTime,TotalStopTime,MeetingTotalTimeReset,MeetingStopTime,VentConfiguration,
          new GroupConfiguration("options.role.tuna.group.gauge",[RequiredGaugeToWin, StopGaugeRatio], GroupConfigurationColor.ToDarkenColor(MyTeam.UnityColor))])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Tuna.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
     Citation? HasCitation.Citation =>Nebula.Roles.Citations.SuperNewRoles;
@@ -59,8 +61,8 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
     static private FloatConfiguration TotalStopTime = NebulaAPI.Configurations.Configuration("options.role.tunaU.TotalstopTime", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second, static () => TunaAction.GetValue() == 1);
     static private BoolConfiguration MeetingTotalTimeReset = NebulaAPI.Configurations.Configuration("options.role.tunaU.meetingTotalTimeReset", false, static () => TunaAction.GetValue() == 1);
     static private FloatConfiguration MeetingStopTime = NebulaAPI.Configurations.Configuration("options.role.tunaU.MeetingstopTime", (1f, 10f, 1f), 10f, FloatConfigurationDecorator.Second);
-    static private BoolConfiguration VentOption = NebulaAPI.Configurations.Configuration("options.role.tunaU.canVent", false);
-    static private FloatConfiguration RequiredGaugeToWin = NebulaAPI.Configurations.Configuration("options.role.tunaU.requiredGaugeToWin", (30f, 200f, 5f), 50f, FloatConfigurationDecorator.Second);
+    static private IVentConfiguration VentConfiguration = NebulaAPI.Configurations.NeutralVentConfiguration("options.role.amnesiaU.vent", true);
+    static private FloatConfiguration RequiredGaugeToWin = NebulaAPI.Configurations.Configuration("options.role.tunaU.requiredGaugeToWin", (50f, 640f, 5f), 130f, FloatConfigurationDecorator.Second);
     static private FloatConfiguration StopGaugeRatio = NebulaAPI.Configurations.Configuration("options.role.tunaU.stopGaugeRatio", (1f, 10f, 0.25f), 1.25f, FloatConfigurationDecorator.Ratio);
 
     RuntimeRole RuntimeAssignableGenerator<RuntimeRole>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
@@ -74,17 +76,16 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
     {
         yield return new(GaugeImage, "role.tunaU.ability.gauge");
     }
-    public class Instance : RuntimeAssignableTemplate, RuntimeRole
+    public class Instance : RuntimeVentRoleTemplate, RuntimeRole
     {
-        DefinedRole RuntimeRole.Role => MyRole;
-        private UnityEngine.Vector2 TunaPosition;
+        public override DefinedRole Role => MyRole;
+        private Vector2 TunaPosition;
         float TunaTimerUse = UseallyStopTime;
         float TunaTimerTotal = TotalStopTime;
         bool TunaCount = false;
         float StartTimer = 10f;
         bool TimerBreak = true;
-        TranslatableTag tunaDead = new("state.tuna.dead");
-        static TunaGaugeAbility TunaGauge = null!; //ゲージ自体
+        TunaGaugeAbility TunaGauge = null!; //ゲージ自体
         bool IsTunaStopped = false;
         private float StopBonus = (StopGaugeRatio - 1.0000000000f) / 60.0000000000f;
         private float TunaGaugeValue = 0f; //ゲージの値
@@ -92,34 +93,44 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
         private bool TunaGaugeActive { get; set; } = false;
         public static MultiImage GaugeIcons = NebulaAPI.AddonAsset.GetResource("TunaGaugeIcon.png")!.AsMultiImage(2, 1, 160f)!;
 
-        public Instance(GamePlayer player) : base(player)
+        public Instance(GamePlayer player) : base(player, VentConfiguration)
         {
         }
 
-        void RuntimeAssignable.OnActivated()
+        public override void OnActivated()
         {
             if (AmOwner)
             {
-                TunaGauge = new TunaGaugeAbility(TunaGaugeMax,340f, GaugeIcons.AsLoader(0), GaugeIcons.AsLoader(1), () => TunaGaugeValue, () => TunaGaugeActive).Register(this);
+                TimerBreak = true;
+                TunaCount = false;
+                StartTimer = 10f;
+
+                TunaGauge = new TunaGaugeAbility(TunaGaugeMax, 340f, GaugeIcons.AsLoader(0), GaugeIcons.AsLoader(1), () => TunaGaugeValue, () => TunaGaugeActive).Register(this);
                 TunaGauge.SetActive(true);
             }
         }
+
+        [Local]
         void GameStart(GameStartEvent ev)
         {
             TimerBreak = true;
             TunaCount = false;
+            StartTimer = 10f;
         }
 
+        [Local]
         void MeetingStart(MeetingStartEvent ev)
         {
             TimerBreak = true;
             TunaCount = false;
+            StartTimer = 10f;
             if (MeetingTotalTimeReset)
             {
-                float TunaTimerTotal = TotalStopTime;
+                TunaTimerTotal = TotalStopTime;
             }
         }
 
+        [Local]
         void MeetingEnd(MeetingEndEvent ev)
         {
             TimerBreak = true;
@@ -127,17 +138,19 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
             StartTimer = MeetingStopTime;
             if (MeetingTotalTimeReset)
             {
-                float TunaTimerTotal = TotalStopTime;
+                TunaTimerTotal = TotalStopTime;
             }
         }
 
-        [Local]
+        [OnlyMyPlayer, Local]
         void PlayerRevive(PlayerReviveEvent ev)
         {
-            float TunaTimerUse = UseallyStopTime;
-            float TunaTimerTotal = TotalStopTime;
+            TunaTimerUse = UseallyStopTime;
+            TunaTimerTotal = TotalStopTime;
         }
-        
+
+        private bool HasTunaPosition = false;
+
         void GameUpdate(GameUpdateEvent ev)//自殺タイマーの管理
         {
             if (TimerBreak)
@@ -149,53 +162,25 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
                     TimerBreak = false;
                 }
             }
-            //自殺タイマー
-            /*if (hudText != null)
-            {
-                string label = NebulaAPI.Language.Translate("role.tunaU.stopTimeText");
-                string special = NebulaAPI.Language.Translate("role.tunaU.stopTimeTextSpecial");
-                if (!TunaCount)
-                {
-                    hudText.text = $"{label}: {special}";
-                    return;
-                }
-                if (TunaAction.GetValue() == 1)
-                {
-                    if (TunaTimerTotal > 1)
-                    {
-                        hudText.text = $"{label}: {TunaTimerTotal:0.0}";
-                    }
-                    else
-                    {
-                        hudText.text = $"<color=#FF0000>{label}: {TunaTimerTotal:0.0}";
-                    }
-                }
-                else
-                {
-                    if (TunaTimerUse > 1)
-                    {
-                        hudText.text = $"{label}: {TunaTimerUse:0.0}";
-                    }
-                    else
-                    {
-                        hudText.text = $"<color=#FF0000>{label}: {TunaTimerUse:0.0}";
-                    }
-                }             
-            }*/
+
             if (!TunaCount) return;
-            if (MyPlayer == null || MyPlayer.IsDead || !MyPlayer.CanMove || MeetingHud.Instance) return;
+            if (MyPlayer == null || MyPlayer.IsDead || !MyPlayer.CanMove || MeetingHud.Instance || ExileController.Instance) return;
             if (TunaAction.GetValue() == 1)
             {
-                if (TunaPosition == default)
+                if (!HasTunaPosition)
+                {
                     TunaPosition = MyPlayer.TruePosition;
+                    HasTunaPosition = true;
+                }
 
-                if (TunaPosition == MyPlayer.TruePosition)
+                if ((TunaPosition - MyPlayer.TruePosition).Magnitude < 0.001f)
                 {
                     IsTunaStopped = true;
                     TunaTimerTotal -= Time.deltaTime;
+
                     if (TunaTimerTotal <= 0f)
                     {
-                        MyPlayer.Suicide(PlayerState.Suicide, tunaDead, KillParameter.NormalKill, null);
+                        MyPlayer.Suicide(UchuTranslatable.tunaDead, PlayerState.Suicide, KillParameter.NormalKill, null);
                         return;
                     }
                 }
@@ -204,21 +189,25 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
                     IsTunaStopped = false;
                     TunaPosition = MyPlayer.TruePosition;
                 }
+
                 return;
             }
 
             if (TunaAction.GetValue() != 0) return;
 
-            if (TunaPosition == default)
+            if (!HasTunaPosition)
+            {
                 TunaPosition = MyPlayer.TruePosition;
+                HasTunaPosition = true;
+            }
 
-            if (TunaPosition == MyPlayer.TruePosition)
+            if ((TunaPosition - MyPlayer.TruePosition).Magnitude < 0.001f)
             {
                 IsTunaStopped = true;
                 TunaTimerUse -= Time.deltaTime;
                 if (TunaTimerUse <= 0f)
                 {
-                    MyPlayer.Suicide(PlayerState.Suicide, tunaDead, KillParameter.NormalKill, null);
+                    MyPlayer.Suicide(UchuTranslatable.tunaDead, PlayerState.Suicide, KillParameter.NormalKill, null);
                     return;
                 }
             }
@@ -232,6 +221,7 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
 
         float shareInterval = 0.5f;
         float progressGrace = 0f;
+
         [Local]
         void GaugeUpdate(GameUpdateEvent ev)
         {
@@ -264,7 +254,20 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
                 progressGrace -= Time.deltaTime;
                 return;
             }
-            if (Player.AllPlayers.Any(p => p != MyPlayer && !p.IsDead && p.Position.Distance(MyPlayer.Position) < 2))
+
+            if (!MyPlayer.CanMove)
+            {
+                TunaGaugeActive = false;
+                return;
+            }
+
+            if (TimerBreak)
+            {
+                TunaGaugeActive = false;
+                return;
+            }
+
+            if (Player.AllPlayers.Any(p => p != MyPlayer && !p.IsDead && p.Position.Distance(MyPlayer.Position) < 1.4f))
             {
                 if (!IsTunaStopped)
                 {
@@ -295,7 +298,7 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
             string special = NebulaAPI.Language.Translate("role.tunaU.stopTimeTextSpecial");
             if (!TunaCount)
             {
-                ev.Name += $" ({special})".Color(Color.yellow);
+                ev.Name += $" ({special})".Color(Virial.Color.Yellow);
                 return;
             }
             if (!TunaCount) return;
@@ -303,27 +306,215 @@ public class TunaU : DefinedRoleTemplate, HasCitation, DefinedRole,IAssignableDo
             {
                 if (TunaTimerTotal > 1)
                 {
-                    ev.Name += $" ({TunaTimerTotal:0.0})".Color(Color.yellow);
+                    ev.Name += $" ({TunaTimerTotal:0.0})".Color(Virial.Color.Yellow);
                 }
                 else
                 {
-                    ev.Name += $" ({TunaTimerTotal:0.0})".Color(Color.red);
+                    ev.Name += $" ({TunaTimerTotal:0.0})".Color(Virial.Color.Red);
                 }
             }
             else
             {
                 if (TunaTimerUse > 1)
                 {
-                    ev.Name += $" ({TunaTimerUse:0.0})".Color(Color.yellow);
+                    ev.Name += $" ({TunaTimerUse:0.0})".Color(Virial.Color.Yellow);
                 }
                 else
                 {
-                    ev.Name += $" ({TunaTimerUse:0.0})".Color(Color.red);
+                    ev.Name += $" ({TunaTimerUse:0.0})".Color(Virial.Color.Red);
                 }
             }
 
         }
-        bool RuntimeRole.CanUseVent => VentOption;
-        bool RuntimeRole.CanMoveInVent => VentOption;
+    }
+}
+
+public class TunaModiU : DefinedAllocatableModifierTemplate, HasCitation, DefinedAllocatableModifier
+{
+    private TunaModiU() : base("tunaModiU", "TNA", new(171, 245, 255), [TunaAction, UseallyStopTime, TotalStopTime, MeetingTotalTimeReset, MeetingStopTime, TaskStopTime])
+    {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Tuna.png")!.AsImage(115f);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+    }
+    static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Tuna.png")!.AsImage(100f)!;
+    Image? DefinedAssignable.IconImage => IconImage;
+    Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
+
+    static private ValueConfiguration<int> TunaAction = NebulaAPI.Configurations.Configuration("options.role.tunaU.tunaAction", ["options.role.tunaU.tunaAction.usually", "options.role.tunaU.tunaAction.total"], 0);
+    static private FloatConfiguration UseallyStopTime = NebulaAPI.Configurations.Configuration("options.role.tunaU.UseallystopTime", (1f, 10f, 1f), 3f, FloatConfigurationDecorator.Second, static () => TunaAction.GetValue() == 0);
+    static private FloatConfiguration TotalStopTime = NebulaAPI.Configurations.Configuration("options.role.tunaU.TotalstopTime", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second, static () => TunaAction.GetValue() == 1);
+    static private BoolConfiguration MeetingTotalTimeReset = NebulaAPI.Configurations.Configuration("options.role.tunaU.meetingTotalTimeReset", false, static () => TunaAction.GetValue() == 1);
+    static private FloatConfiguration MeetingStopTime = NebulaAPI.Configurations.Configuration("options.role.tunaU.MeetingstopTime", (1f, 10f, 1f), 10f, FloatConfigurationDecorator.Second);
+    static private readonly BoolConfiguration TaskStopTime = NebulaAPI.Configurations.Configuration("options.role.tunaU.taskStopTime", true);
+
+    static public TunaModiU MyRole = new TunaModiU();
+
+    RuntimeModifier RuntimeAssignableGenerator<RuntimeModifier>.CreateInstance(GamePlayer player, int[] arguments) => new Instance(player);
+    public class Instance : RuntimeAssignableTemplate, RuntimeModifier
+    {
+        DefinedModifier RuntimeModifier.Modifier => MyRole;
+
+        private Vector2 TunaPosition;
+        float TunaTimerUse = UseallyStopTime;
+        float TunaTimerTotal = TotalStopTime;
+        bool TunaCount = false;
+        float StartTimer = 10f;
+        bool TimerBreak = true;
+        public Instance(GamePlayer player) : base(player)
+        {
+        }
+
+        void RuntimeAssignable.OnActivated()
+        {
+            if (AmOwner)
+            {
+
+            }
+        }
+
+        void GameStart(GameStartEvent ev)
+        {
+            TimerBreak = true;
+            TunaCount = false;
+        }
+
+        void MeetingStart(MeetingStartEvent ev)
+        {
+            TimerBreak = true;
+            TunaCount = false;
+            if (MeetingTotalTimeReset)
+            {
+                float TunaTimerTotal = TotalStopTime;
+            }
+        }
+
+        void MeetingEnd(MeetingEndEvent ev)
+        {
+            TimerBreak = true;
+            TunaCount = false;
+            StartTimer = MeetingStopTime;
+            if (MeetingTotalTimeReset)
+            {
+                float TunaTimerTotal = TotalStopTime;
+            }
+        }
+
+        [Local]
+        void PlayerRevive(PlayerReviveEvent ev)
+        {
+            TunaTimerUse = UseallyStopTime;
+            TunaTimerTotal = TotalStopTime;
+        }
+
+        bool CanMove()
+        {
+            return MyPlayer.CanMove || (TaskStopTime && Minigame.Instance);
+        }
+
+        private bool HasTunaPosition = false;
+
+        [Local]
+        void GameUpdate(GameUpdateEvent ev)
+        {
+            if (TimerBreak)
+            {
+                StartTimer -= Time.deltaTime;
+                if (StartTimer <= 0f)
+                {
+                    TunaCount = true;
+                    TimerBreak = false;
+                }
+            }
+
+            if (!TunaCount) return;
+            if (MyPlayer == null || MyPlayer.IsDead || !CanMove() || MeetingHud.Instance || ExileController.Instance) return;
+            if (TunaAction.GetValue() == 1)
+            {
+                if (!HasTunaPosition)
+                {
+                    TunaPosition = MyPlayer.TruePosition;
+                    HasTunaPosition = true;
+                }
+
+                if ((TunaPosition - MyPlayer.TruePosition).Magnitude < 0.001f)
+                {
+                    TunaTimerTotal -= Time.deltaTime;
+
+                    if (TunaTimerTotal <= 0f)
+                    {
+                        MyPlayer.Suicide(UchuTranslatable.tunaDead, PlayerState.Suicide, KillParameter.NormalKill, null);
+                        return;
+                    }
+                }
+                else
+                {
+                    TunaPosition = MyPlayer.TruePosition;
+                }
+
+                return;
+            }
+
+            if (TunaAction.GetValue() != 0) return;
+
+            if (!HasTunaPosition)
+            {
+                TunaPosition = MyPlayer.TruePosition;
+                HasTunaPosition = true;
+            }
+
+            if ((TunaPosition - MyPlayer.TruePosition).Magnitude < 0.001f)
+            {
+                TunaTimerUse -= Time.deltaTime;
+                if (TunaTimerUse <= 0f)
+                {
+                    MyPlayer.Suicide(PlayerState.Suicide, null, KillParameter.NormalKill, null);
+                    return;
+                }
+            }
+            else
+            {
+                TunaTimerUse = UseallyStopTime;
+                TunaPosition = MyPlayer.TruePosition;
+            }
+        }
+        void RuntimeAssignable.DecorateNameConstantly(ref string name, bool canSeeAllInfo, bool inEndScene)
+        {
+            if (AmOwner || canSeeAllInfo) name += MyRole.GetRoleIconTagSmall();
+        }
+
+        [Local, OnlyMyPlayer]
+        void Name(PlayerDecorateNameEvent ev)
+        {
+            string label = NebulaAPI.Language.Translate("role.tunaU.stopTimeText");
+            string special = NebulaAPI.Language.Translate("role.tunaU.stopTimeTextSpecial");
+            if (!TunaCount)
+            {
+                ev.Name += $" ({special})".Color(Virial.Color.Yellow);
+                return;
+            }
+            if (!TunaCount) return;
+            if (TunaAction.GetValue() == 1)
+            {
+                if (TunaTimerTotal > 1)
+                {
+                    ev.Name += $" ({TunaTimerTotal:0.0})".Color(Virial.Color.Yellow);
+                }
+                else
+                {
+                    ev.Name += $" ({TunaTimerTotal:0.0})".Color(Virial.Color.Red);
+                }
+            }
+            else
+            {
+                if (TunaTimerUse > 1)
+                {
+                    ev.Name += $" ({TunaTimerUse:0.0})".Color(Virial.Color.Yellow);
+                }
+                else
+                {
+                    ev.Name += $" ({TunaTimerUse:0.0})".Color(Virial.Color.Red);
+                }
+            }
+        }
     }
 }

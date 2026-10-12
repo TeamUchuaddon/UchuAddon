@@ -1,35 +1,38 @@
 # Assignable
 
 "role.admiralU.name" : "アドミラル"
-"role.admiralU.short" : "ア"
-"role.admiralU.blurb" : "絶対権限"
+"role.admiralU.short" : "アド"
+"role.admiralU.blurb" : "その旗のもとに"
 
 # Document
 
-"role.admiralU.doc" : "提督権限を行使し追放を防ぐクルーメイトです。"
-"role.admiralU.ability.title" : "固有能力 "絶対的提督権限""
-"role.admiralU.ability.main" : "アドミラルは追放を防ぐクルーメイトです。能力を使用した会議は追放を防ぎます。"
-"role.admiralU.ability.skill" : "<title>提督権限</title>追放を防ぎます。能力を発動した会議は追放者が出ても死にません。"
+"role.admiralU.doc" : "提督として船を導くクルーメイトです。"
+"role.admiralU.ability.title" : "固有能力 "総員、応答せよ！""
+"role.admiralU.ability.main" : "点呼を呼びかけ、他プレイヤーから位置を集めます。<br>議論を整理し、会議を導きましょう！"
+"role.admiralU.ability.call" : "<title>点呼</title>プレイヤー全員に点呼を呼びかけます。"
+"role.admiralU.ability.response" : "<title>応答</title>点呼に応答します。<br>マップで<b>位置</b>を選択し、その位置をアドミラルに送信します。"
+"role.admiralU.ability.close" : "<title>点呼終了</title>点呼を締め切ります。<br>終了することで、送信された位置を確認できるようになります。"
 
 # Options
 
-"options.role.admiralU.detail" : "アドミラルは追放を防ぐクルーメイトです。能力を使用した会議は追放を防ぐことが出来ます。"
-"options.role.admiralU.numOfAdmiral" : "提督権限使用可能回数"
-"options.role.admiralU.publicName" : "役職を公開"
-"options.role.admiralU.publicName.detail" : "設定量のタスクを終えた時、アドミラルの名前が変色します。"
-"options.role.admiralU.numOfPublicTask" : "役職公開タスク数"
-"options.role.admiralU.voteWatching" : "匿名投票貫通"
-"options.role.admiralU.notGuess" : "アドミラル推察不可"
-"options.role.admiralU.privateNameGuess" : "役職非公開時推察可能"
+"options.role.admiralU.detail" : "アドミラルは提督として船を導くクルーメイトです。"
+"options.role.admiralU.numOfCall" : "点呼使用可能数"
+"options.role.admiralU.voteWatching" : "投票先の視認"
+"options.role.admiralU.voteWatching.detail" : "匿名投票がオンでも、プレイヤーの投票先が分かります。"
+"options.role.admiralU.admiralSystemStop" : "アドミラルの処理を停止"
+"options.role.admiralU.admiralSystemStop.detail" : "<title>注意</title>このオプションは応答ボタンが条件を無視して出現してしまう問題を修正するための物です。<br>アドミラルでプレイする際は絶対にオンにしないでください、正しく動作しなくなります。<br>オプションがオンの場合、応答ボタンが必ず生成されなくなります。"
 
 # Game
 
+"role.admiralU.title" : "<b><size=120%>点呼結果</size></b>"
+"role.admiralU.hudText" : "残り点呼回数"
 
 # UI
 
-"button.label.admiral" : "提督権限"
-"role.admiralU.message1" : "提督権限により追放が無効化されました。"
-"role.admiralU.hudText" : "残り使用回数"
+"button.label.admiralU.call" : "点呼"
+"button.label.admiralU.close" : "締め切り"
+"button.label.admiralU.map" : "点呼結果"
+"button.label.admiralU.response" : "応答"
 
 # Stats
 

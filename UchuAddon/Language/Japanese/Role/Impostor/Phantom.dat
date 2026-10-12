@@ -1,0 +1,34 @@
+# Assignable
+
+"role.phantomU.name" : "ファントム"
+"role.phantomU.short" : "ファン"
+"role.phantomU.blurb" : "姿なき亡霊"
+
+# Document
+
+"role.phantomU.doc" : "透明化し、姿を消すインポスターです。"
+
+# Options
+
+"options.role.phantomU.detail" : "ファントムは透明化し、姿を消します。"
+"options.role.phantomU.phantomCooldown" : "消えるクールダウン"
+"options.role.phantomU.phantomDuration" : "消える持続時間"
+"options.role.phantomU.canKillInVanish" : "透明化中のキル"
+"options.role.phantomU.vanishImpostor" : "味方インポスターの透明視認"
+"options.role.phantomU.vanishImpostor.detail" : "味方のインポスターが透明になってることを視認できるようになります。"
+"options.role.phantomU.seOption" : "透明化SEの可聴"
+"options.role.phantomU.seOption.detail" : "オンにすると透明化時のSEが周囲のプレイヤーにも聞こえるようになります。"
+
+# Game
+
+
+# UI
+
+"button.label.phantomU.vanish" : "消える"
+"button.label.phantomU.away" : "出現"
+
+# Stats
+
+
+# Titles
+

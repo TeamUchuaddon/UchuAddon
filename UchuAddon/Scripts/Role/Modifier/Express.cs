@@ -78,6 +78,11 @@ public class ExpressU : DefinedAllocatableModifierTemplate, HasCitation, Defined
         void RuntimeAssignable.OnActivated() 
         {
             MyPlayer.GainSpeedAttribute(ExpressSpeed, 9999999999999f, true, 0, "ExpressU:express");
+            if (AmOwner)
+            {
+                float speed = PlayerControl.LocalPlayer.MyPhysics.GhostSpeed;
+                PlayerControl.LocalPlayer.MyPhysics.GhostSpeed = speed * ExpressSpeed;
+            }
         }
 
         void IGameOperator.OnReleased()

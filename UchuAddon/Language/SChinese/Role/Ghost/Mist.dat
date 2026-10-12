@@ -1,0 +1,30 @@
+# Assignable
+
+"role.mistU.name" : "雾影"
+"role.mistU.blurb" : "影之帷幕"
+"role.mistU.short" : "雾"
+
+# Document
+
+"role.mistU.doc" : "可以制造缩小视野的阴影。"
+
+# Options
+
+"options.role.mistU.detail" : "雾影可以在原地制造缩小视野的阴影。"
+"options.role.mistU.nightCooldown" : "迷雾冷却时间"
+"options.role.mistU.nightDuration" : "迷雾持续时间"
+"options.role.mistU.numOfNight" : "迷雾可用次数"
+"options.role.mistU.nightSize" : "迷雾范围"
+"options.role.mistU.inNightLightSize" : "迷雾区域内视野"
+
+# Game
+
+# UI
+
+"button.label.mistU.night" : "迷雾"
+
+# Stats
+
+"stats.mistU.night" : "迷雾技能次数"
+
+# Titles

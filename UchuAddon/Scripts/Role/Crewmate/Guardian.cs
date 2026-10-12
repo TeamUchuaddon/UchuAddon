@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine;
 using Virial;
+using Virial.Achievements;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
@@ -31,17 +32,18 @@ using Virial.Configuration;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
+using Virial.Runtime;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using UnityColor = UnityEngine.Color;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
+[NebulaPreprocess(PreprocessPhase.Roles)]
 public class GuardianU : DefinedSingleAbilityRoleTemplate<GuardianU.Ability>, DefinedRole
 {
     public GuardianU() : base("guardianU", new(222, 223, 255), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [ShieldTask,ShieldLimit,NumOfShield/*,BlessingCooldown,NumOfBlessing*/])
@@ -54,9 +56,6 @@ public class GuardianU : DefinedSingleAbilityRoleTemplate<GuardianU.Ability>, De
     static FloatConfiguration ShieldTask = NebulaAPI.Configurations.Configuration("options.role.guardianU.shieldTask", (0f, 100f, 10f), 100f, FloatConfigurationDecorator.Percentage);
     static BoolConfiguration ShieldLimit = NebulaAPI.Configurations.Configuration("options.role.guardianU.shieldLimit", false);
     static IntegerConfiguration NumOfShield = NebulaAPI.Configurations.Configuration("options.role.guardianU.numOfShield", (1, 15), 2, () => ShieldLimit);
-    //static FloatConfiguration BlessingCooldown = NebulaAPI.Configurations.Configuration("options.role.guardianU.blessingCooldown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
-    //static IntegerConfiguration NumOfBlessing = NebulaAPI.Configurations.Configuration("options.role.guardianU.numOfBlessing", (1, 15), 2, () => !ShieldLimit);
-
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
     IUsurpableAbility? DefinedRole.GetUsurpedAbility(GamePlayer player, int[] arguments)
     {
@@ -66,57 +65,58 @@ public class GuardianU : DefinedSingleAbilityRoleTemplate<GuardianU.Ability>, De
     Image? DefinedAssignable.IconImage => IconImage;
 
     static public GuardianU MyRole = new();
+
+    static private void Preprocess(NebulaPreprocessor preprocessor)
+    {
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "guardianU.common1")
+        {
+            RelatedRole = GuardianU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "guardianU.another1")
+        {
+            RelatedRole = GuardianU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+            IsSecret = true
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "guardianU.another2")
+        {
+            RelatedRole = GuardianU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+            IsSecret = true
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "guardianU.challenge1")
+        {
+            RelatedRole = GuardianU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Rainbow
+        });
+    }
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
-        static private readonly Virial.Media.Image BlessingImage = NebulaAPI.AddonAsset.GetResource("WitchSpellButton.png")!.AsImage(115f)!;
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
 
         bool hasGuarded = false;
         int leftShield = NumOfShield;
-        //int leftBlessing = NumOfBlessing;
         bool Guard = false;
-        static List<GamePlayer>? BlessingTargets = new List<GamePlayer>();
 
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
         {
             if (AmOwner)
             {
-                /*var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
-                var blessingButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
-                    BlessingCooldown, "Blessing", BlessingImage, _ => playerTracker.CurrentTarget != null&& !BlessingTargets!.Contains(playerTracker.CurrentTarget));
-                blessingButton.Visibility = (button) => !MyPlayer.IsDead && leftShield > 0 && leftBlessing > 0 && Guard;
-                blessingButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Crewmate);
-                blessingButton.OnClick = (button) =>
-                {
-                    GamePlayer? target = playerTracker.CurrentTarget;
-                    if (target != null && target != MyPlayer)
-                    {
-                        if (ShieldLimit)
-                        {
-                            leftShield--;
-                            RpcShield.Invoke(playerTracker.CurrentTarget!);
-                            blessingButton.StartCoolDown();
-                        }
-                        else
-                        {
-                            leftBlessing--;
-                            blessingButton.UpdateUsesIcon(leftBlessing.ToString());
-                            RpcShield.Invoke(playerTracker.CurrentTarget!);
-                            blessingButton.StartCoolDown();
-                        }
-                    }
-                };
 
-                if (!ShieldLimit)
-                {
-                    blessingButton.ShowUsesIcon(3, leftBlessing.ToString());
-                }*/
             }
         }
+
         [OnlyMyPlayer]
         void CheckKill(PlayerCheckKilledEvent ev)
         {
-            if(Guard)
+            hasGuarded = true;
+            if (Guard)
             {
                 if (ShieldLimit)
                 {
@@ -125,45 +125,33 @@ public class GuardianU : DefinedSingleAbilityRoleTemplate<GuardianU.Ability>, De
                 if (ev.IsMeetingKill || ev.EventDetail == EventDetail.Curse) return;
                 if (ev.Killer.PlayerId == MyPlayer.PlayerId) return;
                 ev.Result = KillResult.ObviousGuard;
-                hasGuarded = true;
-
+               
                 leftShield--;
 
                 //キルを防ぐ称号
-                new StaticAchievementToken("guardianU.challenge1");
+                TitleUnLock("uchuaddon.guardianU.challenge1");
             }
             else
             {
                 //キル防げなかった称号
-                new StaticAchievementToken("guardianU.another1");
+                TitleUnLock("uchuaddon.guardianU.another1");
             }
         }
 
-        void BlessingGuard(PlayerCheckKilledEvent ev)
-        {
-            if (ev.Player == MyPlayer) return;
-            if (BlessingTargets == null) return;
-            if (!BlessingTargets.Contains(ev.Player)) return;
-            if (ev.IsMeetingKill || ev.EventDetail == EventDetail.Curse) return;
-
-            ev.Result = KillResult.ObviousGuard;
-
-            BlessingTargets.Remove(ev.Player);
-        }
-
-        [Local]
+        [Local,OnlyMyPlayer]
         void OnExiled(PlayerExiledEvent ev)
         {
             //追放称号
-            new StaticAchievementToken("guardianU.another2");
+            TitleUnLock("uchuaddon.guardianU.another2");
         }
-        [Local]
+
+        [Local,OnlyMyPlayer]
         void OnGameEnd(GameEndEvent ev)
         {
-            if (!MyPlayer.IsDead && ev.EndState?.EndCondition == NebulaGameEnd.CrewmateWin && !hasGuarded)
+            if (!MyPlayer.IsDead && ev.EndState.Winners.Test(MyPlayer) && !hasGuarded)
             {
-                //一度もキルガードせず勝利
-                new StaticAchievementToken("guardianU.common1");
+                //一度もキルされずに勝利
+                TitleUnLock("uchuaddon.guardianU.common1");
             }
         }
 
@@ -176,28 +164,7 @@ public class GuardianU : DefinedSingleAbilityRoleTemplate<GuardianU.Ability>, De
             {
                 ev.Name += $" ({leftShield})".Color("#ffff00");
             }
-            /*else
-            {
-                ev.Name += $" {leftBlessing}".Color("#FF0000");
-            }*/
         }
-
-        /*void TargetsName(PlayerDecorateNameEvent ev)
-        {
-            if (BlessingTargets == null) return;
-            if (BlessingTargets.Contains(ev.Player))
-            {
-                ev.Name += " ♦".Color("#FFFF00");
-            }
-        }*/
-
-       
-        /*RemoteProcess<GamePlayer> RpcShield = new("Shield", (message, _) =>
-        {
-            var myplayer = GamePlayer.LocalPlayer!;
-            BlessingTargets?.Add(message);
-            BlessingTargets?.Remove(myplayer);
-        });*/
 
         void GuardTask(GameUpdateEvent ev)
         {
@@ -207,6 +174,12 @@ public class GuardianU : DefinedSingleAbilityRoleTemplate<GuardianU.Ability>, De
             {
                 Guard = true;
             }
+        }
+
+        void TitleUnLock(string id)
+        {
+            var progress = NebulaAPI.CurrentGame?.GetModule<ITitleHandler>();
+            progress.Progress(id);
         }
     }
 }

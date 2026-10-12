@@ -1,6 +1,7 @@
 ﻿using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Hori.Core;
 using Hori.Scripts.Abilities;
+using Hori.Scripts.Role.Crewmate;
 using Nebula;
 using Nebula.Behavior;
 using Nebula.Configuration;
@@ -13,6 +14,7 @@ using Nebula.Roles;
 using Nebula.Roles.Abilities;
 using Nebula.Roles.Neutral;
 using Nebula.Utilities;
+using Rewired.Utils.Classes.Data;
 using System;
 using System;
 using System;
@@ -28,6 +30,7 @@ using System.Threading.Tasks;
 using System.Threading.Tasks;
 using UnityEngine;
 using Virial;
+using Virial.Achievements;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
@@ -36,21 +39,24 @@ using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
 using Virial.Media;
+using Virial.Runtime;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Neutral;
 
+[NebulaPreprocess(PreprocessPhase.Roles)]
 public class AmnesiaU : DefinedRoleTemplate, DefinedRole, HasCitation
 {
     public static Team MyTeam = new Team("teams.amnesiaU", new Virial.Color(79, 110, 115), TeamRevealType.OnlyMe);
     private AmnesiaU() : base("amnesiaU", new(79, 110, 115), RoleCategory.NeutralRole, MyTeam, [AmnesiaAction,DeadBodyArrow,VentConfiguration])
     {
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Amnesia.png")!.AsImage(115f);
     }
     Citation? HasCitation.Citation => Nebula.Roles.Citations.SuperNewRoles;
 
@@ -64,6 +70,43 @@ public class AmnesiaU : DefinedRoleTemplate, DefinedRole, HasCitation
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Amnesia.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public AmnesiaU MyRole = new AmnesiaU();
+
+    static private void Preprocess(NebulaPreprocessor preprocessor)
+    {
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "amnesiaU.common1")
+        {
+            RelatedRole = AmnesiaU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "amnesiaU.another1")//奥深く
+        {
+            RelatedRole = AmnesiaU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+            IsSecret = true
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "amnesiaU.another2")//再来
+        {
+            RelatedRole = AmnesiaU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+            IsSecret = true
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "amnesiaU.hard1")
+        {
+            RelatedRole = AmnesiaU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Gold,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "amnesiaU.challenge1")
+        {
+            RelatedRole = AmnesiaU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Rainbow,
+        });
+    }
+
     public class Instance : RuntimeVentRoleTemplate, RuntimeRole
     {
         public override DefinedRole Role => MyRole;
@@ -81,6 +124,8 @@ public class AmnesiaU : DefinedRoleTemplate, DefinedRole, HasCitation
                 {
                     var ability = new DeadbodyArrowAbility().Register(this);
                     GameOperatorManager.Instance?.Subscribe<GameUpdateEvent>(ev => ability.ShowArrow = !MyPlayer.IsDead, this);
+
+                    ModSingleton<AmnesiaTitleManager>.Instance.RegisterAmnesia(MyPlayer);
                 }
             }
         }
@@ -107,8 +152,25 @@ public class AmnesiaU : DefinedRoleTemplate, DefinedRole, HasCitation
 
             dead.CoGetRoleArgument(args => targetArgs = args);
 
+            TitleUnLock("uchuaddon.amnesiaU.common1");
+
+            if (targetRole == ChainShifter.MyRole)
+            {
+                TitleUnLock("uchuaddon.amnesiaU.another2");
+            }
+
+            if (!reportedDead.IsTrueCrewmate)
+            {
+                TitleUnLock("uchuaddon.amnesiaU.hard1");
+            }
+
             using (RPCRouter.CreateSection("AmnesiaCopy"))
             {
+                if (targetRole == ChickenU.MyRole || targetRole == GuardianU.MyRole)
+                {
+                    MyPlayer.Tasks.Unbox().GainExtraTasksAndRecompute(1, 0, 0, true);
+                }
+
                 MyPlayer.Unbox().RpcInvokerSetRole(targetRole, targetArgs).InvokeSingle();
             }
 
@@ -129,12 +191,73 @@ public class AmnesiaU : DefinedRoleTemplate, DefinedRole, HasCitation
 
             dead.CoGetRoleArgument(args => targetArgs = args);
 
+            TitleUnLock("uchuaddon.amnesiaU.common1");
+
+            if (targetRole == ChainShifter.MyRole)
+            {
+                TitleUnLock("uchuaddon.amnesiaU.another2");
+            }
+
+            if (!reportedDead.IsTrueCrewmate)
+            {
+                TitleUnLock("uchuaddon.amnesiaU.hard1");
+            }
+
             using (RPCRouter.CreateSection("AmnesiaCopy"))
             {
+                if (targetRole == ChickenU.MyRole || targetRole == GuardianU.MyRole)
+                {
+                    MyPlayer.Tasks.Unbox().GainExtraTasksAndRecompute(1, 0, 0, true);
+                }
+
                 MyPlayer.Unbox().RpcInvokerSetRole(targetRole, targetArgs).InvokeSingle();
             }
 
             reportedDead = null;
         }
+
+        [Local]
+        void OnGameEnd(GameEndEvent ev) =>TitleUnLock("uchuaddon.amnesiaU.another1");
+
+        void TitleUnLock(string id)
+        {
+            var progress = NebulaAPI.CurrentGame?.GetModule<ITitleHandler>();
+            progress.Progress(id);
+        }
     }
+}
+
+
+[NebulaPreprocess(PreprocessPhase.PostRoles)]
+[NebulaRPCHolder]
+public class AmnesiaTitleManager : AbstractModule<Virial.Game.Game>, IGameOperator //チャレンジ称号のチェック
+{
+    static AmnesiaTitleManager() => DIManager.Instance.RegisterModule(() => new AmnesiaTitleManager());
+    public AmnesiaTitleManager() => ModSingleton<AmnesiaTitleManager>.Instance = this;
+
+    List<GamePlayer> amnesias = new List<GamePlayer>();
+
+    public void RegisterAmnesia(GamePlayer am)
+    {
+        amnesias.Add(am);
+    }
+
+    void OnGameEnd(GameEndEvent ev)
+    {
+        foreach (var am in amnesias)
+        {
+            if (ev.EndState.Winners.Test(am))
+            {
+                RpcCheckAmnesia.Invoke(am);
+            }
+        }
+    }
+
+    private RemoteProcess<GamePlayer> RpcCheckAmnesia = new("RpcCheckAmnesia_Uchu", (message, _) =>
+    {
+        if (GamePlayer.LocalPlayer != message) return;
+
+        var progress = NebulaAPI.CurrentGame?.GetModule<ITitleHandler>();
+        progress.Progress("uchuaddon.amnesiaU.challenge1");
+    });
 }

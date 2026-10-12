@@ -24,6 +24,9 @@ using Virial.Game;
 using Virial.Helpers;
 using Virial.Media;
 using Image = Virial.Media.Image;
+using Color = Virial.Color;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 using static Nebula.Modules.ScriptComponents.NebulaSyncStandardObject;
 
 namespace Hori.Scripts.Role.Crewmate;
@@ -33,6 +36,7 @@ public class NiceObserverU : DefinedSingleAbilityRoleTemplate<NiceObserverU.Abil
 {
     private NiceObserverU() : base("niceObserverU", new(0, 103, 144), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [MaxCameraCountOption, PlaceCoolDownOption, CanSeeCameraOtherPlayerOption])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/NiceObserver.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon, ConfigurationTags.TagFunny);
     }
 

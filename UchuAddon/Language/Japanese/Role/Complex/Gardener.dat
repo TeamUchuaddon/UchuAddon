@@ -1,0 +1,24 @@
+# Document
+
+"role.gardenerU.ability.evil.plant" : "<title>植える</title>その場に人外専用パークを植えます。"
+"role.gardenerU.ability.nice.plant" : "<title>植える</title>その場に共通パークを植えます。"
+"role.gardenerU.ability.water" : "<title>水やり</title>パークを即座に成長させます。"
+
+# Options
+
+"options.role.gardenerU.plantCooldown" : "植えるクールダウン"
+"options.role.gardenerU.numOfPlant" : "植える使用可能数"
+"options.role.gardenerU.waterCooldown" : "水やりクールダウン"
+"options.role.gardenerU.waterDuration" : "水やり所要時間"
+
+# Game
+
+
+# UI
+
+"button.label.plant" : "植える"
+"button.label.water" : "水やり"
+"ui.action.gardenerU.plant" : "パークを植えます。"
+"ui.action.gardenerU.water" : "パークを成長させます。"
+
+# Status
