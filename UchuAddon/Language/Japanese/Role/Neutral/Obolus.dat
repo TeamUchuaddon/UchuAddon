@@ -25,6 +25,8 @@
 "options.role.obolusU.breakdownAction" : "いつ開示するか"
 "options.role.obolusU.breakdownAction.firstTurn" : "初手会議"
 "options.role.obolusU.breakdownAction.unlockTurn" : "キル解放時"
+"options.role.obolusU.obolusBreakdownInDead" : "オボルスの死亡を開示"
+"options.role.obolusU.obolusBreakdownInDead.detail" : "オボルスの死亡がキル対象に知らされるようになります。"
 "options.role.obolusU.group.win" : "勝利拡張設定"
 "options.role.obolusU.jackalOptions" : "<color=#08bef5>ジャッカル</color>へのキルでも勝利可能"
 "options.role.obolusU.tyrantOptions" : "<color=#b98900>タイラント</color>へのキルでも勝利可能"
@@ -40,6 +42,10 @@
 
 "options.role.obolusU.message.header" : "オボルスに気をつけろ。"
 "options.role.obolusU.message.content" : "何物かが影からあなたを狙っているようだ。"
+
+"options.role.obolusU.messageDead.header" : "危機は去った"
+"options.role.obolusU.messageDead.content" : "オボルスがいなくなったようだ。"
+
 
 # Stats
 

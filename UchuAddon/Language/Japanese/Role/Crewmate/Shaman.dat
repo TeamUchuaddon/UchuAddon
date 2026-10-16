@@ -19,6 +19,8 @@
 "options.role.shamanU.necromancyCooldown" : "降霊術クールダウン"
 "options.role.shamanU.necromancyDuration" : "降霊術所要時間"
 "options.role.shamanU.numOfnecromancy" : "降霊術使用可能数"
+"options.role.shamanU.resultViewAlivePlayers" : "生存者数の表示"
+"options.role.shamanU.resultViewAlivePlayers.detail" : "能力使用時の生存者数が降霊術結果に記されるようになります。"
 "options.role.shamanU.taskCompletesRoomReroll" : "タスク完了時に部屋を再抽選"
 "options.role.shamanU.skillBoost" : "降霊術の強化"
 "options.role.shamanU.numOfBoostTask" : "強化されるタスク数"
@@ -26,7 +28,9 @@
 # Game
 
 "options.role.shamanU.message.header" : "降霊術結果"
-"role.shamanU.result" : "生存してる非クルーメイト数"
+"role.shamanU.result" : "生存してる非クルーメイト数 : %COUNT%%ROLES%"
+"role.shamanU.resultAndAlive": "能力使用時の生存者数 : <b>%ALIVES%人</b><br>生存してる非クルーメイト数 : <b>%COUNT%人</b><br>%ROLES%"
+
 # UI
 
 "button.label.shamanU.necromancy" : "降霊術"

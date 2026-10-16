@@ -74,7 +74,7 @@ namespace Hori.Scripts.Role.Neutral;
 public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
 {
     public static Team MyTeam = new Team("teams.obolusU", new Virial.Color(189, 135, 26), TeamRevealType.OnlyMe);
-    private ObolusU() : base("obolusU", new(189, 135, 26), RoleCategory.NeutralRole, MyTeam, [KillCoolDownOption,KillShieldTurn,CanKillHidingPlayer, ImpostorVision, BlackOutVision, ObolusBreakdown, BreakdownAction,
+    private ObolusU() : base("obolusU", new(189, 135, 26), RoleCategory.NeutralRole, MyTeam, [KillCoolDownOption,KillShieldTurn,CanKillHidingPlayer, ImpostorVision, BlackOutVision, ObolusBreakdown, BreakdownAction, ObolusBreakdownInDead,
     new GroupConfiguration("options.role.obolusU.group.win",[JackalOptions,TyrantOptions, RogueOptions],GroupConfigurationColor.ToDarkenColor(MyTeam.Color.ToUnityColor()))])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Obolus.png")!.AsImage(115f);
@@ -89,6 +89,7 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
     static private BoolConfiguration BlackOutVision = NebulaAPI.Configurations.Configuration("options.role.obolusU.blackOutVision", true);
     static internal BoolConfiguration ObolusBreakdown = NebulaAPI.Configurations.Configuration("options.role.obolusU.obolusBreakdown", false);
     static private ValueConfiguration<int> BreakdownAction = NebulaAPI.Configurations.Configuration("options.role.obolusU.breakdownAction", ["options.role.obolusU.breakdownAction.firstTurn", "options.role.obolusU.breakdownAction.unlockTurn"], 0 ,()=> ObolusBreakdown);
+    static internal BoolConfiguration ObolusBreakdownInDead = NebulaAPI.Configurations.Configuration("options.role.obolusU.obolusBreakdownInDead", true, ()=> ObolusBreakdown);
 
     static private BoolConfiguration JackalOptions = NebulaAPI.Configurations.Configuration("options.role.obolusU.jackalOptions", false);
     static private BoolConfiguration TyrantOptions = NebulaAPI.Configurations.Configuration("options.role.obolusU.tyrantOptions", false);
@@ -201,7 +202,7 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                             UnityEngine.Object.Destroy(lockSprite.gameObject);
                             lockSprite = null;
 
-                            if (ObolusBreakdown && BreakdownAction.GetValue() == 1)
+                            if (ObolusBreakdown && BreakdownAction.GetValue() == 1 && !MyPlayer.IsDead)
                             {
                                 RpcObolusBreakdown.Invoke();
                             }
@@ -225,6 +226,12 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             }
         }
 
+        [OnlyMyPlayer]
+        void OnDead(PlayerDieOrDisconnectEvent ev)
+        {
+            RpcObolusBreakdownInDead.Invoke();
+        }
+
         bool RuntimeRole.HasImpostorVision => ImpostorVision;
         bool RuntimeRole.IgnoreBlackout => BlackOutVision;
 
@@ -245,6 +252,24 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
                 new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.obolusU.message.header")),
                 new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(Language.Translate("options.role.obolusU.message.content")))),
+                NoticeIconImage, MyRole.RoleColor);
+        }
+    });
+
+
+    public static RemoteProcess RpcObolusBreakdownInDead = new("RpcObolusBreakdownInDead_Uchu", (_) =>
+    {
+        var local = GamePlayer.LocalPlayer;
+        if (local == null) return;
+
+        if (local.IsImpostor
+        || (JackalOptions && local.Role.Role is Jackal)
+        || (TyrantOptions && local.Role.Role is Tyrant)
+        || (RogueOptions && local.Role.Role is RogueU))
+        {
+            NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
+                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.obolusU.messageDead.header")),
+                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(Language.Translate("options.role.obolusU.messageDead.content")))),
                 NoticeIconImage, MyRole.RoleColor);
         }
     });

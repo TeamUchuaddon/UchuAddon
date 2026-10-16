@@ -42,6 +42,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Virial;
+using Virial.Achievements;
 using Virial.Assignable;
 using Virial.Attributes;
 using Virial.Compat;
@@ -50,6 +51,7 @@ using Virial.Events.Game.Meeting;
 using Virial.Events.Game.Meeting;
 using Virial.Events.Player;
 using Virial.Game;
+using Virial.Runtime;
 using Virial.Text;
 using static Nebula.Roles.Impostor.Cannon;
 using static UnityEngine.GraphicsBuffer;
@@ -60,9 +62,10 @@ using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
+[NebulaPreprocess(PreprocessPhase.Roles)]
 public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, DefinedRole, IAssignableDocument, HasCitation
 {
-    public ShamanU() : base("shamanU", new(202, 80, 242), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NecromancyCooldown,NecromancyDuration,NumOfNecromancy,TaskCompletesRoomReroll,SkillBoost,NumOfBoostTask])
+    public ShamanU() : base("shamanU", new(202, 80, 242), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [NecromancyCooldown, NecromancyDuration, NumOfNecromancy, ResultViewAlivePlayers, TaskCompletesRoomReroll, SkillBoost,NumOfBoostTask])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Shaman.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -72,6 +75,7 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
     public static FloatConfiguration NecromancyCooldown = NebulaAPI.Configurations.Configuration("options.role.shamanU.necromancyCooldown", (2.5f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
     public static FloatConfiguration NecromancyDuration = NebulaAPI.Configurations.Configuration("options.role.shamanU.necromancyDuration", (0.25f, 10f, 0.25f), 3f, FloatConfigurationDecorator.Second);
     public static IntegerConfiguration NumOfNecromancy = NebulaAPI.Configurations.Configuration("options.role.shamanU.numOfnecromancy", (1, 15), 1);
+    public static BoolConfiguration ResultViewAlivePlayers = NebulaAPI.Configurations.Configuration("options.role.shamanU.resultViewAlivePlayers", false);
     public static BoolConfiguration TaskCompletesRoomReroll = NebulaAPI.Configurations.Configuration("options.role.shamanU.taskCompletesRoomReroll", false);
     public static BoolConfiguration SkillBoost = NebulaAPI.Configurations.Configuration("options.role.shamanU.skillBoost", true);
     public static IntegerConfiguration NumOfBoostTask = NebulaAPI.Configurations.Configuration("options.role.shamanU.numOfBoostTask", (1, 12), 8, () => SkillBoost);
@@ -100,6 +104,17 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
     IEnumerable<AssignableDocumentReplacement> IAssignableDocument.GetDocumentReplacements()
     {
         if(SkillBoost) yield return new("%NUMBOOST%", NumOfBoostTask.GetValue().ToString());
+    }
+
+    static private void Preprocess(NebulaPreprocessor preprocessor)
+    {
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "shamanU.another1")
+        {
+            RelatedRole = ShamanU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+            IsSecret = true
+        });
     }
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
@@ -179,24 +194,23 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
         }
 
 
+        string? bodyText;
 
         void NecromancyResult()
         {
-            var aliveImpostors =NebulaGameManager.Instance!.AllPlayerInfo.Where(p => !p.IsDead && !p.IsTrueCrewmate).ToArray();
-
+            var aliveImpostors = GamePlayer.AllPlayers.Where(p => !p.IsDead && !p.IsTrueCrewmate).ToArray();
+            var alives = GamePlayer.AllPlayers.Where(p => !p.IsDead).ToArray();
             int aliveCount = aliveImpostors.Length;
-            string bodyText;
+            int players = alives.Length;
 
-            if (SkillBoost && BoostCheack)
+            if (GamePlayer.AllPlayers.Where(p => !p.IsDead && p != MyPlayer).All(p => !p.IsTrueCrewmate))
             {
-                string roles = string.Join("<br>",aliveImpostors.Select(p => p.Role.Role.DisplayColoredName).Distinct());
+                TitleUnLock("uchuaddon.shamanU.another1"); //自分以外が全員人外なら解放
+            }
 
-                bodyText = $"{Language.Translate("role.shamanU.result")} : {aliveCount}<br>" +roles;
-            }
-            else
-            {
-                bodyText = $"{Language.Translate("role.shamanU.result")} : {aliveCount}";
-            }
+            string roles = SkillBoost && BoostCheack ? string.Join("<br>", aliveImpostors.Select(p => p.Role.Role.DisplayColoredName).Distinct()) : "";
+
+            bodyText = Language.Translate(!ResultViewAlivePlayers ? "role.shamanU.result" : "role.shamanU.resultAndAlive").Replace("%COUNT%", aliveCount.ToString()).Replace("%ROLES%", roles).Replace("%ALIVES%", players.ToString());
 
             NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay( NebulaAPI.GUI.VerticalHolder( Virial.Media.GUIAlignment.Left,
                 new NoSGUIText(Virial.Media.GUIAlignment.Left,NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle),new TranslateTextComponent("options.role.shamanU.message.header")),
@@ -242,6 +256,12 @@ public class ShamanU : DefinedSingleAbilityRoleTemplate<ShamanU.Ability>, Define
                 BoostCheack = true;
                 NecromancyButton.SetImage(NecromancyBoostImage);
             }
+        }
+
+        void TitleUnLock(string id)
+        {
+            var progress = NebulaAPI.CurrentGame?.GetModule<ITitleHandler>();
+            progress.Progress(id);
         }
     }
 }

@@ -63,7 +63,7 @@ namespace Hori.Scripts.Role.Impostor;
 
 public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, DefinedRole,IAssignableDocument
 {
-    public HarvesterU() : base("harvesterU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [NumOfHarvest, NumOfPerMeeting,HarvestAddKill,NumOfAddHarvest])
+    public HarvesterU() : base("harvesterU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [NumOfHarvest, NumOfPerMeeting,HarvestAddKill,NumOfAddHarvest, HarvestPlayerState])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Harvester.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -76,6 +76,7 @@ public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, 
     static public readonly IntegerConfiguration NumOfPerMeeting = NebulaAPI.Configurations.Configuration("options.role.harvesterU.numOfHarvestPerMeeting", (1, 15), 2);
     static public readonly BoolConfiguration HarvestAddKill = NebulaAPI.Configurations.Configuration("options.role.harvesterU.harvestAddKill", true);
     static public readonly IntegerConfiguration NumOfAddHarvest = NebulaAPI.Configurations.Configuration("options.role.harvesterU.numOfAddHarvest", (1, 15), 2, () => HarvestAddKill );
+    static public readonly BoolConfiguration HarvestPlayerState = NebulaAPI.Configurations.Configuration("options.role.harvesterU.harvestPlayerState", false);
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Harvester.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
     static public HarvesterU MyRole = new();
@@ -123,10 +124,20 @@ public class HarvesterU : DefinedSingleAbilityRoleTemplate<HarvesterU.Ability>, 
                     GamePlayer target = p.MyPlayer;
                     if (target != null)
                     {
-                        NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
-                            new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.harvesterU.message.header")),
-                            new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(target.ColoredName + "<br>" + target.Role.DisplayColoredName))),
-                            MeetingOverlayHolder.IconsSprite[5], MyRole.RoleColor);
+                        if (HarvestPlayerState)
+                        {
+                            NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
+                                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.harvesterU.message.header")),
+                                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(target.ColoredName + "<br>" + target.Role.DisplayColoredName + "<br>" + Language.Translate("options.role.harvesterU.state").Replace("%STATE%", target.PlayerState.Text)))),
+                                MeetingOverlayHolder.IconsSprite[5], MyRole.RoleColor);
+                        }
+                        else
+                        {
+                            NebulaAPI.CurrentGame?.GetModule<MeetingOverlayHolder>()?.RegisterOverlay(NebulaAPI.GUI.VerticalHolder(Virial.Media.GUIAlignment.Left,
+                                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayTitle), new TranslateTextComponent("options.role.harvesterU.message.header")),
+                                new NoSGUIText(Virial.Media.GUIAlignment.Left, NebulaAPI.GUI.GetAttribute(Virial.Text.AttributeAsset.OverlayContent), new RawTextComponent(target.ColoredName + "<br>" + target.Role.DisplayColoredName))),
+                                MeetingOverlayHolder.IconsSprite[5], MyRole.RoleColor);
+                        }
                         MediumTargets?.Add(target);
                         leftHarvest--;
                         leftHarvestPer--;

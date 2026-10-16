@@ -76,7 +76,7 @@ public class NimrodU : DefinedSingleAbilityRoleTemplate<NimrodU.Ability>, Define
     static private readonly IntegerConfiguration NumOfInvolve = NebulaAPI.Configurations.Configuration("options.role.nimrodU.numOfInvolve", (1, 15), 6);
     static private readonly FloatConfiguration MaxLeftTimer = NebulaAPI.Configurations.Configuration("options.role.nimrodU.maxLeftTimer", (0f, 60f, 5f), 20f, FloatConfigurationDecorator.Second);
     static private readonly BoolConfiguration MultiInvolve = NebulaAPI.Configurations.Configuration("options.role.nimrodU.multiInvolve", true);
-    static private readonly IntegerConfiguration NumOfInvolvePerMeeting = NebulaAPI.Configurations.Configuration("options.role.nimrodU.numOfInvolvePerMeting", (1, 15), 3, ()=> MultiInvolve);
+    static private readonly IntegerConfiguration NumOfInvolvePerMeeting = NebulaAPI.Configurations.Configuration("options.role.nimrodU.numOfInvolvePerMeting", (2, 15), 3, ()=> MultiInvolve);
 
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 

@@ -18,6 +18,8 @@
 "options.role.harvesterU.numOfHarvestPerMeeting" : "1会議での最大回収回数"
 "options.role.harvesterU.harvestAddKill" : "キル時に回収回数を増加"
 "options.role.harvesterU.numOfAddHarvest" : "増加回収数"
+"options.role.harvesterU.harvestPlayerState" : "死因の確認"
+"options.role.harvesterU.harvestPlayerState.detail" : "死者の死因も確認できるようになります。"
 
 # Game
 
@@ -25,6 +27,7 @@
 # UI
 
 "options.role.harvesterU.message.header" : "回収結果"
+"options.role.harvesterU.state" : "死因 : <b>%STATE%</b>"
 "harvesterU.Text" : "残り回収数"
 
 # Stats

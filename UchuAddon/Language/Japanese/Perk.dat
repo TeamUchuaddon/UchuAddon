@@ -23,6 +23,9 @@
 
 # NonCrewmateOnly Perk
 
+"perk.berserkU.name" : "雄叫び"
+"perk.berserkU.detail" : "バーサーカーの咆哮音を鳴らす。<br>このパークには%CD%秒のクールダウンがあり、<b>3回</b>のみ使用できる。"
+
 "perk.bruteSabotageU.name" : "剛腕サボタージュ"
 "perk.bruteSabotageU.detail" : "己の腕で扉を強引に閉める。<br>このパークには%CD%秒のクールダウンがある。"
 "perk.bruteSabotageU.cooldown" : "剛腕クールダウン"
