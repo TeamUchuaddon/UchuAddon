@@ -75,7 +75,7 @@ public class VampireU : DefinedSingleAbilityRoleTemplate<VampireU.Ability>, Defi
                 biteButton = NebulaAPI.Modules.KillButton(this, MyPlayer, true, Virial.Compat.VirtualKeyInput.Kill,
                     BiteCoolDownOption.GetCooldown(MyPlayer.TeamKillCooldown), "bite", ModAbilityButton.LabelType.Impostor, null!, (target, _) =>
                     {
-                        var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEventAbstractPlayerEvent(MyPlayer, target));
+                        var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEvent(MyPlayer, target));
                         if (!(cancelable?.IsCanceled ?? false))
                         {
                             NebulaManager.Instance.StartCoroutine(CoDelayKill(target.RealPlayer).WrapToIl2Cpp());

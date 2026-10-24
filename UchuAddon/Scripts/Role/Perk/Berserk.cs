@@ -42,6 +42,7 @@ internal class BerserkU : PerkFunctionalInstance
         if (MyPlayer.IsDead) return;
 
         left--;
+        cooldownTimer.Start(CoolDown);
 
         RpcBerserkSound.Invoke(MyPlayer);
     }

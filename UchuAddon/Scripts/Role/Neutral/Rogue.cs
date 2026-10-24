@@ -35,6 +35,7 @@ public class RogueU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
     private RogueU() : base("rogueU", MyTeam.Color, RoleCategory.NeutralRole, MyTeam, [KillCoolDownOption, CanKillHidingPlayerOption,
      new GroupConfiguration("options.role.rogueU.group.failure", [FailureAction, AbilityPreview, ClockCooldown, ClockDuration, ClockRatio, EchoCooldown, EchoRange], GroupConfigurationColor.ToDarkenColor(Color.Blue))])
     {
+        base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Rogue.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
     }
 
@@ -245,7 +246,7 @@ public class RogueU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
                 KillCoolDownOption.Cooldown, "kill", ModAbilityButton.LabelType.Impostor, null!,
                 (target, _) =>
                 {
-                    var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEventAbstractPlayerEvent(MyPlayer, target));
+                    var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEvent(MyPlayer, target));
 
                     if (!(cancelable?.IsCanceled ?? false))
                     {
@@ -284,6 +285,7 @@ public class RogueU : DefinedRoleTemplate, DefinedRole, IAssignableDocument
         {
             if (ev.Murderer != MyPlayer 
                 || ev.Dead.PlayerState == PlayerState.Suicide 
+                || ev.Dead.PlayerState == PlayerState.Pseudocide
                 || ev.Dead.PlayerState == UchuTranslatable.ChickenDoorDead
                 || ev.Dead.PlayerState == UchuTranslatable.ChickenDropDead
                 || ev.Dead.PlayerState == UchuTranslatable.ChickenFallDead

@@ -140,7 +140,7 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
                     (target, _) =>
                     {
 
-                        var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEventAbstractPlayerEvent(MyPlayer, target));
+                        var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEvent(MyPlayer, target));
                         if (!(cancelable?.IsCanceled ?? false))
                         {
                             
@@ -226,10 +226,18 @@ public class ObolusU : DefinedRoleTemplate, DefinedRole,IAssignableDocument
             }
         }
 
-        [OnlyMyPlayer]
+        bool IsSend = false;
+
+        [OnlyMyPlayer, Local]
         void OnDead(PlayerDieOrDisconnectEvent ev)
         {
-            RpcObolusBreakdownInDead.Invoke();
+            if (ev.Player != MyPlayer) return;
+
+            if (!IsSend && ObolusBreakdownInDead && ObolusBreakdown)
+            {
+                IsSend = true;
+                RpcObolusBreakdownInDead.Invoke();
+            }
         }
 
         bool RuntimeRole.HasImpostorVision => ImpostorVision;

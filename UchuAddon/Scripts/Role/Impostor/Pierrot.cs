@@ -107,7 +107,7 @@ public class PierrotU : DefinedSingleAbilityRoleTemplate<PierrotU.Ability>, Defi
                 NebulaTeams.ImpostorTeam.KillCooldown, "kill", Virial.Components.ModAbilityButton.LabelType.Impostor,
                 null, (target, _) =>
                 {
-                    var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEventAbstractPlayerEvent(MyPlayer, target));
+                    var cancelable = GameOperatorManager.Instance?.Run(new PlayerTryVanillaKillLocalEvent(MyPlayer, target));
                     if (!(cancelable?.IsCanceled ?? false))
                     {
                         MyPlayer.MurderPlayer(target, UchuTranslatable.PierrotDead, EventDetail.Kill, Virial.Game.KillParameter.RemoteKill);

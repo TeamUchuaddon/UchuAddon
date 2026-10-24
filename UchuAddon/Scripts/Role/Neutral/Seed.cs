@@ -3,6 +3,7 @@ using BepInEx.Unity.IL2CPP.Utils.Collections;
 using Hori.Core;
 using Hori.Scripts.Abilities;
 using Hori.Scripts.Role.Crewmate;
+using Hori.Scripts.Role.Ghost.Complex;
 using Hori.Scripts.Role.Impostor;
 using Nebula;
 using Nebula.Behavior;
@@ -35,10 +36,10 @@ using Virial.Game;
 using Virial.Media;
 using Virial.Text;
 using static UnityEngine.GraphicsBuffer;
-using Color = UnityEngine.Color;
+using Color = Virial.Color;
 using Image = Virial.Media.Image;
-using Vector2 = UnityEngine.Vector2;
-using Vector3 = UnityEngine.Vector3;
+using Vector2 = Virial.Compat.Vector2;
+using Vector3 = Virial.Compat.Vector3;
 
 
 namespace Hori.Scripts.Role.Neutral;
@@ -48,7 +49,7 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
 {
     public static Team MyTeam = new Team("teams.seedU", new Virial.Color(106, 178, 189), TeamRevealType.OnlyMe);
     public static ExtraWin SeedExtra = NebulaAPI.Preprocessor!.CreateExtraWin("seedU", SeedU.MyTeam.Color);
-    private SeedU() : base("seedU", new(106, 178, 189), RoleCategory.NeutralRole, MyTeam, [SeedCooldown,NumOfSeed,DieBlockWins,PlayerDieBlockWins,
+    private SeedU() : base("seedU", new(106, 178, 189), RoleCategory.NeutralRole, MyTeam, [SeedCooldown,NumOfSeed,CanSeeRoleOption,DieBlockWins,PlayerDieBlockWins,
      new GroupConfiguration("options.role.seed.group.gauge",[SeedWinGauge, RequiredGaugeToWin, SurplusGauge, GaugeReductionSpeed], GroupConfigurationColor.ToDarkenColor(MyTeam.UnityColor))])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Seed.png")!.AsImage(115f);
@@ -65,6 +66,7 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
     static private FloatConfiguration RequiredGaugeToWin = NebulaAPI.Configurations.Configuration("options.role.seedU.requiredGaugeToWin", (10f, 150f, 5f), 20f, FloatConfigurationDecorator.Second, () => SeedWinGauge);
     static private FloatConfiguration SurplusGauge = NebulaAPI.Configurations.Configuration("options.role.seedU.surplusGauge", (5f, 80f, 5f), 20f, FloatConfigurationDecorator.Second, () => SeedWinGauge);
     static private FloatConfiguration GaugeReductionSpeed = NebulaAPI.Configurations.Configuration("options.role.seedU.gaugeReductionRatio", (0f, 2f, 0.125f), 0.25f, FloatConfigurationDecorator.Ratio, () => SeedWinGauge);
+    static internal BoolConfiguration CanSeeRoleOption = NebulaAPI.Configurations.Configuration("options.role.seedU.canSeeRole", true);
 
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Seed.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
@@ -82,8 +84,9 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
         private List<GamePlayer>? SeedTargets = new List<GamePlayer>();
         private SeedGaugeAbility SeedGauge = null!;
         private float SeedGaugeValue = 0f;
-        static private float SeedGaugeMax => RequiredGaugeToWin + SurplusGauge;
-        static private float SeedGaugeThreshold => RequiredGaugeToWin;
+        private float SeedGaugeMax => RequiredGaugeToWin + SurplusGauge;
+        private float SeedGaugeThreshold => RequiredGaugeToWin;
+        private bool SeedGaugeWin => SeedGaugeValue >= SeedGaugeThreshold;
 
         public static MultiImage GaugeIcons = NebulaAPI.AddonAsset.GetResource("SeedGaugeIcon.png")!.AsMultiImage(2, 1, 160f)!;
 
@@ -107,14 +110,15 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
                         SeedAllCount++;
                         if (SeedAllCount >= 1)
                         {
-                            new StaticAchievementToken("seedU.common1");
+                            //new StaticAchievementToken("seedU.common1");
                         }
                         seedButton.UpdateUsesIcon(left.ToString());
-                        SeedTargets!.Add(target);
+                        RpcShareSeedTarget.Invoke((MyPlayer, target));
                         seedButton.StartCoolDown();
                     }
                 };
                 seedButton.ShowUsesIcon(3, left.ToString());
+
                 SeedGauge = new SeedGaugeAbility(SeedGaugeMax, SeedGaugeThreshold, 340f, GaugeIcons.AsLoader(0), GaugeIcons.AsLoader(1), () => SeedGaugeValue, () => SeedGaugeActive).Register(this);
                 SeedGauge.SetActive(false);
             }
@@ -126,20 +130,32 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
             if (SeedTargets == null) return;
             if (SeedTargets.Contains(ev.Player))
             {
-                ev.Name += " ▼".Color(new Color(106f / 255f, 178f / 255f, 189f / 255f));
+                ev.Name += " ▼".Color(new UnityEngine.Color(106f / 255f, 178f / 255f, 189f / 255f));
             }
         }
-        [OnlyMyPlayer, Local]
+
+        [Local]
+        void RoleInfoVisibilityLocalEvent(PlayerCheckRoleInfoVisibilityLocalEvent ev)
+        {
+            if (CanSeeRoleOption && SeedTargets != null && SeedTargets.Contains(ev.Player)) ev.CanSeeAll = true;
+        }
+
+        static private readonly RemoteProcess<(GamePlayer myPlayer, GamePlayer target)> RpcShareSeedTarget = new("RpcShareSeedTarget_Uchu", (message, _) =>
+        {
+            var seed = message.myPlayer.Role as SeedU.Instance;
+            if (seed != null && seed.SeedTargets != null)
+            {
+                seed.SeedTargets.Add(message.target);
+            }
+        });
+
+        [OnlyMyPlayer]
         void CheckSeedExtraWin(PlayerCheckExtraWinEvent ev)
         {
-            if (SeedWinGauge)
-            {
-                bool gaugeFull = SeedGaugeValue >= SeedGaugeThreshold;
-                if (!gaugeFull) return;
-            }
-            if (SeedTargets == null || !SeedTargets.Any()) return;
+            if (SeedWinGauge && !SeedGaugeWin) return; // ゲージが必要かつ、溜まっていない場合敗北
+            if (SeedTargets == null || !SeedTargets.Any()) return; // リストに人がいない場合敗北
 
-            bool anyoneWon = SeedTargets.Any(p =>
+            bool anyoneWon = SeedTargets.Any(p => // 共生先が勝利しているか、オプションがオンの場合死亡していないかをチェック
             {
                 if (!ev.WinnersMask.Test(p)) return false;
                 if (PlayerDieBlockWins && p.IsDead) return false;
@@ -147,15 +163,17 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
                 return true;
             });
 
-            if (!anyoneWon) return;
+            if (!anyoneWon) return; // 相乗りできる共生先がいないなら敗北
 
-            if (DieBlockWins && MyPlayer.IsDead) return;
+            if (DieBlockWins && MyPlayer.IsDead) return; // 自身の生存が必要かつ死亡している場合敗北
 
+            // 勝利
             ev.SetWin(true);
             ev.ExtraWinMask.Add(SeedExtra);
             ev.IsExtraWin = true;
         }
         
+        /*
         [Local]
         void OnGameEnd(GameEndEvent ev)
         {
@@ -178,10 +196,12 @@ public class SeedU : DefinedRoleTemplate, DefinedRole
                 }
             }
         }
+        */
         
         float shareInterval = 0.5f;
         float progressGrace = 0f;
         private bool SeedGaugeActive { get; set; } = false;
+
         [Local]
         void OnUpdate(GameUpdateEvent ev) 
         {
