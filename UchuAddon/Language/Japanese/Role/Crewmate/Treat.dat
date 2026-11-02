@@ -1,0 +1,75 @@
+# Assignable
+
+"role.treatU.name" : "トリート"
+"role.treatU.short" : "トリ"
+"role.treatU.blurb" : "トリック・オア・トリート！"
+
+# Document
+
+"role.treatU.doc" : "お菓子を配るクルーメイトです。"
+"role.treatU.ability.title" : "固有能力 "ハッピーハロウィン！""
+"role.treatU.ability.main" : "<var>%GET%秒</var>ごとにランダムなお菓子を入手します。"
+"role.treatU.ability.sweet" : "<title>渡す</title>お菓子を配ります。配られたお菓子によって特殊な効果が表れます。<br><b>赤いゼリービーンズ</b>: 移動速度が上昇します。<br><b>クッキー</b>: 透明化します。<br><b>キャンディー</b>: 効果中キルを防ぎます。<br><b>ゼリー</b>: 体が大きくなり、視野が広がります。"
+"role.treatU.ability.mix" : "<title>ミックス</title>お菓子を2つ使って、<b>特別な強化されたお菓子</b>を新しく作ります。<br>強化されたお菓子は、お菓子の効果が強化されています。"
+
+# Options
+
+"options.role.treatU.detail" : "トリートは特殊効果のあるお菓子を配るクルーメイトです。"
+"options.role.treatU.sweetCooldown" : "渡すクールダウン"
+"options.role.treatU.sweetGetCooldown" : "お菓子が貰える秒数"
+"options.role.treatU.sweetGetCooldown.detail" : "設定した秒数が経過するごとにお菓子がランダムでもらえます。"
+"options.role.treatU.sweetGetPerTask" : "タスクによるお菓子の獲得"
+"options.role.treatU.sweetGetPerTask.detail" : "オンにするとタスク完了時にお菓子が貰えます。"
+"options.role.treatU.numOfSweet" : "お菓子の保有可能数"
+"options.role.treatU.mixCooldown" : "ミックスクールダウン"
+
+"options.role.treatU.group.sweet" : "お菓子の効果の設定"
+
+"options.role.treatU.beanDuration" : "ゼリービーンズの効果時間"
+"options.role.treatU.beanRatio" : "ゼリービーンズの移動速度倍率"
+"options.role.treatU.enhancedBeanRatio" : "強化ゼリービーンズの追加倍率"
+"options.role.treatU.enhancedBeanRatio.detail" : "ゼリービーンズの倍率に追加されます。"
+
+"options.role.treatU.candyDuration" : "キャンディーの無敵化秒数"
+"options.role.treatU.enhancedCandyDuration" : "強化キャンディーの追加秒数"
+
+"options.role.treatU.cookieDuration" : "クッキーの透明化秒数"
+"options.role.treatU.enhancedCookieDuration" : "強化クッキーの追加秒数"
+
+"options.role.treatU.jellyDuration" : "ゼリーの効果時間"
+"options.role.treatU.jellyRatio" : "ゼリーの拡大倍率"
+"options.role.treatU.enhancedJellyRatio" : "強化ゼリーの追加倍率"
+"options.role.treatU.enhancedJellyRatio.detail" : "ゼリーの拡大倍率に追加されます。"
+
+# Game
+
+"role.treatU.Bean" : "<b><color=#D62740>ゼリービーンズ</color></b><br>プレイヤーの移動速度が上がる。"
+"role.treatU.Cookie" : "<b><color=#D4BD57>クッキー</color></b><br>効果中透明になる。"
+"role.treatU.Candy" : "<b><color=#D15A92>キャンディー</color></b><br>効果中キルを防ぐ。"
+"role.treatU.Jelly" : "<b><color=#D1792C>ゼリー</color></b><br>体が大きくなり視野が広がる。"
+
+"role.treatU.EnhancedBean" : "<b><color=#D62740>強化されたゼリービーンズ</color></b><br>プレイヤーの移動速度が大幅に上がる。"
+"role.treatU.EnhancedCookie" : "<b><color=#D4BD57>強化されたクッキー</color></b><br>かなりの時間透明になる。"
+"role.treatU.EnhancedCandy" : "<b><color=#D15A92>強化されたキャンディー</color></b><br>かなりの時間キルを防ぐ。"
+"role.treatU.EnhancedJelly" : "<b><color=#D1792C>強化されたゼリー</color></b><br>大幅に体が大きくなり視野が広がる。"
+
+# UI
+
+"button.label.sweet" : "渡す"
+"button.label.mix" : "ミックス"
+"button.label.unmix" : "解除"
+"ui.action.sweetAction" : "このボタンは<b>クリックで発動できません。</b><br>お菓子を直接クリックすることで渡せます。"
+"ui.action.treatU.mix" : "お菓子を二つ選んで強化します。"
+"role.treatU.mixText" : "お菓子を二つ選べ！"
+
+# Stats
+
+
+# Push
+
+"role.treatU.pushSweetButton" : "お菓子を直接クリックしてください。"
+"role.treatU.pushCooldown" : "クールダウンが明けていません。"
+"role.treatU.pushTarget" : "渡す対象がいません。"
+
+# Titles
+

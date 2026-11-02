@@ -1,0 +1,52 @@
+﻿# Assignable
+
+"role.boogeymanU.name" : "ブギーマン"
+"role.boogeymanU.short" : "べ"
+"role.boogeymanU.blurb" : "レイクミドロの悪夢"
+"teams.boogeymanU" : "ブギーマン"
+
+# Document
+
+"role.boogeymanU.doc" : "幽霊になっていたずらする第三陣営です。"
+"role.boogeymanU.winCond" : "指定数いたずらをし、次の会議を生存する。"
+"role.boogeymanU.ability.title" : "固有能力 "いたずら好きなまぼろし""
+"role.boogeymanU.ability.main" : ""
+"role.boogeymanU.ability.pseudocide" : "<title>偽装死</title>幽霊になって移動できます。<br>会議が始まっても復活しますが、自身の死体がレポートされると本当に死亡してしまいます。"
+"role.boogeymanU.ability.mischief" : "<title>いたずら</title>プレイヤーにランダムないたずらをします。いたずらをするには少しの時間を要します。<br>プレイヤーから離れてしまうといたずらアクションは中断されます。"
+"role.boogeymanU.tips" : "・いたずらの種類<br> <b>-サイズ変化</b>: 体のサイズがランダムに変化します。<br> <b>-画面反転</b>: プレイヤーの画面が左右反転します。<br> <b>-モザイク</b>: 画面にモザイクがかかります。<br> <b>-金縛り</b>: プレイヤーの姿が幽霊になり、動けなくなります。<br> <b>-転倒</b>: 転んで動けなくなります。"
+
+# Options
+
+"options.role.boogeymanU.detail" : "ブギーマンは幽霊になっていたずらする第三陣営です。"
+
+"options.role.boogeymanU.numOfMischiefToWin" : "勝利に必要ないたずら数"
+"options.role.boogeymanU.numOfMischiefPerTaskPhase" : "ターンごとのいたずら可能数"
+
+"options.role.boogeymanU.group.mischief" : "いたずらの設定"
+"options.role.boogeymanU.mischiefCooldown" : "いたずらクールダウン"
+"options.role.boogeymanU.mischiefDuration" : "いたずら所要時間"
+"options.role.boogeymanU.mischiefAttributesDuration" : "いたずら持続時間"
+"options.role.boogeymanU.mischiefAttributesDuration.detail" : "いたずらの効果が何秒続くか設定できます。"
+
+"options.role.boogeymanU.group.pseudocide" : "偽装死の設定"
+"options.role.boogeymanU.pseudocideCooldown" : "偽装死クールダウン"
+"options.role.boogeymanU.hidePseudocideFromVitals" : "バイタル上での偽装死の隠蔽"
+"options.role.boogeymanU.hidePseudocideFromVitals.detail" : "オンに設定すると、偽装死中、バイタルでは<br>ブギーマンが生存しているように見えます。"
+
+# Game
+
+"role.boogeymanU.hudText" : "勝利までのいたずら数"
+"role.boogeymanU.hudText.complete" : "いたずら完了！会議を生き延びろ。"
+# UI
+
+"button.label.mischief" : "いたずら"
+"ui.attribute.boogeymanMischief" : "いたずら"
+"ui.attribute.boogeymanMischief.detail" : "ブギーマンにいたずらされた！"
+
+# Stats
+
+"end.boogeymanU" : "ブギーマン%EXTRA%勝利"
+"document.tip.winCond.boogeymanU.title" : "特殊勝利"
+"document.tip.winCond.boogeymanU" : "指定の回数いたずらをし、次の会議を生き延びると勝利します。"
+
+# Titles
