@@ -1,0 +1,54 @@
+# Assignable
+
+"role.witchU.name" : "ウィッチ"
+"role.witchU.short" : "ウィ"
+"role.witchU.blurb" : "死の詠唱者"
+
+# Document
+
+"role.witchU.doc" : "魔術を唱えるインポスターです。"
+"role.witchU.ability.title" : "固有能力 "死の詠唱者""
+"role.witchU.ability.main" : "プレイヤーを呪えます。呪われたプレイヤーには<b>魔術のマーク</b>がネームプレートに表示されます。"
+"role.witchU.ability.spell" : "<title>魔術</title>プレイヤーに呪いの魔術をかけます。<br>呪われたプレイヤーは会議でウィッチを排除しないと死亡してしまいます。"
+
+# Options
+
+"options.role.witchU.detail" : "ウィッチは他プレイヤーに魔術をかけるインポスターです。"
+"options.role.witchU.spellCooldown" : "魔術クールダウン"
+"options.role.witchU.spellDuration" : "魔術所要時間"
+"options.role.witchU.numOfOneTurnSpell" : "1ターンの最大魔術使用可能数"
+"option.role.witchU.witchNormalKill" : "通常キル使用可能"
+
+# Game
+
+
+# UI
+
+"button.label.Spell" : "魔術"
+
+# Stats
+
+"state.witchSpell" : "魔術"
+
+# Titles
+
+"achievement.uchuaddon.witchU.common1.title" : "死の魔術"
+"achievement.uchuaddon.witchU.common1.goal" : "魔術でキルをする。"
+"achievement.uchuaddon.witchU.common1.cond" : ""
+
+"achievement.uchuaddon.witchU.another1.title" : "武の時代"
+"achievement.uchuaddon.witchU.another1.goal" : "魔術を使用せず、ゲームを終える。"
+"achievement.uchuaddon.witchU.another1.cond" : ""
+
+"achievement.uchuaddon.witchU.another2.title" : "詠唱失敗"
+"achievement.uchuaddon.witchU.another2.goal" : "自身が追放・推察され、魔術でのキルを失敗する"
+"achievement.uchuaddon.witchU.another2.cond" : ""
+"achievement.uchuaddon.witchU.another2.flavor" : ""ANNOUNCE" マナ不足です。"
+
+"achievement.uchuaddon.witchU.hard1.title" : "まだ、終わらない"
+"achievement.uchuaddon.witchU.hard1.goal" : "魔術を使った次の会議で、ウィッチ以外のプレイヤーが追放される。"
+"achievement.uchuaddon.witchU.hard1.cond" : "自身がその会議で死亡しないこと。"
+
+"achievement.uchuaddon.witchU.challenge1.title" : "灰燼なるワルプルギス"
+"achievement.uchuaddon.witchU.challenge1.goal" : "同時に3人以上のプレイヤーに魔術を付与し、その全員が魔術によって死亡する。"
+"achievement.uchuaddon.witchU.challenge1.cond" : ""

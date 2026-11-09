@@ -1,0 +1,34 @@
+# Assignable
+
+"role.niceGardenerU.name" : "ナイスガーデナー"
+"role.niceGardenerU.short" : "ガー"
+"role.niceGardenerU.blurb" : "優雅に見惚れて"
+
+# Document
+
+"role.niceGardenerU.doc" : "共通パークを植えるクルーメイトです。"
+"role.niceGardenerU.ability.title" : "固有能力 "サプライズガーデン""
+"role.niceGardenerU.ability.main" : ""
+"role.niceGardenerU.tips" : "パークオプションで出現するパークを設定できます。<br>ゲーム内にパークが出現しない設定でも、設定していたパークが開花します。"
+
+# Options
+
+"options.role.niceGardenerU.detail" : "ナイスガーデナーは、共通パークを植えるクルーメイトです。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"achievement.uchuaddon.niceGardenerU.common1.title" : "しあわせフルール"
+"achievement.uchuaddon.niceGardenerU.common1.goal" : "通算で15回共通パークを植える。"
+
+"achievement.uchuaddon.niceGardenerU.common2.title" : "すくすく"
+"achievement.uchuaddon.niceGardenerU.common2.goal" : "通算で10回パークを育てる"
+
+"achievement.uchuaddon.niceGardenerU.challenge1.title" : "ガーデニングマスター"
+"achievement.uchuaddon.niceGardenerU.challenge1.goal" : "1ゲームで3回パークを植え、5回育てる。"
+"achievement.uchuaddon.niceGardenerU.challenge1.cond" : "水やりクールダウン20秒以上"

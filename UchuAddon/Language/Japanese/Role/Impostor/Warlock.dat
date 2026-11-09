@@ -1,0 +1,34 @@
+# Assignable
+
+"role.warlockU.name" : "ウォーロック"
+"role.warlockU.short" : "ウォ"
+"role.warlockU.blurb" : "自他の支配者"
+
+# Document
+
+"role.warlockU.doc" : "呪われたプレイヤーにキルをさせるインポスターです。"
+"role.warlockU.ability.title" : "固有能力 "隷属の黒魔術""
+"role.warlockU.ability.main" : "ウォーロックは対象に「呪い」をかけることができます。呪われたプレイヤーは呪われていることを自覚できません。<br>ウォーロックが呪ったプレイヤーの近くに別のプレイヤーがいると呪殺ボタンが有効化され、<br>使用することで呪ったプレイヤーに近くのプレイヤーのキルを強制させることができます。"
+"role.warlockU.ability.curse" : "<title>呪う</title>プレイヤーを呪います。一度に一人までしか呪うことができません。"
+
+# Options
+
+"options.role.warlockU.detail" : "ウォーロックはプレイヤーに呪いをかけることができます<br>呪われたプレイヤーは近くのプレイヤーをキルしてしまいます。"
+"options.role.warlockU.curseKillCooldown" : "呪殺クールダウン"
+"options.role.warlockU.curseCooldown" : "呪いクールダウン"
+"options.role.warlockU.canKillTeamPlayer" : "同チームのプレイヤーを呪殺可能"
+"options.role.warlockU.killFreezeTime" : "キル後の硬直時間"
+
+# Game
+
+
+# UI
+
+"button.label.Curse" : "呪う"
+"button.label.CurseKill" : "呪殺"
+
+# Stats
+
+"statistics.curseKill" : "呪殺"
+
+# Titles

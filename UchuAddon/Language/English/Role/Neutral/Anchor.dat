@@ -1,0 +1,40 @@
+# Assignable
+
+"role.anchorU.name" : "Anchor"
+"role.anchorU.short" : "Anc"
+"role.anchorU.blurb" : "Hold the Abyss in Place"
+"teams.anchorU" : "Anchor"
+
+# Document
+
+"role.anchorU.doc" : "A Neutral that places anchors a set number of times."
+"role.anchorU.ability.place" : "<title>Place</title>Places an anchor. Surrounding players are notified when one is placed."
+"role.anchorU.ability.fakenotice" : "<title>Phantom Sound</title>Triggers a notification from a previously placed anchor."
+"role.anchorU.ability.title" : "Unique Ability "Logical Singularity""
+"role.anchorU.ability.main" : "Wins by surviving the meeting immediately after placing the required number of anchors."
+"role.anchorU.tips" : "- Even after placing all anchors, you must survive the next meeting to win."
+
+# Options
+
+"options.role.anchorU.detail" : "A Neutral that wins by placing anchors a set number of times."
+"options.role.anchorU.PlaceCooldown" : "Anchor Cooldown"
+"options.role.anchorU.NumOfAnchor" : "Anchors to Place"
+"options.role.anchorU.FakeNoticeCooldown" : "Phantom Sound Cooldown"
+"options.role.anchorU.NumOfAnchorPerTurn" : "Anchors per Turn"
+"options.role.anchorU.NumOfFakeNotice" : "Phantom Sound Uses"
+"options.role.anchorU.AnchorRangeOption" : "Anchor Notification Range"
+
+# Game
+
+
+# UI
+
+"button.label.AnchorPlace" : "Place"
+"button.label.FakeNotice" : "Phantom Sound"
+
+# Stats
+"end.anchorU" : "Anchor%EXTRA% Wins"
+"document.tip.winCond.anchorU.title" : "Special Win"
+"document.tip.winCond.anchorU" : "<b>Anchor</b> wins solo by surviving the meeting immediately after placing all anchors."
+
+# Titles

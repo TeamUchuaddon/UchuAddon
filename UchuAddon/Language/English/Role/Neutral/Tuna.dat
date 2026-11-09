@@ -1,0 +1,55 @@
+# Assignable
+
+"role.tunaU.name" : "Tuna"
+"role.tunaU.short" : "Tun"
+"role.tunaU.blurb" : "Keep running!!"
+"teams.tunaU" : "Tuna"
+
+"role.tunaModiU.name" : "Tuna"
+"role.tunaModiU.short" : ""
+"role.tunaModiU.generalBlurb" : "Keep running!!"
+
+# Document
+
+"role.tunaU.doc" : "A Neutral that dies if they stop moving."
+"role.tunaU.ability.title" : "Unique Ability "Migration""
+"role.tunaU.ability.main" : "Tuna dies when the suicide timer reaches 0.<br>The suicide timer progresses while you are standing still."
+"role.tunaU.ability.gauge" : "<b>Tuna Gauge</b><br>The gauge fills when other players are nearby.<br>The fill rate is boosted while you are standing still.<br>Win when the gauge reaches MAX."
+"role.tunaU.tips" : "The suicide timer does not progress while inside a vent or on a zipline."
+
+
+"role.tunaModiU.doc" : "You die if you stop moving."
+
+# Options
+
+"options.role.tunaU.detail" : "Tuna is a Neutral that dies if they stop moving.<br>Win by filling the <b>Tuna Gauge</b> to MAX."
+"options.role.tunaU.tunaAction" : "Mode Setting"
+"options.role.tunaU.tunaAction.usually" : "Continuous"
+"options.role.tunaU.tunaAction.total" : "Cumulative"
+"options.role.tunaU.UseallystopTime" : "Allowed Stop Time"
+"options.role.tunaU.TotalstopTime" : "Total Allowed Stop Time"
+"options.role.tunaU.meetingTotalTimeReset" : "Reset Suicide Timer on Meeting"
+"options.role.tunaU.MeetingstopTime" : "Suicide Timer Stop Time After Meeting"
+"options.role.tunaU.canVent" : "Can Use Vents"
+"options.role.tuna.group.gauge" : "Tuna Gauge Settings"
+"options.role.tunaU.requiredGaugeToWin" : "Gauge Required to Win"
+"options.role.tunaU.stopGaugeRatio" : "Gauge Fill Rate Multiplier While Stopped"
+
+"options.role.tunaModiU.detail" : "Tuna is a Modifier that causes you to die if you stop for too long."
+
+# Game
+
+
+# UI
+
+"role.tunaU.stopTimeText" : "Until Death"
+"role.tunaU.stopTimeTextSpecial" : "Timer Paused"
+
+# Stats
+
+"state.tuna.dead" : "Cooked"
+"end.tunaU" : "Tuna%EXTRA% Wins"
+"document.tip.winCond.tunaU.title" : "Special Win"
+"document.tip.winCond.tunaU" : "Win when the <b>Tuna Gauge</b> reaches MAX."
+
+# Titles

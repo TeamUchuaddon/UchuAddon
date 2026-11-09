@@ -1,0 +1,19 @@
+# Document
+
+"role.decoratorU.ability.decoration" : "<title>Decoration</title>Changes a Player's Role."
+
+# Options
+
+"options.role.decoratorU.maxdecorationCount" : "Decoration Use Count"
+"options.role.decoratorU.decorationCoolDown" : "Decoration Cooldown"
+"options.role.decoratorU.ImpostorgiveFilter" : "ImpostorCan OutputFilter"
+"options.role.decoratorU.CrewmategiveFilter" : "CrewmateCan OutputFilter"
+
+# Game
+
+
+# UI
+
+"button.label.decoration" : "Decoration"
+
+# Status

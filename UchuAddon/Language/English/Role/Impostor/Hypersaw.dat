@@ -1,0 +1,36 @@
+# Assignable
+
+"role.hypersawU.name" : "Hypersaw"
+"role.hypersawU.short" : "Hyp"
+"role.hypersawU.blurb" : "Maximum Output of Frequency"
+
+# Document
+
+"role.hypersawU.doc" : "The HyperSaw is imposters who can use a chainsaw to take down player."
+"role.hypersawU.ability.title" : "Inherent Ability "Over Drive""
+"role.hypersawU.ability.main" : "Wield that chainsaw."
+"role.hypersawU.ability.chainsaw" : "<title>Equip</title>Take aim with your chainsaw and kill the player.<br>It will <b>Overheat</b> after a certain amount of time.<br>%SPEED%"
+"role.hypersawU.ability.speed.decel" : "Your movement speed decreases when you draw your chainsaw."
+"role.hypersawU.ability.speed.nodecel" : ""
+"role.hypersawU.tips" : "The sound can be heard by those around you."
+
+# Options
+
+"options.role.hypersawU.detail" : "The HyperSaw is imposters who can use a chainsaw to take down player."
+"options.role.hypersawU.sawSize" : "Size Of Chainsaw"
+"options.role.hypersawU.sawCooldown" : "Equip Cooldown"
+"options.role.hypersawU.sawDuration" : "Equip Duration"
+"options.role.hypersawU.insaweffectspeed" : "Speed In Equip"
+"options.role.hypersawU.syncKillCooldown" : "Sync Kill And Equip Cooldown"
+"options.role.hypersawU.seStrength" : "SE Strength"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

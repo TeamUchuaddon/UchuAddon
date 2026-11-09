@@ -1,0 +1,25 @@
+# Assignable
+
+"role.drunkU.name" : "ドランク"
+"role.drunkU.generalBlurb" : "昨日は飲みすぎた..."
+"role.drunkU.blurb" : "昨日は飲みすぎた..."
+
+# Document
+
+"role.drunkU.doc" : "常に移動方向がおかしくなります。"
+
+# Options
+
+"options.role.drunkU.detail" : "常に移動方向がおかしくなるモディファイアです。"
+"options.role.drunkU.meetingDrunkShuffle" : "会議後に移動方向を再シャッフル"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,176 @@
+{
+    "hats": [     
+        {
+            "Author": "catudon",
+            "Package": "Catudon Costume",
+		    "Name" : "Citrus_Orange",
+		    "Bounce": "false",
+		    "Adaptive": "true",
+            "IsSkinny": "true",
+            "IsHidden" : "true",
+            "FPS": "8",
+            "Main": {
+                "Address": "OrangeU.png",
+                "Hash": "4db15555dc52ddb37ecc774341c91287",
+                "ExAddress": "OrangeU_Ex.png",
+                "ExHash": "c6bf371b4e9662c7074f7a65586b354c",                
+                "MaskAddress":"AllCover_Id.png",
+                "MaskHash":"18a5137e221e76364a5df84c08b2b823",         
+                "ExIsFront":"true",              
+                "Length": "1"
+            },
+            "Move": {
+                "Address": "OrangeU_Move.png",
+                "Hash": "16b7eaad22e5de624e9c4457e47b751b",
+                "ExAddress": "OrangeU_ExMove.png",
+                "ExHash": "d278205f73e6e9251c6258511a656dac",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                
+                "ExIsFront":"true",                
+                "Length": "9"
+            },            
+            "Climb": {
+                "Address": "OrangeU_Climb.png",
+                "Hash": "c8df081179273084cbb80fadd23589d6",
+                "ExAddress": "OrangeU_ExClimb.png",
+                "ExHash": "06a3dbd9458198fef1d47498125a5b55", 
+                "MaskAddress":"AllCover.png",
+                "MaskHash":"81c8a8418fc530d141ccee8895e92c4f",     
+                "ExIsFront":"true",                           
+                "Length": "1"                       
+            },
+            "SeekerAlternative" : {
+                "Author" : "catudon",
+		        "Name" : "Citrus_Orange(Se)"
+            }
+        },
+        {
+            "Author": "catudon",
+            "Package": "Catudon Costume",
+		    "Name" : "Citrus_Orange(Se)",
+		    "Bounce": "false",
+		    "Adaptive": "true",
+            "IsSkinny": "true",
+            "IsHidden" : "true",
+            "FPS": "8",
+            "Main": {
+                "Address": "OrangeU(Se).png",
+                "Hash": "e3b040f70d93eaae09259c9d55e37d1c",
+                "ExAddress": "OrangeU(Se)_Ex.png",
+                "ExHash": "658962bf3ba0607b650595d62a007e88",                
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "ExIsFront":"true",                
+                "Length": "9"
+            },
+            "Move": {
+                "Address": "OrangeU(Se)_Move.png",
+                "Hash": "c8edecc0970ecccecd922a9a7e765ae2",
+                "ExAddress": "OrangeU_ExMove.png",
+                "ExHash": "d278205f73e6e9251c6258511a656dac",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                  
+                "ExIsFront":"true",                
+                "Length": "9"
+            },            
+            "Climb": {
+                "Address": "OrangeU(Se)_Climb.png",
+                "Hash": "4261146952ced1be95fe159878399a14",
+                "ExAddress": "OrangeU_ExClimb.png",
+                "ExHash": "06a3dbd9458198fef1d47498125a5b55",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "ExIsFront":"true",                
+                "Length": "9"                    
+            }
+        },
+        {
+            "Author": "catudon",
+            "Package": "Catudon Costume",
+		    "Name" : "Citrus_Lemon",
+		    "Bounce": "false",
+		    "Adaptive": "true",
+            "IsSkinny": "true",
+            "IsHidden" : "true",
+            "FPS": "8",
+            "Main": {
+                "Address": "LemonU.png",
+                "Hash": "e888e5b3a8c0f29e367b7698f862a6bd",
+                "MaskAddress":"AllCover_Id.png",
+                "MaskHash":"18a5137e221e76364a5df84c08b2b823",                
+                "Length": "1"
+            },
+            "Move": {
+                "Address": "LemonU_Move.png",
+                "Hash": "b00a4efe0245ad8bc84b6f2d4460ea48",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "e35bc8fb86fb7d7ffe34a58f5176af2a",  
+                "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                  
+                "Length": "9"
+            },            
+            "Climb": {
+                "Address": "LemonU_Climb.png",
+                "Hash": "c07aaf375fee490ccdf16a068bc1302d",
+                "MaskAddress":"AllCover.png",
+                "MaskHash":"81c8a8418fc530d141ccee8895e92c4f",                
+                "Length": "1"                       
+            },
+            "SeekerAlternative" : {
+                "Author" : "catudon",
+		        "Name" : "Citrus_Lemon(Se)"
+            }
+        },
+        {
+            "Author": "catudon",
+            "Package": "Catudon Costume",
+		    "Name" : "Citrus_Lemon(Se)",
+		    "Bounce": "false",
+		    "Adaptive": "true",
+            "IsSkinny": "true",
+            "IsHidden" : "true",
+            "FPS": "8",
+            "Main": {
+                "Address": "LemonU(Se).png",
+                "Hash": "e8c8e12a43f9f40d16c5c2daf4ab1322",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "Length": "9"
+            },
+            "Move": {
+                "Address": "LemonU(Se)_Move.png",
+                "Hash": "ce75dbd5746efb4e30565e73e9708fbc",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "FPSCurve" : [4, 8, 8, 8, 8, 8, 8, 8, 8] ,                  
+                "Length": "9"
+            },            
+            "Climb": {
+                "Address": "LemonU(Se)_Climb.png",
+                "Hash": "48662624b6575d1278c759bad6004886",
+                "MaskAddress": "AllCover-9.png",
+                "MaskHash": "b3eff1fe6bf9433d2ae0c0876b86fea1",  
+                "Length": "9"                    
+            }
+        }
+    ],
+"nameplates": [
+        {
+                "Author": "catudon",
+                "Package": "Catudon Costume",
+                "Name" : "Citrus_NamePlate",
+                "Plate": {
+                    "Address": "Citrus_NamePlate.png",
+                    "Hash" : "e467a9f1d77c50f4f40cd0530c986de4"
+                }
+        }
+    ],    
+    "packages": [
+            {
+                "Package": "Catudon Costume",
+                "Format": "Catudon Costume",
+                "Priority" : "1000"
+            }
+    ]
+}            

@@ -1,0 +1,20 @@
+# Assignable
+
+"role.autopsyU.name" : "医学家"
+"role.autopsyU.generalBlurb" : "从死人身上获取信息"
+
+# Document
+
+"role.autopsyU.doc" : "医学家可以随时随地查看生命体征。"
+
+# Options
+
+"options.role.autopsyU.detail" : "医学家可以随时随地查看生命体征。"
+
+# Game
+
+# UI
+
+# Stats
+
+# Titles

@@ -1,0 +1,35 @@
+# Assignable
+
+"role.hypersawU.name" : "ハイパーソー"
+"role.hypersawU.short" : "ハイ"
+"role.hypersawU.blurb" : "最大出力の周波数"
+
+# Document
+"role.hypersawU.doc" : "ハイパーソーはチェンソーを使用してクルーをキルすることのできるインポスターです。"
+"role.hypersawU.ability.title" : "固有能力 "オーバードライブ""
+"role.hypersawU.ability.main" : "チェンソーを振り回します。"
+"role.hypersawU.ability.chainsaw" : "<title>装備</title>チェンソーを取り出し、チェンソーに触れたプレイヤーをキルします。<br>一定時間経つと</b>オーバーヒート</b>を起こしこのボタンはクールダウンに入ります。<br>また、効果中にボタンを再度押すことで手動でチェンソーを収納できます。<br><var>%SPEED%</var>"
+"role.hypersawU.ability.speed.decel" : "チェンソーを構えてる間は移動速度が減少します。"
+"role.hypersawU.ability.speed.nodecel" : ""
+"role.hypersawU.tips" : "・音は周りに聞こえます。"
+
+# Options
+"options.role.hypersawU.detail" : "チェンソーを使ってキルできるインポスターです。"
+"options.role.hypersawU.sawSize" : "チェンソーの当たり判定"
+"options.role.hypersawU.sawCooldown" : "チェンソークールダウン"
+"options.role.hypersawU.sawDuration" : "オーバーヒートまでの時間"
+"options.role.hypersawU.sawDuration.detail" : "一定時間チェンソーを構えると、オーバーヒートしクールダウンに入ります。"
+"options.role.hypersawU.insaweffectspeed" : "チェンソー装備中の移動速度"
+"options.role.hypersawU.syncKillCooldown" : "キルクールダウンを同期"
+"options.role.hypersawU.seStrength" : "SE可聴範囲"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

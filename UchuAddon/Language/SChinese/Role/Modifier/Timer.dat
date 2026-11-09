@@ -1,0 +1,24 @@
+# Assignable
+
+"role.timerU.name" : "计时者"
+"role.timerU.generalBlurb" : "精准的记录员"
+
+# Document
+
+"role.timerU.doc" : "计时者可以记录每回合的时间"
+
+# Options
+
+"options.role.timerU.detail" : "计时者可以记录每回合的时间"
+
+# Game
+
+
+# UI
+
+"role.timerU.TimerTxt" : "回合用时"
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,55 @@
+# Assignable
+
+"role.seedU.name" : "シード"
+"role.seedU.short" : "シ"
+"role.seedU.blurb" : "涙の花"
+"teams.seedU" : "シード"
+
+# Document
+
+"role.seedU.doc" : "共生相手と共に勝利する第三陣営です。"
+
+# Options
+
+"options.role.seedU.detail" : "共生を使った相手が勝利すると追加勝利する第三陣営です。"
+"options.role.seedU.seedCooldown" : "共生クールダウン"
+"options.role.seedU.numOfSeed" : "共生使用可能回数"
+"options.role.seedU.dieBlockWins" : "死亡時勝利ブロック"
+"options.role.seedU.playerDieBlockWins" : "死亡した共生対象に追加勝利不可"
+"options.role.seed.group.gauge" : "シードゲージの設定"
+"options.role.seedU.seedGauge" : "シードゲージ"
+"options.role.seedU.seedGauge.detail" : "勝利にシードゲージを必要にします。"
+"options.role.seedU.requiredGaugeToWin" : "勝利に必要なゲージ量"
+"options.role.seedU.surplusGauge" : "余剰ゲージ量"
+"options.role.seedU.gaugeReductionRatio" : "シードゲージの減少速度"
+
+# Game
+
+
+# UI
+
+"button.label.seedSkill" : "共生"
+
+# Stats
+
+"end.extra.seedU" : "<color=#FFFFFF>+</color> シード"
+
+# Titles
+
+"achievement.seedU.common1.title" : "苗床"
+"achievement.seedU.common1.goal" : "共生を使用する"
+"achievement.seedU.common1.cond" : ""
+
+"achievement.seedU.another1.title" : "郷愁のロンド"
+"achievement.seedU.another1.goal" : "共生相手が誰も勝利せず、敗北する。"
+"achievement.seedU.another1.cond" : ""
+
+"achievement.seedU.hard1.title" : "開花"
+"achievement.seedU.hard1.goal" : "共生を使い、勝利する。"
+"achievement.seedU.hard1.cond" : ""
+
+"achievement.seedU.challenge1.title" : "霜しべのロンド"
+"achievement.seedU.challenge1.goal": "一人にのみ共生を使用し、勝利する"
+"achievement.seedU.challenge1.cond" : ""
+"achievement.seedU.challenge1.flavor" : "季節は廻る。"
+"achievement.seedU.challenge1.splitted.2" : "ロンド"

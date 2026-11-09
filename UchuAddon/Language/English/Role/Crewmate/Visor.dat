@@ -1,0 +1,36 @@
+# Assignable
+
+"role.superVisorU.name" : "Visor"
+"role.superVisorU.short" : "vs"
+"role.superVisorU.blurb" : "Ship Manager"
+
+"role.visorModifierU.name" : "Visor"
+"role.visorModifierU.short" : "vs"
+"role.visorModifierU.blurb": "Ship Manager"
+
+# Document
+
+"role.superVisorU.doc" : "A Crewmate that has a Portable Admin."
+"role.visorModifierU.doc" : "A Modifier that has a Portable Admin."
+
+# Options
+
+"options.role.superVisorU.detail" : "Visor is a Crewmate that can see Admin from anywhere."
+"options.role.superVisorU.group.charge" : "Charging Settings"
+"options.role.superVisorU.charge" : "Charging Feature"
+"options.role.superVisorU.AdminCharge" : "Initial Charge Amount"
+"options.role.superVisorU.chargesPerTasks" : "Charge Increase Amount per Task"
+
+"options.role.visorModifierU.detail" : "A Modifier that can see Admin from anywhere."
+
+# Game
+
+
+# UI
+
+"button.label.Admin" : "Admin"
+
+# Stats
+
+
+# Titles

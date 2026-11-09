@@ -1,0 +1,44 @@
+# Assignable
+
+"role.gluttonyU.name" : "グラトニー"
+"role.gluttonyU.short" : "グラ"
+"role.gluttonyU.blurb" : "暴飲暴食のマモノ"
+
+# Document
+
+"role.gluttonyU.doc" : "プレイヤーを呑み込むインポスターです。"
+"role.gluttonyU.ability.title" : "固有能力 "暴飲暴食のマモノ""
+"role.gluttonyU.ability.main" : "プレイヤーを呑み込みます。呑み込まれたプレイヤーは死亡しておらず<br>%ACTION%"
+"role.gluttonyU.ability.kill" : "<title>キル</title>プレイヤーを呑み込んでいる場合特殊なキルボタンに変化します。<br>吞み込んでるプレイヤーをキルしその場に死体を残します。"
+"role.gluttonyU.ability.swallow" : "<title>呑み込む</title>プレイヤーを呑み込みます。<var>%PENALTY%</var>"
+"role.gluttonyU.meetingStart.dead" : "<var>呑み込んでるグラトニーが死亡することで解放されます。</var>"
+"role.gluttonyU.meetingStart.release" : "<var>呑み込んでるグラトニーが死亡、または会議が始まると解放されます。</var>"
+"role.gluttonyU.swallowPenalty.on" : "<br>%SEC%秒以上プレイヤーを呑み込んでいると、ペナルティとして血の足跡が付いてしまいます。"
+"role.gluttonyU.tips" : "呑み込まれたプレイヤーのVCはグラトニーにしか聞こえません。"
+
+# Options
+
+"options.role.gluttonyU.detail" : "グラトニーはプレイヤーを呑み込むインポスターです。"
+"options.role.gluttonyU.killCooldown" : "呑み込むクールダウン"
+"options.role.gluttonyU.meetingStartAction" : "会議開始時のアクション"
+"options.role.gluttonyU.meetingStartAction.dead" : "キル"
+"options.role.gluttonyU.meetingStartAction.release" : "解放"
+
+"options.role.gluttony.group.swallowPenalty" : "呑み込みペナルティの設定"
+"options.role.gluttonyU.swallowPenalty" : "呑み込みペナルティ"
+"options.role.gluttonyU.swallowPenalty.detail" : "一定時間呑み込んでいると<b>血の足跡</b>が付くようになります。"
+"options.role.gluttonyU.penaltyActiveTime" : "血の足跡ペナルティの作動時間"
+"options.role.gluttonyU.penaltyActiveTime.detail" : "何秒呑み込んでいるとペナルティが作動するか設定します。"
+
+# Game
+
+
+# UI
+
+"button.label.swallow" : "呑み込む"
+
+# Stats
+
+
+# Titles
+

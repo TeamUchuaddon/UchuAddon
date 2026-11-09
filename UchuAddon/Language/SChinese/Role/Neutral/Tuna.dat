@@ -1,0 +1,55 @@
+# Assignable
+
+"role.tunaU.name" : "金枪鱼"
+"role.tunaU.short" : "鱼"
+"role.tunaU.blurb" : "不要停下来！"
+"teams.tunaU" : "金枪鱼"
+
+"role.tunaModiU.name" : "金枪鱼"
+"role.tunaModiU.short" : ""
+"role.tunaModiU.generalBlurb" : "不要停下来！"
+
+# Document
+
+"role.tunaU.doc" : "金枪鱼是只要停下来就会死亡的第三方阵营。<br>根据设置，<b>金枪鱼指标</b>可能需要为满值时才可以获胜。"
+"role.tunaU.ability.title" : "固有能力 【回游】"
+"role.tunaU.ability.main" : "自杀倒计时为0时会自杀。<br>自杀倒计时会在停止移动时开始计时。"
+"role.tunaU.ability.tunaGauge" : "<title>金枪鱼指标</title>附近有其他玩家时，会累计金枪鱼指标的值。<br>停止移动时，空气值会加速上升。<br>指标达到满值时才可以获得胜利。"
+"role.tunaU.tips" : "管道内、滑索上等不能移动的情况下，自杀倒计时会暂停。"
+
+"role.tunaModiU.doc" : "这是一个停止一段时间就会死亡的附加职业。"
+
+# Options
+
+"options.role.tunaU.detail" : "金枪鱼是只要停下来就会死亡的第三方阵营。<br>根据设置，<b>金枪鱼指标</b>可能需要为满值时才可以获胜。"
+"options.role.tunaU.tunaAction" : "模式设置"
+"options.role.tunaU.tunaAction.usually" : "普通"
+"options.role.tunaU.tunaAction.total" : "累计"
+"options.role.tunaU.UseallystopTime" : "可以停止的时间"
+"options.role.tunaU.TotalstopTime" : "可以停止的累计时间"
+"options.role.tunaU.meetingTotalTimeReset" : "召开会议重置自杀倒计时"
+"options.role.tunaU.MeetingstopTime" : "会议后可停止的时间"
+"options.role.tunaU.canVent" : "可以使用通风管道"
+"options.role.tuna.group.gauge" : "金枪鱼指标设定"
+"options.role.tunaU.requiredGaugeToWin" : "金枪鱼指标值满才可以获胜"
+"options.role.tunaU.stopGaugeRatio" : "停止时金枪鱼指标的上升倍率"
+
+"options.role.tunaModiU.detail" : "这是一个停止一段时间就会死亡的附加职业。"
+
+# Game
+
+
+# UI
+
+"role.tunaU.stopTimeText" : "距离死亡"
+"role.tunaU.stopTimeTextSpecial" : "停止计时"
+
+# Stats
+
+"state.tuna.dead" : "烹饪"
+"end.tunaU" : "金枪鱼胜利"
+"document.tip.winCond.tunaU.title" : "特殊胜利"
+"document.tip.winCond.tunaU" : "<b>金枪鱼指标</b>达到满值时才可以胜利。"
+
+
+# Titles

@@ -1,0 +1,45 @@
+# Assignable
+
+"role.slimeU.name" : "スライム"
+"role.slimeU.short" : "ス"
+"role.slimeU.blurb" : "変幻自在"
+
+# Document
+
+"role.slimeU.doc" : "体を伸縮できるクルーメイトです。"
+"role.slimeU.ability.title" : "固有能力 "変幻自在の流動"
+"role.slimeU.ability.main" : "身体を大きく、または小さくすることができます。"
+"role.slimeU.ability.jumbo" : "<title>拡大</title>身体が巨大化します。この時、同時に視界も広がります。"
+"role.slimeU.ability.mini" : "<title>縮小</title>身体が縮小します。この時、視界が狭まる代わりに移動速度が上昇します。"
+"role.slimeU.tips" : "どちらか片方の能力を使用している際、もう片方のクールダウンはリセットされ、使用中はクールダウンが進みません。"
+
+# Options
+
+"options.role.slimeU.detail" : "スライムは身体を伸縮できるクルーメイトです。"
+"options.role.slimeU.JumboCoolDown" : "巨大化クールダウン"
+"options.role.slimeU.JumboDuration" : "巨大化持続時間"
+"options.role.slimeU.JumboSize" : "巨大化サイズ"
+"options.role.slimeU.JumboVision" : "巨大化中の視野"
+"options.role.slimeU.JumboScreen" : "巨大化中の画面サイズ"
+"options.role.slimeU.MiniCoolDown" : "縮小クールダウン"
+"options.role.slimeU.MiniDuration" : "縮小持続時間"
+"options.role.slimeU.MiniSize" : "縮小サイズ"
+"options.role.slimeU.MiniSpeed" : "縮小中の移動速度"
+"options.role.slimeU.MiniScreen" : "縮小中の画面サイズ"
+"options.group.slimejumbo" : "巨大化の設定"
+"options.group.slimemini" : "縮小の設定"
+
+# Game
+
+
+# UI
+
+"ui.action.slimeU.jumbo" : "身体を巨大化します"
+"ui.action.slimeU.mini" : "身体を収縮します"
+"button.label.jumbo" : "巨大化"
+"button.label.mini" : "縮小"
+
+# Stats
+
+
+# Titles

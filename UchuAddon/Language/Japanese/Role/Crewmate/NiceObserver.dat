@@ -1,0 +1,24 @@
+# Assignable
+
+"role.niceObserverU.name" : "ナイスオブザーバー"
+"role.niceObserverU.short" : "ナオ"
+"role.niceObserverU.blurb" : "映照の哨戒者"
+
+# Document
+
+"role.niceObserverU.doc" : "カメラを設置するクルーメイトです。"
+
+# Options
+
+"options.role.niceObserverU.detail" : "ナイスオブザーバーは定点カメラを設置できるクルーメイトです。<br>会議後に有効化し、好きなタイミングでカメラの周囲を監視できます。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

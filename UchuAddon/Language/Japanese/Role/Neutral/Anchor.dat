@@ -1,0 +1,40 @@
+# Assignable
+
+"role.anchorU.name" : "アンカー"
+"role.anchorU.short" : "ア"
+"role.anchorU.blurb" : "深淵を繋ぎ止めろ"
+"teams.anchorU" : "アンカー"
+
+# Document
+
+"role.anchorU.doc" : "一定回数アンカーを設置する第三陣営です。"
+"role.anchorU.ability.place" : "<title>設置</title>アンカーを設置します。設置した時周りに通知がされます。"
+"role.anchorU.ability.fakenotice" : "<title>幻聴</title>既にアンカーを設置した場所から通知を出すことができます。"
+"role.anchorU.ability.title" : "固有能力 "論理特異点""
+"role.anchorU.ability.main" : "指定回数アンカーを設置した後直後の会議を生き残ることによって勝利します。"
+"role.anchorU.tips" : "・設置し終えてもその次の会議を生き残らないと勝利できません。"
+
+# Options
+
+"options.role.anchorU.detail" : "一定回数アンカーを設置することで勝利する第三陣営です。"
+"options.role.anchorU.PlaceCooldown" : "アンカークールダウン"
+"options.role.anchorU.NumOfAnchor" : "アンカー設置数"
+"options.role.anchorU.FakeNoticeCooldown" : "幻聴クールダウン"
+"options.role.anchorU.NumOfAnchorPerTurn" : "ターン毎の設置可能回数"
+"options.role.anchorU.NumOfFakeNotice" : "幻聴回数"
+"options.role.anchorU.AnchorRangeOption" : "アンカーの通知が聞こえる範囲"
+
+# Game
+
+
+# UI
+
+"button.label.AnchorPlace" : "設置"
+"button.label.FakeNotice" : "幻聴"
+
+# Stats
+"end.anchorU" : "アンカー%EXTRA%勝利"
+"document.tip.winCond.anchorU.title" : "特殊勝利"
+"document.tip.winCond.anchorU" : "<b>アンカー</b>を全て設置した後直後の会議を生き残ることで単独勝利します。"
+
+# Titles

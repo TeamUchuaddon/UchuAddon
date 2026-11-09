@@ -1,0 +1,21 @@
+# Document
+
+"role.summonerU.ability.contract" : "<title>Contract</title>Makes a Contract with the target.<br>Press the UI button in the bottom left to cancel the Contract.""
+"role.summonerU.ability.summon" : "<title>Summon</title>Summons the Contracted Player."
+
+# Options
+
+"options.role.summonerU.contractCooldown" : "Contract Cooldown"
+"options.role.summonerU.contractDuration" : "Contract Required Time"
+"options.role.summonerU.numOfMaxTarget" : "Maximum Contracts at Once"
+"options.role.summonerU.summonCooldown" : "Summon Cooldown"
+
+# Game
+
+
+# UI
+
+"button.label.summonerU.contract" : "Contract"
+"button.label.summonerU.summon" : "Summon"
+
+# Status

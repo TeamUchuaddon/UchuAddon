@@ -1,0 +1,29 @@
+# Assignable
+
+"role.observerU.name" : "邪恶的监控员"
+"role.observerU.short" : "邪监"
+"role.observerU.blurb" : "无法逃脱的监视网"
+
+# Document
+
+"role.observerU.doc" : " 邪恶的监控员是能够设置定点摄像头的内鬼。会议后摄像头生效，可在任意时机监视摄像头附近区域。"
+
+# Options
+
+"options.role.observerU.detail" : " 邪恶的监控员是能够设置定点摄像头的内鬼。会议后摄像头生效，可在任意时机监视摄像头附近区域。"
+"options.role.observerU.maxCameraCount" : "摄像头最大数量"
+"options.role.observerU.placeCoolDown" : "摄像头设置冷却时间"
+"options.role.observerU.canSeeCameraOtherPlayer" : "其他玩家可看到摄像头"
+
+# Game
+
+
+# UI
+
+"button.label.self" : "自身视角"
+"button.label.next" : "下一个"
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,25 @@
+# Assignable
+
+"role.hunchU.name" : "先知"
+"role.hunchU.generalBlurb" : "别错过那道死亡"
+
+# Document
+
+"role.hunchU.doc" : "能够感知死亡的附加职业。"
+
+# Options
+
+"options.role.hunchU.detail" : "其他玩家死亡时，屏幕会出现闪光。<br>可在设置中修改感知范围。"
+"options.role.hunchU.detected" : "限制感知范围"
+"options.role.hunchU.detectedRange" : "死亡感知范围"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

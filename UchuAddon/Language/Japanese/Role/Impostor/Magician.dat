@@ -1,0 +1,44 @@
+# Assignable
+
+"role.magicianU.name" : "マジシャン"
+"role.magicianU.short" : "マジ"
+"role.magicianU.blurb" : "奇術の使い手"
+
+# Document
+
+"role.magicianU.doc" : "プレイヤーの位置をシャッフルするインポスターです。"
+
+# Options
+
+"options.role.magicianU.detail" : "マジシャンはプレイヤーの位置をシャッフルするインポスターです。"
+"options.role.magicianU.magicCooldown" : "マジッククールダウン"
+"options.role.magicianU.numOfMagic" : "マジック使用可能回数"
+
+# Game
+
+
+# UI
+
+"button.label.magic" : "マジック"
+
+# Stats
+
+
+# Titles
+
+"achievement.magicianU.common1.title" : "奇術の使い手"
+"achievement.magicianU.common1.goal" : "試合中に3回、マジックを使用する"
+"achievement.magicianU.common1.cond" : ""
+
+"achievement.magicianU.another1.title" : "計画通り？"
+"achievement.magicianU.another1.goal" : "マジック使用直後に、死体を通報される"
+"achievement.magicianU.another1.cond" : "マジック後7秒以内に通報が入ること。"
+
+"achievement.magicianU.hard1.title" : "完璧な手品"
+"achievement.magicianU.hard1.goal" : "マジック使用直後に、自身がキルをする"
+"achievement.magicianU.hard1.cond" : "マジック後7秒以内にキルをすること。"
+
+"achievement.magicianU.challenge1.title" : "種も仕掛けもありません"
+"achievement.magicianU.challenge1.goal" : "マジックを使用し、3個以上の死体の報告を防ぐ"
+"achievement.magicianU.challenge1.cond" : ""
+"achievement.magicianU.challenge1.flavor" : "えぇ、本当に何もありませんよ。"

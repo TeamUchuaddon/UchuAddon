@@ -1,0 +1,35 @@
+# Assignable
+
+"role.baphometU.name" : "バフォメット"
+"role.baphometU.blurb" : "死より始まる黙示録"
+"role.baphometU.short" : "バフォ"
+
+# Document
+
+"role.baphometU.doc" : "霊界から眷属と共に勝利を狙います。"
+"role.baphometU.winCond" : "ゲーム終了時に、ゲージがMAXで<b>自身の<color=#1f1a7a>ファムルス</color></b>が生存している。(サボタージュによる終了を除く。)"
+"role.baphometU.ability.title" : "固有能力 "アポカリプスメロディー""
+"role.baphometU.ability.main" : ""
+"role.baphometU.ability.family" : "<title>眷属</title>自身の眷属となる、<b><color=#1f1a7a>ファムルス</color></b>を作成します。<br>作成したことは全プレイヤーに通知されます。"
+"role.baphometU.ability.gauge" : "<title>バフォメットゲージ</title>勝利に必要なゲージです。<b>自身の<color=#1f1a7a>ファムルス</color></b>の周囲で停止することでゲージが進行します。<br>進行中は生きているプレイヤーにのみに見える、自身の亡霊がその場に出てしまいます。<br>亡霊が出ていたらそれはバフォメットとファムルスです！"
+
+# Options
+
+"options.role.baphometU.detail" : "バフォメットは霊界から眷属と共に勝利を狙います。"
+"options.role.baphometU.totalStandingTimeToWin" : "勝利に必要なゲージ量"
+"options.role.baphometU.rewindGaugeToMeetingEnd" : "会議終了時の消失ゲージ量"
+"options.role.baphometU.rewindGaugeToMeetingEnd.detail" : "会議終了時に設定量ゲージから消えます。ゲージが満タンなら減りません"
+
+# Game
+
+"role.baphometU.hudText" : "You became Baphomet"
+"role.baphometU.taskText" : "眷属の近くで佇み続ける"
+# UI
+
+"button.label.baphometU.family" : "眷属"
+
+# Stats
+
+"end.baphometU" : "バフォメット%EXTRA%勝利"
+
+# Titles

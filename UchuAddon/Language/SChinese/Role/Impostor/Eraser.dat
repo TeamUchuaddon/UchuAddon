@@ -1,0 +1,31 @@
+# Assignable
+
+"role.EraserU.name" : "抹除者"
+"role.EraserU.short" : "抹"
+"role.EraserU.blurb" : "抹除你们的职业"
+
+# Document
+
+"role.EraserU.doc" : "抹除者是能够强制将其他玩家的角色改为船员。"
+"role.EraserU.ability.title" : "固有能力『身份抹除』"
+"role.EraserU.ability.main" : "可以清除其他玩家的职业。"
+"role.EraserU.ability.erase" : "<title>抹除</title>清除目标玩家的职业，并强制将其变为船员。该变更会在下次会议结束后生效。"
+"role.EraserU.tips" : "・若抹除的职业不属于船员阵营，目标将变为 <color=#6AB2BD> 种子</color>。"
+
+# Options
+
+"options.role.EraserU.detail" : "抹除者是能够强制将其他玩家的角色改为船员。"
+"options.role.EraserU.EraseCooldown" : "抹除冷却时间"
+"options.role.EraserU.numofErase" : "抹除次数"
+
+# Game
+
+
+# UI
+
+"button.label.Erase" : "抹除"
+
+# Stats
+
+
+# Titles

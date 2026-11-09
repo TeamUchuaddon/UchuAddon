@@ -1,0 +1,28 @@
+# Assignable
+
+"role.nicedecoratorU.name" : "正义的塑型师"
+"role.nicedecoratorU.short" : "正塑"
+"role.nicedecoratorU.blurb" : "赋彩之手"
+
+# Document
+
+"role.nicedecoratorU.doc" : "正义的塑型师可以更改其他玩家的职业。"
+"role.nicedecoratorU.ability.title" : "固有能力 【专业塑造】"
+"role.nicedecoratorU.ability.main" : "正义的塑型师可以更改其他玩家的职业。<br>若对第三方阵营或混沌中立阵营玩家使用塑型技能，会浪费一次技能使用次数。<br>开启筛选功能后，仅能转换为选定职业，内鬼不会被转换为船员。"
+"role.nicedecoratorU.ability.decoration" : "<title>塑型</title>更改目标玩家的职业。"
+"role.nicedecoratorU.tips" : 如果不设置过滤，则无法分配此职业"
+
+# Options
+
+"options.role.nicedecoratorU.detail" : "正义的塑型师可以更改其他玩家的职业。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

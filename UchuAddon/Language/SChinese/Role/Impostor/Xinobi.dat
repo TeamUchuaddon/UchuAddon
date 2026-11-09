@@ -1,0 +1,34 @@
+# Assignable
+
+"role.xinobiU.name" : "忍术师"
+"role.xinobiU.short" : "忍"
+"role.xinobiU.blurb" : "藏刃于心"
+
+# Document
+
+"role.xinobiU.doc" : "忍术师是可变化为场景物件的伪装者。"
+"role.xinobiU.ability.title" : "固有能力 【静动变化术】"
+"role.xinobiU.ability.main" : "忍术师可掌握<b>变化术</b>与<b>遁形术</b>两种忍术。<br>遁形技能存在冷却时间与持续时间限制，但可在所有通风管道间自由穿梭。"
+"role.xinobiU.ability.possess" : "<title>变化</title>变化为指定场景物件。"
+"role.xinobiU.ability.vent" : "<title>遁形</title>远程潜入最近的通风管道。"
+"role.xinobiU.tips" : "最近的通风管道位置会有箭头标识。"
+
+# Options
+
+"options.role.xinobiU.detail" : "忍术师是可变化为场景物件的伪装者。"
+"options.role.xinobiU.killCooldown" : "击杀冷却时间"
+"options.role.xinobiU.xinobiUVentCooldown" : "遁形冷却时间"
+
+# Game
+
+
+# UI
+
+"button.label.xinobiU.possess" : "变化"
+"button.label.xinobiU.release" : "解除"
+"button.label.xinobiU.vent" : "遁形"
+
+# Stats
+
+
+# Titles

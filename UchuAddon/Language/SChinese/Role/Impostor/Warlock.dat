@@ -1,0 +1,35 @@
+# Assignable
+
+"role.warlockU.name" : "术士"
+"role.warlockU.short" : "术"
+"role.warlockU.blurb" : "他人的支配者"
+
+# Document
+
+"options.role.warlockU.detail" : "术士可以诅咒玩家。<br>被诅咒的玩家会被术士强制杀死附近的玩家。"
+"role.warlockU.ability.title" : "固有能力【附属黑魔法】"
+"role.warlockU.ability.main" : "术士可以对其他玩家施加“诅咒”。被诅咒的玩家不会意识到自己被诅咒。<br>被术士诅咒的玩家附近有其他玩家时，咒杀按钮会被激活<br>使用技能可以强制被诅咒的玩家杀死其附近的玩家"
+"role.warlockU.ability.curse" : "<title>诅咒</title>诅咒玩家，一次只能诅咒一个人。"
+"role.warlockU.tips" : "对队友之类的玩家使用技能可以完成复数击杀。<br>并且，对叛徒之类的玩家使用技能也可以帮助他们完成击杀。"
+
+# Options
+
+"role.warlockU.doc" : "术士可以诅咒玩家。<br>被诅咒的玩家会被术士强制杀死附近的玩家。"
+"options.role.warlockU.curseKillCooldown" : "咒杀冷却"
+"options.role.warlockU.curseCooldown" : "诅咒冷却"
+"options.role.warlockU.canKillTeamPlayer" : "可以诅咒相同阵营的玩家"
+"options.role.warlockU.killFreezeTime" : "咒杀后的僵直时间"
+
+# Game
+
+
+# UI
+
+"button.label.Curse" : "诅咒"
+"button.label.CurseKill" : "咒杀"
+
+# Stats
+
+"statistics.curseKill" : "咒杀"
+
+# Titles

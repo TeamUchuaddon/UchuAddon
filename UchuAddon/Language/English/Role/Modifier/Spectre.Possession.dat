@@ -1,0 +1,32 @@
+# Assignable
+
+"role.spectrePossessionU.name" : "Fox Possession"
+"role.spectrePossessionU.generalBlurb" : "A Beautiful Curse"
+"role.spectrePossessionU.blurb" : "<color=#b998c5>And so, serve them</color>"
+
+# Document
+
+"role.spectrePossessionU.doc" : "A player with this modifier joins the Fox Spirit faction."
+
+# Options
+
+"options.role.spectrePossessionU.detail" : "A modifier given only to Impostors and Crewmates.<br>Players with this modifier join the Fox Spirit faction."
+"options.role.spectrePossessionU.group.fanaticism" : "Fanatic Settings"
+"options.role.spectrePossessionU.fanaticism" : "Fanatic Ability"
+"options.role.spectrePossessionU.fanaticismLimit" : "Add Limits to the Fanatic Ability"
+"options.role.spectrePossessionU.numOfTaskFanaticism" : "Tasks to Awaken Fanatic"
+"options.role.spectrePossessionU.numOfTaskFanaticism.detail" : "When a Crewmate gains Fox Possession,<br>completing this many tasks awakens the Fanatic ability."
+"options.role.spectrePossessionU.numOfKillFanaticism" : "Kills to Awaken Fanatic"
+"options.role.spectrePossessionU.numOfKillFanaticism.detail" : "When an Impostor gains Fox Possession,<br>this many kills awakens the Fanatic ability."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+

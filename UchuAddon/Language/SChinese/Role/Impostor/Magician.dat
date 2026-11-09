@@ -1,0 +1,44 @@
+ Assignable
+
+"role.magicianU.name" : "魔法师"
+"role.magicianU.shor" : "魔"
+"role.magicianU.blurb" : "奇术的操控者"
+
+# Document
+
+"role.magicianU.doc" : "魔法师是可以打乱玩家位置的伪装者"
+
+# Options
+
+"options.role.magicianU.detail" : "魔法师是可以打乱玩家位置的伪装者"
+"options.role.magicianU.magicCooldown" : "魔法冷却时间"
+"options.role.magicianU.numOfMagic" : "魔法可使用次数"
+
+# Game
+
+
+# UI
+
+"button.label.magic" : "魔法"
+
+# Stats
+
+
+# Titles
+
+"achievement.magicianU.common1.title" : "奇术之手"
+"achievement.magicianU.common1.goal" : "对局中使用3次魔法"
+"achievement.magicianU.common1.cond" : ""
+
+"achievement.magicianU.another1.title" : "如计划般？"
+"achievement.magicianU.another1.goal" : "使用魔法后，立即有人报告尸体"
+"achievement.magicianU.another1.cond" : "魔法使用后7秒内完成报告"
+
+"achievement.magicianU.hard1.title" : "完美戏法"
+"achievement.magicianU.hard1.goal" : "使用魔法后，立即亲手淘汰对手"
+"achievement.magicianU.hard1.cond" : "魔法使用后7秒内完成淘汰"
+
+"achievement.magicianU.challenge1.title" : "无计可施，无计可设"
+"achievement.magicianU.challenge1.goal" : "使用魔法，阻止3具及以上尸体被报告"
+"achievement.magicianU.challenge1.cond" : ""
+"achievement.magicianU.challenge1.flavor" : "哎呀，真的是什么招数都没有啦。"

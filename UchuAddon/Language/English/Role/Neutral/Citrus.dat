@@ -1,0 +1,43 @@
+# Assignable
+
+"role.citrusU.name" : "Citrus"
+"role.citrusU.short" : "Cit"
+"role.citrusU.blurb" : "Citrus Infection"
+"teams.citrusU" : "Citrus"
+
+"role.citrusStateU.name" : "Citrus State"
+"role.citrusStateU.generalBlurb" : "Infected"
+
+# Document
+
+"role.citrusU.doc" : "Citrus can infect other players.<br>Infected players become indistinguishable from one another."
+"role.citrusU.ability.title" : "Unique Ability "Citrus Infection""
+"role.citrusU.ability.main" : "Win by infecting all other surviving players."
+"role.citrusU.ability.infection" : "<title>Infect</title>Infects a target."
+"role.citrusU.ability.selfInfection" : "<title>Self-Infect</title>Infects yourself."
+"document.tip.winCond.citrusU.title" : "Special Win"
+"document.tip.winCond.citrusU" : "Win when all surviving players other than yourself are in the Citrus State."
+
+"role.citrusStateU.doc" : "A player infected by Citrus.<br>The state is removed when you die or when the Citrus who infected you dies."
+
+# Options
+
+"options.role.citrusU.detail" : "Citrus is a Neutral that puts players into the Citrus State."
+"options.role.citrusU.infectionCooldown" : "Infection Cooldown"
+"options.role.citrusU.canUseVent" : "Can Use Vents"
+"options.role.citrusU.canUseStamp" : "Infected Players Can Use Stamps/Emotes"
+
+
+
+# Game
+
+# UI
+
+"button.label.infection" : "Infect"
+"button.label.selfInfection" : "Self-Infect"
+
+# Stats
+
+"end.citrusU" : "Citrus%EXTRA% Wins"
+
+# Titles

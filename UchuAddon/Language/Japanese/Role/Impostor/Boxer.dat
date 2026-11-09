@@ -1,0 +1,65 @@
+# Assignable
+
+"role.boxerU.name" : "ボクサー"
+"role.boxerU.short" : "ボク"
+"role.boxerU.blurb" : "闘士の炎"
+
+# Document
+
+"role.boxerU.doc" : "ボクシングタスクをして専用のキルボタンを手に入れるインポスターです。"
+"role.boxerU.ability.title" : "固有能力 "チャンピオンへの道のり""
+"role.boxerU.ability.main" : "鍛えてキルボタンを獲得します。通常のキルボタンは持ちません。"
+"role.boxerU.ability.boxing" : "<title>ボクシング</title>ボクシングタスクを行い、キルボタンを手に入れます。<br>ボクシングを終えると、その場に<b>壊れたサンドバッグ</b>が残ります。"
+"role.boxerU.ability.kill" : "<title>チャンピオンキル</title>%KILL%"
+"role.boxerU.ability.main.rangeKill" : "<var>周囲のプレイヤーを巻き込む強力なキルです。</var><br>キルは使い切り式のため、一度使うと消えてしまいます。<br>キルボタンを使い切ってしまったらもう一度鍛えましょう！"
+"role.boxerU.ability.main.noRangeKill" : "<var>%BLINK%使い切り式のキルボタンです。</var><br>キルボタンを使い切ってしまったらもう一度鍛えましょう！"
+"role.boxerU.ability.main.showBlink" : ""
+"role.boxerU.ability.main.noShowBlink" : "キルモーションのない、"
+
+# Options
+
+"options.role.boxerU.detail" : "ボクサーは鍛えて強力なキルボタンを獲得するインポスターです。"
+"options.role.boxerU.boxingCooldown" : "ボクシングクールダウン"
+"options.role.boxerU.numOfSandbag" : "壊れたサンドバッグの残存ターン数"
+"options.role.boxerU.group.kill" : "キルの設定"
+"options.role.boxerU.numOfKillButton" : "獲得できるキルボタン数"
+"options.role.boxerU.killButtonLost" : "ターン終了時にキルボタンロスト"
+"options.role.boxerU.showBlink" : "キルのブリンク"
+"options.role.boxerU.showBlink.detail" : "オフにすると、キルモーションが発生しません。"
+"options.role.boxerU.rangeKill" : "更に強力なキル"
+"options.role.boxerU.rangeKill.detail" : "キルボタンが更に強力になり、周囲のプレイヤーまで巻き込むようになります。"
+"options.role.boxerU.killRange" : "キル範囲"
+"options.role.boxerU.friendlyFire" : "フレンドリーファイア"
+"options.role.boxerU.friendlyFire.detail" : "インポスターまで巻き込むようになります。"
+
+# Game
+
+
+# UI
+
+"button.label.boxing" : "ボクシング"
+
+# Stats
+
+"stats.boxerU.task" : "ボクシングをした回数"
+"stats.boxerU.kill" : "キルした回数"
+
+# Titles
+
+"achievement.uchuaddon.boxerU.common1.title" : "ムキムキ"
+"achievement.uchuaddon.boxerU.common1.goal" : "通算で5回、ボクシングタスクをする。"
+"achievement.uchuaddon.boxerU.common1.cond" : ""
+
+"achievement.uchuaddon.boxerU.another1.title" : "引退"
+"achievement.uchuaddon.boxerU.another1.goal" : "ボクサーから役職が変化する。"
+"achievement.uchuaddon.boxerU.another1.cond" : ""
+
+"achievement.uchuaddon.boxerU.hard1.title" : "裏路地のモハメド・アリ"
+"achievement.uchuaddon.boxerU.hard1.goal" : "一ターンでキルボタンを3個以上使う。"
+"achievement.uchuaddon.boxerU.hard1.cond" : ""
+"achievement.uchuaddon.boxerU.hard1.flavor" : ""暴力が、そこを通って行ったんです。""
+
+"achievement.uchuaddon.boxerU.challenge1.title" : "パーフェクトノックアウト"
+"achievement.uchuaddon.boxerU.challenge1.goal" : "一度のキルで7人のプレイヤーをキルする。"
+"achievement.uchuaddon.boxerU.challenge1.cond" : ""
+"achievement.uchuaddon.boxerU.challenge1.flavor" : ""勝利の秘訣? トレーニングです。" ─試合後インタビューにて"

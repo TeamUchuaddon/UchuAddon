@@ -1,0 +1,29 @@
+# Assignable
+
+"role.alchemistU.name" : "炼金术士"
+"role.alchemistU.short" : "炼"
+"role.alchemistU.blurb" : "向死而生的调和"
+
+# Document
+
+"role.alchemistU.doc" : "可对尸体进行炼金，可以通过炼制的子弹在会议击杀玩家。"
+
+# Options
+
+"options.role.alchemistU.detail" : "可对尸体进行炼金，可以通过炼制的子弹在会议击杀玩家。"
+"options.role.AlchemistU.AlchemyCooldown" : "炼金冷却时间"
+"options.role.AlchemistU.alchemycount" : "单次炼金可获得的炼金弹数量"
+"options.role.AlchemistU.NumOfShotPerMeeting" : "单场会议最大可用弹数"
+
+# Game
+
+
+# UI
+
+"button.label.Alchemy" : "炼金"
+"alchemistU.leftalchemy" : "剩余炼金弹"
+
+# Stats
+
+
+# Titles

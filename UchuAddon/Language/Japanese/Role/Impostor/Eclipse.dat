@@ -1,0 +1,45 @@
+# Assignable
+
+"role.eclipseU.name" : "エクリプス"
+"role.eclipseU.short" : "エク"
+"role.eclipseU.blurb" : "災いが降り注ぐ"
+
+# Document
+
+"role.eclipseU.doc" : "隕石を召喚するインポスターです。"
+"role.eclipseU.ability.title" : "固有能力 "宇宙からの厄災""
+"role.eclipseU.ability.main" : ""
+"role.eclipseU.ability.mark" : "<title>マーク</title>隕石の着弾地点をマークをします"
+"role.eclipseU.ability.blast" : "<title>メテオ</title>マークをした場所に、隕石を降らせます。<br>マーク地点がないと使用できません。"
+
+# Options
+
+"options.role.eclipseU.detail" : "エクリプスは隕石を降らせてキルをするインポスターです。<br>隕石は、味方に当たっても問答無用でキルしてしまいます"
+"options.role.eclipseU.group.mark" : "マークの設定"
+"options.role.eclipseU.meteorMarkCoolDown" : "マーククールダウン"
+"options.role.eclipseU.markStopTime" : "マークの所要時間"
+"options.role.eclipseU.markMeetingReset" : "会議時マーク地点リセット"
+"options.role.eclipseU.resetBlastCool"  : "マーク使用時メテオクールをリセット"
+"options.role.eclipseU.markPlaySE" : "マーク設定SE"
+"options.role.eclipseU.markPlaySE.detail" : "周囲のプレイヤーにも設置SEが聞こえるようになります。"
+"options.role.eclipseU.seRange" : "SE範囲"
+
+"options.role.eclipseU.group.meteor" : "メテオの設定"
+"options.role.eclipseU.meteorBlastCoolDown" : "メテオクールダウン"
+"options.role.eclipseU.useOfMeteor" : "メテオ使用可能回数"
+"options.role.eclipseU.meteorWarningTime" : "メテオ警告時間"
+"options.role.eclipseU.meteorSize" : "メテオサイズ"
+
+# Game
+
+
+# UI
+
+"button.label.Emark" : "マーク"
+"button.label.Eblast" : "メテオ"
+
+# Stats
+
+"state.eclipseBomb" : "爆撃"
+
+# Titles

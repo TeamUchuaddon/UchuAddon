@@ -1,0 +1,51 @@
+# Assignable
+
+"role.scaleU.name" : "Scale"
+"role.scaleU.generalBlurb" : "Bodily Anomaly"
+
+# Document
+
+"role.scaleU.doc" : "Body size changes."
+
+# Options
+
+"options.role.scaleU.detail" : "Scale is a modifier whose body size changes."
+"options.role.scaleU.group.size" : "Size Settings"
+"options.role.scaleU.scaleAction" : "Size Selection Mode"
+"options.role.scaleU.scaleAction.fixed" : "Fixed"
+"options.role.scaleU.scaleAction.random" : "Random"
+"options.role.scaleU.scaleAction.select" : "Select"
+"options.role.scaleU.sizeFixed" : "Size"
+"options.role.scaleU.sizeMax" : "Maximum Size"
+"options.role.scaleU.sizeMin" : "Minimum Size"
+"options.role.scaleU.sizeMeetingRandom" : "Re-roll After Meeting"
+"options.role.scaleU.numOfSelect" : "Selection Slots"
+"options.role.scaleU.sizeSelect" : "Selection Pool"
+"options.role.scaleU.sizeMeetingSelect" : "Re-select After Meeting"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+
+"achievement.scaleU.common1.title" : "Wow! Jumbo!!!"
+"achievement.scaleU.common1.goal" : "Become large."
+"achievement.scaleU.common1.cond" : ""
+
+"achievement.scaleU.common2.title" : "Asteroid"
+"achievement.scaleU.common2.goal" : "Become small."
+"achievement.scaleU.common2.cond" : ""
+
+"achievement.scaleU.another1.title" : "Squashed"
+"achievement.scaleU.another1.goal" : "Die while small."
+"achievement.scaleU.another1.cond" : ""
+
+"achievement.scaleU.challenge1.title" : "Hyper-Mutant"
+"achievement.scaleU.challenge1.goal" : "Change size 7 or more times in a single game."
+"achievement.scaleU.challenge1.cond" : ""

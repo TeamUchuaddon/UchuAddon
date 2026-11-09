@@ -1,0 +1,30 @@
+# Assignable
+
+"role.harvesterU.name" : "Harvester"
+"role.harvesterU.short" : "Hrv"
+"role.harvesterU.blurb" : "We'll meet again as stars"
+
+# Document
+
+"role.harvesterU.doc" : "An Impostor who investigates the roles of the dead."
+
+# Options
+
+"options.role.harvesterU.detail" : "Harvester is an Impostor who can investigate the roles of dead players during a meeting.""
+"options.role.harvesterU.numOfHarvest" : "Max Harvest Uses"
+"options.role.harvesterU.numOfHarvestPerMeeting" : "Max Harvests per Meeting"
+"options.role.harvesterU.harvestAddKill" : "Gain Harvest Uses on Kill"
+"options.role.harvesterU.numOfAddHarvest" : "Harvest Uses Gained"
+
+# Game
+
+
+# UI
+
+"options.role.harvesterU.message.header" : "Harvest Result"
+"harvesterU.Text" : "Harvests Remaining"
+
+# Stats
+
+
+# Titles

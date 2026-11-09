@@ -1,0 +1,31 @@
+# Assignable
+
+"role.mistU.name" : "Mist"
+"role.mistU.blurb" : "Veil of Shadows"
+"role.mistU.short" : "Mst"
+
+# Document
+
+"role.mistU.doc" : "Can create shadows that narrow Vision."
+
+# Options
+
+"options.role.mistU.detail" : "Mist can create shadows that narrow Vision at that location."
+"options.role.mistU.nightCooldown" : "Night Mist Cooldown"
+"options.role.mistU.nightDuration" : "Night Mist Duration"
+"options.role.mistU.numOfNight" : "Night Mist Available Count"
+"options.role.mistU.nightSize" : "Night Mist Size"
+"options.role.mistU.inNightLightSize" : "Vision Inside Night Mist Area"
+
+# Game
+
+
+# UI
+
+"button.label.mistU.night" : "Night Mist"
+
+# Stats
+
+"stats.mistU.night" : "Night Mist Activation Count"
+
+# Titles

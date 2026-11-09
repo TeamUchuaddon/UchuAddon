@@ -1,0 +1,51 @@
+# Assignable
+
+"role.scaleU.name" : "スケール"
+"role.scaleU.generalBlurb" : "身体への異常現象"
+
+# Document
+
+"role.scaleU.doc" : "体の大きさが変わります。"
+
+# Options
+
+"options.role.scaleU.detail" : "スケールは体の大きさが変わるモディファイアです。"
+"options.role.scaleU.group.size" : "サイズ設定"
+"options.role.scaleU.scaleAction" : "サイズ設定方法"
+"options.role.scaleU.scaleAction.fixed" : "固定"
+"options.role.scaleU.scaleAction.random" : "ランダム"
+"options.role.scaleU.scaleAction.select" : "選出"
+"options.role.scaleU.sizeFixed" : "サイズ"
+"options.role.scaleU.sizeMax" : "最大サイズ"
+"options.role.scaleU.sizeMin" : "最小サイズ"
+"options.role.scaleU.sizeMeetingRandom" : "会議後に再抽選"
+"options.role.scaleU.numOfSelect" : "セレクト枠数"
+"options.role.scaleU.sizeSelect" : "選出枠"
+"options.role.scaleU.sizeMeetingSelect" : "会議後に再選出"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+
+"achievement.scaleU.common1.title" : "ワオ！ジャンボ！！！"
+"achievement.scaleU.common1.goal" : "大きくなる。"
+"achievement.scaleU.common1.cond" : ""
+
+"achievement.scaleU.common2.title" : "小惑星"
+"achievement.scaleU.common2.goal" : "小さくなる。"
+"achievement.scaleU.common2.cond" : ""
+
+"achievement.scaleU.another1.title" : "ふみつぶし"
+"achievement.scaleU.another1.goal" : "体が小さい時に死亡する。"
+"achievement.scaleU.another1.cond" : ""
+
+"achievement.scaleU.challenge1.title" : "超変異体"
+"achievement.scaleU.challenge1.goal" : "1ゲーム中に7回以上、大きさが変わる。"
+"achievement.scaleU.challenge1.cond" : ""

@@ -1,0 +1,52 @@
+# Assignable
+
+"role.witchU.name" : "女巫"
+"role.witchU.short" : "女"
+"role.witchU.blurb" : "记下女巫的诅咒"
+
+# Document
+
+"role.witchU.doc" : "女巫是能够对其他玩家施加诅咒的内鬼。被施加诅咒的玩家，若在会议中未放逐或指认女巫，将会死亡。"
+
+# Options
+
+"options.role.witchU.detail" : "女巫是能够对其他玩家施加诅咒的内鬼。被施加诅咒的玩家，若在会议中未放逐或指认女巫，将会死亡。"
+"options.role.witchU.spellCooldown" : "诅咒冷却时间"
+"options.role.witchU.spellDuration" : "法术施法时间"
+"options.role.witchU.numOfOneTurnSpell" : "诅咒一回合最大使用技能"
+"option.role.witchU.witchNormalKill" : "可以使用普通击杀"
+
+# Game
+
+
+# UI
+
+"button.label.Spell" : "诅咒"
+
+# Stats
+
+"state.witchSpell" : "诅咒"
+
+# Titles
+
+"achievement.witchU.common1.title" : "死亡魔法"
+"achievement.witchU.common1.goal" : "通过魔法完成击杀。"
+"achievement.witchU.common1.cond" : ""
+
+"achievement.witchU.another1.title" : "武力时代"
+"achievement.witchU.another1.goal" : "不使用魔法，完成一局游戏。"
+"achievement.witchU.another1.cond" : ""
+"achievement.witchU.another1.splitted.2" : "时代"
+
+"achievement.witchU.another2.title" : "咏唱失败"
+"achievement.witchU.another2.goal" : "自身被放逐或猜测，导致魔法击杀失败"
+"achievement.witchU.another2.cond" : ""
+"achievement.witchU.another2.flavor" : ""公告：魔力不足。""
+
+"achievement.witchU.hard1.title" : "还未结束"
+"achievement.witchU.hard1.goal" : "施加魔法后的下一场会议中，有除女巫外的玩家被放逐。"
+"achievement.witchU.hard1.cond" : ""
+
+"achievement.witchU.challenge1.title" : "烬灭的魔女之夜"
+"achievement.witchU.challenge1.goal" : "同时对 3 名及以上玩家施加魔法。"
+"achievement.witchU.challenge1.cond" : ""

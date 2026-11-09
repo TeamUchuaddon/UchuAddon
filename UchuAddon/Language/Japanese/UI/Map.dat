@@ -1,0 +1,13 @@
+"options.map.customization.polus.relocationVital" : "研究室へのバイタル移動"
+"options.map.customization.polus.relocationVital.detail" : "オフィスのバイタルを研究室に移動します。"
+"options.map.customization.polus.relocationTask" : "タスク位置の改変"
+"options.map.customization.polus.relocationTask.detail" : "タスクの位置を改変します。以下の改変が含まれます。<br>- 通信室のWifi再起動タスクをドロップシップに移動<br>- ドロップシップの航路図タスクを通信室に移動"
+"options.map.customization.polus.customVent" : "ベントの接続改変"
+"options.map.customization.polus.customVent.detail" : "一部ベントの接続を改変します。以下の改変が含まれます。<br>- リアクター(左側)ベントとリアクター(右側)ベントの接続を遮断<br>- リアクター(左側)ベントと電気室ベントを接続<br>- リアクター(右側)ベントと保管庫ベントを接続"
+"options.map.customization.polus.specimensDoorLower" : "下部ドアの解放"
+"options.map.customization.polus.specimensDoorLower.detail" : "標本室(下部)のドアを常に空いた状態にします。"
+"options.map.customization.polus.specimensDoorUpper" : "上部ドアの解放"
+"options.map.customization.polus.specimensDoorUpper.detail" : "標本室(上部)のドアを常に空いた状態にします。"
+
+"options.map.customization.fungle.mushroomChaos" : "キノコカオスを有効化"
+"options.map.customization.fungle.mushroomChaos.detail" : "※試験的に追加しているため、不具合が起こる可能性が高いです。"

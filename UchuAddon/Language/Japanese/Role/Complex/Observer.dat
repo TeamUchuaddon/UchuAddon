@@ -1,0 +1,18 @@
+# Document
+
+
+# Options
+
+"options.role.observerU.maxCameraCount" : "カメラ最大数"
+"options.role.observerU.placeCoolDown" : "カメラ設置クールダウン"
+"options.role.observerU.canSeeCameraOtherPlayer" : "他プレイヤーがカメラを視認可能"
+
+# Game
+
+
+# UI
+
+"button.label.self" : "自視点"
+"button.label.next" : "次へ"
+
+# Status

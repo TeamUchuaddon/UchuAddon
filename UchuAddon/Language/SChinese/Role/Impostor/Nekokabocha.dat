@@ -1,0 +1,26 @@
+# Assignable
+
+"role.nekokabochaU.name" : "邪恶的猎人"
+"role.nekokabochaU.short" : "猎"
+"role.nekokabochaU.blurb" : "攫取生命的冥界之尾"
+
+# Document
+
+"role.nekokabochaU.doc" : "死亡时会带走其他玩家的伪装者。"
+"role.nekokabochaU.tips" : "・被投票放逐时不会连带伪装者一起死亡。"
+
+# Options
+
+"options.role.nekokabochaU.detail" : "死亡或被放逐时会带走一名玩家的伪装者。"
+"options.role.nekokabochaU.exileembroil" : "连带"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

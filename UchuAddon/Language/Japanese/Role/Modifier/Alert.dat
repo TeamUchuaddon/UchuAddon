@@ -1,0 +1,25 @@
+# Assignable
+
+"role.alertU.name" : "アラート"
+"role.alertU.generalBlurb" : "緊急招集"
+"role.alertU.blurb" : "招集せよ"
+
+# Document
+
+"role.alertU.doc" : "ポータブルボタンを持つモディファイアです。"
+
+# Options
+
+"options.role.alertU.detail" : "アラートは遠隔でボタンを押すことが出来るモディファイアです。"
+
+# Game
+
+
+# UI
+
+"button.label.emergency.ability" : "緊急会議"
+
+# Stats
+
+
+# Titles

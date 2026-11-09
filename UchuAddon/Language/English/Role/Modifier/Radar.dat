@@ -1,0 +1,24 @@
+# Assignable
+
+"role.radarU.name" : "Radar"
+"role.radarU.generalBlurb" : "Detection Transducer Online"
+
+# Document
+
+"role.radarU.doc" : "Tracks the closest player with an arrow."
+
+# Options
+
+"options.role.radarU.detail" : "Radar tracks the closest player."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+

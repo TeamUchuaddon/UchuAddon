@@ -1,0 +1,46 @@
+# Assignable
+
+"role.guardianU.name" : "免疫者"
+"role.guardianU.short" : "免"
+"role.guardianU.blurb" : "神之庇护"
+
+# Document
+
+"role.guardianU.doc" : "免疫者是完成任务后，可获得防止被击杀护盾的船员。"
+
+# Options
+
+"options.role.guardianU.detail" : "免疫者是完成任务后，可获得防止被击杀护盾的船员。"
+"options.role.guardianU.shieldLimit" : "次数限制护盾"
+"options.role.guardianU.numOfShield" : "护盾最大次数"
+"options.role.guardianU.shieldTask" : "解锁护盾任务占比"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+
+"achievement.guardianU.common1.title" : "象征"
+"achievement.guardianU.common1.goal" : "全程未被击杀并获得胜利。"
+"achievement.guardianU.common1.cond" : ""
+
+"achievement.guardianU.another1.title" : "信仰不足"
+"achievement.guardianU.another1.goal" : "展开屏障前被击杀并死亡"
+"achievement.guardianU.another1.cond" : ""
+
+"achievement.guardianU.another2.title" : "忏悔"
+"achievement.guardianU.another2.goal" : "被放逐并死亡。"
+"achievement.guardianU.another2.cond" : ""
+"achievement.guardianU.another2.flavor" : ""神明未曾注视我"—— 修女的忏悔 "
+
+"achievement.guardianU.challenge1.title" : "祈祷已传达"
+"achievement.guardianU.challenge1.goal" : "成功防止一次击杀"
+"achievement.guardianU.challenge1.cond" : ""
+"achievement.guardianU.challenge1.splitted.1" : "祈祷"
+"achievement.guardianU.challenge1.flavor" : "神明曾注视着我"

@@ -1,0 +1,31 @@
+# Assignable
+
+"role.EraserU.name" : "Eraser"
+"role.EraserU.short" : "Era"
+"role.EraserU.blurb" : "Let the World Forget Me"
+
+# Document
+
+"role.EraserU.doc" : "An Impostor who deletes player roles."
+"role.EraserU.ability.title" : "Unique Ability "Role Erasure Protocol""
+"role.EraserU.ability.main" : "Can erase a player's role."
+"role.EraserU.ability.erase" : "<title>Erase</title>Erases a player's role and forces them into a Crewmate.<br>The change applies after the next meeting."
+"role.EraserU.tips" : "- If you erase a non-Crewmate role, you become <color=#6AB2BD>Seed</color>."
+
+# Options
+
+"options.role.EraserU.detail" : "Forces a player's role to become a Crewmate."
+"options.role.EraserU.EraseCooldown" : "Erase Cooldown"
+"options.role.EraserU.numofErase" : "Erase Uses"
+
+# Game
+
+
+# UI
+
+"button.label.Erase" : "Erase"
+
+# Stats
+
+
+# Titles

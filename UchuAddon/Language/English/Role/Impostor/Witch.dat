@@ -1,0 +1,52 @@
+# Assignable
+
+"role.witchU.name" : "Witch"
+"role.witchU.short" : "Wch"
+"role.witchU.blurb" : "Caster of Death"
+
+# Document
+
+"role.witchU.doc" : "An Impostor who curses players."
+
+# Options
+
+"options.role.witchU.detail" : "Witch is an Impostor who casts spells on other players.<br>A spell-cast player will die unless Witch is voted out or guessed at the next meeting."
+"options.role.witchU.spellCooldown" : "Spell Cooldown"
+"options.role.witchU.spellDuration" : "Spell Cast Time"
+"options.role.witchU.numOfOneTurnSpell" : "Max Spells per Round"
+"option.role.witchU.witchNormalKill" : "Normal Kill Available"
+
+# Game
+
+
+# UI
+
+"button.label.Spell" : "Spell"
+
+# Stats
+
+"witch.spell" : "Spells"
+
+# Titles
+
+"achievement.witchU.common1.title" : "Spell of Death"
+"achievement.witchU.common1.goal" : "Get a kill with a spell."
+"achievement.witchU.common1.cond" : ""
+
+"achievement.witchU.another1.title" : "Age of the Blade"
+"achievement.witchU.another1.goal" : "End the game without using a spell."
+"achievement.witchU.another1.cond" : ""
+"achievement.witchU.another1.splitted.2" : "Age"
+
+"achievement.witchU.another2.title" : "Failed Cast"
+"achievement.witchU.another2.goal" : "Get voted out or guessed and fail to land a spell kill"
+"achievement.witchU.another2.cond" : ""
+"achievement.witchU.another2.flavor" : ""ANNOUNCE" Out of mana."
+
+"achievement.witchU.hard1.title" : "Not Yet Over"
+"achievement.witchU.hard1.goal" : "At the next meeting after using a spell, have a non-Witch player voted out."
+"achievement.witchU.hard1.cond" : ""
+
+"achievement.witchU.challenge1.title" : "Walpurgis of Ash"
+"achievement.witchU.challenge1.goal" : "Have spells active on 3 or more players at the same time."
+"achievement.witchU.challenge1.cond" : ""

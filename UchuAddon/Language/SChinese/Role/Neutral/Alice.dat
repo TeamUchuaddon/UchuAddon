@@ -1,0 +1,51 @@
+# Assignable
+
+"role.aliceU.name" : "爱丽丝"
+"role.aliceU.short" : "爱丽"
+"role.aliceU.blurb" : "被困于奇妙之国"
+"teams.aliceU" : "爱丽丝阵营"
+
+# Document
+
+"role.aliceU.doc" : "被击杀即可获胜的中立阵营角色"
+"role.aliceU.ability.title" : "固有能力『柴郡引路人』"
+"role.aliceU.ability.main" : "%EXTRA%"
+"role.aliceU.ability.main.extraWin" : "爱丽丝被击杀后，可在游戏结束时获得额外胜利判定"
+"role.aliceU.ability.main.normalWin" : "爱丽丝被击杀后，将立即达成单独胜利"
+"role.aliceU.ability.echo" : "<title>预知感应</title>可获知杀手的实时位置"
+"role.aliceU.ability.kill" : "<title>猎杀</title>可击杀其他玩家<br>需要累计击杀一定次数才能获胜，即便达成次数要求，猎杀按钮仍可继续使用"
+"document.tip.winCond.aliceU.title" : "特殊胜利条件"
+"document.tip.winCond.aliceU" : "被击杀次数达到设定值即可获胜"
+
+# Options
+
+"options.role.aliceU.detail" : "爱丽丝是被击杀即可获胜的中立阵营角色"
+"options.role.aliceU.numOfWin" : "获胜所需被击杀次数"
+"options.role.aliceU.canFixLight" : "可修复电力故障"
+"options.role.aliceU.canFixComms" : "可修复通讯故障"
+"options.role.aliceU.extraWin" : "额外胜利判定"
+"role.aliceU.vent" : "管道使用设置"
+"options.role.aliceU.group.echo" : "预知感应能力设置"
+"options.role.aliceU.echoCooldown" : "预知感应冷却时间"
+"options.role.aliceU.echoRange" : "预知感应范围"
+"options.role.aliceU.numOfEcho" : "预知感应可用次数"
+"options.role.aliceU.group.winKill" : "猎杀功能设置"
+"options.role.aliceU.winForKill" : "获胜需达成指定击杀次数"
+"options.role.aliceU.killCooldown" : "猎杀冷却时间"
+"options.role.aliceU.numOfWinKill" : "获胜所需击杀次数"
+"options.role.aliceU.KillVentPlayer" : "可击杀在管道内的玩家"
+"options.role.aliceU.task" : "获胜需完成指定任务"
+
+# Game
+
+
+# UI
+
+"button.label.Premonition" : "预知感应"
+
+# Stats
+
+"end.aliceU" : "爱丽丝 胜利"
+"end.extra.aliceU" : "<color=#FFFFFF>+</color> 爱丽丝"
+
+# Titles

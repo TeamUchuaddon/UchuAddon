@@ -1,0 +1,31 @@
+# Assignable
+
+"role.spectrePossessionU.name" : "狐憑き"
+"role.spectrePossessionU.generalBlurb" : "美しき呪い"
+"role.spectrePossessionU.blurb" : "<color=#b998c5>そして、彼の者に仕えよ</color>"
+
+# Document
+
+"role.spectrePossessionU.doc" : "このモディファイアを持つプレイヤーは妖狐陣営になります。"
+
+# Options
+
+"options.role.spectrePossessionU.detail" : "インポスター・クルーメイトにのみ付与されるモディファイアです。<br>このモディファイアを持つプレイヤーは、妖狐陣営になります。"
+"options.role.spectrePossessionU.group.fanaticism" : "狂信者設定"
+"options.role.spectrePossessionU.fanaticism" : "狂信者能力"
+"options.role.spectrePossessionU.fanaticismLimit" : "狂信能力に制限を追加"
+"options.role.spectrePossessionU.numOfTaskFanaticism" : "狂信発現タスク数"
+"options.role.spectrePossessionU.numOfTaskFanaticism.detail" : "クルーメイトに狐憑きが付いた時<br>このタスク数を終えることで狂信能力を発現します。"
+"options.role.spectrePossessionU.numOfKillFanaticism" : "狂信発現キル数"
+"options.role.spectrePossessionU.numOfKillFanaticism.detail" : "インポスターに狐憑きが付いた時<br>この回数キルをすることで狂信能力を発現します。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

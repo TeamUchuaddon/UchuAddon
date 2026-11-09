@@ -1,0 +1,40 @@
+# Assignable
+
+"role.eclipseU.name" : "召陨师"
+"role.eclipseU.short" : "召"
+"role.eclipseU.blurb" : "来自那天外来物"
+
+# Document
+
+"role.eclipseU.ability.title" : "固有能力『陨石灾厄』"
+"role.eclipseU.ability.main" : " 召陨师是一名能召唤陨石的伪装者。"
+"role.eclipseU.ability.mark" : "<title>标记</title>标记陨石的坠落地点"
+"role.eclipseU.ability.blast" : "<title>陨石/title>在标记的位置召唤陨石坠落。未标记地点则无法使用该能力。"
+
+# Options
+
+"options.role.eclipseU.detail" : " 召陨师是能够召唤陨石进行击杀的内鬼。陨石即使命中队友，也会无差别击杀 "
+"options.role.eclipseU.useOfMeteor" : "陨石可使用次数"
+"options.role.eclipseU.meteorMarkCoolDown" : "标记冷却时间"
+"options.role.eclipseU.meteorBlastCoolDown" : "陨石冷却时间"
+"options.role.eclipseU.meteorWarningTime" : "陨石警告时间"
+"options.role.eclipseU.markStopTime" : "标记僵直时间"
+"options.role.eclipseU.meteorSize" : "陨石尺寸"
+"options.role.eclipseU.resetBlastCool" : "使用标记时重置陨石冷却时间"
+"options.role.eclipseU.markMeetingReset" : "会议时重置标记地点"
+"options.role.eclipseU.markPlaySE" : "标记设置音效"
+"options.role.eclipseU.seRange" : "音效范围"
+
+# Game
+
+
+# UI
+
+"button.label.Emark" : "标记"
+"button.label.Eblast" : "陨石"
+
+# Stats
+
+"state.eclipseBomb" : "轰炸"
+
+# Titles

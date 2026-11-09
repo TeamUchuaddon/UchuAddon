@@ -1,0 +1,39 @@
+# Assignable
+
+"role.sonarU.name" : "ソナー"
+"role.sonarU.short" : "ソナ"
+"role.sonarU.blurb" : "絶命の残響、共振す。"
+
+# Document
+
+"role.sonarU.doc" : "キルを検知するアンテナを設置します。"
+"role.sonarU.ability.title" : "固有能力 "アンテナ""
+"role.sonarU.ability.main" : ""
+"role.sonarU.ability.place" : "<title>設置</title>その場にアンテナを設置します。<br><b>設置したアンテナは自分にしか見えません。</b>"
+"role.sonarU.ability.antenna" : "<title>アンテナ</title>有効化しているアンテナです。<br>周囲でキルが起こるとサイレンを発信します。"
+"role.sonarU.ability.break" : "<title>壊れたアンテナ</title>一度キルを検知するとアンテナは壊れてしまいます。<br>この状態のアンテナはキルを検知できません。"
+　
+# Options
+
+"options.role.sonarU.detail" : "ソナーはキルを検知するアンテナを設置することが出来るクルーメイトです。"
+"options.role.sonarU.placeCooldown" : "設置クールダウン"
+"options.role.sonarU.numOfPlace" : "アンテナ設置可能回数"
+"options.role.sonarU.sonarRange" : "キル検知範囲"
+"options.role.sonarU.noiseDuration" : "サイレン持続時間"
+"options.role.sonarU.noisePosition" : "死亡位置にサイレンを発信"
+"options.role.sonarU.noisePosition.detail" : "オフにするとアンテナからサイレンが発信されます。"
+"options.role.sonarU.rpcBreakAntenna" : "壊れたアンテナを同期"
+
+# Game
+
+
+# UI
+
+"button.label.sonarU.place" : "設置"
+
+# Stats
+
+"stats.sonarU.place" : "アンテナの設置回数"
+"stats.sonarU.noise" : "キルの検知回数"
+
+# Titles

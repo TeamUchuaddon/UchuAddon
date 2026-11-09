@@ -1,0 +1,65 @@
+# Assignable
+
+"role.polarisU.name" : "ポラリス"
+"role.polarisU.short" : "ポ"
+"role.polarisU.blurb" : "蒼天の導星"
+
+# Document
+
+"role.polarisU.doc" : "キルと幻視を使えるクルーメイトです。"
+"role.polarisU.ability.title" : "固有能力 "導きの青い星""
+"role.polarisU.ability.main" : "<b>キル能力</b>と<b>幻視能力</b>を使えます。<br>%REWIND%"
+"role.polarisU.ability.main.rewind" : "<var>幻視能力にはタスクを消費します。</var>"
+"role.polarisU.ability.main.norewind" : ""
+"role.polarisU.ability.kill" : "<title>キル</title>プレイヤーをキルします。"
+"role.polarisU.ability.medium" : "<title>幻視</title>死者の役職を占います。結果は会議で表示され、自身のみ視認可能です。"
+
+# Options
+
+"options.role.polarisU.detail" : "ポラリスはキル能力と幻視能力を使用できるクルーメイトです。"
+"options.role.polarisU.numofKillOption" : "キル可能回数"
+"options.role.polarisU.killCoolDownOption" : "キルクールダウン"
+"options.role.polarisU.mediumCooldown" : "幻視クールダウン"
+"options.role.polarisU.mediumDuration" : "幻視所要時間"
+"options.role.polarisU.numOfMedium" : "幻視使用可能回数"
+"options.role.polarisU.rewindTask" : "幻視使用時タスクを消費"
+"options.role.polarisU.mediumRewindTask" : "幻視消費タスク"
+
+# Game
+
+
+# UI
+
+"button.label.polarisU.Kill" : "キル"
+"button.label.polarisU.Medium" : "幻視"
+"options.role.polarisU.message.header" : "幻視結果"
+
+# Stats
+
+
+# Titles
+
+"achievement.uchuaddon.polarisU.common1.title" : "蒼天の導星"
+"achievement.uchuaddon.polarisU.common1.goal" : "非クルーメイトをキルする。"
+"achievement.uchuaddon.polarisU.common1.cond" : ""
+
+"achievement.uchuaddon.polarisU.common2.title" : "幻"
+"achievement.uchuaddon.polarisU.common2.goal" : "幻視能力を使用する。"
+"achievement.uchuaddon.polarisU.common2.cond" : ""
+
+"achievement.uchuaddon.polarisU.another1.title" : "哀色の疵"
+"achievement.uchuaddon.polarisU.another1.goal" : "クルーメイトをキルする。"
+"achievement.uchuaddon.polarisU.another1.cond" : ""
+
+"achievement.uchuaddon.polarisU.another2.title" : "真偽不明"
+"achievement.uchuaddon.polarisU.another2.goal" : "幻視中の死体を通報される。"
+"achievement.uchuaddon.polarisU.another2.flavor" : ""結局あいつは何者なんだ？""
+"achievement.uchuaddon.polarisU.another2.cond" : ""
+
+"achievement.uchuaddon.polarisU.hard1.title" : "彗星"
+"achievement.uchuaddon.polarisU.hard1.goal" : "加速中にキルをする。"
+"achievement.uchuaddon.polarisU.hard1.cond" : ""
+
+"achievement.uchuaddon.polarisU.challenge1.title" : "英雄"
+"achievement.uchuaddon.polarisU.challenge1.goal" : "自身の手でインポスターを全員キルする。"
+"achievement.uchuaddon.polarisU.challenge1.cond" : "クルーメイトをキルしないこと。"

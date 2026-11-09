@@ -1,0 +1,25 @@
+# Assignable
+
+"role.niceObserverU.name" : "Nice Observer"
+"role.niceObserverU.short" : "Neo"
+"role.niceObserverU.blurb" : "Sentinel of Reflection"
+
+# Document
+
+"role.niceObserverU.doc" : "A Crewmate who places cameras."
+
+# Options
+
+"options.role.niceObserverU.detail" : "Nice Observer is a Crewmate who can place stationary cameras.<br>The cameras activate after a meeting, letting you watch their surroundings whenever you like."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+

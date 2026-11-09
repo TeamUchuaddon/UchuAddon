@@ -1,0 +1,25 @@
+﻿# Assignable
+
+"role.hunchU.name" : "Hunch"
+"role.hunchU.generalBlurb" : "Don't Miss That Death"
+
+# Document
+
+"role.hunchU.doc" : "A modifier that senses death."
+
+# Options
+
+"options.role.hunchU.detail" : "When another player dies, the screen flashes.<br>You can configure the range within which deaths are sensed."
+"options.role.hunchU.detected" : "Limit Detection Range"
+"options.role.hunchU.detectedRange" : "Death Detection Range"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

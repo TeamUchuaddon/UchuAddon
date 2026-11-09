@@ -1,0 +1,30 @@
+# Assignable
+
+"role.spectrumU.name" : "异能者"
+"role.spectrumU.short" : "异能"
+"role.spectrumU.blurb" : "违规改造"
+
+# Document
+
+"role.spectrumU.doc" : "异能者是可使用部分船员阵营职业技能的伪装者。"
+
+# Options
+
+"options.role.spectrumU.detail" : "异能者是可使用部分船员阵营职业技能的伪装者。"
+"options.role.spectrumU.killCooldown" : "击杀冷却时间"
+
+# Game
+
+"options.role.count.custom" : "内鬼自定义分配人数"
+"options.role.chance.custom" : "内鬼自定义分配概率"
+"help.rolePreview.inner.custom.100" : "内鬼化必定出现"
+"help.rolePreview.inner.custom.random" : "内鬼化随机出现"
+
+# UI
+
+"options.role.spectrumU.prefix" : ""
+
+# Stats
+
+
+# Titles

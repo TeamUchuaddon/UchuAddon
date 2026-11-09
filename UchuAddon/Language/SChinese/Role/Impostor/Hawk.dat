@@ -1,0 +1,29 @@
+# Assignable
+
+"role.hawkU.name" : "邪恶的瞭望者"
+"role.hawkU.short" : "邪瞭"
+"role.hawkU.blurb" : "窥视他人的一举一动"
+
+# Document
+
+"role.hawkU.doc" : "邪恶的瞭望者是能够扩大自身视野的内鬼。"
+
+# Options
+
+"options.role.hawkU.detail" : "邪恶的瞭望者是能够扩大自身视野的内鬼。"
+"options.role.hawkU.hawkeyeCoolDown" : "望眼镜冷却时间"
+"options.role.hawkU.hawkeyeDuration" : "望眼镜持续时间"
+"options.role.hawkU.hawkeyeRatio" : "望眼镜倍率"
+"options.role.hawkU.hawkeyeStop" : "开启望眼镜时无法移动"
+
+# Game
+
+
+# UI
+
+"button.label.hawkeye" : "望眼镜"
+
+# Stats
+
+
+# Titles

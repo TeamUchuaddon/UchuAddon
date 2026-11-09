@@ -1,0 +1,51 @@
+# Assignable
+
+"role.pierrotU.name" : "ピエロ"
+"role.pierrotU.short" : "ピエ"
+"role.pierrotU.blurb" : "いたずらサーカス"
+
+# Document
+
+"role.pierrotU.doc" : "会議をめちゃくちゃにするインポスターです。"
+"role.pierrotU.ability.title" : "固有能力 "狂気のカーテンコール""
+"role.pierrotU.ability.main" : "ピエロのキルはキルワープが発生しません。"
+"role.pierrotU.ability.report" : "<title>サーカス</title>ピエロがキルした死体が通報されると<br>会議画面がめちゃくちゃになり、一部の会議能力が使えなくなります。"
+"role.pierrotU.tips" : "サーカス開始時はピエロの笑い声が聞こえます。<br>まるで嘲笑うかのように。"
+
+# Options
+
+"options.role.pierrotU.detail" : "ピエロは会議画面をめちゃくちゃにするインポスターです。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+"state.pierrotKill" : "奇術"
+
+# Titles
+
+"achievement.uchuaddon.pierrotU.common1.title" : "いたずらサーカス"
+"achievement.uchuaddon.pierrotU.common1.goal" : "通算で5回サーカスを開催する。"
+"achievement.uchuaddon.pierrotU.common1.cond" : ""
+
+"achievement.uchuaddon.pierrotU.hard1.title" : "幻惑ミスディレクション"
+"achievement.uchuaddon.pierrotU.hard1.goal" : "周囲に3人以上いる状態でキルをし、次の会議を生き残る。"
+"achievement.uchuaddon.pierrotU.hard1.cond" : ""
+
+"achievement.uchuaddon.pierrotU.another1.title" : "毎度おなじみ"
+"achievement.uchuaddon.pierrotU.another1.goal" : "通算で50回サーカスを開催する。"
+"achievement.uchuaddon.pierrotU.another1.cond" : ""
+
+"achievement.uchuaddon.pierrotU.another2.title" : "私からの最後の演目"
+"achievement.uchuaddon.pierrotU.another2.goal" : "死後にサーカスを開催する。"
+"achievement.uchuaddon.pierrotU.another2.cond" : ""
+"achievement.uchuaddon.pierrotU.another2.flavor" : ""私が消えても、作品は残るのだ。""
+
+"achievement.uchuaddon.pierrotU.challenge1.title" : "喝采の幕引き"
+"achievement.uchuaddon.pierrotU.challenge1.goal" : "1ゲーム中に3回サーカスを開催し勝利する。"
+"achievement.uchuaddon.pierrotU.challenge1.cond" : "ゲーム終了時に生存していること。"
+"achievement.uchuaddon.pierrotU.challenge1.flavor" : ""これにて終幕""

@@ -1,0 +1,30 @@
+# Assignable
+
+"role.amnesiaU.name" : "失忆者"
+"role.amnesiaU.short" : "失忆"
+"role.amnesiaU.blurb" : "记忆的空壳"
+"teams.amnesiaU" : "失忆者"
+
+# Document
+
+"role.amnesiaU.doc" : "失忆者是通过通报尸体来变成尸体职业的第三方阵营。<br>失忆者没有胜利条件，必须通过报告尸体来想起自己是谁。"
+
+# Options
+
+"options.role.amnesiaU.detail" : "失忆者是通过通报尸体来变成尸体职业的第三方阵营。<br>失忆者没有胜利条件，必须通过报告尸体来想起自己是谁。"
+"options.role.amnesiaU.amnesiaAction" : "职业变化时间"
+"options.role.amnesiaU.amnesiaAction.meetingStart" : "会议开始"
+"options.role.amnesiaU.amnesiaAction.meetingEnd" : "会议结束"
+"options.role.amnesiaU.deadBodyArrow" : "显示尸体箭头"
+
+# Game
+
+
+# UI
+
+"stats.amnesiaU.report" : "报告次数"
+
+# Stats
+
+
+# Titles

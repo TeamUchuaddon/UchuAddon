@@ -1,0 +1,40 @@
+# Assignable
+
+"role.triggerU.name" : "Trigger"
+"role.triggerU.short" : "Tri"
+"role.triggerU.blurb" : "Silver Bullet"
+
+# Document
+
+"role.triggerU.doc" : "Can analyze and relocate vents."
+"role.triggerU.ability.title" : "Unique Ability "Mechanical Grace""
+"role.triggerU.ability.main" : "Can analyze and relocate vents."
+"role.triggerU.ability.analysis" : "<title>Analyze</title>Analyzes a vent. When someone uses an analyzed vent,<br>you receive a report at the next meeting."
+"role.trigeerU.ability.relocation" : "<title>Relocate</title>Grabs a vent and moves it to a new location."
+
+# Options
+
+"options.role.triggerU.detail" : "Trigger is a Crewmate who analyzes and relocates vents."
+"options.role.triggerU.analysisCooldown" : "Analyze Cooldown"
+"options.role.triggerU.numOfAnalysis" : "Analyze Uses"
+"options.role.triggerU.playerColor" : "Show Light/Dark"
+"options.role.triggerU.playerColor.detail" : "Adds a light/dark indicator to the analyze result."
+"options.role.triggerU.relocationCooldown" : "Relocate Cooldown"
+"options.role.triggerU.relocationDuration" : "Relocate Duration"
+"options.role.triggerU.message.header" : "Analysis Report"
+"options.role.triggerU.message" : "Vent use detected"
+"options.role.triggerU.message.inner.lightColor" : "<b>Light/Dark Result: Light</b>"
+"options.role.triggerU.message.inner.darkColor" : "<b>Light/Dark Result: Dark</b>"
+
+# Game
+
+
+# UI
+
+"button.label.analysis" : "Analyze"
+"button.label.relocation" : "Relocate"
+
+# Stats
+
+
+# Titles

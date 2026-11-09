@@ -1,0 +1,31 @@
+# Assignable
+
+"role.EraserU.name" : "イレイサー"
+"role.EraserU.short" : "イレ"
+"role.EraserU.blurb" : "世界が私を忘れて"
+
+# Document
+
+"role.EraserU.doc" : "プレイヤーの役職を削除するインポスターです。"
+"role.EraserU.ability.title" : "固有能力 "役職消去プロトコル""
+"role.EraserU.ability.main" : "プレイヤーの役職を消去できます。"
+"role.EraserU.ability.erase" : "<title>削除</title>プレイヤーの役職を消去し、強制的にクルーメイトにします。<br>変更は次の会議後に反映されます。"
+"role.EraserU.tips" : "・クルーメイト陣営以外の役職を消去した場合、<color=#6AB2BD>シード</color>になります。"
+
+# Options
+
+"options.role.EraserU.detail" : "プレイヤーの役職を強制的にクルーメイトにすることができます。"
+"options.role.EraserU.EraseCooldown" : "削除クールダウン"
+"options.role.EraserU.numofErase" : "削除可能回数"
+
+# Game
+
+
+# UI
+
+"button.label.Erase" : "削除"
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,40 @@
+# Assignable
+
+"role.anchorU.name" : "锚定者"
+"role.anchorU.short" : "锚"
+"role.anchorU.blurb" : "维系深渊"
+"teams.anchorU" : "锚定者"
+
+# Document
+
+"role.anchorU.doc" : "锚定者是需要放置一定次数锚点的中立阵营。"
+"role.anchorU.ability.place" : "使用<title>放置</title>来放置锚点。放置时会向周围发出提示。"
+"role.anchorU.ability.fakenotice" : "<title>幻听</title>可以从已放置锚点的位置发出提示。"
+"role.anchorU.ability.title" : "固有能力【逻辑奇点】"
+"role.anchorU.ability.main" : "放置指定次数锚点，存活至下一轮会议后即可获胜。"
+"role.anchorU.tips" : "・即使放置完毕，若没能在下次会议存活则无法获胜。"
+
+# Options
+
+"options.role.anchorU.detail" : "锚定者是通过放置一定次数锚点来获胜的中立阵营。"
+"options.role.anchorU.PlaceCooldown" : "锚点冷却时间"
+"options.role.anchorU.NumOfAnchor" : "锚点放置数量"
+"options.role.anchorU.FakeNoticeCooldown" : "幻听冷却时间"
+"options.role.anchorU.NumOfAnchorPerTurn" : "每回合可放置次数"
+"options.role.anchorU.NumOfFakeNotice" : "幻听次数"
+"options.role.anchorU.AnchorRangeOption" : "锚点提示可听见范围"
+
+# Game
+
+
+# UI
+
+"button.label.AnchorPlace" : "放置"
+"button.label.FakeNotice" : "幻听"
+
+# Stats
+"end.anchorU" : "锚定者%EXTRA%胜利"
+"document.tip.winCond.anchorU.title" : "特殊胜利"
+"document.tip.winCond.anchorU" : "<b>放置全部锚点</b>后，在紧接着的会议中存活即可单独胜利。"
+
+# Titles

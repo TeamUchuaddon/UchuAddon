@@ -1,0 +1,53 @@
+# Assignable
+
+"role.seedU.name" : "种子"
+"role.seedU.short" : "种"
+"role.seedU.blurb" : "泪水之花"
+"teams.seedU" : "种子"
+
+# Document
+
+"role.seedU.doc" : " 种子是中立角色，只要使用共生技能的对象获胜，自身也会额外获胜。"
+
+# Options
+
+"options.role.seedU.detail" : " 种子是中立角色，只要使用共生技能的对象获胜，自身也会额外获胜。"
+"options.role.seedU.seedCooldown" : "共生冷却时间"
+"options.role.seedU.numOfSeed" : "共生可使用次数"
+"options.role.seedU.dieBlockWins" : "死亡时阻止自身获胜"
+"options.role.seed.group.gauge" : "希望值设定"
+"options.role.seedU.seedGauge" : "希望值"
+"options.role.seedU.requiredGaugeToWin" : "希望值达到一定指标才可以胜利"
+"options.role.seedU.surplusGauge" : "剩余希望值"
+"options.role.seedU.gaugeReductionRatio" : "希望值下降速率"
+
+# Game
+
+
+# UI
+
+"button.label.seedSkill" : "共生"
+
+# Stats
+
+"end.extra.seedU" : "<color=#FFFFFF>+</color> 种子"
+
+# Titles
+
+"achievement.seedU.common1.title" : "苗床"
+"achievement.seedU.common1.goal" : "使用共生"
+"achievement.seedU.common1.cond" : ""
+
+"achievement.seedU.another1.title" : "乡愁圆舞曲"
+"achievement.seedU.another1.goal" : "共生搭档无人取胜，最终落败"
+"achievement.seedU.another1.cond" : ""
+
+"achievement.seedU.hard1.title" : "开花"
+"achievement.seedU.hard1.goal" : "使用共生，取得胜利"
+"achievement.seedU.hard1.cond" : ""
+
+"achievement.seedU.challenge1.title" : "霜枝圆舞曲"
+"achievement.seedU.challenge1.goal": "仅与一人缔结共生，并取得胜利"
+"achievement.seedU.challenge1.cond" : ""
+"achievement.seedU.challenge1.flavor" : "四季流转"
+"achievement.seedU.challenge1.splitted.2" : "圆舞曲"

@@ -1,0 +1,24 @@
+# Assignable
+
+"role.evilObserverU.name" : "Evil Observer"
+"role.evilObserverU.short" : "Obs"
+"role.evilObserverU.blurb" : "Inescapable Surveillance"
+
+# Document
+
+"role.evilObserverU.doc" : "An Impostor who sets up cameras."
+
+# Options
+
+"options.role.evilObserverU.detail" : "Observer is an Impostor who can place fixed cameras.<br>They activate after meetings."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

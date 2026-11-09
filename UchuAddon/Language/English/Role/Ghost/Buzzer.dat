@@ -1,0 +1,30 @@
+# Assignable
+
+"role.buzzerU.name" : "Buzzer"
+"role.buzzerU.blurb" : "Ghost Tip-Off"
+"role.buzzerU.short" : "Bzr"
+
+# Document
+
+"role.buzzerU.doc" : "Sends a notification to living Impostors."
+"role.buzzerU.ability.title" : "Unique Ability "Wolf Siren""
+"role.buzzerU.ability.main" : ""
+"role.buzzerU.ability.buzzer" : "<title>Buzzer</title>Drops a notification on the spot, visible only to Impostors."
+
+# Options
+
+"options.role.buzzerU.detail" : "Buzzer sends notifications to living Impostors."
+"options.role.buzzerU.buzzerCooldown" : "Buzzer Cooldown"
+"options.role.buzzer.numOfBuzzer" : "Buzzer Uses"
+
+# Game
+
+
+# UI
+
+"button.label.buzzerU.buzzer" : "Buzzer"
+
+# Stats
+
+
+# Titles

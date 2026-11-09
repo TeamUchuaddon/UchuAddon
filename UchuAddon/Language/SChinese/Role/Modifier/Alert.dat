@@ -1,0 +1,25 @@
+# Assignable
+
+"role.alertU.name" : "报警人"
+"role.alertU.generalBlurb" : "紧急召集"
+"role.alertU.blurb" : "速速集结"
+
+# Document
+
+"role.alertU.doc" : "执扭人是可远程触发紧急会议的角色强化模组。"
+
+# Options
+
+"options.role.alertU.detail" : "执扭人是可远程触发紧急会议的角色强化模组。"
+
+# Game
+
+
+# UI
+
+"button.label.emergency.ability" : "紧急召集"
+
+# Stats
+
+
+# Titles

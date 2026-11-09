@@ -1,0 +1,51 @@
+# Assignable
+
+"role.kunoichiU.name" : "女忍"
+"role.kunoichiU.short" : "女忍"
+"role.kunoichiU.blurb" : "花凋零之时方为最美"
+
+# Document
+
+"role.kunoichiU.doc" : "投掷苦无进行击杀的伪装者。"
+"role.kunoichiU.ability.title" : "固有能力【樱忍遁形】"
+"role.kunoichiU.ability.main" : "投掷苦无击杀玩家。"
+"role.kunoichiU.ability.Kunai" : "<title>装备</title>装备/收纳苦无。"
+"role.kunoichiU.ability.kill" : "<title>苦无</title>投掷已装备的苦无。<br>苦无命中玩家一定次数即可击杀。"
+"role.kunoichiU.ability.invisibily" : "<title>隐身</title>静止一定时间后隐身。<br>按下按钮或移动即可解除隐身。"
+"role.kunoichiU.tips" : "・苦无飞行30米后会消失。"
+
+# Options
+
+"options.role.kunoichiU.detail" : "女忍是可以投掷苦无击杀并能隐身的伪装者。"
+"options.role.kunoichiU.KunaiCooldown" : "苦无冷却时间"
+"options.role.kunoichiU.KunaiSize" : "苦无判定范围"
+"options.role.kunoichiU.KunaiSpeed" : "苦无投掷速度"
+"options.role.kunoichiU.numofhit" : "击杀所需命中次数"
+"options.role.kunoichiU.canKillImpostor" : "友军伤害"
+"options.role.kunoichiU.UseInvisibleButton" : "使用按钮隐身"
+"options.role.kunoichiU.UseInvisibleButton.detail" : "关闭后将自动进入隐身。"
+"options.role.kunoichiU.InvisibleTime" : "隐身所需时间"
+"options.role.kunoichi.group.kunai" : "苦无设置"
+"options.role.kunoichi.group.invisibily" : "隐身设置"
+"options.role.kunoichiU.KunaiIninvisibily" : "隐身期间可投掷苦无"
+"options.role.kunoichiU.KunaiDisappearOnWall" : "苦无碰到墙壁消失"
+"options.role.kunoichiU.CanIninvisibily" : "隐身能力"
+"options.role.kunoichiU.ResetHitCountOnMeeting" : "每次会议重置命中次数"
+
+# Game
+
+
+# UI
+
+"button.label.KunaiThrow" : "苦无"
+"button.label.KunoichiInvisibily" : "隐身"
+"button.label.Kunoichirelease" : "解除"
+"ui.action.kunoichiU.equip" : "装备/收纳苦无。"
+"ui.action.kunoichiU.kill" : "投掷苦无。"
+
+
+
+# Stats
+
+
+# Titles

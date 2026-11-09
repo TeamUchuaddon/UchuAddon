@@ -1,0 +1,42 @@
+# Assignable
+
+"role.loversbreakerU.name" : "爱情爆破师"
+"role.loversbreakerU.short" : "爱情"
+"role.loversbreakerU.blurb" : "爱情什么的都爆炸吧"
+"teams.loversbreakerU" : "爱情爆破师"
+
+# Document
+
+"role.loversbreakerU.doc" : "爱情爆破师是需要爆破恋人的第三方阵营。"
+"role.loversbreakerU.ability.title" : "固有能力【爱情定罪】"
+"role.loversbreakerU.ability.main" : "爆破恋人。爆破效果只对自己可见。如果所有爆破技能都失败了，那么爱情爆破师会自杀。"
+"role.loversbreakerU.ability.Exp" : "<title>爆破</title>爆破恋人。"
+"role.loversbreakerU.tips" : "・爱情爆破师不会持有恋人附加。"
+"document.tip.winCond.loversbreakerU.normal.title" : "特殊胜利"
+"document.tip.winCond.loversbreakerU.normal" : "一定轮次内爆破恋人后单独胜利"
+"document.tip.winCond.loversbreakerU.takeover.title" : "跟随胜利"
+"document.tip.winCond.loversbreakerU.takeover" : "一定轮次内爆破恋人后存活到最后跟随胜利"
+
+# Options
+
+"options.role.loversbreakerU.detail" : "爱情爆破师是需要爆破恋人的第三方阵营。"
+"options.role.loversbreakerU.ExpCooldown" : "爆破冷却"
+"options.role.loversbreakerU.NumOfExp" : "获胜需要一定爆破次数"
+"options.role.loversbreakerU.NumOfDeathExp" : "可失败爆破次数"
+"options.role.loversbreakerU.TakeoverWinOption" : "跟随胜利"
+"options.role.loversbreakerU.TakeoverWinOption.detail" : "如果关闭，满足胜利条件时会立即胜利。"
+"options.role.loversbreakerU.BecomingLoversMeansDeath" : "成为恋人瞬间死亡"
+
+# Game
+
+
+# UI
+
+"button.label.Explosion" : "爆破"
+"role.loversbreakerU.hudText" : "自爆前的失败次数"
+
+# Stats
+
+"end.loversbreakerU" : "爱情爆破师%EXTRA%胜利"
+
+# Titles

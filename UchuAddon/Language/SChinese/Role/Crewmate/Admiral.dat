@@ -1,0 +1,36 @@
+# Assignable
+
+"role.admiralU.name" : "提督"
+"role.admiralU.short" : "提"
+"role.admiralU.blurb" : "保护你们所有人"
+
+# Document
+
+"role.admiralU.doc" : "提督是能防止被放逐的船员。使用能力的会议中，所有放逐判定将失效。"
+"role.admiralU.ability.title" : "固有能力 『绝对权限』"
+"role.admiralU.ability.main" : "提督是能防止有人被放逐的船员。。<br>使用能力的会议可阻止放逐。"
+"role.admiralU.ability.skill" : "<title>提督权限</title>可阻止放逐。发动能力的会议中，即便出现被放逐者也不会死亡。"
+
+# Options
+
+"options.role.admiralU.detail" : "提督是能防止被放逐的船员。使用能力的会议中，所有放逐判定将失效。"
+"options.role.admiralU.numOfAdmiral" : "提督次数"
+"options.role.admiralU.publicName" : "公开职务"
+"options.role.admiralU.numOfPublicTask" : "职业公开所需任务数量"
+"options.role.admiralU.voteWatching" : "无视匿名投票"
+"options.role.admiralU.notGuess" : "禁止猜测"
+"options.role.admiralU.privateNameGuess" : "允许猜测未公开职业的提督"
+
+# Game
+
+
+# UI
+
+"button.label.admiral" : "提督权限"
+"role.admiralU.message1" : "本轮提督不允许任何人被放逐!"
+"role.admiralU.hudText" : "剩余技能使用次数"
+
+# Stats
+
+
+# Titles

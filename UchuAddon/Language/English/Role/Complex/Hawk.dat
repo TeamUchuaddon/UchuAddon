@@ -1,0 +1,18 @@
+# Document
+
+
+# Options
+
+"options.role.hawkU.hawkeyeCoolDown" : "Hawk EyeCooldown"
+"options.role.hawkU.hawkeyeDuration" : "Hawk EyeDuration"
+"options.role.hawkU.hawkeyeRatio" : "Hawk EyeMultiplier"
+"options.role.hawkU.hawkeyeStop" : "Cannot Move During Hawk Eye"
+
+# Game
+
+
+# UI
+
+"button.label.summonerU.hawkeye" : "Hawk Eye"
+
+# Status

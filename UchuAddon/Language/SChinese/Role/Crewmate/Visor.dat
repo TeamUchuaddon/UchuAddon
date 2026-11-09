@@ -1,0 +1,36 @@
+# Assignable
+
+"role.superVisorU.name" : "特工"
+"role.superVisorU.short" : "特"
+"role.superVisorU.blurb" : "飞船的管理者"
+
+"role.visorModifierU.name" : "特工"
+"role.visorModifierU.short" : "特"
+"role.visorModifierU.blurb": "飞船的管理者"
+
+# Document
+
+"role.superVisorU.doc" : "这是一名可以随时随地查看管理地图的船员。"
+"role.visorModifierU.doc" : "这是一名可以随时随地查看管理地图的船员。"
+
+# Options
+
+"options.role.superVisorU.detail" : "这是一名可以随时随地查看管理地图的船员。"
+"options.role.superVisorU.group.charge" : "充电设置组"
+"options.role.superVisorU.charge" : "充电功能"
+"options.role.superVisorU.AdminCharge" : "初始充电量"
+"options.role.superVisorU.chargesPerTasks" : "任务充电增量"
+
+"options.role.visorModifierU.detail" : "这是一名可以随时随地查看管理地图的船员。"
+
+# Game
+
+
+# UI
+
+"button.label.Admin" : "管理"
+
+# Stats
+
+
+# Titles

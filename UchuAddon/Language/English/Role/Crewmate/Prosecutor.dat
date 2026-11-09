@@ -1,0 +1,33 @@
+# Assignable
+
+"role.prosecutorU.name" : "Prosecutor"
+"role.prosecutorU.short" : "Pro"
+"role.prosecutorU.blurb" : "See You in Hell"
+
+# Document
+
+"role.prosecutorU.doc" : "Forcibly votes out a player."
+"role.prosecutorU.ability.title" : "Unique Ability "Guilty Verdict""
+"role.prosecutorU.ability.main" : "Can forcibly vote out a player."
+"role.prosecutorU.ability.prosecute" : "<title>Prosecute</title>After use, forcibly votes out the player you vote for."
+　
+# Options
+
+"options.role.prosecutorU.detail" : "Prosecutor is a Crewmate who forcibly votes out players."
+"options.role.prosecutorU.numOfProsecute" : "Prosecute Uses"
+"options.role.prosecutorU.prosecuteCrewmateCheck" : "Die if Target Is a Crewmate"
+
+# Game
+
+
+# UI
+
+"button.label.prosecute" : "Prosecute"
+"role.prosecutorU.hudText" : "Prosecutes Remaining"
+"role.prosecutorU.message1" : "<color=#3477eb>Prosecute</color>"
+
+# Stats
+
+
+# Titles
+

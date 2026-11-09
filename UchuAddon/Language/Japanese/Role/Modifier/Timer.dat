@@ -1,0 +1,24 @@
+# Assignable
+
+"role.timerU.name" : "タイマー"
+"role.timerU.generalBlurb" : "正確な記録屋"
+
+# Document
+
+"role.timerU.doc" : "ターンの経過時間を記録します"
+
+# Options
+
+"options.role.timerU.detail" : "タスクターンの経過時間を記録するモディファイアです。"
+
+# Game
+
+
+# UI
+
+"role.timerU.TimerTxt" : "ターン経過時間"
+
+# Stats
+
+
+# Titles

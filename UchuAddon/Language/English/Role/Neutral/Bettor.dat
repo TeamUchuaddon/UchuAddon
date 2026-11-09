@@ -1,0 +1,49 @@
+# Assignable
+
+"role.bettorU.name" : "Bettor"
+"role.bettorU.short" : "Bet"
+"role.bettorU.blurb" : "Logic Over Luck."
+"teams.bettorU" : "Bettor"
+
+# Document
+
+"role.bettorU.doc" : "A Neutral that wins by correctly guessing everyone's role."
+"role.bettorU.ability.title" : "Unique Ability "Logical Call""
+"role.bettorU.ability.main" : "Guess players' roles and record them during the task phase to check results."
+"role.bettorU.ability.guess" : "<title>Guess</title>Guess a player's role.<br>HIT → Correct<br>BLOW → Incorrect, but another player with that role exists<br>MISS → Incorrect"
+"role.bettorU.ability.analyze" : "<title>Analyze</title>Check the team of the selected player."
+"role.bettorU.ability.identify" : "<title>Identify</title>Learn the role of the selected player."
+"document.tip.winCond.bettorU.title" : "Special Win"
+"document.tip.winCond.bettorU" : "Win by correctly guessing everyone's role."
+
+
+# Options
+
+"options.role.bettorU.detail" : "Bettor is a Neutral that wins by correctly guessing all players' roles."
+"options.role.bettorU.analyzeCooldownOption" : "Analyze Cooldown"
+"options.role.bettorU.numOfAnalyzeOption" : "Analyze Uses"
+"options.role.bettorU.allowIdentifyonDeadPlayersOption" : "Can Use Identify on Dead Players"
+"options.role.bettorU.getIdentifyPercentageOption" : "Hit Rate Required to Unlock Identify"
+"options.role.bettorU.disableGuessTurn" : "Turns After Game Start Before "Guess" Is Available"
+
+# Game
+
+"role.bettorU.analyze.title" : "Analysis Result"
+
+"role.bettorU.information.title" : "Currently Known Information"
+"role.bettorU.information.blow" : "Existing Roles"
+"role.bettorU.information.miss": "Non-existing Roles"
+"role.bettorU.information.none" : "None"
+"role.bettorU.identifyHelp" : "Until "Identify" is available"
+"role.bettorU.normalHelp" :  "Current Hit Rate"
+
+# UI
+
+"button.label.guess" : "Guess"
+"button.label.analyze" : "Analyze"
+
+# Stats
+
+"end.bettorU" : "Bettor%EXTRA% Wins"
+
+# Titles

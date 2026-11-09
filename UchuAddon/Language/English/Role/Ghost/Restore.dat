@@ -1,0 +1,26 @@
+# Assignable
+
+"role.restoreU.name" : "Restore"
+"role.restoreU.blurb" : "Mechanic of the Beyond"
+"role.miracleU.short" : "Rs"
+
+# Document
+
+"role.restoreU.doc" : "Consumes tasks to fix sabotages."
+
+# Options
+
+"options.role.restoreU.detail" : "Restore can fix sabotages by consuming tasks."
+"options.role.restoreU.numOfRewind" : "Tasks Consumed"
+
+# Game
+
+
+# UI
+
+"button.label.fix" : "Repair"
+
+# Stats
+
+
+# Titles

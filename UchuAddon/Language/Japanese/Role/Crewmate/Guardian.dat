@@ -1,0 +1,45 @@
+# Assignable
+
+"role.guardianU.name" : "ガーディアン"
+"role.guardianU.short" : "ガ"
+"role.guardianU.blurb" : "神の加護"
+
+# Document
+
+"role.guardianU.doc" : "キルバリアを展開するクルーメイトです。"
+
+# Options
+
+"options.role.guardianU.detail" : "ガーディアンはタスクをこなし、キルを防ぐバリアを得るクルーメイトです。"
+"options.role.guardianU.shieldTask" : "バリア展開タスク割合"
+"options.role.guardianU.shieldLimit" : "回数制限バリア"
+"options.role.guardianU.numOfShield" : "バリア最大回数"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+
+"achievement.uchuaddon.guardianU.common1.title" : "象徴"
+"achievement.uchuaddon.guardianU.common1.goal" : "一度もキルされずに勝利する。"
+"achievement.uchuaddon.guardianU.common1.cond" : ""
+
+"achievement.uchuaddon.guardianU.another1.title" : "信仰不足"
+"achievement.uchuaddon.guardianU.another1.goal" : "バリアを展開する前にキルされ、死亡する"
+"achievement.uchuaddon.guardianU.another1.cond" : ""
+
+"achievement.uchuaddon.guardianU.another2.title" : "懺悔"
+"achievement.uchuaddon.guardianU.another2.goal" : "追放され、死亡する。"
+"achievement.uchuaddon.guardianU.another2.cond" : ""
+"achievement.uchuaddon.guardianU.another2.flavor" : ""神は私を見ていないかった" ─異端神父の遺言"
+
+"achievement.uchuaddon.guardianU.challenge1.title" : "祈りは届いた"
+"achievement.uchuaddon.guardianU.challenge1.goal" : "バリアでキルを防ぐ。"
+"achievement.uchuaddon.guardianU.challenge1.cond" : ""
+"achievement.uchuaddon.guardianU.challenge1.flavor" : ""神は私を見ていた" ─信仰深きシスターの呟き"

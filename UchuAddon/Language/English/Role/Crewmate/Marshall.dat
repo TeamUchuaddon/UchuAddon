@@ -1,0 +1,26 @@
+# Assignable
+
+"role.marshallU.name" : "Marshall"
+"role.marshallU.short" : "Marsh"
+"role.marshallU.blurb" : "Tactical System"
+
+# Document
+
+"role.marshallU.doc" : "This is a crewmate that can grant players a kill button."
+"role.marshallU.ability.title" : "Inherent Ability [Tactical Orders]"
+"role.marshallU.ability.main" : "You can give players a kill button."
+"role.marshallU.ability.provision" : "<title>Provision</title>Grants the player <b><color=#69b7bf>Modifier Deployed</color></b>. When <br><b><color=#69b7bf>Deploy</color></b> is applied, the player gains the ability to kill another player once."
+
+# Options
+
+"options.role.marshallU.detail" : "Marshall is a crewmate who can grant players a kill button."
+"options.role.marshalllU.ProvisionCooldown" : "Provision Cooldown"
+"options.role.marshallU.numOfProvision" : "Number of Provision"
+"options.role.marshalllU.KillCooldown" : "Kill Cooldown"
+
+# Game
+
+
+# UI
+
+"button.label.Provision" : "Provision"

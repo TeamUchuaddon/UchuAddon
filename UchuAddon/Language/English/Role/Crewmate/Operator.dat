@@ -1,0 +1,30 @@
+# Assignable
+
+"role.operatorU.name" : "Operator"
+"role.operatorU.short" : "Op"
+"role.operatorU.blurb" : "Emergency Operation"
+
+# Document
+
+"role.operatorU.doc" : "A Crewmate that increases Meeting Duration."
+
+# Options
+
+"options.role.operatorU.detail" : "Operator is a Crewmate that submits requests to increase Meeting Duration."
+"options.role.operatorU.numOfOperate" : "OperateAvailable Count"
+"options.role.operatorU.operateAddTime" : "Increase Meeting Duration"
+"options.role.operatorU.skipBan" : "Cannot Skip During Operate"
+
+# Game
+
+
+# UI
+
+"button.label.operatorU.operate" : "Operate"
+"role.operatorU.hudText" : "Remaining Operate Count"
+
+# Stats
+
+"stats.operatorU.operate" : "Operate Count"
+
+# Titles

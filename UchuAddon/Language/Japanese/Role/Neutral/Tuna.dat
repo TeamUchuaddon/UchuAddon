@@ -1,0 +1,56 @@
+# Assignable
+
+"role.tunaU.name" : "マグロ"
+"role.tunaU.short" : "マ"
+"role.tunaU.blurb" : "走れ！！"
+"teams.tunaU" : "マグロ"
+
+"role.tunaModiU.name" : "マグロ"
+"role.tunaModiU.short" : ""
+"role.tunaModiU.generalBlurb" : "走れ！！"
+
+# Document
+
+"role.tunaU.doc" : "常に動かないと死んでしまう第三陣営です。"
+"role.tunaU.ability.title" : "固有能力 "回遊""
+"role.tunaU.ability.main" : "マグロは自殺タイマーが0になると死亡してしまいます。<br>自殺タイマーは、自身が停止しているときに進行します。"
+"role.tunaU.ability.gauge" : "<b>マグロゲージ</b><br>近くに他のプレイヤーがいることで、ゲージが溜まります。<br>自身が止まっている際中は、ゲージの上昇倍率が上がります。<br>ゲージをMAXになると勝利します。"
+"role.tunaU.tips" : "ベント内や、ジップラインなどで行動不能場合、自殺タイマーは進行しません。"
+
+
+"role.tunaModiU.doc" : "動き続けないと死んでしまいます。"
+
+# Options
+
+"options.role.tunaU.detail" : "マグロは止まったら死ぬ第三陣営です。<br><b>マグロゲージ</b>をMAXにすることで勝利します。"
+"options.role.tunaU.tunaAction" : "モード設定"
+"options.role.tunaU.tunaAction.usually" : "常時"
+"options.role.tunaU.tunaAction.total" : "累計"
+"options.role.tunaU.UseallystopTime" : "停止可能時間"
+"options.role.tunaU.TotalstopTime" : "停止可能累計時間"
+"options.role.tunaU.meetingTotalTimeReset" : "会議時に自殺タイマーをリセット"
+"options.role.tunaU.MeetingstopTime" : "会議後の自殺タイマー停止時間"
+"options.role.tunaU.canVent" : "ベント使用"
+"options.role.tuna.group.gauge" : "マグロゲージ設定"
+"options.role.tunaU.requiredGaugeToWin" : "勝利に必要なゲージ量"
+"options.role.tunaU.stopGaugeRatio" : "停止中のゲージ上昇倍率"
+"options.role.tunaU.taskStopTime" : "タスク中に自殺タイマーを作動"
+
+"options.role.tunaModiU.detail" : "マグロは一定時間止まったら死んでしまうモディファイアです。"
+
+# Game
+
+
+# UI
+
+"role.tunaU.stopTimeText" : "死亡まで"
+"role.tunaU.stopTimeTextSpecial" : "タイマー停止中"
+
+# Stats
+
+"state.tuna.dead" : "調理"
+"end.tunaU" : "マグロ%EXTRA%勝利"
+"document.tip.winCond.tunaU.title" : "特殊勝利"
+"document.tip.winCond.tunaU" : "<b>マグロゲージ</b>がMAXになると勝利します。"
+
+# Titles

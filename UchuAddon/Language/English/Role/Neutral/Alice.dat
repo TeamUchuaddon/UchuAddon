@@ -1,0 +1,51 @@
+# Assignable
+
+"role.aliceU.name" : "Alice"
+"role.aliceU.short" : "Ali"
+"role.aliceU.blurb" : "Trapped in Wonderland"
+"teams.aliceU" : "Alice"
+
+# Document
+
+"role.aliceU.doc" : "A Neutral that wins by being killed."
+"role.aliceU.ability.title" : "Unique Ability "Cheshire's Guide""
+"role.aliceU.ability.main" : "%EXTRA%"
+"role.aliceU.ability.main.extraWin" : "Alice gains an extra win at the end of the game by being killed."
+"role.aliceU.ability.main.normalWin" : "Alice wins instantly upon being killed."
+"role.aliceU.ability.echo" : "<title>Premonition</title>Reveals the killer's location."
+"role.aliceU.ability.kill" : "<title>Kill</title>Kills a player.<br>A certain number of kills are required to win, but the kill button remains usable after meeting the requirement."
+"document.tip.winCond.aliceU.title" : "Special Win"
+"document.tip.winCond.aliceU" : "Win by being killed the set number of times."
+
+# Options
+
+"options.role.aliceU.detail" : "Alice is a Neutral that wins by being killed."
+"options.role.aliceU.numOfWin" : "Kills Required to Win"
+"options.role.aliceU.canFixLight" : "Can Fix Lights"
+"options.role.aliceU.canFixComms" : "Can Fix Comms"
+"options.role.aliceU.extraWin" : "Extra Win"
+"role.aliceU.vent" : "Vent Settings"
+"options.role.aliceU.group.echo" : "Premonition Settings"
+"options.role.aliceU.echoCooldown" : "Premonition Cooldown"
+"options.role.aliceU.echoRange" : "Premonition Range"
+"options.role.aliceU.numOfEcho" : "Premonition Uses"
+"options.role.aliceU.group.winKill" : "Kill Settings"
+"options.role.aliceU.winForKill" : "Kill Required to Win"
+"options.role.aliceU.killCooldown" : "Kill Cooldown"
+"options.role.aliceU.numOfWinKill" : "Required Kill Count"
+"options.role.aliceU.KillVentPlayer" : "Can Kill Players Hiding in Vents"
+"options.role.aliceU.task" : "Task Required to Win"
+
+# Game
+
+
+# UI
+
+"button.label.Premonition" : "Premonition"
+
+# Stats
+
+"end.aliceU" : "Alice%EXTRA% Wins"
+"end.extra.aliceU" : "<color=#FFFFFF>+</color> Alice"
+
+# Titles

@@ -1,0 +1,26 @@
+# Assignable
+
+"role.SummonerU.name" : "Summoner"
+"role.SummonerU.short" : "Smn"
+"role.SummonerU.blurb" : "This Is Our Board"
+
+# Document
+
+"role.SummonerU.doc" : "Summons a contracted player to your location."
+"role.SummonerU.ability.title" : "Unique Ability "Summoning Magic""
+"role.SummonerU.ability.main" : ""
+
+# Options
+
+"options.role.SummonerU.detail" : "Summoner is a Crewmate who contracts with players and can summon them to their location."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

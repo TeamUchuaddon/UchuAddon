@@ -1,0 +1,37 @@
+# Assignable
+
+"role.sonarU.name" : "Sonar"
+"role.sonarU.short" : "Snr"
+"role.sonarU.blurb" : "Set Up the Antenna"
+
+# Document
+
+"role.sonarU.doc" : "Places antennas that detect kills."
+"role.sonarU.ability.title" : "Unique Ability "Antenna""
+"role.sonarU.ability.main" : "Can place antennas.<br>If a kill happens near an antenna, all players are notified by a noise."
+"role.sonarU.ability.place" : "<title>Place</title>Places an antenna. Placed antennas are visible only to you."
+"role.sonarU.ability.antenna" : "<title>Antenna</title>An active antenna. Notifies when a kill occurs nearby."
+"role.sonarU.ability.break" : "<title>Broken Antenna</title>An antenna breaks the first time it detects a kill.<br>Broken antennas can no longer detect kills."
+　
+# Options
+
+"options.role.sonarU.detail" : "Sonar is a Crewmate who can place antennas that detect kills."
+"options.role.sonarU.placeCooldown" : "Place Cooldown"
+"options.role.sonarU.numOfPlace" : "Antenna Placement Uses"
+"options.role.sonarU.sonarRange" : "Kill Detection Range"
+"options.role.sonarU.noiseDuration" : "Notification Duration"
+ 
+# Game
+
+
+# UI
+
+"button.label.sonarU.place" : "Place"
+
+# Stats
+
+"stats.sonarU.place" : "Antennas Placed"
+"stats.sonarU.noise" : "Kills Detected"
+
+# Titles
+

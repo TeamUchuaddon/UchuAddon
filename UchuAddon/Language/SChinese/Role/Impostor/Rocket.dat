@@ -1,0 +1,37 @@
+# Assignable
+
+"role.rocketU.name" : "火箭兵"
+"role.rocketU.short" : "火"
+"role.rocketU.blurb" : "大气层巡航，为您服务"
+
+# Document
+
+"role.rocketU.doc" : "火箭兵是可以抓取其他玩家并发射升空的伪装者。<br>被发射的玩家不会留下尸体，但全体玩家都会听到巨大的声响"
+"role.rocketU.ability.title" : "固有能力『迷失火箭』"
+"role.rocketU.ability.main" : " 火箭兵能将玩家捆绑在火箭上发射出去，以此达成无尸体的击杀效果可同时挟持多名玩家，<br>且挟持状态下也能参与紧急会议。火箭发射时会产生全图可闻的巨大声响，因此击杀时机很容易被他人察觉。"
+"role.rocketU.ability.hold" : "<title>抓</title>挟持其他玩家。从第二名目标开始，挟持的冷却时间会发生变化。"
+"role.rocketU.ability.launch" : "<title>升空</title>发射捆绑的玩家。若挟持了多名玩家，会将所有目标一并发射。"
+"role.rocketU.tips" : "火箭兵在挟持玩家的状态下参与会议，若自身未被放逐则将全部发射"
+
+# Options
+
+"options.role.rocketU.detail" : "火箭兵是可以抓取其他玩家并发射升空的伪装者。<br>被发射的玩家不会留下尸体，但全体玩家都会听到巨大的声响"
+"options.role.rocketU.holdCooldown" : "抓取冷却时间"
+"options.role.rocketU.nextHoldCooldown" : "抓取第二名及后续目标的冷却时间"
+"options.role.rocketU.launchCooldown" : "发射冷却时间"
+"options.role.rocketU.canUseNormalKill" : "可使用正常击杀"
+"options.role.rocketU.canCounter" : "被抓取的玩家可进行反抗"
+
+# Game
+
+
+# UI
+
+"button.label.Hold" : "抓"
+"statistics.Launch" : "升空"
+
+# Stats
+
+"state.rocketLaunch" : "爆裂"
+
+# Titles

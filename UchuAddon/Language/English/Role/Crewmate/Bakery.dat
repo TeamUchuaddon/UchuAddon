@@ -1,0 +1,31 @@
+# Assignable
+
+"role.bakeryU.name" : "Bakery"
+"role.bakeryU.short" : "Bk"
+"role.bakeryU.blurb" : "Delivering Peace Today, Too"
+
+# Document
+
+"role.bakeryU.doc" : "A Crewmate who bakes bread every turn."
+
+# Options
+
+"options.role.bakeryU.detail" : "Bakery is a Crewmate who bakes bread.<br>While this role is alive, a notification at the end of each meeting<br>shows that bread was baked."
+"options.role.bakeryU.passBreadCooldown" : "Hand-Off Cooldown"
+"options.role.bakeryU.breadPerMeeting" : "Bread Gained per Meeting"
+
+# Game
+
+
+# UI
+
+"role.bakeryU.message3" : "<color=#e6b422>Tonight feels like a Bread Festival...!</color>"
+"role.bakeryU.message2" : "<color=#696969>The smell of burnt dough drifts through the air...</color>"
+"role.bakeryU.message1" : "<color=#87ffbb>The smell of baked dough drifts through the air.</color>"
+"button.label.bakeryU.passBread" : "Hand Off"
+
+# Stats
+
+
+# Titles
+

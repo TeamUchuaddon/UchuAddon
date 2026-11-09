@@ -1,0 +1,43 @@
+# Assignable
+
+"role.lighterU.name" : "执灯人"
+"role.lighterU.short" : "执"
+"role.lighterU.blurb" : "为自己点亮通向前方的道路"
+
+# Document
+
+"role.lighterU.doc" : "执灯人可以扩大自身的视野"
+
+# Options
+
+"role.lighterU.doc" : "执灯人可以扩大自身的视野"
+"options.role.lighterU.lightCoolDown" : "手电筒冷却"
+"options.role.lighterU.lightDuration" : "手电筒持续时间"
+"options.role.lighterU.lightRatio" : "视野倍率"
+"options.role.lighterU.blackoutIgnore" :  "无视黑灯"
+
+# Game
+
+
+# UI
+
+"button.label.light" : "灯光"
+
+# Stats
+
+
+# Titles
+
+"achievement.lighterU.common1.title" : "为我照亮"
+"achievement.lighterU.common1.goal" : "一局游戏内使用 5 次灯光"
+"achievement.lighterU.common1.cond" : ""
+
+"achievement.lighterU.another1.title" : "劣质品"
+"achievement.lighterU.another1.goal" : "通过灯光缩小视野"
+"achievement.lighterU.another1.cond" : "此商品概不接受退货。"
+"achievement.lighterU.another1.splitted.2" : "劣质品"
+
+"achievement.lighterU.challenge1.title" : "光芒照亮我们"
+"achievement.lighterU.challenge1.goal" : "开启灯光时，视野内包含 5 名玩家"
+"achievement.lighterU.challenge1.cond" : ""
+"achievement.lighterU.challenge1.splitted.1" : "我们"

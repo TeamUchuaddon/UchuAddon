@@ -1,0 +1,37 @@
+# Assignable
+
+"role.commanderU.name" : "コマンダー"
+"role.commanderU.short" : "コマ"
+"role.commanderU.blurb" : "最高司令官"
+
+# Document
+
+"role.commanderU.doc" : "インポスターへ指令を出します。"
+"role.commanderU.ability.title" : "固有能力 "総司令""
+"role.commanderU.ability.main" : "仲間のインポスターに対して指令を出します。"
+"role.commanderU.ability.command" : "<title>指令</title>インポスター全員のキルクールダウンを<var>%COOL%秒</var>に短縮します。<br>指令終了後は、<var>%LOST%秒間</var>ボタンクールが動かない待機時間が発生します。"
+"role.commanderU.tips" : "マッドメイトにも指令は伝わります。"
+
+# Options
+
+"options.role.commanderU.detail" : "コマンダーは味方のインポスターに指令を出します。"
+"options.role.commanderU.numOfCommand" : "指令使用可能数"
+"options.role.commanderU.commandCooldown" : "指令クールダウン"
+"options.role.commanderU.commandKillCooldown" : "指令時のキルクールダウン"
+"options.role.commanderU.commandDuration" : "指令持続時間"
+"options.role.commanderU.killButtonLostTime" : "指令後の待機時間"
+"options.role.commanderU.killButtonLostTime.detail" : "クールダウンの動かない待機時間の秒数を設定します。"
+
+# Game
+
+"role.commander.CommandText" : "総指令終了まで"
+"role.commander.CommandEndText" : "待機時間終了まで"
+
+# UI
+
+"button.label.commanderU.command" : "指令"
+
+# Stats
+
+
+# Titles

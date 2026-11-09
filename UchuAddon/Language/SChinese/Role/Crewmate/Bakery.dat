@@ -1,0 +1,30 @@
+# Assignable
+
+"role.bakeryU.name" : "面包师"
+"role.bakeryU.short" : "面"
+"role.bakeryU.blurb" : "新鲜出炉的烤面包!"
+
+# Document
+
+"role.bakeryU.doc" : "面包师是制作面包的船员。只要该角色存活，会议结束时就会显示 “面包已制作完成” 的通知 "
+
+# Options
+
+"options.role.bakeryU.detail" : "面包师是制作面包的船员。只要该角色存活，会议结束时就会显示 “面包已制作完成” 的通知 "
+"options.role.bakeryU.passBreadCooldown" : "递出面包冷却时间"
+"options.role.bakeryU.breadPerMeeting" : "每次会议面包增加数量"
+
+# Game
+
+
+# UI
+
+"role.bakeryU.message3" :"<color=#e6b422 > 今晚感觉会有面包庆典呢…！</color>"
+"role.bakeryU.message2" :" <color=#696969> 飘来烤焦面团的味道…</color>"
+"role.bakeryU.message1" :"<color=#87ffbb> 飘来烤熟面团的味道</color>"
+"button.label.bakeryU.passBread" : "递出"
+
+# Stats
+
+
+# Titles

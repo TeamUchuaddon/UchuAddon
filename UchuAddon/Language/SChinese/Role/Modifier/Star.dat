@@ -1,0 +1,23 @@
+# Assignable
+
+"role.StarU.name" : "明星"
+"role.StarU.generalBlurb" : "希望的一等星"
+
+# Document
+
+"role.StarU.doc" : "持续闪耀。"
+
+# Options
+
+"options.role.StarU.detail" : "名字会一直发光。"
+"options.StarU.RainbowStar" : "彩虹星光模式"
+"options.StarU.RainbowStar.detail" : "名字会变为彩虹色闪耀。"
+"options.role.StarU.RainbowStarOption" : "彩虹名字帧率"
+
+# Game
+
+# UI
+
+# Stats
+
+# Titles

@@ -1,0 +1,26 @@
+# Assignable
+
+"role.inflictU.name" : "インフリクト"
+"role.inflictU.short" : "イ"
+"role.inflictU.blurb" : "モデル・アサイン"
+
+# Document
+
+"role.inflictU.doc" : "開発サポート専用"
+
+# Options
+
+"options.role.inflictU.detail" : "開発専用"
+
+# Game
+
+
+# UI
+
+"button.label.InflictSkill" : "他者"
+"button.label.InflictSkill2" : "自身"
+
+# Stats
+
+
+# Titles

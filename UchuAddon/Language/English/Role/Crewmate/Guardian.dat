@@ -1,0 +1,46 @@
+# Assignable
+
+"role.guardianU.name" : "Guardian"
+"role.guardianU.short" : "Gd"
+"role.guardianU.blurb" : "Divine Protection"
+
+# Document
+
+"role.guardianU.doc" : "A Crewmate who deploys kill barriers."
+
+# Options
+
+"options.role.guardianU.detail" : "Guardian is a Crewmate who completes tasks to gain barriers that prevent kills."
+"options.role.guardianU.shieldTask" : "Barrier Deployment Task Ratio"
+"options.role.guardianU.shieldLimit" : "Limit Barrier Uses"
+"options.role.guardianU.numOfShield" : "Maximum Barrier Count"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles
+
+"achievement.guardianU.common1.title" : "Symbol"
+"achievement.guardianU.common1.goal" : "Win without being killed even once."
+"achievement.guardianU.common1.cond" : ""
+
+"achievement.guardianU.another1.title" : "Lack of Faith"
+"achievement.guardianU.another1.goal" : "Get killed before deploying a barrier."
+"achievement.guardianU.another1.cond" : ""
+
+"achievement.guardianU.another2.title" : "Confession"
+"achievement.guardianU.another2.goal" : "Get voted out and die."
+"achievement.guardianU.another2.cond" : ""
+"achievement.guardianU.another2.flavor" : ""God was not watching me" — A Sister's Confession"
+
+"achievement.guardianU.challenge1.title" : "Prayers Reached"
+"achievement.guardianU.challenge1.goal" : "Prevent a kill"
+"achievement.guardianU.challenge1.cond" : ""
+"achievement.guardianU.challenge1.splitted.1" : "Prayers"
+"achievement.guardianU.challenge1.flavor" : "God was watching me"

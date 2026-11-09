@@ -1,0 +1,33 @@
+# Assignable
+
+"role.kuchinashiU.name" : "クチナシ"
+"role.kuchinashiU.short" : "クチ"
+"role.kuchinashiU.blurb" : "沈黙の代償"
+
+# Document
+
+"role.kuchinashiU.doc" : "プレイヤーを喋れなくさせるインポスターです。"
+"role.kuchinashiU.ability.title" : "固有能力 "SHHHHHHH!""
+"role.kuchinashiU.ability.main" : ""
+"role.kuchinashiU.ability.zip" : "<title>ミュート</title>次の会議で発言することができなくなります。<br>チャット自体は見ることが出来ます。"
+"role.kuchinashiU.ability.mark" : "<title>ミュートマーク</title>ミュートされたプレイヤーにはマークが付きます。<br><var>%MARK%</var>"
+"role.kuchinashiU.ability.main.view" : "マークは全プレイヤーが確認できます。"
+"role.kuchinashiU.ability.main.localView" : "マークはミュートされたプレイヤーと、クチナシ自身が確認できます。"
+
+# Options
+
+"options.role.kuchinashiU.detail" : "クチナシは、プレイヤーを黙らせるインポスターです。"
+"options.role.kuchinashiU.zipCooldown" : "ミュートクールダウン"
+"options.role.kuchinashiU.zipDuration" : "ミュート所要時間"
+"options.role.kuchinashiU.numOfZip" : "ミュート使用可能数"
+"options.role.kuchinashiU.zipMarkView" : "ミュートマークの全体公開"
+
+# Game
+
+# UI
+
+"button.label.mute" : "ミュート"
+
+# Stats
+
+# Titles

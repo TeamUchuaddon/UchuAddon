@@ -1,0 +1,27 @@
+# Assignable
+
+"role.cicadaU.name" : "セミ"
+"role.cicadaU.generalBlurb" : "張り付け！"
+
+# Document
+
+"role.cicadaU.doc" : "はしごに張り付けるモディファイアです。"
+"role.cicadaU.ability.title" : "固有能力 "夏の風物詩""
+"role.cicadaU.ability.main" : ""
+"role.cicadaU.ability.cicada" : "<title>張り付き</title>はしごに張り付きます。"
+
+# Options
+
+"options.role.cicadaU.detail" : "はしごに張り付けるモディファイアです。"
+
+# Game
+
+
+# UI
+
+"button.label.cicadaU.Button" : "張り付き"
+
+# Stats
+
+
+# Titles

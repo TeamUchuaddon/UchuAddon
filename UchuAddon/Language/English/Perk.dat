@@ -1,0 +1,12 @@
+# Perk
+
+"perk.masterKeyU.name" : "Master Key"
+"perk.masterKeyU.detail" : "Instantly unlocks a door.<br>This perk has a cooldown of %CD% seconds."
+"perk.masterKeyU.cooldown" : "Cooldown"
+
+"perk.repairU.name" : "Repair"
+"perk.repairU.detail" : "Instantly repairs a sabotage."
+
+"perk.storageBoxU.name" : "Roadblock"
+"perk.storageBoxU.detail" : "Places a solid box for %D% seconds.<br>This perk has a cooldown of %CD% seconds<br>and can only be used once."
+"perk.storageBoxU.duration" : "Box Duration"

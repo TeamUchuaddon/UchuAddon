@@ -1,0 +1,35 @@
+# Assignable
+
+"role.voyagerU.name" : "航行者"
+"role.voyagerU.short" : "航"
+"role.voyagerU.blurb" : "时空旅人"
+
+# Document
+
+"role.voyagerU.doc" : "跨越次元的伪装者。"
+"role.voyagerU.ability.title" : "固有能力【平行潜航】"
+"role.voyagerU.ability.main" : "可以潜伏进次元中。不在一定时间内从中脱离就会死亡。"
+"role.voyagerU.ability.dive" : "<title>潜伏</title>来前往新的次元。<br>潜伏期间其他玩家外观会被打乱，<br>同时获得隐身与移速提升。"
+"role.voyagerU.ability.away" : "<title>脱离</title>来从次元中离开。"
+# Options
+
+"options.role.voyagerU.detail" : "航行者是能够穿梭次元的伪装者。"
+"options.role.voyagerU.diveCooldown" : "潜伏冷却时间"
+"options.role.voyagerU.diveDuration" : "潜伏持续时间"
+"options.role.voyagerU.speedRatio" : "潜伏期间移动速度"
+
+# Game
+
+
+# UI
+
+"button.label.pdiver.dive" : "潜伏"
+"button.label.pdiver.away" : "脱离"
+"role.voyagerU.paradoxTimerText" : "距离时空论"
+
+# Stats
+
+"state.paradox" : "时空悖论"
+
+# Titles
+

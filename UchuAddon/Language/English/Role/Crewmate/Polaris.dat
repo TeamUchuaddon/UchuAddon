@@ -1,0 +1,60 @@
+# Assignable
+
+"role.polarisU.name" : "Polaris"
+"role.polarisU.short" : "Pol"
+"role.polarisU.blurb" : "Guiding Star of the Blue Sky"
+
+# Document
+
+"role.polarisU.doc" : "A Crewmate who can use Kill and Vision."
+"role.polarisU.ability.title" : "Unique Ability "Guiding Blue Star""
+"role.polarisU.ability.main" : "Can use a <b>Kill ability</b> and a <b>Vision ability</b>.<br>%REWIND%"
+"role.polarisU.ability.main.rewind" : "<var>The Vision ability consumes tasks.</var>"
+"role.polarisU.ability.main.norewind" : ""
+"role.polarisU.ability.kill" : "<title>Kill</title>Kills a player."
+"role.polarisU.ability.medium" : "<title>Vision</title>Reveals the role of a dead player. The result is shown at the next meeting and is visible only to you."
+
+# Options
+
+"options.role.polarisU.detail" : "Polaris is a Crewmate who can use a Kill ability and a Vision ability."
+"options.role.polarisU.numofKillOption" : "Kill Uses"
+"options.role.polarisU.killCoolDownOption" : "Kill Cooldown"
+"options.role.polarisU.mediumCooldown" : "Vision Cooldown"
+"options.role.polarisU.mediumDuration" : "Vision Duration"
+"options.role.polarisU.numOfMedium" : "Vision Uses"
+"options.role.polarisU.rewindTask" : "Vision Consumes Tasks"
+"options.role.polarisU.mediumRewindTask" : "Tasks Consumed by Vision"
+
+# Game
+
+
+# UI
+
+"button.label.polarisU.Kill" : "Kill"
+"button.label.polarisU.Medium" : "Vision"
+"options.role.polarisU.message.header" : "Vision Result"
+
+# Stats
+
+
+# Titles
+
+"achievement.polarisU.common1.title" : "Guiding Star of the Blue Sky"
+"achievement.polarisU.common1.goal" : "Kill a non-Crewmate"
+"achievement.polarisU.common1.cond" : ""
+
+"achievement.polarisU.common2.title" : "Illusion"
+"achievement.polarisU.common2.goal" : "Use the Vision ability"
+"achievement.polarisU.common2.cond" : ""
+
+"achievement.polarisU.another1.title" : "Sorrow's Wound"
+"achievement.polarisU.another1.goal" : "Kill a Crewmate"
+"achievement.polarisU.another1.cond" : ""
+
+"achievement.polarisU.hard1.title" : "Hero in Orbit"
+"achievement.polarisU.hard1.goal" : "Get a kill while invisible"
+"achievement.polarisU.hard1.cond" : ""
+
+"achievement.polarisU.challenge1.title" : "Brilliantly Shining Altair"
+"achievement.polarisU.challenge1.goal" : "Kill 2 or more non-Crewmates and use Vision on 2 or more non-Crewmate players, then win the game"
+"achievement.polarisU.challenge1.cond" : "Do not kill any Crewmate-aligned players"

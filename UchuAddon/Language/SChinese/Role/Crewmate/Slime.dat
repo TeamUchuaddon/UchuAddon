@@ -1,0 +1,42 @@
+# Assignable
+
+"role.slimeU.name" : "史莱姆"
+"role.slimeU.short" : "史"
+"role.slimeU.blurb" : "变幻自在"
+
+# Document
+
+"role.slimeU.doc" : "史莱姆能够伸缩自身身体。"
+"role.slimeU.ability.title" : "固有能力『自由伸缩』"
+"role.slimeU.ability.main" : "可以自由放大或缩小自身的体型。"
+"role.slimeU.ability.jumbo" : "<title>巨大化</title>体型大幅巨大化。此时，视野范围也会同步扩大。"
+"role.slimeU.ability.mini" : "<title>缩小</title>体型缩小。此时，视野范围会随之变窄，但移动速度会提升。"
+"role.slimeU.tips" : "・在使用其中一项能力时，另一项能力的冷却时间会重置；且处于能力生效期间，冷却时间不会推进。"
+
+# Options
+
+"options.role.slimeU.detail" : "史莱姆能够伸缩自身身体。"
+"options.role.slimeU.JumboCoolDown" : "巨大化冷却时间"
+"options.role.slimeU.JumboDuration" : "巨大化持续时间"
+"options.role.slimeU.JumboSize" : "巨大化尺寸"
+"options.role.slimeU.JumboVision" : "巨大化时的视野"
+"options.role.slimeU.JumboScreen" : "巨大化时的画面尺寸"
+"options.role.slimeU.MiniCoolDown" : "缩小冷却时间"
+"options.role.slimeU.MiniDuration" : "缩小持续时间"
+"options.role.slimeU.MiniSize" : "缩小尺寸"
+"options.role.slimeU.MiniSpeed" : "缩小后的移动速度"
+"options.role.slimeU.MiniScreen" : "缩小后的画面尺寸"
+"options.group.slimejumbo" : "巨大化设定"
+"options.group.slimemini" : "缩小设定"
+
+# Game
+
+
+# UI
+
+"button.label.jumbo" : "巨大化"
+"button.label.mini" : "缩小"
+# Stats
+
+
+# Titles

@@ -1,0 +1,52 @@
+# Assignable
+
+"role.amnesiaU.name" : "アムネシア"
+"role.amnesiaU.short" : "アム"
+"role.amnesiaU.blurb" : "記憶の抜け殻"
+"teams.amnesiaU" : "アムネシア"
+
+# Document
+
+"role.amnesiaU.doc" : "通報した死体の役職に変化する第三陣営です。"
+
+# Options
+
+"options.role.amnesiaU.detail" : "アムネシアは死体を通報することでその死体の役職になる第三陣営です。<br>勝利条件はなく、通報して自身が何者か思い出さないといけません。"
+"options.role.amnesiaU.amnesiaAction" : "役職変化タイミング"
+"options.role.amnesiaU.amnesiaAction.meetingStart" : "会議開始"
+"options.role.amnesiaU.amnesiaAction.meetingEnd" : "会議終了"
+"options.role.amnesiaU.deadBodyArrow" : "死体に矢印を表示"
+
+# Game
+
+
+# UI
+
+"stats.amnesiaU.report" : "レポート回数"
+
+# Stats
+
+
+# Titles
+
+"achievement.uchuaddon.amnesiaU.common1.title" : "REMEMBER"
+"achievement.uchuaddon.amnesiaU.common1.goal" : "死体を通報し役職を思い出す。"
+"achievement.uchuaddon.amnesiaU.common1.cond" : ""
+
+"achievement.uchuaddon.amnesiaU.another1.title" : "一つの終わり方"
+"achievement.uchuaddon.amnesiaU.another1.goal" : "何物か思い出せないままゲームが終了する。"
+"achievement.uchuaddon.amnesiaU.another1.cond" : ""
+"achievement.uchuaddon.amnesiaU.another1.flavor" : ""これもまたいいのかも。""
+
+"achievement.uchuaddon.amnesiaU.another2.title" : "再来"
+"achievement.uchuaddon.amnesiaU.another2.goal" : "自身がチェインシフターだと思い出す。"
+"achievement.uchuaddon.amnesiaU.another2.cond" : ""
+
+"achievement.uchuaddon.amnesiaU.hard1.title" : "開いたパンドラ"
+"achievement.uchuaddon.amnesiaU.hard1.goal" : "非クルーメイトの死体を通報し、役職を思い出す。"
+"achievement.uchuaddon.amnesiaU.hard1.cond" : ""
+
+"achievement.uchuaddon.amnesiaU.challenge1.title" : "本当の自分"
+"achievement.uchuaddon.amnesiaU.challenge1.goal" : "役職を思い出し、勝利する。"
+"achievement.uchuaddon.amnesiaU.challenge1.cond" : ""
+"achievement.uchuaddon.amnesiaU.challenge1.flavor" : "溢れ出す、勝者の記憶"

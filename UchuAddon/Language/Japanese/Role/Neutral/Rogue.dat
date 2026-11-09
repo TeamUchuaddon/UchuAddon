@@ -1,0 +1,54 @@
+# Assignable
+
+"role.rogueU.name" : "ローグ"
+"role.rogueU.short" : "ロー"
+"role.rogueU.blurb" : "彷徨う、欲望と凶変"
+"teams.rogueU" : "ローグ"
+
+# Document
+
+"role.rogueU.doc" : "能力を奪いとる第三陣営です。"
+"role.rogueU.winCond" : "1回以上能力を奪った上で、敵を殲滅する。<br>または、最後の生存者になる。"
+"role.rogueU.ability.title" : "固有能力 "変異する意思""
+"role.rogueU.ability.main" : ""
+"role.rogueU.ability.kill" : "<title>キル</title>キルを試みます。相手が奪える能力を持っている場合奪います。<br>%VENT%"
+"role.rogueU.ability.kill.vent" : "<var>ベント内のプレイヤーもキルできます。</var>"
+"role.rogueU.ability.clock" : "<title>クールダウン変速</title>奪える能力がない場合、代わりにクールダウン変速能力を獲得します。"
+"role.rogueU.ability.echo" : "<title>探知</title>周囲の奪える能力を持っているプレイヤーを探知します。"
+
+# Options
+
+"options.role.rogueU.detail" : "ローグはキルしたプレイヤーの能力を奪いとります。"
+"options.role.rogueU.killCooldown" : "キルクールダウン"
+"options.role.rogueU.canKillHidingPlayer" : "隠れているプレイヤーをキル可能"
+
+"options.role.rogueU.group.failure" : "失敗時の設定"
+"options.role.rogueU.failureAction" : "強奪失敗時の能力"
+"options.role.rogueU.failureAction.clock" : "クールダウン変速"
+"options.role.rogueU.failureAction.search" : "探知"
+"options.role.rogueU.abilityPreview" : "相手に奪える能力がない場合に得る能力を設定します。"
+"options.role.rogueU.abilityPreview.clock" : "しばらくの間クールダウンのあがる速度を早めます。"
+"options.role.rogueU.abilityPreview.echo" : "周囲の奪える能力を持っているプレイヤーを即座に探知します。"
+
+"options.role.rogueU.clockCooldown" : "変速クールダウン"
+"options.role.rogueU.clockDuration" : "変速効果時間"
+"options.role.rogueU.clockRatio": "クールダウン変速強度"
+
+"options.role.rogueU.echoCooldown" : "探知クールダウン"
+"options.role.rogueU.echoRange" : "探知範囲"
+
+# Game
+
+"document.tip.winCond.rogueU.title" : "殲滅勝利"
+"document.tip.winCond.rogueU" : "能力を一度以上奪ってる状態で、他プレイヤーを殲滅すると勝利します。"
+
+# UI
+
+"button.label.rogueU.clock" : "変速"
+"button.label.rogueU.echo" : "探知"
+
+# Stats
+
+"end.rogueU" : "ローグ%EXTRA%勝利"
+
+# Titles

@@ -1,0 +1,42 @@
+# Assignable
+
+"role.loversbreakerU.name" : "爆ぜ師"
+"role.loversbreakerU.short" : "爆ぜ"
+"role.loversbreakerU.blurb" : "リア充は爆破せよ"
+"teams.loversbreakerU" : "爆ぜ師"
+
+# Document
+
+"role.loversbreakerU.doc" : "ラバーズを爆破する第三陣営です。"
+"role.loversbreakerU.ability.title" : "固有能力 "恋の断罪""
+"role.loversbreakerU.ability.main" : "ラバーズを爆破します。爆破エフェクトが発生し、自身にのみSEが再生されます。"
+"role.loversbreakerU.ability.exp" : "<title>爆破</title>ラバーズを爆破します。"
+"role.loversbreakerU.tips" : "・爆ぜ師はラバーズにアサインされません。"
+
+# Options
+
+"options.role.loversbreakerU.detail" : "爆ぜ師はラバーズを爆破する第三陣営です。"
+"options.role.loversbreakerU.ExpCooldown" : "爆破クールダウン"
+"options.role.loversbreakerU.NumOfExp" : "勝利に必要な爆破回数"
+"options.role.loversbreakerU.NumOfDeathExp" : "自爆までの失敗回数"
+"options.role.loversbreakerU.TakeoverWinOption" : "乗っ取り勝利"
+"options.role.loversbreakerU.TakeoverWinOption.detail" : "オフにした場合、勝利条件を満たした時点で勝利します。"
+"options.role.loversbreakerU.BecomingLoversMeansDeath" : "ラバーズになった瞬間死亡する"
+
+# Game
+
+
+# UI
+
+"button.label.Explosion" : "爆破"
+"role.loversbreakerU.hudText" : "自爆までの失敗数"
+"document.tip.winCond.loversbreakerU.normal.title" : "特殊勝利"
+"document.tip.winCond.loversbreakerU.normal" : "ラバーズを一定回数爆破した時点で単独勝利します。"
+"document.tip.winCond.loversbreakerU.takeover.title" : "乗っ取り勝利"
+"document.tip.winCond.loversbreakerU.takeover" : "一定回数ラバーズを爆破した後生存して生き残ると勝利します。"
+
+# Stats
+
+"end.loversbreakerU" : "爆ぜ師%EXTRA%勝利"
+
+# Titles

@@ -1,0 +1,28 @@
+# Assignable
+
+"role.monitorU.name" : "Monitor"
+"role.monitorU.short" : "Mn"
+"role.monitorU.blurb" : "Electronic Fairy Observing All Things"
+
+# Document
+
+"role.monitorU.doc" : "A Madmate that works with Proxy."
+"role.monitorU.ability.title" : "UniqueAbility "CODE FAIRY""
+"role.monitorU.ability.main" : "Monitor is a Madmate that supports Proxy."
+"role.monitorU.ability.request" : "<title>Application</title>Requests a Role Change from a Proxy."
+"role.monitorU.ability.approval" : "<title>Approval</title>When the requested Proxy presses this button<br>the Role is changed."
+
+# Options
+
+"options.role.monitorU.detail" : "Proxy is a Madmate that works with Monitor."
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

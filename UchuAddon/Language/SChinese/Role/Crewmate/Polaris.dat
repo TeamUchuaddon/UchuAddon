@@ -1,0 +1,61 @@
+# Assignable
+
+"role.polarisU.name" : "北极星"
+"role.polarisU.short" : "北"
+"role.polarisU.blurb" : "苍天的引导星"
+
+# Document
+
+"role.polarisU.doc" : "北极星是可以击杀的船员，并且可以对尸体使用幻视技能。"
+"role.polarisU.ability.title" : "固有能力【青色星星的指引】"
+"role.polarisU.ability.main" : "除了可以击杀外还可以使用幻视技能。<br>%REWIND%"
+"role.polarisU.ability.main.rewind" : "幻视能力需要消耗自身已完成的任务才可以发动。"
+"role.polarisU.ability.norewind" : ""
+"role.polarisU.ability.kill" : "<title>击杀</title>可以击杀玩家。"
+"role.polarisU.ability.medium" : "<title>幻视</title>在会议上得知死者的职业，只有自己可见。"
+
+# Options
+
+"options.role.polarisU.detail" : "北极星是可以击杀的船员，并且可以对尸体使用幻视技能。"
+"options.role.polarisU.numofKillOption" : "可击杀次数"
+"options.role.polarisU.killCoolDownOption" : "击杀冷却时间"
+"options.role.polarisU.killHidingPlayer" : "可击杀管道中的玩家"
+"options.role.polarisU.mediumCooldown" : "幻视冷却"
+"options.role.polarisU.mediumDuration" : "幻视所需时间"
+"options.role.polarisU.numOfMedium" : "幻视可用次数"
+"options.role.polarisU.rewindTask" : "使用幻视会消耗已完成的任务"
+"options.role.polarisU.mediumRewindTask" : "幻视发动所需任务数"
+
+# Game
+
+
+# UI
+
+"button.label.polarisU.Kill" : "击杀"
+"button.label.polarisU.Medium" : "幻视"
+"options.role.polarisU.message.header" : "幻视结果"
+
+# Stats
+
+
+# Titles
+
+"achievement.polarisU.common1.titel" : "蒼天の導星"
+"achievement.polarisU.common1.goal" : "非クルーメイトをキルする"
+"achievement.polarisU.common1.cond" : ""
+
+"achievement.polarisU.common2.titel" : "幻"
+"achievement.polarisU.common2.goal" : "幻視能力を使用する"
+"achievement.polarisU.common2.cond" : ""
+
+"achievement.polarisU.another1.titel" : "哀色の疵"
+"achievement.polarisU.another1.goal" : "クルーメイトをキルする"
+"achievement.polarisU.another1.cond" : ""
+
+"achievement.polarisU.hard1.titel" : "軌道上の英雄"
+"achievement.polarisU.hard1.goal" : "透明化中に、キルをする"
+"achievement.polarisU.hard1.cond" : ""
+
+"achievement.polarisU.challenge1.title" : "炯々と煌めくアルタイル"
+"achievement.polarisU.challenge1.goal" : "2人以上の非クルーメイトをキルし、2人以上の非クルーメイトプレイヤーを幻視し勝利する"
+"achievement.polarisU.challenge1.cond" : "クルーメイト陣営をキルしないこと"

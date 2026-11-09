@@ -1,0 +1,24 @@
+# Assignable
+
+"role.guestU.name" : "ゲスト"
+"role.guestU.generalBlurb" : "数万光年を超えて、いまここに"
+
+# Document
+
+"role.guestU.doc" : "緊急ボタンを押せません"
+
+# Options
+
+"options.role.guestU.detail" : "ゲストは緊急ボタンを押せません"
+
+# Game
+
+
+# UI
+
+"role.guestU.denyReason" : "緊急ボタンはロックされている"
+
+# Stats
+
+
+# Titles

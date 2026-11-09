@@ -1,0 +1,24 @@
+# Assignable
+
+"role.forensicsU.name" : "フォレンジック"
+"role.forensicsU.generalBlurb" : "その死こそが、最後の刻み。"
+
+# Document
+
+"role.forensicsU.doc" : "追放されたプレイヤーがインポスターかそうでないかがわかります。"
+
+# Options
+
+"options.role.forensicsU.detail" : "追放されたプレイヤーがインポスターかわかるモディファイアです。"
+
+# Game
+"role.forensicsU.textImpostor" : "%PLAYER%はインポスターだった。"
+"role.forensicsU.textNotImpostor" : "%PLAYER%はインポスターではなかった。"
+
+# UI
+
+
+# Stats
+
+
+# Titles

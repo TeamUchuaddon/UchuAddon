@@ -1,0 +1,25 @@
+# Assignable
+
+"role.niceObserverU.name" : "正义的监控员"
+"role.niceObserverU.short" : "正监"
+"role.niceObserverU.blurb" : "放置摄像头"
+
+# Document
+
+"role.niceObserverU.doc" : "正义的监控员是能够设置定点摄像头的船员。会议后摄像头生效，可在任意时机监视摄像头附近区域。"
+
+# Options
+
+"options.role.niceObserverU.detail" : "正义的监控员是能够设置定点摄像头的船员。会议后摄像头生效，可在任意时机监视摄像头附近区域。"
+"options.role.obaserverU.maxCameraCount" : "摄像头最大数量"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

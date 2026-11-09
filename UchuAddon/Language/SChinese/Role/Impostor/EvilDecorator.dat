@@ -1,0 +1,33 @@
+# Assignable
+
+"role.evildecoratorU.name" : "邪恶的塑型师"
+"role.evildecoratorU.short" : "邪塑"
+"role.evildecoratorU.blurb" : "终焉塑型"
+
+# Document
+
+"role.evildecoratorU.doc" : "邪恶的塑型师可以更改其他玩家的职业。"
+"role.evildecoratorU.ability.title" : "固有能力 【专业塑造】"
+"role.evildecoratorU.ability.main" : "邪恶的塑型师可以更改其他玩家的职业。<br>若对第三方阵营或混沌中立阵营玩家使用塑型技能，会浪费一次技能使用次数。<br>开启筛选功能后，仅能转换为选定职业，船员不会被转换为内鬼。"
+"role.evildecoratorU.ability.decoration" : "<title>塑型</title>更改目标玩家的职业。"
+"role.evildecoratorU.tips" : 如果不设置过滤，则无法分配此职业"
+
+# Options
+
+"options.role.evildecoratorU.detail" : "邪恶的塑型师可以更改其他玩家的职业。"
+"options.role.evildecoratorU.maxdecorationCount" : "塑型技能使用次数"
+"options.role.evildecoratorU.decorationCoolDown" : "塑型技能冷却时间"
+"options.role.evildecoratorU.ImpostorgiveFilter" : "内鬼可转换职业筛选器"
+"options.role.evildecoratorU.CrewmategiveFilter" : "船员可转换职业筛选器"
+
+# Game
+
+
+# UI
+
+"button.label.decoration" : "塑型"
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,30 @@
+# Assignable
+
+"role.operatorU.name" : "オペレーター"
+"role.operatorU.short" : "オペ"
+"role.operatorU.blurb" : "逆行する砂時計"
+
+# Document
+
+"role.operatorU.doc" : "会議時間を増やすクルーメイトです。"
+
+# Options
+
+"options.role.operatorU.detail" : "オペレーターは会議時間増加の申請を出し、会議時間を増加させるクルーメイトです。"
+"options.role.operatorU.numOfOperate" : "オペレート使用可能数"
+"options.role.operatorU.operateAddTime" : "増加会議時間"
+"options.role.operatorU.skipBan" : "オペレート時スキップ不可"
+
+# Game
+
+
+# UI
+
+"button.label.operatorU.operate" : "オペレート"
+"role.operatorU.hudText" : "残りオペレート回数"
+
+# Stats
+
+"stats.operatorU.operate" : "オペレート回数"
+
+# Titles

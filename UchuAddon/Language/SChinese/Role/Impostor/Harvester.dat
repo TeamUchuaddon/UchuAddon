@@ -1,0 +1,30 @@
+# Assignable
+
+"role.harvesterU.name" : "收割者"
+"role.harvesterU.short" : "收"
+"role.harvesterU.blurb" : "变成星星再会吧"
+
+# Document
+
+"role.harvesterU.doc" : "收割者是可以在会议中查看死者职业的伪装者。"
+
+# Options
+
+"options.role.harvesterU.detail" : "收割者是可以在会议中查看死者职业的伪装者。"
+"options.role.harvesterU.numOfHarvest" : "使用回收最大数"
+"options.role.harvesterU.numOfHarvestPerMeeting" : "每轮会议的回收数"
+"options.role.harvesterU.harvestAddKill" : "击杀增加回收数"
+"options.role.harvesterU.numOfAddHarvest" : "增加回收数"
+
+# Game
+
+
+# UI
+
+"options.role.harvesterU.message.header" : "回收结果"
+"harvesterU.Text" : "剩余回收数"
+
+# Stats
+
+
+# Titles

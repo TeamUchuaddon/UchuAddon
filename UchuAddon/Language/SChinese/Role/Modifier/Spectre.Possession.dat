@@ -1,0 +1,31 @@
+# Assignable
+
+"role.spectrePossessionU.name" : "狐灵"
+"role.spectrePossessionU.generalBlurb" : "美丽的诅咒"
+"role.spectrePossessionU.blurb" : "<color=#b998c5>然后，为他献上供奉</color>"
+
+# Document
+
+"role.spectrePossessionU.doc" : "这是一个只有伪装者和船员才会获得的附加能力。<br>持有这个附加的玩家会变成狐妖阵营。"
+
+# Options
+
+"options.role.spectrePossessionU.detail" : "这是一个只有伪装者和船员才会获得的附加能力。<br>持有这个附加的玩家会变成狐妖阵营。"
+"options.role.spectrePossessionU.group.fanaticism" : "狂信者设定"
+"options.role.spectrePossessionU.fanaticism" : "狂信者能力"
+"options.role.spectrePossessionU.fanaticismLimit" : "狂信者设置"
+"options.role.spectrePossessionU.numOfTaskFanaticism" : "狂信所需任务数"
+"options.role.spectrePossessionU.numOfTaskFanaticism.detail" : "船员持有这个附加时<br>完成一定的任务后才能得知狐妖。"
+"options.role.spectrePossessionU.numOfKillFanaticism" : "狂信所需击杀数"
+"options.role.spectrePossessionU.numOfKillFanaticism.detail" : "伪装者持有这个附加时<br>击杀一定人数后才能得知狐妖。"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

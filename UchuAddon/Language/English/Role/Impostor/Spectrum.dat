@@ -1,0 +1,30 @@
+# Assignable
+
+"role.spectrumU.name" : "Spectrum"
+"role.spectrumU.short" : "Spc"
+"role.spectrumU.blurb" : "Illegal Mod"
+
+# Document
+
+"role.spectrumU.doc" : "Can use some Crewmate abilities."
+
+# Options
+
+"options.role.spectrumU.detail" : "Spectrum is an Impostor who can use some Crewmate role abilities."
+"options.role.spectrumU.killCooldown" : "Kill Cooldown"
+
+# Game
+
+"options.role.count.custom" : "Impostor Slots Assigned"
+"options.role.chance.custom" : "Impostor Assignment Chance"
+"help.rolePreview.inner.custom.100" : "Impostor — Always Appears"
+"help.rolePreview.inner.custom.random" : "Impostor — Random Appearance"
+
+# UI
+
+"role.spectrumU.prefix" : ""
+
+# Stats
+
+
+# Titles

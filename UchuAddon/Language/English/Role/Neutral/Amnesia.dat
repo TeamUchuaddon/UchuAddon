@@ -1,0 +1,30 @@
+# Assignable
+
+"role.amnesiaU.name" : "Amnesia"
+"role.amnesiaU.short" : "Amn"
+"role.amnesiaU.blurb" : "A shell of lost memories"
+"teams.amnesiaU" : "Amnesia"
+
+# Document
+
+"role.amnesiaU.doc" : "A Neutral that transforms into the role of the body they report."
+
+# Options
+
+"options.role.amnesiaU.detail" : "Amnesia is a Neutral that becomes the role of a dead body by reporting it.<br>There is no win condition — you must report a body to remember who you are."
+"options.role.amnesiaU.amnesiaAction" : "Role Change Timing"
+"options.role.amnesiaU.amnesiaAction.meetingStart" : "Meeting Start"
+"options.role.amnesiaU.amnesiaAction.meetingEnd" : "Meeting End"
+"options.role.amnesiaU.deadBodyArrow" : "Show Arrow to Dead Bodies"
+
+# Game
+
+
+# UI
+
+"stats.amnesiaU.report" : "Report Count"
+
+# Stats
+
+
+# Titles

@@ -1,0 +1,26 @@
+# Assignable
+
+"role.nekokabochaU.name" : "Nekokabocha"
+"role.nekokabochaU.short" : "Nko"
+"role.nekokabochaU.blurb" : "Tail of the Underworld That Grasps Life"
+
+# Document
+
+"role.nekokabochaU.doc" : "An Impostor who drags a player down with them."
+"role.nekokabochaU.tips" : "- Impostors cannot be dragged down by the vote-out trigger."
+
+# Options
+
+"options.role.nekokabochaU.detail" : "An Impostor who drags a player down on death or vote-out."
+"options.role.nekokabochaU.exileembroil" : "Trigger on Vote-Out"
+
+# Game
+
+
+# UI
+
+
+# Stats
+
+
+# Titles

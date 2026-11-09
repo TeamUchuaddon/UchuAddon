@@ -1,0 +1,28 @@
+# Assignable
+
+"role.waraningyouU.name" : "稻草人"
+"role.waraningyouU.short" : "稻"
+"role.waraningyouU.blurb" : "诅咒他人者，自身也将陷入同样困境"
+
+# Document
+
+"role.waraningyouU.doc" : " 稻草人是能够储存投向自身的票数，并通过诅咒按钮使用储存票数的船员。自己投的票无法储存 "
+
+# Options
+
+"options.role.waraningyouU.detail" : " 稻草人是能够储存投向自身的票数，并通过诅咒按钮使用储存票数的船员。自己投的票无法储存 "
+"options.role.waraningyouU.allowSkip" : "使用诅咒时允许跳过投票"
+"options.role.waraningyouU.defaultVote" : "票数初始值"
+
+# Game
+
+
+# UI
+
+"button.label.curse" : "诅咒"
+"role.waraningyouU.hudText" : "当前票数"
+
+# Stats
+
+
+# Titles

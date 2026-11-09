@@ -1,0 +1,29 @@
+# Assignable
+
+"role.djU.name" : "DJ"
+"role.djU.short" : "DJ"
+"role.djU.blurb" : "沸け！虹色フェスティバル"
+
+# Document
+
+"role.djU.doc" : "フロアを沸かせるクルーメイトです。"
+
+# Options
+
+"options.role.djU.detail" : "DJは周囲のプレイヤーの視界を光らせるクルーメイトです。"
+"options.role.djU.djSkillCooldown" : "スクラッチクールダウン"
+"options.role.djU.numOfFlash" : "フラッシュ回数"
+"options.role.djU.numOfFlash.detail" : "スキル使用時のフラッシュ回数を設定します。"
+"options.role.djU.djSkillRange" : "スクラッチ範囲"
+
+# Game
+
+
+# UI
+
+"button.label.scratch" : "スクラッチ"
+
+# Stats
+
+
+# Titles

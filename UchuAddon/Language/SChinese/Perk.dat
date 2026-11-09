@@ -1,0 +1,11 @@
+# Perk
+"perk.masterKeyU.name" : "万能钥匙"
+"perk.masterKeyU.detail" : "立即打开门锁。<br>该特技有%CD%秒冷却时间。"
+"perk.masterKeyU.cooldown" : "冷却时间"
+
+"perk.repairU.name" : "修理"
+"perk.repairU.detail" : "使用后立即修复破坏。"
+
+"perk.storageBoxU.name" : "禁止通行"
+"perk.storageBoxU.detail" : "在%D%秒内，放置一个箱子。<br>这个特技有%CD%秒的冷却<br>一回合只能使用一次。"
+"perk.storageBoxU.duration" : "箱子持续时间"

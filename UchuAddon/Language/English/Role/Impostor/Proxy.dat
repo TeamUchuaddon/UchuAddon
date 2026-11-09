@@ -1,0 +1,30 @@
+# Assignable
+
+"role.proxyU.name" : "Proxy"
+"role.proxyU.short" : "Pxy"
+"role.proxyU.blurb" : "A Node That Crosses Boundaries"
+
+# Document
+
+"role.proxyU.doc" : "An Impostor who works in tandem with the Monitor."
+"role.proxyU.ability.title" : "Unique Ability "Cycle the Cyber Link""
+"role.proxyU.ability.main" : "Proxy is a counterpart to the Monitor. Coordinate well."
+"role.proxyU.ability.request" : "<title>Request</title>Swap roles with the Monitor."
+
+# Options
+
+"options.role.proxyU.detail" : "Proxy is an Impostor who coordinates with the Monitor."
+"options.role.proxyU.requestCooldown" : "Request Cooldown"
+
+# Game
+
+
+# UI
+
+"button.label.Request" : "Request"
+"button.label.approval" : "Approve"
+
+# Stats
+
+
+# Titles

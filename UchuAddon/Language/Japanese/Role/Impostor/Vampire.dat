@@ -1,0 +1,28 @@
+# Assignable
+
+"role.vampireU.name" : "ヴァンパイア"
+"role.vampireU.short" : "ヴァ"
+"role.vampireU.blurb" : "明けない夜と、癒えない渇き。"
+
+# Document
+
+"role.vampireU.doc" : "遅延してキルをすることができるインポスターです。"
+
+# Options
+"options.role.vampireU.detail" : "ヴァンパイアはプレイヤーに対し遅延キルをすることができます。<br>ニンニクの近くにいるとボタンを押すことができません。"
+"options.role.VampireU.BiteCooldown" : "噛みつくクールタイム"
+"options.role.VampireU.KillDelay" : "キルが起こるまでの秒数"
+"options.role.VampireU.numOfGarlic" : "ニンニク設置個数"
+"options.role.VampireU.GarlicCoolDown" : "ニンニククールタイム"
+"options.role.VampireU.mineSize" : "ニンニク有効範囲"
+
+# Game
+
+# UI
+
+"button.label.bite" : "噛みつく"
+"button.label.vampireU.garlic" : "ニンニク"
+
+# Stats
+
+# Titles
