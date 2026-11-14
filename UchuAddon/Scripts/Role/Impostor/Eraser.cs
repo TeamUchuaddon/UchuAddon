@@ -24,7 +24,7 @@ namespace Hori.Scripts.Role.Impostor;
 
 public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCitation, DefinedRole,IAssignableDocument
 {
-    public EraserU() : base("EraserU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [EraseCooldown, NumOfErase])
+    public EraserU() : base("EraserU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [EraseCooldown, NumOfErase, NeutralAction])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Eraser.png")!.AsImage(115f);
         ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
@@ -36,6 +36,7 @@ public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCit
 
     static private FloatConfiguration EraseCooldown = NebulaAPI.Configurations.Configuration("options.role.EraserU.EraseCooldown", (0f, 60f, 2.5f), 30f, FloatConfigurationDecorator.Second);
     static public readonly IntegerConfiguration NumOfErase = NebulaAPI.Configurations.Configuration("options.role.EraserU.numofErase", (1, 15), 3);
+    static private ValueConfiguration<int> NeutralAction = NebulaAPI.Configurations.Configuration("options.role.EraserU.NeutralAction", ["options.role.EraserU.Opportunist", "options.role.EraserU.Seed", "options.role.EraserU.Crewmate"], 0);
     static public EraserU MyRole = new EraserU();
     public override EraserU.Ability CreateAbility(GamePlayer player, int[] arguments)
     {
@@ -68,7 +69,7 @@ public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCit
                 var playerTracker = NebulaAPI.Modules.PlayerTracker(this, MyPlayer);
 
                 var EraseButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
-                    EraseCooldown, "Erase", EraseImage, _ => playerTracker.CurrentTarget != null && playerTracker.CurrentTarget.RealPlayer.Role.Role.Team != NebulaTeams.ImpostorTeam).SetAsUsurpableButton(this);
+                    EraseCooldown, "Erase", EraseImage, _ => playerTracker.CurrentTarget != null && playerTracker.CurrentTarget.CanKill(MyPlayer)).SetAsUsurpableButton(this);
                 EraseButton.Visibility = (button) => !MyPlayer.IsDead && leftErase > 0;
                 EraseButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Impostor);
                 EraseButton.OnClick = (button) =>
@@ -95,9 +96,21 @@ public class EraserU : DefinedSingleAbilityRoleTemplate<EraserU.Ability>, HasCit
                     {
                         target.RealPlayer.SetRole(Nebula.Roles.Crewmate.Crewmate.MyRole);
                     }
-                    else
+                    else if (target.IsImpostor)
+                    {
+                        target.RealPlayer.SetRole(Nebula.Roles.Impostor.Impostor.MyRole);
+                    }
+                    else if (NeutralAction.GetValue() == 0)
+                    {
+                        target.RealPlayer.SetRole(Nebula.Roles.Neutral.Opportunist.MyRole);
+                    }
+                    else if (NeutralAction.GetValue() == 1)
                     {
                         target.RealPlayer.SetRole(Hori.Scripts.Role.Neutral.SeedU.MyRole);
+                    }
+                    else if (NeutralAction.GetValue() == 2)
+                    {
+                        target.RealPlayer.SetRole(Nebula.Roles.Crewmate.Crewmate.MyRole);
                     }
                 }
                 EraseTargets.Clear();

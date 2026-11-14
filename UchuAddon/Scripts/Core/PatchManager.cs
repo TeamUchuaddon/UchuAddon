@@ -229,7 +229,7 @@ public static class AddonScreen
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentTitle, "Credit"),
             NebulaAPI.GUI.VerticalMargin(0.15f),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Code</b>\n</size>"),
-            NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ごま。(goma_), あらいもん(araimon), アンハッピーセット(unhappyset), たこ焼き(takoyaki), いおむ(iom)\n</size>\n"),
+            NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ごま。(goma_), あらいもん(araimon), アンハッピーセット(unhappyset), たこ焼き(takoyaki), ラムネ(ramune)\n</size>\n"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Illustration</b>\n</size>"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%>ねこかぼちゃ(nekokabocha), マカロン(macaron), シート(Sheat), りょい(ryoi) \n　　　　こむぎこ(komugipan), たくえもん(takuemon), ExNEO.(ex_neo.)\n</size>\n"),
             NebulaAPI.GUI.RawText(GUIAlignment.Center, AttributeAsset.DocumentStandard, "<size=110%><b>Language</b>\n</size>"),
@@ -380,28 +380,6 @@ public class MeetingEvent : Virial.Events.Event
 {
     internal MeetingEvent()
     {
-    }
-}
-
-public static class AnonymousVoteBypass
-{
-    public static void AnonymousVotesFix(ref bool __result)
-    {
-        if (__result && NebulaAPI.CurrentGame != null && GamePlayer.LocalPlayer != null)
-        {
-            if ((GamePlayer.LocalPlayer.Role.Role == Hori.Scripts.Role.Crewmate.AdmiralU.MyRole && AdmiralU.VoteWatching)　|| GamePlayer.LocalPlayer.TryGetModifier<WatcherU.Instance>(out _) || (GamePlayer.LocalPlayer.Role.Role == MoiraU.MyRole && MoiraU.CanSeeVoteOption))
-            {
-                __result = false; 
-            }
-        }
-    }
-
-    public static void Patch(Harmony harmony)
-    {
-        harmony.Patch(
-            original: typeof(LogicOptionsNormal).GetMethod("GetAnonymousVotes"),
-            postfix: new HarmonyMethod(typeof(AnonymousVoteBypass).GetMethod(nameof(AnonymousVotesFix)))
-        );
     }
 }
 

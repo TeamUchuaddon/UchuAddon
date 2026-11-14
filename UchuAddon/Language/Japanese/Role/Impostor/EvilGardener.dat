@@ -9,7 +9,7 @@
 "role.evilGardenerU.doc" : "人外専用パークを植えるインポスターです。"
 "role.evilGardenerU.ability.title" : "固有能力 "サプライズガーデン""
 "role.evilGardenerU.ability.main" : ""
-"role.evilGardenerU.tips" : "パークオプションで出現するパークを設定できます。<br>ゲーム内にパークが出現しない設定でも、設定していたパークが開花します。"
+"role.evilGardenerU.tips" : "<b>パークオプションで出現するパークや出現確率を設定することが出来ます。</b><br>ゲーム内にパークが出現しない設定でも、設定していたパークが開花します。"
 
 # Options
 
