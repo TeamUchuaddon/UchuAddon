@@ -1,28 +1,24 @@
-﻿using Hori.Core;
+﻿using Hori.Scripts.Core;
+using Nebula.Roles.Crewmate;
+using Nebula;
 using Nebula.Behavior;
+using Nebula.Configuration;
 using Nebula.Game;
 using Nebula.Game.Statistics;
 using Nebula.Modules;
 using Nebula.Modules.ScriptComponents;
 using Nebula.Player;
 using Nebula.Roles;
-using Nebula.Roles.Complex;
 using Nebula.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TMPro;
-using Virial.Attributes;
-using Virial.Events.Player;
-using Color = Virial.Color;
+using Virial.Achievements;
+using Virial.Runtime;
+using compat = Hori.Core.UchuTranslatable;
 using Image = Virial.Media.Image;
-using Vector2 = Virial.Compat.Vector2;
-using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Crewmate;
 
+[NebulaPreprocess(PreprocessPhase.Roles)]
 public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, DefinedRole, IAssignableDocument
 {
     public AlchemistU() : base("alchemistU", new(42, 44, 80), RoleCategory.CrewmateRole, NebulaTeams.CrewmateTeam, [AlchemyUCooldown, alchemycount, NumOfPerMeeting])
@@ -56,11 +52,74 @@ public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, 
     }
 
     static public AlchemistU MyRole = new();
-    static private readonly GameStatsEntry StatsSample = NebulaAPI.CreateStatsEntry("stats.alchemistU.alchemy", GameStatsCategory.Roles, MyRole);
+    static private readonly GameStatsEntry StatsAlchemy = NebulaAPI.CreateStatsEntry("stats.alchemistU.alchemy", GameStatsCategory.Roles, MyRole);
+    static private void Preprocess(NebulaPreprocessor preprocessor)
+    {
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.common1")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.common2")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.another1")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Silver,
+            IsSecret = true,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.hard1")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Gold,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.hard2")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Gold,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.hard3")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Gold,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.hard4")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 20,
+            Rank = TrophyLevel.Gold,
+            RelatedRecord = "uchuaddon.alchemistU.hard4"
+        });
+        preprocessor.Titles.Register(new RecordBuilder("uchuaddon", "alchemistU.hard4")
+        {
+            Goal = 20,
+        });
+        preprocessor.Titles.Register(new TitleBuilder("uchuaddon", "alchemistU.challenge1")
+        {
+            RelatedRole = AlchemistU.MyRole,
+            Goal = 1,
+            Rank = TrophyLevel.Rainbow,
+        });
+    }
+
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
         int leftAlchemy = 0;
-
+        bool MissShot = false;
+        int CorrectShot = 0;
+        bool CrewmateSuicide = false;
+        bool Hard1 = false;
+        bool Hard2 = false;
+        private List<GamePlayer>? AlchemyKillers = new List<GamePlayer>();
 
         int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
@@ -72,25 +131,38 @@ public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, 
                 var AlchemyButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability,
                     AlchemyUCooldown, "Alchemy", AlchemySprite,
                     _ => AlchemyTracker.CurrentTarget != null).SetAsUsurpableButton(this);
-                AlchemyButton.OnClick = (button) => {
+                AlchemyButton.OnClick = (button) =>
+                {
+                    var body = AlchemyTracker.CurrentTarget;
+                    if (body == null) return;
+                    var deadPlayer = body.Player;
+                    var killer = deadPlayer.MyKiller;
+
                     NebulaGameManager.Instance?.RpcDoGameAction(MyPlayer, MyPlayer.Position, GameActionTypes.CleanCorpseAction);
-                    AmongUsUtil.RpcCleanDeadBody(AlchemyTracker.CurrentTarget!, MyPlayer.PlayerId, EventDetail.Clean);
+                    AmongUsUtil.RpcCleanDeadBody(body, MyPlayer.PlayerId, EventDetail.Clean);
                     leftAlchemy += alchemycount;
                     AlchemyButton.UpdateUsesIcon(leftAlchemy.ToString());
+                    StatsAlchemy.Progress();
+
+                    if (killer != null) AlchemyKillers!.Add(killer);
+                    var state = deadPlayer.PlayerState;
+                    if (deadPlayer.IsTrueCrewmate && (state == PlayerState.Suicide ||state == PlayerState.Pseudocide ||state == PlayerState.Punished ||state == PlayerState.Misfired ||state == PlayerState.Layoff ||state == PlayerState.SelfSacrifice ||state == compat.ChickenMessDead ||state == compat.ChickenDoorDead ||state == compat.ChickenDropDead ||state == compat.ChickenFallDead ||state == compat.ChickenVentDead))
+                    {
+                        CrewmateSuicide = true;
+                    }
+                    AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.hard4");
                     AlchemyButton.StartCoolDown();
                 };
                 AlchemyButton.ShowUsesIcon(3, leftAlchemy.ToString());
-                if (base.AmOwner)
-                {
-                    string prefix = Language.Translate("alchemistU.leftalchemy");
-                    Helpers.TextHudContent("alchemistUleftText", this, delegate (TextMeshPro tmPro)
-                    {
-                        tmPro.text = prefix + ": " + leftAlchemy.ToString();
-                    }, true);
-                }
 
+                string prefix = Language.Translate("alchemistU.leftalchemy");
+                Helpers.TextHudContent("alchemistUleftText", this, delegate (TextMeshPro tmPro)
+                {
+                    tmPro.text = prefix + ": " + leftAlchemy.ToString();
+                }, true);
             }
         }
+
         [Local]
         void OnMeetingStart(MeetingStartEvent ev)
         {
@@ -99,13 +171,67 @@ public class AlchemistU : DefinedSingleAbilityRoleTemplate<AlchemistU.Ability>, 
             buttonManager?.RegisterMeetingAction(new(BulletSprite,
                 p =>
                 {
+                    bool targetIsTrueCrewmate = p.MyPlayer.IsTrueCrewmate;
+                    bool targetIsTrueUnCrewmate = !p.MyPlayer.IsTrueCrewmate;
+                    bool targetIsKiller = p.MyPlayer.IsKiller;
+                    bool DeadBodyKiller = AlchemyKillers!.Any(k => k.PlayerId == p.MyPlayer.PlayerId);
+                    int deadBefore = NebulaAPI.CurrentGame!.GetAllPlayers().Count(x => x.IsDead);
+
                     NebulaAPI.CurrentGame?.LocalPlayer.MurderPlayer(p.MyPlayer, PlayerState.Dead, EventDetail.Kill, KillParameter.MeetingKill, KillCondition.BothAlive);
                     leftAlchemy--;
                     leftShotsPerMeeting--;
+                    AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.common1");
+
+                    if (targetIsTrueCrewmate)
+                    {
+                        AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.another1");
+                        MissShot = true;
+                    }
+                    if (targetIsTrueUnCrewmate && CrewmateSuicide)
+                    {
+                        Hard2 = true;
+                    }
+                    if (targetIsKiller)
+                    {
+                        AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.common2");
+                        CorrectShot++;
+                        if (deadBefore == 1)
+                        {
+                            Hard1 = true;
+                        }
+                    }
+                    if (DeadBodyKiller)
+                    {
+                        AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.hard3");
+                    }
                 },
                 p => !p.MyPlayer.IsDead && !p.MyPlayer.AmOwner && leftAlchemy > 0 && leftShotsPerMeeting > 0 && !PlayerControl.LocalPlayer.Data.IsDead && GameOperatorManager.Instance!.Run(new PlayerCanGuessPlayerLocalEvent(NebulaAPI.CurrentGame!.LocalPlayer, p.MyPlayer, true)).CanGuess
             ));
         }
 
+        void OnMeetingEnd(MeetingEndEvent ev)
+        {
+            Hard1 = false;
+            Hard2 = false;
+        }
+
+        [Local]
+        void OnGameEnd(GameEndEvent ev)
+        {
+            bool iWon = ev.EndState.Winners.Test(MyPlayer);
+
+            if (Hard1 && iWon)
+            {
+                AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.hard1");
+            }
+            if (Hard2 && iWon)
+            {
+                AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.hard2");
+            }
+            if (CorrectShot >= 3 && !MissShot && iWon)
+            {
+                AchievementUnLock.TitleUnLock("uchuaddon.alchemistU.challenge1");
+            }
+        }
     }
 }

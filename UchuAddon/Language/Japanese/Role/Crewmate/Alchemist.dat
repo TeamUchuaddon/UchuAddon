@@ -31,3 +31,40 @@
 
 
 # Titles
+"achievement.uchuaddon.alchemistU.common1.title" : "等価交換"
+"achievement.uchuaddon.alchemistU.common1.goal" : "死体を錬金する。"
+"achievement.uchuaddon.alchemistU.common1.cond" : ""
+
+"achievement.uchuaddon.alchemistU.common2.title" : "魂を背負う者"
+"achievement.uchuaddon.alchemistU.common2.goal" : "キル能力を持った非クルーメイトを錬金弾を使用し殺害する。"
+"achievement.uchuaddon.alchemistU.common2.cond" : ""
+
+"achievement.uchuaddon.alchemistU.another1.title" : "みならいアルケミー"
+"achievement.uchuaddon.alchemistU.another1.goal" : "錬金弾でクルーメイトを殺害する。"
+"achievement.uchuaddon.alchemistU.another1.flavor" : ""てへっ"－とある見習い錬金術師のくちぐせ""
+"achievement.uchuaddon.alchemistU.another1.cond" : ""
+
+"achievement.uchuaddon.alchemistU.hard1.title" : "錬金術RTA走者"
+"achievement.uchuaddon.alchemistU.hard1.goal" : "最初の犠牲者が出た会議でゲームを終わらせる。"
+"achievement.uchuaddon.alchemistU.hard1.flavor" : ""多分これが一番早いと思います""
+"achievement.uchuaddon.alchemistU.hard1.cond" : "犠牲者の人数は1人であり、自らの手で1人以上のキル能力持ち<br>非クルーメイトを錬金弾を使用して殺害し、自身が勝利すること。"
+
+"achievement.uchuaddon.alchemistU.hard2.title" : "理不尽カルマ"
+"achievement.uchuaddon.alchemistU.hard2.goal" : "自爆した死体を錬金し非クルーメイトを殺害し、ゲームを終了させる。"
+"achievement.uchuaddon.alchemistU.hard2.flavor" : ""なんで？""
+"achievement.uchuaddon.alchemistU.hard2.cond" : "自爆したプレイヤーはクルーメイト陣営であること。"
+
+"achievement.uchuaddon.alchemistU.hard3.title" : "鏡合わせのネメシス"
+"achievement.uchuaddon.alchemistU.hard3.goal" : "錬金した死体のキラーを錬金弾を使用し殺害する。"
+"achievement.uchuaddon.alchemistU.hard3.flavor" : ""お前の奪った命の重さだ。""
+"achievement.uchuaddon.alchemistU.hard3.cond" : ""
+
+"achievement.uchuaddon.alchemistU.hard4.title" : "輝きし賢者の石"
+"achievement.uchuaddon.alchemistU.hard4.goal" : "通算で20回錬金を行う。"
+"achievement.uchuaddon.alchemistU.hard4.flavor" : ""それは、全錬金術師の憧れの代物であった。""
+"achievement.uchuaddon.alchemistU.hard4.cond" : ""
+
+"achievement.uchuaddon.alchemistU.challenge1.title" : "黄金の極致"
+"achievement.uchuaddon.alchemistU.challenge1.goal" : "クルーメイトを殺害することなくキル能力を持った非クルーメイトを3回錬金弾で殺害し、勝利する。"
+"achievement.uchuaddon.alchemistU.challenge1.flavor" : "その運命は黄金に輝いている、誰にも邪魔されることなく...そして、この先も永久にそうであり続ける。"
+"achievement.uchuaddon.alchemistU.challenge1.cond" : ""
