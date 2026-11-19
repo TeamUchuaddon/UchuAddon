@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ using Virial.Game;
 using Virial.Media;
 using Virial.Runtime;
 using Virial.Text;
+using static Hori.Scripts.Role.Impostor.BoxerU;
 using static Hori.Scripts.Role.Neutral.EpidemicU;
 using static Nebula.Roles.Complex.Nexus;
 using static Nebula.Roles.Complex.Trapper;
@@ -66,6 +68,9 @@ file static class GardenerSystem
     
     public static void OnActivated(IUsurpableAbility myRole, bool isEvil, int left, List<Vector2>? myPerkPos = null)
     {
+        int ValueChallengePlant = 0;
+        int ValueChallengeWater = 0;
+
         var plantButton = NebulaAPI.Modules.AbilityButton(myRole, myRole.MyPlayer, Virial.Compat.VirtualKeyInput.Ability, "gardenerU.plant",
             GardenerU.PlantCooldown, "plant", NiceImage, _ => left > 0).SetAsUsurpableButton(myRole);
         if (isEvil) plantButton.SetImage(EvilImage);
@@ -86,6 +91,8 @@ file static class GardenerSystem
             }
             else
             {
+                ValueChallengePlant++;
+
                 NebulaSyncObject.RpcInstantiate(
                 ItemSupplier.MyAllplayersTag,
                 [pos.x, pos.y - 0.25f]);
@@ -96,7 +103,7 @@ file static class GardenerSystem
             left--;
             button.UpdateUsesIcon(left.ToString());
 
-            GameOperatorManager.Instance?.Run(new GardenerPlantEvent(myRole.MyPlayer));
+            RpcGardenerPlantEvent.Invoke(myRole.MyPlayer);
         };
 
         ObjectTracker<ItemSupplier> flowerTracker = new ObjectTrackerUnityImpl<ItemSupplier, ItemSupplier>(myRole.MyPlayer.VanillaPlayer, 0.8f, () => ModSingleton<ItemSupplierManager>.Instance.allSuppliers, flower => flower.age != 3, flower => !NebulaPhysicsHelpers.AnyShadowBetween(myRole.MyPlayer.TruePosition, flower.Position, out _), f => f, f => [f.Position], f => f.MyRenderer, isEvil? Palette.ImpostorRed : GardenerU.MyNiceRole.UnityColor, true).Register(myRole);
@@ -133,9 +140,10 @@ file static class GardenerSystem
                 else
                 {
                     TitleUnLock("uchuaddon.niceGardenerU.common2");
+                    ValueChallengeWater++;
                 }
 
-                GameOperatorManager.Instance?.Run(new GardenerWaterEvent(myRole.MyPlayer));
+                RpcGardenerWaterEvent.Invoke(myRole.MyPlayer);
             }
         };
         waterButton.OnUpdate = (button) => 
@@ -149,6 +157,17 @@ file static class GardenerSystem
             var progress = NebulaAPI.CurrentGame?.GetModule<ITitleHandler>();
             progress.Progress(id);
         }
+
+        GameOperatorManager.Instance?.Subscribe<GameEndEvent>(ev =>
+        {
+            if (isEvil) return;
+            if (GardenerU.WaterCooldown < 20) return;
+
+            if (ValueChallengePlant >= 3 && ValueChallengeWater >= 5)
+            {
+                TitleUnLock("uchuaddon.niceGardenerU.challenge1");
+            }
+        }, myRole);
     }
 
     private static IEnumerator CoWaterEffect(ItemSupplier supplier, string perkId)
@@ -166,6 +185,18 @@ file static class GardenerSystem
             yield return Effects.Wait(0.065f);
         }
     }
+
+    static internal RemoteProcess<GamePlayer> RpcGardenerPlantEvent = new("RpcGardenerPlantEvent_Uchu",
+    (message, _) =>
+    {
+        if (message != null) GameOperatorManager.Instance?.Run<GardenerPlantEvent>(new GardenerPlantEvent(message));
+    });
+
+    static internal RemoteProcess<GamePlayer> RpcGardenerWaterEvent = new("RpcGardenerWaterEvent_Uchu",
+    (message, _) =>
+    {
+        if (message != null) GameOperatorManager.Instance?.Run<GardenerWaterEvent>(new GardenerWaterEvent(message));
+    });
 }
 
 [NebulaPreprocess(PreprocessPhase.Roles)]
@@ -190,6 +221,8 @@ public class GardenerU : DefinedSingleAbilityRoleTemplate<IUsurpableAbility>, De
 
     public bool IsEvil => Category == RoleCategory.ImpostorRole;
     public override IUsurpableAbility CreateAbility(GamePlayer player, int[] arguments) => IsEvil ? new EvilAbility(player, arguments.GetAsBool(0)) : new NiceAbility(player, arguments.GetAsBool(0));
+    AbilityAssignmentStatus DefinedRole.AssignmentStatus => IsEvil ? AbilityAssignmentStatus.KillersSide : AbilityAssignmentStatus.CanLoadToMadmate;
+    MultipleAssignmentType DefinedRole.MultipleAssignment => IsEvil ? MultipleAssignmentType.Allowed : MultipleAssignmentType.Allowed;
 
     static internal readonly FloatConfiguration PlantCooldown = NebulaAPI.Configurations.Configuration("options.role.gardenerU.plantCooldown", (5f, 60f, 5f), 15f, FloatConfigurationDecorator.Second);
     static internal readonly IntegerConfiguration NumOfPlant = NebulaAPI.Configurations.Configuration("options.role.gardenerU.numOfPlant", (1, 99), 4);
@@ -288,35 +321,6 @@ public class GardenerU : DefinedSingleAbilityRoleTemplate<IUsurpableAbility>, De
             {
                 GardenerSystem.OnActivated(this, false, NumOfPlant);
             }
-        }
-
-        [Local, OnlyMyPlayer]
-        void OnValuePlant(GardenerPlantEvent ev)
-        {
-            ValueChallengePlant++;
-        }
-
-        [Local, OnlyMyPlayer]
-        void OnValueWater(GardenerWaterEvent ev)
-        {
-            ValueChallengeWater++;
-        }
-
-        [Local, OnlyMyPlayer]
-        void OnGameEvent(GameEndEvent ev)
-        {
-            if (WaterCooldown < 20) return;
-            
-            if (ValueChallengePlant >= 3 && ValueChallengeWater >= 5)
-            {
-                TitleUnLock("uchuaddon.niceGardenerU.challenge1");
-            }
-        }
-
-        void TitleUnLock(string id)
-        {
-            var progress = NebulaAPI.CurrentGame?.GetModule<ITitleHandler>();
-            progress.Progress(id);
         }
     }
 

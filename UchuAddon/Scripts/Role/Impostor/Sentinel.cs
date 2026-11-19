@@ -64,7 +64,7 @@ public class SentinelU : DefinedSingleAbilityRoleTemplate<SentinelU.Ability>, De
     static private FloatConfiguration ShorteningCooldownInKilling = NebulaAPI.Configurations.Configuration("options.role.sentinelU.shorteningCooldownInKilling", (0f, 30f, 2.5f), 10f, FloatConfigurationDecorator.Second);
 
     static public SentinelU MyRole = new();
-    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
 
     static public bool IsPlayerNearAdmin { get; private set; }
     static public bool IsPlayerNearVital { get; private set; }

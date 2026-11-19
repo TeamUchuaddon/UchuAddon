@@ -7,6 +7,7 @@ using Cpp2IL.Core.Extensions;
 using HarmonyLib;
 using Hazel;
 using Hori.Core;
+using Hori.Scripts.Core;
 using Hori.Scripts.Role.Crewmate;
 using Hori.Scripts.Role.Impostor;
 using Hori.Scripts.Role.Modifier;
@@ -20,11 +21,13 @@ using Nebula.Extensions;
 using Nebula.Game;
 using Nebula.Modules;
 using Nebula.Modules;
+using Nebula.Modules.Cosmetics;
 using Nebula.Modules.GUIWidget;
 using Nebula.Modules.ScriptComponents;
 using Nebula.Patches;
 using Nebula.Roles;
 using Nebula.Roles;
+using Nebula.Roles.Crewmate;
 using Nebula.Utilities;
 using Rewired.UI.ControlMapper;
 using Rewired.Utils;
@@ -33,6 +36,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO.Compression;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
@@ -57,9 +61,6 @@ using Color = Virial.Color;
 using Image = Virial.Media.Image;
 using Vector2 = Virial.Compat.Vector2;
 using Vector3 = Virial.Compat.Vector3;
-using System.Net.Http;
-using Nebula.Roles.Crewmate;
-using Hori.Scripts.Core;
 
 namespace Hori.Core;
 
@@ -82,7 +83,7 @@ public class PatchManager
 
         harmony.Patch(typeof(ModNewsHistory).GetMethod(nameof(ModNewsHistory.GetLoaderEnumerator)),prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(GetLoaderEnumeratorPatch))));
         harmony.Patch(typeof(AnnouncementPanel).GetMethod(nameof(AnnouncementPanel.SetUp)),postfix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(SetUpPatch))));
-
+        harmony.Patch(typeof(StampHelpers).GetMethod(nameof(StampHelpers.TryShowStampRingMenu)), prefix: new HarmonyMethod(typeof(PatchManager).GetMethod(nameof(CitrusStampPatch))));
         //HastyU.LoadPatch(harmony);
         //LimpidoU.LoadPatch(harmony);
 
@@ -105,7 +106,7 @@ public class PatchManager
 
         logo.gameObject.AddComponent<BoxCollider2D>().size = new Vector2(7f, 3.5f);
 
-        GameOperatorManager.Instance!.Subscribe<GameStartEvent>(_ => GameObject.Destroy(addonLogoHolder), Virial.NebulaAPI.CurrentGame!);
+        GameOperatorManager.Instance!.Subscribe<LobbyDestroyEvent>(_ => GameObject.Destroy(addonLogoHolder), Virial.NebulaAPI.CurrentGame!);
     }
 
 
@@ -136,12 +137,26 @@ public class PatchManager
 
         var lang = Language.GetCurrentLanguage();
 
-        string response = null!;
-        yield return NebulaWebRequest.CoGet(Helpers.ConvertUrl($"https://raw.githubusercontent.com/TeamUchuaddon/UchuAddon/master/UchuAddonAnnouncement_{lang}.json"), true, r => response = r);
+        string nosResponse = null!;
+        string uchuResponse = null!;
+        yield return NebulaWebRequest.CoGet(Helpers.ConvertUrl($"https://raw.githubusercontent.com/Dolly1016/Nebula/master/Announcement_{lang}.json"), true, r => nosResponse = r);
 
-        if (response == null) yield break;
+        if (nosResponse != null)
+        {
+            ModNewsHistory.AllModNews = JsonStructure.Deserialize<List<ModNews>>(nosResponse) ?? new();
+        }
 
-        ModNewsHistory.AllModNews = JsonStructure.Deserialize<List<ModNews>>(response) ?? new();
+
+        yield return NebulaWebRequest.CoGet(Helpers.ConvertUrl($"https://raw.githubusercontent.com/TeamUchuAddon/UchuAddon/main/UchuAddonAnnouncement_{lang}.json"), true, r => uchuResponse = r);
+
+        List<ModNews> uchuNews = null!;
+
+        if (uchuResponse != null)
+        {
+            uchuNews = JsonStructure.Deserialize<List<ModNews>>(uchuResponse)?.Where(n => DateTimeOffset.Parse(n.date) < DateTimeOffset.UtcNow).ToList() ?? new();
+            ModNewsHistory.AllModNews.AddRange(uchuNews);
+        }
+
 
         foreach (var news in ModNewsHistory.AllModNews)
         {
@@ -181,6 +196,13 @@ public class PatchManager
     {
         if (announcement.Number < 200000) return;
         __instance.transform.FindChild("ModLabel").GetComponent<SpriteRenderer>().sprite = UchuAddonLabel;
+    }
+
+    public static bool CitrusStampPatch()
+    {
+        if (GamePlayer.LocalPlayer!.TryGetModifier<CitrusStateU.Instance>(out _) && !CitrusU.CanUseStampOption) return false;
+        else return true;
+
     }
 
     public static void StartMeeting()

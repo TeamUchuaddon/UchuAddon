@@ -32,7 +32,7 @@ public class HawkU : DefinedSingleAbilityRoleTemplate<HawkU.Ability>, DefinedRol
 
     static public HawkU MyRole = new();
     static private readonly GameStatsEntry StatsHawkeye = NebulaAPI.CreateStatsEntry("stats.hawkU.hawkeyeSKill", GameStatsCategory.Roles, MyRole);
-    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
     static private readonly Virial.Media.Image HawkImage = NebulaAPI.AddonAsset.GetResource("HawkButton.png")!.AsImage(115f)!;
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility

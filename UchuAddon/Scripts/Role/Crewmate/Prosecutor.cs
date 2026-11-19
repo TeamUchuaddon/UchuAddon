@@ -67,7 +67,7 @@ public class ProsecutorU : DefinedSingleAbilityRoleTemplate<ProsecutorU.Ability>
     Image? DefinedAssignable.IconImage => IconImage;
 
     static private readonly Virial.Media.Image MeetingButton = NebulaAPI.AddonAsset.GetResource("ProsecutorIcon.png")!.AsImage(115f)!;
-    bool IAssignableDocument.HasTips => false;
+    bool IAssignableDocument.HasTips => true;
     bool IAssignableDocument.HasAbility => true;
     IEnumerable<AssignableDocumentImage> IAssignableDocument.GetDocumentImages()
     {
@@ -78,6 +78,8 @@ public class ProsecutorU : DefinedSingleAbilityRoleTemplate<ProsecutorU.Ability>
     {
         yield return new("%EXILED%", Language.Translate(ProsecuteCrewmateCheck ? "role.prosecutorU.ability.main.exiled" : "role.prosecutorU.ability.main.notExiled"));
     }
+
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
@@ -116,7 +118,7 @@ public class ProsecutorU : DefinedSingleAbilityRoleTemplate<ProsecutorU.Ability>
 
                 if (meeting == null) return;
 
-                meeting.ResetPlayerState();
+                RpcMeetingStateReset.Invoke();
 
                 meeting.ModCastVote(MyPlayer.PlayerId, targetId, 100);
                 
@@ -138,12 +140,17 @@ public class ProsecutorU : DefinedSingleAbilityRoleTemplate<ProsecutorU.Ability>
         {
             if (IsProsecute) // 強制追放したかどうかの有無を確認
             {
-                if (ev.Player.IsTrueCrewmate && ProsecuteCrewmateCheck) // Swapperなどで追放先が変わる可能性もあるため追放者をチェックする。
+                if (ev.Player.IsTrueCrewmate && ProsecuteCrewmateCheck && MyPlayer.IsTrueCrewmate) // Swapperなどで追放先が変わる可能性もあるため追放者をチェックする。奪われた能力とかは例外にする。
                 {
                     MyPlayer.VanillaPlayer.ModMarkAsExtraVictim(null, PlayerState.Suicide, PlayerState.Suicide);
                 }
             }
         }
+
+        static RemoteProcess RpcMeetingStateReset = new("RpcMeetingStateReset_Uchu", (_) =>
+        {
+            MeetingHud.Instance.ResetPlayerState();
+        });
 
         static RemoteProcess<byte> RpcHandMaterial = new("RpcHandMaterial _Uchu", (targetId, _) =>
         {

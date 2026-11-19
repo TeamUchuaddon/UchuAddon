@@ -41,30 +41,45 @@ using Vector3 = Virial.Compat.Vector3;
 
 namespace Hori.Scripts.Role.Impostor;
 
+//役職の定義をしています。競合を避けるために役職の最後にUを付けてます。
 public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, DefinedRole,HasCitation
 {
+    //役職の定義をしています。　　　　　　　　　　
     public MagicianU() : base("magicianU", NebulaTeams.ImpostorTeam.Color, RoleCategory.ImpostorRole, NebulaTeams.ImpostorTeam, [MagicCooldown,NumOfMagic])
     {
         base.ConfigurationHolder!.Illustration = NebulaAPI.AddonAsset.GetResource("RoleImage/Magician.png")!.AsImage(115f);
-        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon);
+        ConfigurationHolder?.AddTags(AddonConfigurationTags.TagUchuAddon); //タグをつけてます。絶対付けてください。
     }
 
+    //Jackal化などに対応させてます。KillersSideだとマッド化まで対応してくれます。
     AbilityAssignmentStatus DefinedRole.AssignmentStatus => AbilityAssignmentStatus.KillersSide;
+
     public override Ability CreateAbility(GamePlayer player, int[] arguments) => new Ability(player, arguments.GetAsBool(0));
 
+    //オプションの定義をしています。
     static private FloatConfiguration MagicCooldown = NebulaAPI.Configurations.Configuration("options.role.magicianU.magicCooldown", (2.5f, 60f, 2.5f), 20f, FloatConfigurationDecorator.Second);
     static private IntegerConfiguration NumOfMagic = NebulaAPI.Configurations.Configuration("options.role.magicianU.numOfMagic", (1, 99), 4);
 
+    //役職の引用です。無い場合はなくてokです。
     Citation? HasCitation.Citation => Hori.Core.Citations.ExtremeRoles;
+
+    //RoleIconを設定しています。
     static internal Image IconImage = NebulaAPI.AddonAsset.GetResource("RoleIcon/Magician.png")!.AsImage(100f)!;
     Image? DefinedAssignable.IconImage => IconImage;
-    static public MagicianU MyRole = new();
-    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
+
+    //必須
+    static public MagicianU MyRole = new(); 
+
+    //AmalgamにMap系能力として登録しています。
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
+
+    //Abilityを作ってます。
+
+    static private readonly Virial.Media.Image MagicImage = NebulaAPI.AddonAsset.GetResource("MagicButton.png")!.AsImage(115f)!;
 
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
-        static private readonly Virial.Media.Image MagicImage = NebulaAPI.AddonAsset.GetResource("MagicButton.png")!.AsImage(115f)!;
-        int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];
+        int[] IPlayerAbility.AbilityArguments => [IsUsurped.AsInt()];//必須
         int leftMagic = NumOfMagic;
         int Magic;
         float KillTimer = 7f;
@@ -76,34 +91,39 @@ public class MagicianU : DefinedSingleAbilityRoleTemplate<MagicianU.Ability>, De
         bool KillAchiStop = false;
         bool OneturnMagic = false;
 
+        //役職セット時に発火します。能力ボタンなどはここで登録してます。
         public Ability(GamePlayer player, bool isUsurped) : base(player, isUsurped)
         {
             if (AmOwner)
             {
+                //ボタン自体の定義
                 var magicButton = NebulaAPI.Modules.AbilityButton(this, MyPlayer, Virial.Compat.VirtualKeyInput.Ability, MagicCooldown, "magic", MagicImage).SetAsUsurpableButton(this);
-                magicButton.Availability = (button) => MyPlayer.CanMove;
-                magicButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Impostor);
-                magicButton.Visibility = (button) => !MyPlayer.IsDead && leftMagic > 0;
-                magicButton.OnClick = (button) =>
+                magicButton.SetLabelType(Virial.Components.ModAbilityButton.LabelType.Impostor); //ボタンのテキストのラベルを設定。
+                magicButton.Visibility = (button) => !MyPlayer.IsDead && leftMagic > 0; //ボタンの表示条件を設定。
+                magicButton.OnClick = (button) => //ボタンを押した時に発火します。
                 {
                     leftMagic--;
                     Magic++;
                     KillTimer = 7f;
                     KillJudge = true;
                     OneturnMagic = true;
-                    MagicRpc.Invoke();
-                    magicButton.UpdateUsesIcon(leftMagic.ToString());
-                    magicButton.StartCoolDown();
 
-                 
+                    MagicRpc.Invoke();
+
+                    //ボタンの使用回数の表示を更新しています。
+                    magicButton.UpdateUsesIcon(leftMagic.ToString());
+                    magicButton.StartCoolDown(); //ボタンのクールダウンをスタートしています。
+
                     if (Magic < 3) return;
                     //new StaticAchievementToken("magicianU.common1");
                 };
 
-                magicButton.ShowUsesIcon(0, leftMagic.ToString());
+                //ボタンに使用回数を表示させています。
+                magicButton.ShowUsesIcon(0, leftMagic.ToString()); 
             }
         }
 
+        //Rpcを作成しています。Rpcで実行すると全プレイヤーに同期されます。
         static RemoteProcess MagicRpc = new RemoteProcess("MagicRpc", (_) =>
         {
             var player = GamePlayer.LocalPlayer;

@@ -83,7 +83,7 @@ public class EvilObserverU : DefinedSingleAbilityRoleTemplate<EvilObserverU.Abil
         }
 
     }
-    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.AsUniqueMapAbility;
+    MultipleAssignmentType DefinedRole.MultipleAssignment => MultipleAssignmentType.Allowed;
     public class Ability : AbstractPlayerUsurpableAbility, IPlayerAbility
     {
 
